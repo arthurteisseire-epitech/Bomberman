@@ -1,0 +1,32 @@
+# General
+*.o
+*.a
+*~
+vgcore*
+
+# Unit Tests
+*.gcno
+*.gcda
+*.gcov
+units
+coverage
+
+# Clion
+.idea/
+cmake-build-debug/
+CMakeFiles/
+CMakeCache.txt
+*.cbp
+cmake_install.cmake
+Testing/
+CTestTestfile.cmake
+feature_tests.c
+CMakeCCompilerId.c
+
+# Qt
+lib/qt/Makefile
+.qmake.stash
+
+# Project
+bomberman
+Makefile
