@@ -30,3 +30,8 @@ lib/qt/Makefile
 # Project
 bomberman
 Makefile
+
+
+#VS specific file
+.vscode/
+.vs/

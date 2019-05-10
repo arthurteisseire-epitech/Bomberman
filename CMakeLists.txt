@@ -1,11 +1,13 @@
 cmake_minimum_required(VERSION 3.11)
 set(NAME bomberman)
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra")
-
 project(${NAME})
-
 set(CMAKE_CXX_STANDARD 11)
+
+if (WIN32)
+	
+else()
+
+endif()
 
 #source files
 set(
@@ -14,15 +16,13 @@ set(
 )
 
 #include files
-include_directories(include src)
+
+include_directories(include include/irrlicht)
 
 add_executable(${NAME} ${SOURCE_FILES})
 
-#Library definition
-target_link_libraries(${NAME} m)
-target_link_libraries(${NAME} GL)
-target_link_libraries(${NAME} Irrlicht)
-target_link_libraries(${NAME} Xxf86vm)
-target_link_libraries(${NAME} Xext)
-target_link_libraries(${NAME} X11)
-target_link_libraries(${NAME} Xcursor)
+if(WIN32)
+	target_link_libraries(${NAME} ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/Windows/Irrlicht.lib)
+else()
+	target_link_libraries(${NAME} ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/Linux/Irrlicht.lib)
+endif()
