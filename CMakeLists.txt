@@ -3,21 +3,17 @@ set(NAME bomberman)
 project(${NAME})
 set(CMAKE_CXX_STANDARD 11)
 
-if (WIN32)
-	
-else()
-
-endif()
-
 #source files
 set(
         SOURCE_FILES
         src/main.cpp
+	src/Indie.cpp
+	src/Indie.hpp
 )
 
 #include files
 
-include_directories(include include/irrlicht)
+include_directories(include include/irrlicht src/)
 
 add_executable(${NAME} ${SOURCE_FILES})
 
