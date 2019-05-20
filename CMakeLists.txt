@@ -2,12 +2,13 @@ cmake_minimum_required(VERSION 3.11)
 set(NAME bomberman)
 project(${NAME})
 set(CMAKE_CXX_STANDARD 11)
-SET(CMAKE_MODULE_PATH cmake)
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 find_package(Irrlicht REQUIRED)
 
 include_directories(
 		include
+		cmake/include
 		IRRLICHT_INCLUDE_DIR
 )
 
