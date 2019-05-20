@@ -10,6 +10,8 @@ include_directories(
 		include
 		cmake/include
 		IRRLICHT_INCLUDE_DIR
+		src
+		src/Entities
 )
 
 file(GLOB_RECURSE SOURCE_FILES src/*.cpp)
@@ -17,10 +19,3 @@ file(GLOB_RECURSE SOURCE_FILES src/*.cpp)
 add_executable(${NAME} ${SOURCE_FILES})
 
 target_link_libraries(${NAME} ${Irrlicht_LIBRARIES})
-
-
-file(GLOB_RECURSE TESTS tests/*.cpp)
-
-add_executable(units ${TESTS})
-
-target_link_libraries(units ${Irrlicht_LIBRARIES} gtest gtest_main)

@@ -29,4 +29,6 @@ Game::Game(char *exec)
 }
 
 void Game::run()
-{}
+{
+
+}
