@@ -6,19 +6,20 @@ SET(CMAKE_MODULE_PATH cmake)
 
 find_package(Irrlicht REQUIRED)
 
-#source files
-file(
-		GLOB_RECURSE
-		SOURCE_FILES
-		src/*.cpp
-)
-
-#include files
 include_directories(
 		include
 		IRRLICHT_INCLUDE_DIR
 )
 
+file(GLOB_RECURSE SOURCE_FILES src/*.cpp)
+
 add_executable(${NAME} ${SOURCE_FILES})
 
 target_link_libraries(${NAME} ${Irrlicht_LIBRARIES})
+
+
+file(GLOB_RECURSE TESTS tests/*.cpp)
+
+add_executable(units ${TESTS})
+
+target_link_libraries(units ${Irrlicht_LIBRARIES} gtest gtest_main)
