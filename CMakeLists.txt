@@ -21,4 +21,4 @@ include_directories(
 
 add_executable(${NAME} ${SOURCE_FILES})
 
-target_link_libraries(${NAME} ${IRRLICHT_LIBRARIES})
+target_link_libraries(${NAME} ${Irrlicht_LIBRARIES})
