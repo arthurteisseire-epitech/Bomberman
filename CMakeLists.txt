@@ -13,6 +13,7 @@ include_directories(
 		src
 		src/Entities
 		src/Services
+		src/Behaviour
 )
 
 file(GLOB_RECURSE SOURCE_FILES src/*.cpp)

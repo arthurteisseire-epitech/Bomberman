@@ -8,10 +8,10 @@
 #pragma once
 
 namespace ind {
-    enum ORIENTATION {
-        NORTH,
-        SOUTH,
-        EAST,
-        WEST,
+
+    class IBehaviour {
+        public:
+            virtual ~IBehaviour() = default;
+            virtual void update() = 0;
     };
 }

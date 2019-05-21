@@ -7,25 +7,25 @@
 
 #pragma once
 
-#include "IEntity.hpp"
+#include "AbstractEntity.hpp"
 #include "Orientation.hpp"
 
 namespace ind {
 
-    class Player : public IEntity {
+    class Player : public AbstractEntity {
         public:
-            explicit Player(std::pair<float, float> position);
+            Player(std::pair<float, float> position, ORIENTATION rotation, IBehaviour &behaviour);
             ~Player() override = default;
             void draw() override;
             void update(float deltaTime) override;
-            void move(ORIENTATION direction);
+            void move(std::pair<float, float>);
             void placeBomb();
-            bool isMoving();
-            std::pair<float, float> getPosition();
-            ORIENTATION getDirection();
+            bool isMoving() const;
         private:
             float timeBeforeStop = -1.0f;
             bool moving = false;
-            ORIENTATION direction = NONE;
+            short bombPower = 1;
+            short bombNumber = 1;
+            float movementSpeed = 1.0f;
     };
 }
