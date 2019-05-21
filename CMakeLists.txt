@@ -14,6 +14,7 @@ include_directories(
 		src/Entities
 		src/Services
 		src/Behaviour
+		src/Map
 )
 
 file(GLOB_RECURSE SOURCE_FILES src/*.cpp)

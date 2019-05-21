@@ -8,6 +8,7 @@
 #include <iostream>
 #include <irrlicht/irrlicht.h>
 #include "Game.hpp"
+#include "Map.hpp"
 
 using namespace irr;
 
@@ -19,6 +20,7 @@ using namespace gui;
 int main(int, char **av)
 {
     try {
+        ind::Map map(std::pair<int, int>(15,15));
         ind::Game game(av[0]);
         game.run();
     } catch (const std::exception &e) {
