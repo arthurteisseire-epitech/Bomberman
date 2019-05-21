@@ -8,7 +8,9 @@
 #include <iostream>
 #include "Game.hpp"
 #include "Board.hpp"
+#include "Singleton.hpp"
 #include "crossPlatform.hpp"
+#include "KeyService.hpp"
 
 ind::Game::Game(char *exec)
 {
@@ -27,6 +29,8 @@ ind::Game::Game(char *exec)
     this->environment = this->device->getGUIEnvironment();
     this->driver = this->device->getVideoDriver();
     this->manager = this->device->getSceneManager();
+    this->device->setEventReceiver(&(SingleTon<KeyService>::getInstance()));
+    this->device->setWindowCaption(L"Bomberman");
 }
 
 void ind::Game::run()

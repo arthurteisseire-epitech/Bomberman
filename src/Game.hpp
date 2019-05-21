@@ -12,9 +12,11 @@
 
 namespace ind {
     class Game {
-    public:
+        public:
         explicit Game(char *exec);
+
         ~Game() = default;
+
         void run();
     private:
         std::string rootPath;
