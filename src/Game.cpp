@@ -7,9 +7,11 @@
 
 #include <iostream>
 #include "Game.hpp"
+#include "Singleton.hpp"
 #include "crossPlatform.hpp"
+#include "KeyService.hpp"
 
-Game::Game(char *exec)
+ind::Game::Game(char *exec)
 {
     std::string ex = exec;
     std::size_t last_slash = ex.find_last_of('/');
@@ -26,9 +28,15 @@ Game::Game(char *exec)
     this->environment = this->device->getGUIEnvironment();
     this->driver = this->device->getVideoDriver();
     this->manager = this->device->getSceneManager();
+    this->device->setEventReceiver(&(SingleTon<KeyService>::getInstance()));
+    this->device->setWindowCaption(L"Bomberman");
 }
 
-void Game::run()
+void ind::Game::run()
 {
-
+    while (this->device->run()) {
+        this->driver->beginScene(true, true, irr::video::SColor(255, 113, 113, 133));
+        this->manager->drawAll();
+        this->driver->endScene();
+    }
 }

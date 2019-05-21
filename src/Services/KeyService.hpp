@@ -12,7 +12,7 @@
 
 namespace ind {
 
-    class KeyService : irr::IEventReceiver {
+    class KeyService : public irr::IEventReceiver {
         public:
             KeyService();
             bool isKeyPressed(irr::EKEY_CODE key) const;
