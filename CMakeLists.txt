@@ -12,6 +12,7 @@ include_directories(
 		IRRLICHT_INCLUDE_DIR
 		src
 		src/Entities
+		src/Services
 )
 
 file(GLOB_RECURSE SOURCE_FILES src/*.cpp)
@@ -19,3 +20,7 @@ file(GLOB_RECURSE SOURCE_FILES src/*.cpp)
 add_executable(${NAME} ${SOURCE_FILES})
 
 target_link_libraries(${NAME} ${Irrlicht_LIBRARIES})
+
+
+
+
