@@ -7,10 +7,11 @@
 
 #pragma once
 
-#include <string>
 #include <irrlicht/irrlicht.h>
+#include <string>
 
-class Game {
+namespace ind {
+    class Game {
     public:
         explicit Game(char *exec);
         ~Game() = default;
@@ -21,4 +22,5 @@ class Game {
         irr::gui::IGUIEnvironment *environment = nullptr;
         irr::scene::ISceneManager *manager = nullptr;
         irr::video::IVideoDriver *driver = nullptr;
-};
+    };
+}

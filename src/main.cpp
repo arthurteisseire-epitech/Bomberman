@@ -19,7 +19,7 @@ using namespace gui;
 int main(int, char **av)
 {
     try {
-        Game game(av[0]);
+        ind::Game game(av[0]);
         game.run();
     } catch (const std::exception &e) {
         std::cout << e.what() << std::endl;

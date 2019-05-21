@@ -7,9 +7,10 @@
 
 #include <iostream>
 #include "Game.hpp"
+#include "Board.hpp"
 #include "crossPlatform.hpp"
 
-Game::Game(char *exec)
+ind::Game::Game(char *exec)
 {
     std::string ex = exec;
     std::size_t last_slash = ex.find_last_of('/');
@@ -28,7 +29,20 @@ Game::Game(char *exec)
     this->manager = this->device->getSceneManager();
 }
 
-void Game::run()
+void ind::Game::run()
 {
+    Board board(Size(15, 13));
 
+    board.create([this]() {
+        auto cube = manager->addCubeSceneNode(10.0f, nullptr, -1);
+        cube->setMaterialFlag(irr::video::EMF_WIREFRAME, true);
+        return cube;
+    });
+    manager->addCameraSceneNode(nullptr, irr::core::vector3df(120, 200, 120), irr::core::vector3df(0, 0, 0));
+    while (device->run()) {
+        driver->beginScene(true, true, irr::video::SColor(255, 255, 255, 255));
+        manager->drawAll();
+        driver->endScene();
+    }
+    device->drop();
 }
