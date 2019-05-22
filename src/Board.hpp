@@ -9,16 +9,9 @@
 #define BOMBERMAN_BOARD_HPP
 
 #include <vector>
+#include "Size.hpp"
 
 namespace ind {
-    struct Size {
-        Size(size_t width, size_t height) : width(width), height(height)
-        {}
-
-        size_t width;
-        size_t height;
-    };
-
     class Board {
     public:
         explicit Board(Size size) : size(size)

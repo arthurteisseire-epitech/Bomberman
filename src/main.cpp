@@ -7,8 +7,10 @@
 
 #include <iostream>
 #include <irrlicht/irrlicht.h>
+#include <string>
 #include "Game.hpp"
 #include "Map.hpp"
+#include "Singleton.hpp"
 
 using namespace irr;
 

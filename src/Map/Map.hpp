@@ -21,6 +21,5 @@ namespace ind {
         private:
             std::vector<std::vector<ind::Tiles>> map;
             std::pair<int, int> size;
-
     };
 }

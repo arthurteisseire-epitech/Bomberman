@@ -8,26 +8,27 @@
 #pragma once
 
 #include <utility>
+#include <irrlicht/IMeshSceneNode.h>
 #include "Orientation.hpp"
 #include "IBehaviour.hpp"
+#include "Position.hpp"
 
 namespace ind {
 
     class AbstractEntity {
         public:
-            AbstractEntity(std::pair<float, float> position, ORIENTATION rotation, IBehaviour &behaviour);
+            AbstractEntity(const Position &boardPosition, ORIENTATION rotation, IBehaviour &behaviour);
             virtual ~AbstractEntity() = default;
             virtual void draw() = 0;
             virtual void update(float deltaTime) = 0;
-            std::pair<float, float> getPosition() const;
+            const Position &getPosition() const;
             ORIENTATION getRotation() const;
             void setRotation(ORIENTATION orientation);
             const IBehaviour &getBehaviour() const;
-            void setBehaviour(IBehaviour &);
 
         protected:
             ORIENTATION rotation;
-            std::pair<float, float> position;
+            Position boardPosition;
             IBehaviour &behaviour;
     };
 }

@@ -27,13 +27,12 @@ namespace ind {
 
     class Player : public AbstractEntity {
         public:
-            Player(std::pair<float, float> position, ORIENTATION rotation, IBehaviour &behaviour);
+            Player(const Position &position, ORIENTATION rotation, IBehaviour &behaviour);
             ~Player() override = default;
             void draw() override;
             void update(float deltaTime) override;
             void move(ORIENTATION direction);
             void placeBomb();
-            bool isMoving() const;
         private:
             short bombPower = 1;
             short bombNumber = 1;

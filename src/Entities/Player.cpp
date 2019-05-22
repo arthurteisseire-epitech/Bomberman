@@ -18,8 +18,8 @@ void ind::Player::draw()
 {
 }
 
-ind::Player::Player(std::pair<float, float> position, ind::ORIENTATION rotation, IBehaviour &behaviour)
-    : AbstractEntity(position, rotation, behaviour)
+ind::Player::Player(const Position &position, ind::ORIENTATION rotation, IBehaviour &behaviour) :
+    AbstractEntity(position, rotation, behaviour)
 {}
 
 void ind::Player::move(ind::ORIENTATION direction)

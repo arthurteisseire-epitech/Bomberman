@@ -9,30 +9,26 @@
 
 ind::ORIENTATION ind::AbstractEntity::getRotation() const
 {
-    return this->rotation;
+    return rotation;
 }
 
-std::pair<float, float> ind::AbstractEntity::getPosition() const
+const ind::Position &ind::AbstractEntity::getPosition() const
 {
-    return this->position;
+    return boardPosition;
 }
 
-ind::AbstractEntity::AbstractEntity(std::pair<float, float> position,
-    ind::ORIENTATION rotation, IBehaviour &behaviour
-) : position(position), rotation(rotation), behaviour(behaviour)
+ind::AbstractEntity::AbstractEntity(const Position &boardPosition, ind::ORIENTATION rotation, IBehaviour &behaviour) :
+    rotation(rotation),
+    boardPosition(boardPosition),
+    behaviour(behaviour)
 {}
 
 void ind::AbstractEntity::setRotation(ind::ORIENTATION orientation)
 {
-    this->rotation = orientation;
+    rotation = orientation;
 }
 
 const ind::IBehaviour &ind::AbstractEntity::getBehaviour() const
 {
-    return this->behaviour;
-}
-
-void ind::AbstractEntity::setBehaviour(ind::IBehaviour &behaviour)
-{
-    this->behaviour = behaviour;
+    return behaviour;
 }
