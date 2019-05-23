@@ -12,10 +12,10 @@
 #include "Player.hpp"
 
 namespace ind {
-    class PlayerBehaviour {
+    class PlayerBehaviour : public IBehaviour {
         public:
             PlayerBehaviour(Player &player, PlayerNumber playerNumber);
-            void update();
+            void update() override;
 
         private:
             Player &player;

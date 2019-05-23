@@ -11,8 +11,10 @@
 #include "Singleton.hpp"
 #include "crossPlatform.hpp"
 #include "KeyService.hpp"
+#include "PlayerBehaviour.hpp"
+#include "Player.hpp"
 
-ind::Game::Game(char *exec)
+ind::Game::Game(char *exec) : map(std::pair<int, int>(15,15))
 {
     std::string ex = exec;
     std::size_t last_slash = ex.find_last_of('/');
@@ -39,10 +41,12 @@ void ind::Game::run()
 
     board.create([this]() {
         auto cube = manager->addCubeSceneNode(10.0f, nullptr, -1);
-        cube->setMaterialFlag(irr::video::EMF_WIREFRAME, true);
+        cube->setMaterialTexture(0, this->driver->getTexture("assets/tnt.jpg"));
+        cube->setMaterialFlag(irr::video::EMF_LIGHTING, false);
         return cube;
     });
-    manager->addCameraSceneNode(nullptr, irr::core::vector3df(120, 200, 120), irr::core::vector3df(0, 0, 0));
+    manager->addLightSceneNode(0, irr::core::vector3df(90, 200, 70), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
+    manager->addCameraSceneNode(nullptr, irr::core::vector3df(90, 200, 70), irr::core::vector3df(90, 0, 70));
     while (device->run()) {
         driver->beginScene(true, true, irr::video::SColor(255, 255, 255, 255));
         manager->drawAll();

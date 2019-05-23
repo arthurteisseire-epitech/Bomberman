@@ -27,18 +27,18 @@ ind::Map::Map(std::pair<int, int> size)
         this->map.push_back(tiles);
     }
     std::cout << this->map.size() << std::endl;
-    this->map[0][0] = NONE;
-    this->map[1][0] = NONE;
-    this->map[0][1] = NONE;
-    this->map[0][size.second -1] = NONE;
-    this->map[0][size.second - 2] = NONE;
-    this->map[1][size.second -1] = NONE;
-    this->map[size.first - 1][size.second -1] = NONE;
-    this->map[size.first - 1][size.second - 2] = NONE;
-    this->map[size.first - 2][size.second -1] = NONE;
-    this->map[size.first - 1][0] = NONE;
-    this->map[size.first - 2][0] = NONE;
-    this->map[size.first - 1][1] = NONE;
+    this->map[0][0] = EMPTY;
+    this->map[1][0] = EMPTY;
+    this->map[0][1] = EMPTY;
+    this->map[0][size.second -1] = EMPTY;
+    this->map[0][size.second - 2] = EMPTY;
+    this->map[1][size.second -1] = EMPTY;
+    this->map[size.first - 1][size.second -1] = EMPTY;
+    this->map[size.first - 1][size.second - 2] = EMPTY;
+    this->map[size.first - 2][size.second -1] = EMPTY;
+    this->map[size.first - 1][0] = EMPTY;
+    this->map[size.first - 2][0] = EMPTY;
+    this->map[size.first - 1][1] = EMPTY;
 
     this->printMap();
 }
@@ -47,7 +47,7 @@ void ind::Map::printMap() const
 {
     for (auto &it : this->map) {
         for (const auto &it2: it) {
-            if (it2 == NONE)
+            if (it2 == EMPTY)
                 std::cout << "o";
             else
                 std::cout << "x";

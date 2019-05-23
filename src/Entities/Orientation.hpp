@@ -13,5 +13,6 @@ namespace ind {
         SOUTH,
         EAST,
         WEST,
+        NONE,
     };
 }

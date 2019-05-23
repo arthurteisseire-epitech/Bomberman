@@ -9,6 +9,7 @@
 
 #include <utility>
 #include <irrlicht/IMeshSceneNode.h>
+#include <memory>
 #include "Orientation.hpp"
 #include "IBehaviour.hpp"
 #include "Position.hpp"
@@ -17,7 +18,7 @@ namespace ind {
 
     class AbstractEntity {
         public:
-            AbstractEntity(const Position &boardPosition, ORIENTATION rotation, IBehaviour &behaviour);
+            AbstractEntity(const Position &boardPosition, ORIENTATION rotation);
             virtual ~AbstractEntity() = default;
             virtual void draw() = 0;
             virtual void update(float deltaTime) = 0;
@@ -25,10 +26,11 @@ namespace ind {
             ORIENTATION getRotation() const;
             void setRotation(ORIENTATION orientation);
             const IBehaviour &getBehaviour() const;
+            void setBehaviour(IBehaviour *behaviour);
 
         protected:
             ORIENTATION rotation;
             Position boardPosition;
-            IBehaviour &behaviour;
+            std::unique_ptr<IBehaviour> behaviour = nullptr;
     };
 }

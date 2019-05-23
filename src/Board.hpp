@@ -10,6 +10,7 @@
 
 #include <vector>
 #include "Size.hpp"
+#include "Map.hpp"
 
 namespace ind {
     class Board {

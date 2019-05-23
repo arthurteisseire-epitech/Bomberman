@@ -5,6 +5,7 @@
 ** Created by abel,
 */
 
+#include <memory>
 #include "AbstractEntity.hpp"
 
 ind::ORIENTATION ind::AbstractEntity::getRotation() const
@@ -17,10 +18,9 @@ const ind::Position &ind::AbstractEntity::getPosition() const
     return boardPosition;
 }
 
-ind::AbstractEntity::AbstractEntity(const Position &boardPosition, ind::ORIENTATION rotation, IBehaviour &behaviour) :
+ind::AbstractEntity::AbstractEntity(const Position &boardPosition, ind::ORIENTATION rotation) :
     rotation(rotation),
-    boardPosition(boardPosition),
-    behaviour(behaviour)
+    boardPosition(boardPosition)
 {}
 
 void ind::AbstractEntity::setRotation(ind::ORIENTATION orientation)
@@ -30,5 +30,10 @@ void ind::AbstractEntity::setRotation(ind::ORIENTATION orientation)
 
 const ind::IBehaviour &ind::AbstractEntity::getBehaviour() const
 {
-    return behaviour;
+    return *behaviour;
+}
+
+void ind::AbstractEntity::setBehaviour(IBehaviour *behaviour)
+{
+    this->behaviour = std::unique_ptr<IBehaviour>(behaviour);
 }

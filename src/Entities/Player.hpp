@@ -27,7 +27,7 @@ namespace ind {
 
     class Player : public AbstractEntity {
         public:
-            Player(const Position &position, ORIENTATION rotation, IBehaviour &behaviour);
+            Player(const Position &position, ORIENTATION rotation, PlayerNumber playerNum);
             ~Player() override = default;
             void draw() override;
             void update(float deltaTime) override;

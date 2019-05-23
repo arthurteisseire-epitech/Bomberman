@@ -9,6 +9,8 @@
 
 #include <irrlicht/irrlicht.h>
 #include <string>
+#include "Map.hpp"
+#include "Player.hpp"
 
 namespace ind {
     class Game {
@@ -24,5 +26,8 @@ namespace ind {
         irr::gui::IGUIEnvironment *environment = nullptr;
         irr::scene::ISceneManager *manager = nullptr;
         irr::video::IVideoDriver *driver = nullptr;
+        Map map;
+        int playerNumber;
+        std::vector<Player> players;
     };
 }
