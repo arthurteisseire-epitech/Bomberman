@@ -11,8 +11,8 @@
 #include "BombBehaviour.hpp"
 
 ind::Bomb::Bomb(const ind::Position &position, ind::ORIENTATION rotation,
-    ind::Map &map, int power, std::function<void(Bomb *bomb)> onExplode) :
-    AbstractEntity(position, rotation), map(map), power(power), onExplode(std::move(onExplode))
+    ind::Map &map, int power, std::function<void(Bomb *bomb)> onExplode, irr::scene::IMeshSceneNode *object) :
+    AbstractEntity(position, rotation, object), map(map), power(power), onExplode(std::move(onExplode))
 {
     auto *behaviour = new BombBehaviour(*this);
     this->setBehaviour(static_cast<IBehaviour *>(behaviour));
@@ -35,46 +35,47 @@ void ind::Bomb::explode()
     bool can_up = true;
     bool can_down = true;
 
-    this->onExplode(this);
     this->map.setAtCoord(std::pair<int, int>(this->getPosition().x, this->getPosition().y), EXPLOSION);
     for (int i = 1; i <= this->power; ++i) {
-        if (this->map.getInfoAtCoord(std::pair<int, int>(this->getPosition().x + i, this->getPosition().y)) == BLOCKBREAKABLE && can_right) {
+        if (static_cast<int>(this->getPosition().x) + i < this->map.getSize().first
+        && this->map.getInfoAtCoord(std::pair<int, int>(this->getPosition().x + i, this->getPosition().y)) == BLOCKBREAKABLE && can_right) {
             this->map.setAtCoord(std::pair<int, int>(this->getPosition().x + i,
                 this->getPosition().y), EXPLOSION);
             can_right = false;
             //TODO: put powerup ?
-        } else if (can_right) {
+        } else if (static_cast<int>(this->getPosition().x) + i < this->map.getSize().first && can_right) {
             this->map.setAtCoord(std::pair<int, int>(this->getPosition().x + i,
                 this->getPosition().y), EXPLOSION);
         }
-        if (this->map.getInfoAtCoord(std::pair<int, int>(this->getPosition().x - i, this->getPosition().y)) == BLOCKBREAKABLE && can_left) {
+        if (static_cast<int>(this->getPosition().x) - i > 0 && this->map.getInfoAtCoord(std::pair<int, int>(this->getPosition().x - i, this->getPosition().y)) == BLOCKBREAKABLE && can_left) {
             this->map.setAtCoord(std::pair<int, int>(this->getPosition().x - i,
                 this->getPosition().y), EXPLOSION);
             can_left = false;
             //TODO: put powerup ?
-        } else if (can_left) {
+        } else if (static_cast<int>(this->getPosition().x) - i > 0 && can_left) {
             this->map.setAtCoord(std::pair<int, int>(this->getPosition().x - i,
                 this->getPosition().y), EXPLOSION);
         }
-        if (this->map.getInfoAtCoord(std::pair<int, int>(this->getPosition().x, this->getPosition().y + i)) == BLOCKBREAKABLE && can_up) {
+        if (static_cast<int>(this->getPosition().y) + i < this->map.getSize().second && this->map.getInfoAtCoord(std::pair<int, int>(this->getPosition().x, this->getPosition().y + i)) == BLOCKBREAKABLE && can_up) {
             this->map.setAtCoord(std::pair<int, int>(this->getPosition().x,
                 this->getPosition().y + i), EXPLOSION);
             can_up = false;
             //TODO: put powerup ?
-        } else if (can_up) {
+        } else if (static_cast<int>(this->getPosition().y) + i < this->map.getSize().second && can_up) {
             this->map.setAtCoord(std::pair<int, int>(this->getPosition().x,
                 this->getPosition().y + i), EXPLOSION);
         }
-        if (this->map.getInfoAtCoord(std::pair<int, int>(this->getPosition().x, this->getPosition().y - i)) == BLOCKBREAKABLE && can_down) {
+        if (static_cast<int>(this->getPosition().y) - i > 0 && this->map.getInfoAtCoord(std::pair<int, int>(this->getPosition().x, this->getPosition().y - i)) == BLOCKBREAKABLE && can_down) {
             this->map.setAtCoord(std::pair<int, int>(this->getPosition().x,
                 this->getPosition().y - i), EXPLOSION);
             can_down = false;
             //TODO: put powerup ?
-        } else if (can_down) {
+        } else if (static_cast<int>(this->getPosition().y) - i > 0 && can_down) {
             this->map.setAtCoord(std::pair<int, int>(this->getPosition().x,
                 this->getPosition().y - i), EXPLOSION);
         }
     }
+    this->onExplode(this);
 }
 
 void ind::Bomb::draw()

@@ -11,6 +11,7 @@
 
 ind::Tiles ind::Map::getInfoAtCoord(std::pair<int, int> coord) const
 {
+    std::cout << "trying to get info at : X " << coord.first << " Y :" << coord.second << std::endl;
     return this->map[coord.first][coord.second];
 }
 
@@ -59,4 +60,9 @@ void ind::Map::printMap() const
 void ind::Map::setAtCoord(std::pair<int, int> coord, ind::Tiles tile)
 {
     this->map[coord.first][coord.second] = tile;
+}
+
+std::pair<int, int> ind::Map::getSize() const
+{
+    return this->size;
 }

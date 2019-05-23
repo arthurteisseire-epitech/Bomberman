@@ -3,6 +3,7 @@ set(NAME bomberman)
 project(${NAME})
 add_compile_options(-Wall -g)
 set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_COMPILER clang++)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 find_package(Irrlicht REQUIRED)

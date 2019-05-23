@@ -18,6 +18,7 @@ namespace ind {
             Tiles getInfoAtCoord(std::pair<int, int> coord) const;
             void setAtCoord(std::pair<int, int> coord, Tiles tile);
             void printMap() const;
+            std::pair<int, int> getSize() const;
 
         private:
             std::vector<std::vector<ind::Tiles>> map;

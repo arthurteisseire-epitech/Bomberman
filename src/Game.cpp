@@ -33,6 +33,11 @@ ind::Game::Game(char *exec) : map(std::pair<int, int>(15,15))
     this->manager = this->device->getSceneManager();
     this->device->setEventReceiver(&(SingleTon<KeyService>::getInstance()));
     this->device->setWindowCaption(L"Bomberman");
+    auto cube = this->manager->addCubeSceneNode(10.0f, nullptr, -1);
+    cube->setPosition(irr::core::vector3df(70, 0, 70));
+    cube->setMaterialTexture(0, this->driver->getTexture((this->rootPath + "assets" + DIRECTORYSEPARATOR + "creeper.jpg").c_str()));
+    auto *player = new Player(Position(0, 0), SOUTH, PLAYER_ONE, this->map, cube);
+    this->players.emplace_back(player);
 }
 
 void ind::Game::run()
@@ -41,16 +46,27 @@ void ind::Game::run()
 
     board.create([this]() {
         auto cube = manager->addCubeSceneNode(10.0f, nullptr, -1);
-        cube->setMaterialTexture(0, this->driver->getTexture((this->rootPath + "assets" + DIRECTORYSEPARATOR + "tnt.jpg").c_str()));
+        cube->setMaterialTexture(0, this->driver->getTexture((this->rootPath + "assets" + DIRECTORYSEPARATOR + "wood.png").c_str()));
         cube->setMaterialFlag(irr::video::EMF_LIGHTING, false);
         return cube;
     });
     manager->addLightSceneNode(0, irr::core::vector3df(90, 200, 70), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
     manager->addCameraSceneNode(nullptr, irr::core::vector3df(90, 200, 70), irr::core::vector3df(90, 0, 70));
+    irr::u32 then = device->getTimer()->getTime();
     while (device->run()) {
+        const irr::u32 now = device->getTimer()->getTime();
+        const irr::f32 deltaTime = (irr::f32)(now - then) / 1000.f;
+
+        then = now;
         driver->beginScene(true, true, irr::video::SColor(255, 255, 255, 255));
+        for (auto &it : players) {
+            it->update(deltaTime);
+            it->draw();
+        }
         manager->drawAll();
         driver->endScene();
     }
+    for (auto &it: players)
+        it = nullptr;
     device->drop();
 }

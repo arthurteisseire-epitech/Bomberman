@@ -28,6 +28,6 @@ namespace ind {
         irr::video::IVideoDriver *driver = nullptr;
         Map map;
         int playerNumber;
-        std::vector<Player> players;
+        std::vector<std::unique_ptr<Player>> players;
     };
 }

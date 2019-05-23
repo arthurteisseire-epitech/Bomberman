@@ -29,18 +29,17 @@ namespace ind {
 
     class Player : public AbstractEntity {
         public:
-            Player(const Position &position, ORIENTATION rotation, PlayerNumber playerNum, Map &map);
+            Player(const Position &position, ORIENTATION rotation, PlayerNumber playerNum, Map &map, irr::scene::IMeshSceneNode *object);
             ~Player() override = default;
             void draw() override;
-            void update(float deltaTime) override;
-            void move(ORIENTATION direction);
             void placeBomb();
             void decreaseBombNumber(short number);
+            float getSpeed() const;
         private:
             short actualBombs = 0;
             short bombPower = 1;
-            short bombNumber = 1;
-            float movementSpeed = 1.0f;
+            short bombNumber = 10000;
+            float movementSpeed = 30.0f;
             Map &map;
     };
 }

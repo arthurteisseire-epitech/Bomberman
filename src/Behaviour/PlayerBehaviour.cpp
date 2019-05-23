@@ -14,7 +14,7 @@ ind::PlayerBehaviour::PlayerBehaviour(ind::Player &player,
 ) : player(player), playerNumber(playerNumber)
 {}
 
-void ind::PlayerBehaviour::update(float)
+void ind::PlayerBehaviour::update(float deltaTime)
 {
     KeyService &keyService = SingleTon<KeyService>::getInstance();
 
@@ -22,24 +22,24 @@ void ind::PlayerBehaviour::update(float)
         if (keyService.isKeyPressed(this->playerOneKeys[PlaceBomb]))
             this->player.placeBomb();
         if (keyService.isKeyPressed(this->playerOneKeys[Up]))
-            this->player.move(NORTH);
+            this->player.move(NORTH, deltaTime, this->player.getSpeed());
         if (keyService.isKeyPressed(this->playerOneKeys[Down]))
-            this->player.move(SOUTH);
+            this->player.move(SOUTH, deltaTime, this->player.getSpeed());
         if (keyService.isKeyPressed(this->playerOneKeys[Left]))
-            this->player.move(WEST);
+            this->player.move(WEST, deltaTime, this->player.getSpeed());
         if (keyService.isKeyPressed(this->playerOneKeys[Right]))
-            this->player.move(EAST);
+            this->player.move(EAST, deltaTime, this->player.getSpeed());
     }
     if (this->playerNumber == PLAYER_TWO) {
         if (keyService.isKeyPressed(this->playerTwoKeys[PlaceBomb]))
             this->player.placeBomb();
         if (keyService.isKeyPressed(this->playerTwoKeys[Up]))
-            this->player.move(NORTH);
+            this->player.move(NORTH, deltaTime, this->player.getSpeed());
         if (keyService.isKeyPressed(this->playerTwoKeys[Down]))
-            this->player.move(SOUTH);
+            this->player.move(SOUTH, deltaTime, this->player.getSpeed());
         if (keyService.isKeyPressed(this->playerTwoKeys[Left]))
-            this->player.move(WEST);
+            this->player.move(WEST, deltaTime, this->player.getSpeed());
         if (keyService.isKeyPressed(this->playerTwoKeys[Right]))
-            this->player.move(EAST);
+            this->player.move(EAST, deltaTime, this->player.getSpeed());
     }
 }

@@ -7,6 +7,7 @@
 
 #include <memory>
 #include <algorithm>
+#include <iostream>
 #include "AbstractEntity.hpp"
 
 ind::ORIENTATION ind::AbstractEntity::getRotation() const
@@ -19,9 +20,10 @@ const ind::Position &ind::AbstractEntity::getPosition() const
     return boardPosition;
 }
 
-ind::AbstractEntity::AbstractEntity(const Position &boardPosition, ind::ORIENTATION rotation) :
+ind::AbstractEntity::AbstractEntity(const Position &boardPosition, ind::ORIENTATION rotation, irr::scene::IMeshSceneNode *object) :
     rotation(rotation),
-    boardPosition(boardPosition)
+    boardPosition(boardPosition),
+    object(object)
 {}
 
 void ind::AbstractEntity::setRotation(ind::ORIENTATION orientation)
@@ -41,10 +43,16 @@ void ind::AbstractEntity::setBehaviour(IBehaviour *behaviour)
 
 void ind::AbstractEntity::update(float deltaTime)
 {
-    this->behaviour->update(deltaTime);
+    size_t list_size = this->children.size();
+
     for (auto &it : this->children) {
+        if (this->children.size() != list_size) {
+            this->update(deltaTime);
+            return;
+        }
         it->update(deltaTime);
     }
+    this->behaviour->update(deltaTime);
 }
 
 void ind::AbstractEntity::addChild(ind::AbstractEntity *entity)
@@ -58,6 +66,26 @@ void ind::AbstractEntity::removeChild(ind::AbstractEntity *entity)
         [entity](std::unique_ptr<AbstractEntity> &elem) {
         return entity == elem.get();
     });
-    if (found != this->children.end())
-        this->children.erase(found);
+    if (found != this->children.end()) {
+        this->children.erase(found++);
+    }
+}
+
+void ind::AbstractEntity::move(ind::ORIENTATION direction, float deltaTime, float movementSpeed)
+{
+    this->rotation = direction;
+    if (direction == NORTH) {
+        this->force.Y -= deltaTime * movementSpeed;
+    } else if (direction == SOUTH) {
+        this->force.Y += deltaTime * movementSpeed;
+    } else if (direction == WEST) {
+        this->force.X -= deltaTime * movementSpeed;
+    } else if (direction == EAST) {
+        this->force.X += deltaTime * movementSpeed;
+    }
+}
+
+ind::AbstractEntity::~AbstractEntity()
+{
+    this->object->remove();
 }

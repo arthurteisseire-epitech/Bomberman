@@ -16,7 +16,7 @@ namespace ind {
     class Bomb : public AbstractEntity {
 
         public:
-            Bomb(const Position &position, ORIENTATION rotation, Map &map, int power, std::function<void(Bomb *bomb)> onExplode);
+            Bomb(const Position &position, ORIENTATION rotation, Map &map, int power, std::function<void(Bomb *bomb)> onExplode, irr::scene::IMeshSceneNode *object);
             ~Bomb() override = default;
             void decreaseTime(float n);
             void explode();
