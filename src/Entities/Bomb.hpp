@@ -9,7 +9,7 @@
 
 #include <functional>
 #include "AbstractEntity.hpp"
-#include "Map.hpp"
+#include "Board.hpp"
 
 namespace ind {
 

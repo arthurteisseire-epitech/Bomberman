@@ -11,3 +11,9 @@
 #pragma comment(lib, "Irrlicht.lib")
 #pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
 #endif
+
+#ifdef WIN32
+    #define DIRECTORYSEPARATOR '\\'
+#else
+    #define DIRECTORYSEPARATOR '/'
+#endif

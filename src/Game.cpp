@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include "Game.hpp"
-#include "Board.hpp"
+#include "GraphicalBoard.hpp"
 #include "Singleton.hpp"
 #include "crossPlatform.hpp"
 #include "KeyService.hpp"
@@ -17,13 +17,13 @@
 ind::Game::Game(char *exec) : map(std::pair<int, int>(15,15))
 {
     std::string ex = exec;
-    std::size_t last_slash = ex.find_last_of('/');
+    std::size_t last_slash = ex.find_last_of(DIRECTORYSEPARATOR);
     if (last_slash == std::string::npos) {
         this->rootPath = ".";
-        this->rootPath += '/';
+        this->rootPath += DIRECTORYSEPARATOR;
     } else {
         this->rootPath = ex.substr(0, last_slash);
-        this->rootPath += '/';
+        this->rootPath += DIRECTORYSEPARATOR;
     }
     this->device = irr::createDevice(irr::video::EDT_OPENGL);
     if (!this->device)
@@ -37,11 +37,11 @@ ind::Game::Game(char *exec) : map(std::pair<int, int>(15,15))
 
 void ind::Game::run()
 {
-    Board board(Size(15, 13));
+    GraphicalBoard board(Size(15, 13));
 
     board.create([this]() {
         auto cube = manager->addCubeSceneNode(10.0f, nullptr, -1);
-        cube->setMaterialTexture(0, this->driver->getTexture("assets/tnt.jpg"));
+        cube->setMaterialTexture(0, this->driver->getTexture((this->rootPath + "assets" + DIRECTORYSEPARATOR + "tnt.jpg").c_str()));
         cube->setMaterialFlag(irr::video::EMF_LIGHTING, false);
         return cube;
     });

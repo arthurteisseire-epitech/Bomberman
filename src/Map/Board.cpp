@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include <iostream>
-#include "Map.hpp"
+#include "Board.hpp"
 
 ind::Tiles ind::Map::getInfoAtCoord(std::pair<int, int> coord) const
 {

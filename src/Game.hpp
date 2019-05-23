@@ -9,7 +9,7 @@
 
 #include <irrlicht/irrlicht.h>
 #include <string>
-#include "Map.hpp"
+#include "Board.hpp"
 #include "Player.hpp"
 
 namespace ind {

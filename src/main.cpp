@@ -9,7 +9,7 @@
 #include <irrlicht/irrlicht.h>
 #include <string>
 #include "Game.hpp"
-#include "Map.hpp"
+#include "Board.hpp"
 #include "Singleton.hpp"
 
 using namespace irr;

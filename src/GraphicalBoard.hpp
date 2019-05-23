@@ -2,20 +2,20 @@
 ** EPITECH PROJECT, 2018
 ** bomberman
 ** File description:
-** Board.hpp
+** GraphicalBoard.hpp
 */
 
-#ifndef BOMBERMAN_BOARD_HPP
-#define BOMBERMAN_BOARD_HPP
+#ifndef BOMBERMAN_GRAPHICALBOARD_HPP
+#define BOMBERMAN_GRAPHICALBOARD_HPP
 
 #include <vector>
 #include "Size.hpp"
-#include "Map.hpp"
+#include "Board.hpp"
 
 namespace ind {
-    class Board {
+    class GraphicalBoard {
     public:
-        explicit Board(Size size) : size(size)
+        explicit GraphicalBoard(Size size) : size(size)
         {}
 
         template<typename Func>

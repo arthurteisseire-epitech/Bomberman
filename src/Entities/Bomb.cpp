@@ -1,5 +1,3 @@
-#include <utility>
-
 /*
 ** EPITECH PROJECT, 2019
 ** bomberman
@@ -7,6 +5,7 @@
 ** Created by abel,
 */
 
+#include <utility>
 #include <iostream>
 #include "Bomb.hpp"
 #include "BombBehaviour.hpp"
