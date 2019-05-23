@@ -14,12 +14,12 @@ ind::PlayerBehaviour::PlayerBehaviour(ind::Player &player,
 ) : player(player), playerNumber(playerNumber)
 {}
 
-void ind::PlayerBehaviour::update()
+void ind::PlayerBehaviour::update(float)
 {
     KeyService &keyService = SingleTon<KeyService>::getInstance();
 
     if (this->playerNumber == PLAYER_ONE) {
-        if (keyService.isKeyPressed(this->playerOneKeys[Bomb]))
+        if (keyService.isKeyPressed(this->playerOneKeys[PlaceBomb]))
             this->player.placeBomb();
         if (keyService.isKeyPressed(this->playerOneKeys[Up]))
             this->player.move(NORTH);
@@ -31,7 +31,7 @@ void ind::PlayerBehaviour::update()
             this->player.move(EAST);
     }
     if (this->playerNumber == PLAYER_TWO) {
-        if (keyService.isKeyPressed(this->playerTwoKeys[Bomb]))
+        if (keyService.isKeyPressed(this->playerTwoKeys[PlaceBomb]))
             this->player.placeBomb();
         if (keyService.isKeyPressed(this->playerTwoKeys[Up]))
             this->player.move(NORTH);

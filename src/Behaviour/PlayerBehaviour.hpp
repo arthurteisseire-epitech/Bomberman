@@ -15,20 +15,20 @@ namespace ind {
     class PlayerBehaviour : public IBehaviour {
         public:
             PlayerBehaviour(Player &player, PlayerNumber playerNumber);
-            void update() override;
+            void update(float) override;
 
         private:
             Player &player;
             PlayerNumber playerNumber;
             std::map<ind::Actions, irr::EKEY_CODE> playerOneKeys = {
-                {Bomb, irr::KEY_KEY_M},
+                {PlaceBomb, irr::KEY_KEY_M},
                 {Up, irr::KEY_UP},
                 {Left, irr::KEY_LEFT},
                 {Right, irr::KEY_RIGHT},
                 {Down, irr::KEY_DOWN},
             };
             std::map<ind::Actions, irr::EKEY_CODE> playerTwoKeys = {
-                {Bomb, irr::KEY_KEY_1},
+                {PlaceBomb, irr::KEY_KEY_1},
                 {Up, irr::KEY_KEY_Z},
                 {Left, irr::KEY_KEY_Q},
                 {Right, irr::KEY_KEY_D},

@@ -55,3 +55,8 @@ void ind::Map::printMap() const
         std::cout << std::endl;
     }
 }
+
+void ind::Map::setAtCoord(std::pair<int, int> coord, ind::Tiles tile)
+{
+    this->map[coord.first][coord.second] = tile;
+}

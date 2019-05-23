@@ -12,6 +12,6 @@ namespace ind {
     class IBehaviour {
         public:
             virtual ~IBehaviour() = default;
-            virtual void update() = 0;
+            virtual void update(float) = 0;
     };
 }
