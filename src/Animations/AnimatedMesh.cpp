@@ -24,7 +24,7 @@ void ind::animations::AnimatedMesh::loadFolder(irr::scene::ISceneManager &manage
 
     while ((dp = readdir(dir)) != nullptr) {
         std::string path = this->_folderPath + dp->d_name;
-        this->_frames.emplace_back(manager.getMesh(&path));
+        this->_frames.emplace_back(manager.getMesh(path.c_str()));
         if (this->_frame == nullptr)
             this->_frame = std::unique_ptr<irr::scene::IAnimatedMesh>(this->_frames.at(0));
     }

@@ -52,7 +52,8 @@ void ind::AbstractEntity::update(float deltaTime)
         }
         it->update(deltaTime);
     }
-    this->behaviour->update(deltaTime);
+    if (this->behaviour)
+        this->behaviour->update(deltaTime);
 }
 
 void ind::AbstractEntity::addChild(ind::AbstractEntity *entity)
@@ -83,9 +84,4 @@ void ind::AbstractEntity::move(ind::ORIENTATION direction, float deltaTime, floa
     } else if (direction == EAST) {
         this->force.X += deltaTime * movementSpeed;
     }
-}
-
-ind::AbstractEntity::~AbstractEntity()
-{
-    this->object->remove();
 }

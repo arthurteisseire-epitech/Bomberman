@@ -11,7 +11,7 @@
 #include "BombBehaviour.hpp"
 
 ind::Bomb::Bomb(const ind::Position &position, ind::ORIENTATION rotation,
-    ind::Map &map, int power, std::function<void(Bomb *bomb)> onExplode, irr::scene::IMeshSceneNode *object) :
+    ind::Board &map, int power, std::function<void(Bomb *bomb)> onExplode, irr::scene::IMeshSceneNode *object) :
     AbstractEntity(position, rotation, object), map(map), power(power), onExplode(std::move(onExplode))
 {
     auto *behaviour = new BombBehaviour(*this);

@@ -38,7 +38,7 @@ void ind::Player::draw()
     this->force.Y = 0;
 }
 
-ind::Player::Player(const Position &position, ind::ORIENTATION rotation, PlayerNumber playerNum, Map &map, irr::scene::IMeshSceneNode *object) :
+ind::Player::Player(const Position &position, ind::ORIENTATION rotation, PlayerNumber playerNum, Board &map, irr::scene::IMeshSceneNode *object) :
     AbstractEntity(position, rotation, object), map(map)
 {
     auto *behaviour = new PlayerBehaviour(*this, playerNum);

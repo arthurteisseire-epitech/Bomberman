@@ -22,8 +22,10 @@ using namespace gui;
 int main(int, char **av)
 {
     try {
-        ind::Map map(std::pair<int, int>(15,15));
-        ind::Game game(av[0]);
+        irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OPENGL);
+        if (device == NULL)
+            exit(1);
+        ind::Game game(av[0], device);
         game.run();
     } catch (const std::exception &e) {
         std::cout << e.what() << std::endl;

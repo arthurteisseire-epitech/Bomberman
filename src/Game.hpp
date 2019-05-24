@@ -15,7 +15,7 @@
 namespace ind {
     class Game {
         public:
-        explicit Game(char *exec);
+        explicit Game(char *exec, irr::IrrlichtDevice *device);
 
         ~Game() = default;
 
@@ -26,7 +26,7 @@ namespace ind {
         irr::gui::IGUIEnvironment *environment = nullptr;
         irr::scene::ISceneManager *manager = nullptr;
         irr::video::IVideoDriver *driver = nullptr;
-        Map map;
+        Board map;
         int playerNumber;
         std::vector<std::unique_ptr<Player>> players;
     };
