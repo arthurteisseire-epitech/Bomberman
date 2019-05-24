@@ -8,6 +8,7 @@
 #include <iostream>
 #include <irrlicht/irrlicht.h>
 #include <string>
+#include <stdlib.h>
 #include "Game.hpp"
 #include "Board.hpp"
 #include "Singleton.hpp"
@@ -21,6 +22,7 @@ using namespace gui;
 
 int main(int, char **av)
 {
+    srand(time(NULL));
     try {
         irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OPENGL);
         if (device == NULL)

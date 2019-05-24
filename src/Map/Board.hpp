@@ -22,6 +22,7 @@ namespace ind {
             void setEntityAtCoord(std::pair<int, int> coord, AbstractEntity *entity);
             void printMap() const;
             std::pair<int, int> getSize() const;
+            void emptyTile(std::pair<ind::Tiles, std::shared_ptr<ind::AbstractEntity>> &tile);
 
         private:
             std::vector<std::vector<std::pair<ind::Tiles, std::shared_ptr<ind::AbstractEntity>>>> map;

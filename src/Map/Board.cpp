@@ -30,16 +30,18 @@ ind::Board::Board(std::pair<int, int> size, irr::scene::ISceneManager *manager) 
             auto first = (ind::Tiles )((rand() % 2) + 1);
             if (first == BLOCKBREAKABLE) {
                 auto *cube = this->manager->addCubeSceneNode(10.0f, NULL, -1);
-                cube->setPosition(irr::core::vector3df(size.first * 10.0f , 0, size.second * 10.0f));
-
-                auto *block = new BlockBreakable(Position(size.first, size.second), NONE, cube, *this);
+                cube->setPosition(irr::core::vector3df(i * 10.0f , 0, j * 10.0f));
+                cube->setMaterialTexture(0, cube->getSceneManager()->getVideoDriver()->getTexture("assets/wood.png"));
+                auto *block = new BlockBreakable(Position(i, j), NONE, cube, *this);
                 std::pair<Tiles, std::shared_ptr<AbstractEntity>> tmp(first, block);
                 tiles.emplace_back(tmp);
             } else {
                 auto *cube = this->manager->addCubeSceneNode(10.0f, NULL, -1);
-                cube->setPosition(irr::core::vector3df(size.first * 10.0f , 0, size.second * 10.0f));
+                cube->setPosition(irr::core::vector3df(i * 10.0f , -10.0f, j * 10.0f));
+                std::cout << "position : X : " << size.first * 10.0f << " Y : " << size.second * 10.0f << std::endl;
+                cube->setMaterialTexture(0, cube->getSceneManager()->getVideoDriver()->getTexture("assets/stone.png"));
 
-                auto *ground = new Ground(Position(size.first, size.second), NONE, cube);
+                auto *ground = new Ground(Position(i, j), NONE, cube);
                 std::pair<Tiles, std::shared_ptr<AbstractEntity>> tmp(first, ground);
                 tiles.emplace_back(tmp);
             }
@@ -48,18 +50,18 @@ ind::Board::Board(std::pair<int, int> size, irr::scene::ISceneManager *manager) 
         tiles.clear();
     }
     std::cout << this->map.size() << std::endl;
-    this->map[0][0].first = EMPTY;
-    this->map[1][0].first = EMPTY;
-    this->map[0][1].first = EMPTY;
-    this->map[0][size.second -1].first = EMPTY;
-    this->map[0][size.second - 2].first = EMPTY;
-    this->map[1][size.second -1].first = EMPTY;
-    this->map[size.first - 1][size.second -1].first = EMPTY;
-    this->map[size.first - 1][size.second - 2].first = EMPTY;
-    this->map[size.first - 2][size.second -1].first = EMPTY;
-    this->map[size.first - 1][0].first = EMPTY;
-    this->map[size.first - 2][0].first = EMPTY;
-    this->map[size.first - 1][1].first = EMPTY;
+    emptyTile(this->map[0][0]);
+    emptyTile(this->map[1][0]);
+    emptyTile(this->map[0][1]);
+    emptyTile(this->map[0][size.second -1]);
+    emptyTile(this->map[0][size.second - 2]);
+    emptyTile(this->map[1][size.second -1]);
+    emptyTile(this->map[size.first - 1][size.second -1]);
+    emptyTile(this->map[size.first - 1][size.second - 2]);
+    emptyTile(this->map[size.first - 2][size.second -1]);
+    emptyTile(this->map[size.first - 1][0]);
+    emptyTile(this->map[size.first - 2][0]);
+    emptyTile(this->map[size.first - 1][1]);
 
     this->printMap();
 }
@@ -94,4 +96,18 @@ void ind::Board::setEntityAtCoord(std::pair<int, int> coord,
     this->map[coord.first][coord.second] =
         std::pair<Tiles, std::unique_ptr<AbstractEntity>>
         (this->map[coord.first][coord.second].first, entity);
+}
+
+void ind::Board::emptyTile(std::pair<ind::Tiles, std::shared_ptr<ind::AbstractEntity>> &tile)
+{
+    irr::core::vector3df pos = tile.second->getObject()->getPosition();
+    tile.first = EMPTY;
+    auto *cube = tile.second->getObject()->getSceneManager()->addCubeSceneNode();
+    cube->setMaterialTexture(0, tile.second->getObject()->getSceneManager()->getVideoDriver()->getTexture("assets/stone.png"));
+    cube->setPosition(irr::core::vector3df(pos.X, -10.0f, pos.Z));
+    tile.second->getObject()->remove();
+
+    auto *ground = new Ground(tile.second->getPosition(), NONE, cube);
+    std::pair<ind::Tiles, std::shared_ptr<ind::AbstractEntity>> newTile(EMPTY, ground);
+    tile = newTile;
 }

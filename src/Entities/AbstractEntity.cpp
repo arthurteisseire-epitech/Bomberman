@@ -85,3 +85,8 @@ void ind::AbstractEntity::move(ind::ORIENTATION direction, float deltaTime, floa
         this->force.X += deltaTime * movementSpeed;
     }
 }
+
+irr::scene::IMeshSceneNode *ind::AbstractEntity::getObject()
+{
+    return this->object;
+}

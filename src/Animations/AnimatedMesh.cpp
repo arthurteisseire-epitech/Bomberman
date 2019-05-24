@@ -11,7 +11,7 @@ ind::animations::AnimatedMesh::AnimatedMesh(irr::scene::ISceneManager &manager,
 {
     if (this->_folderPath.empty())
         throw "Can not create AnimatedMesh. File path empty.";
-    if (this->_folderPath[this->_folderPath.length() + 1] != '/')
+    if (this->_folderPath[this->_folderPath.length() - 1] != '/')
         this->_folderPath += "/";
     // TODO : Check if directory exists
     this->loadFolder(manager);
@@ -23,11 +23,12 @@ void ind::animations::AnimatedMesh::loadFolder(irr::scene::ISceneManager &manage
     DIR* dir = opendir(this->_folderPath.c_str());
 
     while ((dp = readdir(dir)) != nullptr) {
+        if (strcmp(dp->d_name, ".") == 0 || strcmp(dp->d_name, "..") == 0)
+            continue;
         std::string path = this->_folderPath + dp->d_name;
         this->_frames.emplace_back(manager.getMesh(path.c_str()));
-        if (this->_frame == nullptr)
-            this->_frame = std::unique_ptr<irr::scene::IAnimatedMesh>(this->_frames.at(0));
     }
+    this->_frame = std::unique_ptr<irr::scene::IAnimatedMesh>(this->_frames.at(0));
     closedir(dir);
 }
 

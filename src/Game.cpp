@@ -6,6 +6,7 @@
 */
 
 #include <iostream>
+#include <Animations/AnimatedMesh.hpp>
 #include "Game.hpp"
 #include "GraphicalBoard.hpp"
 #include "Singleton.hpp"
@@ -38,17 +39,27 @@ ind::Game::Game(char *exec, irr::IrrlichtDevice *device) : device(device), manag
 
 void ind::Game::run()
 {
-    GraphicalBoard board(Size(15, 13));
+/*    GraphicalBoard board(Size(15, 13));
 
     board.create([this]() {
         auto cube = manager->addCubeSceneNode(10.0f, nullptr, -1);
         cube->setMaterialTexture(0, this->driver->getTexture((this->rootPath + "assets" + DIRECTORYSEPARATOR + "wood.png").c_str()));
         cube->setMaterialFlag(irr::video::EMF_LIGHTING, false);
         return cube;
-    });
+    });*/
     manager->addLightSceneNode(0, irr::core::vector3df(90, 200, 70), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
     manager->addCameraSceneNode(nullptr, irr::core::vector3df(90, 200, 70), irr::core::vector3df(90, 0, 70));
     irr::u32 then = device->getTimer()->getTime();
+
+
+    /*
+    std::string path = "/home/Taz/Desktop/obj_indie/";
+
+    ind::animations::AnimatedMesh bite(*manager, path);
+    auto var = manager->addAnimatedMeshSceneNode(&bite, nullptr, -1);
+    */
+
+
     while (device->run()) {
         const irr::u32 now = device->getTimer()->getTime();
         const irr::f32 deltaTime = (irr::f32)(now - then) / 1000.f;

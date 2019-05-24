@@ -32,6 +32,7 @@ namespace ind {
             void setRotation(ORIENTATION orientation);
             const IBehaviour &getBehaviour() const;
             void setBehaviour(IBehaviour *behaviour);
+            irr::scene::IMeshSceneNode *getObject();
 
         protected:
             ORIENTATION rotation;
