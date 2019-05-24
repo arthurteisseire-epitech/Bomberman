@@ -6,6 +6,7 @@
 */
 
 #include <iostream>
+#include <Animations/AnimatedMesh.hpp>
 #include "Game.hpp"
 #include "GraphicalBoard.hpp"
 #include "Singleton.hpp"
@@ -53,6 +54,16 @@ void ind::Game::run()
     manager->addLightSceneNode(0, irr::core::vector3df(90, 200, 70), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
     manager->addCameraSceneNode(nullptr, irr::core::vector3df(90, 200, 70), irr::core::vector3df(90, 0, 70));
     irr::u32 then = device->getTimer()->getTime();
+
+
+    /*
+    std::string path = "/home/Taz/Desktop/obj_indie/";
+
+    ind::animations::AnimatedMesh bite(*manager, path);
+    auto var = manager->addAnimatedMeshSceneNode(&bite, nullptr, -1);
+    */
+
+
     while (device->run()) {
         const irr::u32 now = device->getTimer()->getTime();
         const irr::f32 deltaTime = (irr::f32)(now - then) / 1000.f;
