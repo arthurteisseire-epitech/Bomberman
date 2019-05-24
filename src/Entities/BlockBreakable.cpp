@@ -24,7 +24,7 @@ ind::BlockBreakable::BlockBreakable(const ind::Position &boardPosition,
 
 void ind::BlockBreakable::breakBlock()
 {
-    this->board.setAtCoord(std::pair<int, int>(this->getPosition().x, this->getPosition().y), EMPTY);
+    this->board.setAtCoord(this->getPosition(), EMPTY);
 }
 
 void ind::BlockBreakable::draw()

@@ -15,18 +15,19 @@
 namespace ind {
     class Board {
         public:
-            explicit Board(std::pair<int, int> size, irr::scene::ISceneManager *manager);
+            explicit Board(Position size, irr::scene::ISceneManager *manager);
             ~Board() = default;
-            Tiles getInfoAtCoord(std::pair<int, int> coord) const;
-            void setAtCoord(std::pair<int, int> coord, Tiles tile);
-            void setEntityAtCoord(std::pair<int, int> coord, AbstractEntity *entity);
+            Tiles getInfoAtCoord(Position coord) const;
+            void setAtCoord(Position coord, Tiles tile);
+            void setEntityAtCoord(Position coord, AbstractEntity *entity);
             void printMap() const;
-            std::pair<int, int> getSize() const;
+            Position getSize() const;
             void emptyTile(std::pair<ind::Tiles, std::shared_ptr<ind::AbstractEntity>> &tile);
+            void emptyTile(Position position);
 
         private:
             std::vector<std::vector<std::pair<ind::Tiles, std::shared_ptr<ind::AbstractEntity>>>> map;
-            std::pair<int, int> size;
+            Position size;
             irr::scene::ISceneManager *manager = nullptr;
     };
 }

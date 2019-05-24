@@ -37,8 +37,8 @@ namespace ind {
             float getSpeed() const;
         private:
             short actualBombs = 0;
-            short bombPower = 1;
-            short bombNumber = 10000;
+            short bombPower = 5;
+            short bombNumber = 1;
             float movementSpeed = 30.0f;
             Board &map;
     };

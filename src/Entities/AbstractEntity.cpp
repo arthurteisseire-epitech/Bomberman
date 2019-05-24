@@ -90,3 +90,13 @@ irr::scene::IMeshSceneNode *ind::AbstractEntity::getObject()
 {
     return this->object;
 }
+
+ind::AbstractEntity::~AbstractEntity()
+{
+    this->object->remove();
+}
+
+void ind::AbstractEntity::setPosition(Position &position)
+{
+    this->boardPosition = position;
+}

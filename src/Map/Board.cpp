@@ -11,20 +11,20 @@
 #include <Entities/BlockBreakable.hpp>
 #include "Board.hpp"
 #include "Ground.hpp"
+#include "Position.hpp"
 
-ind::Tiles ind::Board::getInfoAtCoord(std::pair<int, int> coord) const
+ind::Tiles ind::Board::getInfoAtCoord(Position coord) const
 {
-    std::cout << "trying to get info at : X " << coord.first << " Y :" << coord.second << std::endl;
-    return this->map[coord.first][coord.second].first;
+    return this->map[coord.x][coord.y].first;
 }
 
-ind::Board::Board(std::pair<int, int> size, irr::scene::ISceneManager *manager) : manager(manager)
+ind::Board::Board(Position size, irr::scene::ISceneManager *manager) : manager(manager), size(size)
 {
     std::vector<std::pair<Tiles, std::shared_ptr<AbstractEntity>>> tiles;
 
-    for (int i = 0; i < size.first; ++i)
+    for (int i = 0; i < size.x; ++i)
     {
-        for (int j = 0; j < size.second; ++j)
+        for (int j = 0; j < size.y; ++j)
         {
 
             auto first = (ind::Tiles )((rand() % 2) + 1);
@@ -38,7 +38,7 @@ ind::Board::Board(std::pair<int, int> size, irr::scene::ISceneManager *manager) 
             } else {
                 auto *cube = this->manager->addCubeSceneNode(10.0f, NULL, -1);
                 cube->setPosition(irr::core::vector3df(i * 10.0f , -10.0f, j * 10.0f));
-                std::cout << "position : X : " << size.first * 10.0f << " Y : " << size.second * 10.0f << std::endl;
+                std::cout << "position : X : " << size.x * 10.0f << " Y : " << size.y * 10.0f << std::endl;
                 cube->setMaterialTexture(0, cube->getSceneManager()->getVideoDriver()->getTexture("assets/stone.png"));
 
                 auto *ground = new Ground(Position(i, j), NONE, cube);
@@ -53,15 +53,15 @@ ind::Board::Board(std::pair<int, int> size, irr::scene::ISceneManager *manager) 
     emptyTile(this->map[0][0]);
     emptyTile(this->map[1][0]);
     emptyTile(this->map[0][1]);
-    emptyTile(this->map[0][size.second -1]);
-    emptyTile(this->map[0][size.second - 2]);
-    emptyTile(this->map[1][size.second -1]);
-    emptyTile(this->map[size.first - 1][size.second -1]);
-    emptyTile(this->map[size.first - 1][size.second - 2]);
-    emptyTile(this->map[size.first - 2][size.second -1]);
-    emptyTile(this->map[size.first - 1][0]);
-    emptyTile(this->map[size.first - 2][0]);
-    emptyTile(this->map[size.first - 1][1]);
+    emptyTile(this->map[0][size.y -1]);
+    emptyTile(this->map[0][size.y - 2]);
+    emptyTile(this->map[1][size.y -1]);
+    emptyTile(this->map[size.x - 1][size.y -1]);
+    emptyTile(this->map[size.x - 1][size.y - 2]);
+    emptyTile(this->map[size.x - 2][size.y -1]);
+    emptyTile(this->map[size.x - 1][0]);
+    emptyTile(this->map[size.x - 2][0]);
+    emptyTile(this->map[size.x - 1][1]);
 
     this->printMap();
 }
@@ -79,23 +79,23 @@ void ind::Board::printMap() const
     }
 }
 
-void ind::Board::setAtCoord(std::pair<int, int> coord, ind::Tiles tile)
+void ind::Board::setAtCoord(Position coord, ind::Tiles tile)
 {
-    this->map[coord.first][coord.second].first = tile;
+    this->map[coord.x][coord.y].first = tile;
 }
 
-std::pair<int, int> ind::Board::getSize() const
+ind::Position ind::Board::getSize() const
 {
     return this->size;
 }
 
-void ind::Board::setEntityAtCoord(std::pair<int, int> coord,
+void ind::Board::setEntityAtCoord(Position coord,
     ind::AbstractEntity *entity
 )
 {
-    this->map[coord.first][coord.second] =
+    this->map[coord.x][coord.y] =
         std::pair<Tiles, std::unique_ptr<AbstractEntity>>
-        (this->map[coord.first][coord.second].first, entity);
+        (this->map[coord.x][coord.y].first, entity);
 }
 
 void ind::Board::emptyTile(std::pair<ind::Tiles, std::shared_ptr<ind::AbstractEntity>> &tile)
@@ -105,9 +105,13 @@ void ind::Board::emptyTile(std::pair<ind::Tiles, std::shared_ptr<ind::AbstractEn
     auto *cube = tile.second->getObject()->getSceneManager()->addCubeSceneNode();
     cube->setMaterialTexture(0, tile.second->getObject()->getSceneManager()->getVideoDriver()->getTexture("assets/stone.png"));
     cube->setPosition(irr::core::vector3df(pos.X, -10.0f, pos.Z));
-    tile.second->getObject()->remove();
 
     auto *ground = new Ground(tile.second->getPosition(), NONE, cube);
     std::pair<ind::Tiles, std::shared_ptr<ind::AbstractEntity>> newTile(EMPTY, ground);
     tile = newTile;
+}
+
+void ind::Board::emptyTile(ind::Position position)
+{
+    return this->emptyTile(this->map[position.x][position.y]);
 }

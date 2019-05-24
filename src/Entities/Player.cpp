@@ -8,6 +8,7 @@
 #include <iostream>
 #include <crossPlatform.hpp>
 #include "Player.hpp"
+#include "Utilities/to2d.hpp"
 #include "PlayerBehaviour.hpp"
 
 void ind::Player::placeBomb()
@@ -23,7 +24,7 @@ void ind::Player::placeBomb()
             this->decreaseBombNumber(1);
             this->removeChild(bomb);
         }, cube);
-        this->map.setAtCoord(std::pair<int, int>(this->getPosition().x, this->getPosition().y), BOMB);
+        this->map.setAtCoord(this->getPosition(), BOMB);
         this->addChild(bomb);
         this->actualBombs += 1;
     }
@@ -31,9 +32,12 @@ void ind::Player::placeBomb()
 
 void ind::Player::draw()
 {
-    std::cout << "Bomb numbers :" << this->actualBombs << std::endl;
-    std::cout << "Elem numbers :" << this->children.size() << std::endl;
+    std::cout << "POSITION : x " << this->getPosition().x << " Y : " << this->getPosition().y << std::endl;
+    irr::core::vector3df actualPosition = this->object->getPosition();
+
     this->object->setPosition(irr::core::vector3df(this->object->getPosition().X - this->force.Y, this->object->getPosition().Y, this->object->getPosition().Z - this->force.X));
+    Position newPosition = to2d(this->object->getPosition());
+    this->setPosition(newPosition);
     this->force.X = 0;
     this->force.Y = 0;
 }

@@ -21,12 +21,13 @@ namespace ind {
         public:
             AbstractEntity(const Position &boardPosition, ORIENTATION rotation, irr::scene::IMeshSceneNode *object);
             AbstractEntity(const AbstractEntity &) = default;
-            virtual ~AbstractEntity() = default;
+            virtual ~AbstractEntity();
             virtual void draw() = 0;
             void move(ORIENTATION direction, float deltaTime, float movementSpeed);
             virtual void update(float deltaTime);
             const Position &getPosition() const;
             ORIENTATION getRotation() const;
+            void setPosition(Position &position);
             void addChild(AbstractEntity *entity);
             void removeChild(AbstractEntity *entity);
             void setRotation(ORIENTATION orientation);
