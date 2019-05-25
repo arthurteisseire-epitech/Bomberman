@@ -48,8 +48,18 @@ void ind::Game::run()
         return cube;
     });*/
     manager->addLightSceneNode(0, irr::core::vector3df(90, 200, 70), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
-    manager->addCameraSceneNode(nullptr, irr::core::vector3df(90, 200, 70), irr::core::vector3df(90, 0, 70));
+    manager->addCameraSceneNode(nullptr, irr::core::vector3df(-20, 200, 70), irr::core::vector3df(60, 0, 70));
     irr::u32 then = device->getTimer()->getTime();
+
+   // std::string path = "/home/Taz/Desktop/wolfanim/";
+   // ind::animations::AnimatedMesh bite(*manager, path);
+
+    //auto mob = this->manager->addAnimatedMeshSceneNode(&bite);
+    //mob->setScale({10, 10, 10});
+    //mob->setAnimationSpeed(24);
+    //mob->setLoopMode(false);
+
+    manager->getActiveCamera()->setFOV(0.7);
 
     while (device->run()) {
         const irr::u32 now = device->getTimer()->getTime();
@@ -57,6 +67,7 @@ void ind::Game::run()
 
         then = now;
         driver->beginScene(true, true, irr::video::SColor(255, 255, 255, 255));
+
         for (auto &it : players) {
             it->update(deltaTime);
             it->draw();
