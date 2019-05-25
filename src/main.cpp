@@ -24,7 +24,7 @@ int main(int, char **av)
 {
     srand(time(NULL));
     try {
-        irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OPENGL);
+        irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OPENGL, irr::core::dimension2d<u32>(1920, 1080),16,false,true);
         if (device == NULL)
             exit(1);
         ind::Game game(av[0], device);
