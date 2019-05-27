@@ -43,6 +43,6 @@ namespace ind {
             Board &map;
 
             irr::core::vector3df correctMovement(const irr::core::vector3df &actualPosition);
-            const bool isWalkable(irr::core::vector3df &position);
+            const bool isWalkable(const irr::core::vector3df &position, const irr::core::vector3df &force);
     };
 }

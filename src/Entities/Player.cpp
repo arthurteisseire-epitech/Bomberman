@@ -64,8 +64,8 @@ irr::core::vector3df ind::Player::correctMovement(const irr::core::vector3df &ac
     irr::core::vector3df horizontalNextPos = irr::core::vector3df(actualPosition.X, actualPosition.Y, actualPosition.Z - this->force.X);
     irr::core::vector3df verticalNextPos = irr::core::vector3df(actualPosition.X - this->force.Y, actualPosition.Y, actualPosition.Z);
     irr::core::vector3df nextPos = irr::core::vector3df(actualPosition.X - this->force.Y, actualPosition.Y, actualPosition.Z - this->force.X);
-    const bool horizontalWalkable = isWalkable(horizontalNextPos);
-    const bool verticalWalkable = isWalkable(verticalNextPos);
+    const bool horizontalWalkable = isWalkable(horizontalNextPos, {0, 0, this->force.X > 0 ? 1.0f : -1.0f});
+    const bool verticalWalkable = isWalkable(verticalNextPos, {this->force.Y > 0 ? 1.0f : -1.0f, 0, 0});
 
     if (horizontalWalkable && verticalWalkable)
         return nextPos;
@@ -76,9 +76,9 @@ irr::core::vector3df ind::Player::correctMovement(const irr::core::vector3df &ac
     return actualPosition;
 }
 
-const bool ind::Player::isWalkable(irr::core::vector3df &position)
+const bool ind::Player::isWalkable(const irr::core::vector3df &position, const irr::core::vector3df &force)
 {
-    Position pos2d = to2d(position);
+    Position pos2d = to2d(position - force * (TILE_SIZE / 2));
     Position mapSize = this->map.getSize();
 
     if (position.X + TILE_SIZE / 2 >= mapSize.x * TILE_SIZE - TILE_SIZE / 2 || position.X < 0 ||
