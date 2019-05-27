@@ -32,7 +32,6 @@ void ind::Player::placeBomb()
 
 void ind::Player::draw()
 {
-    std::cout << "POSITION : x " << this->getPosition().x << " Y : " << this->getPosition().y << std::endl;
     irr::core::vector3df actualPosition = this->object->getPosition();
     const irr::core::vector3df futurePosition = this->correctMovement(actualPosition);
     Position futurePosition2d = to2d(futurePosition);
@@ -79,7 +78,11 @@ irr::core::vector3df ind::Player::correctMovement(const irr::core::vector3df &ac
 
 const bool ind::Player::isWalkable(irr::core::vector3df &position)
 {
-    Tiles tile = this->map.getInfoAtCoord(to2d(position));
+    Position pos2d = to2d(position);
+    Position mapSize = this->map.getSize();
 
+    if (pos2d.x >= mapSize.x || position.X < 0 || pos2d.y >= mapSize.y || position.Z < 0)
+        return false;
+    Tiles tile = this->map.getInfoAtCoord(pos2d);
     return (tile != BLOCKBREAKABLE && tile != BOMB);
 }

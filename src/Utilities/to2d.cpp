@@ -10,8 +10,8 @@
 
 ind::Position ind::to2d(const irr::core::vector3df& pos3d)
 {
-    auto x = (size_t)((pos3d.X + 5) / 10.0f);
-    auto y = (size_t)((pos3d.Z + 5) / 10.0f);
+    size_t x = (int)((pos3d.X + 5) / 10.0f);
+    size_t y = (int)((pos3d.Z + 5) / 10.0f);
 
     return {x, y};
 }
