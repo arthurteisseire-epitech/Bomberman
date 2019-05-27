@@ -81,12 +81,19 @@ irr::core::vector3df ind::Player::correctMovement(const irr::core::vector3df &ac
 
 const bool ind::Player::isWalkable(const irr::core::vector3df &position, const irr::core::vector3df &force)
 {
-    Position pos2d = to2d(position - force * (TILE_SIZE / 2));
+    const irr::core::vector3df posBorder = position - force * (TILE_SIZE / 2);
+    const irr::core::vector3df cornerOffset = (force.X != 0 ? irr::core::vector3df(0, 0, TILE_SIZE / 2.3) : irr::core::vector3df(TILE_SIZE / 2.3, 0, 0));
+    Position firstCorner = to2d(posBorder + cornerOffset);
+    Position secondCorner = to2d(posBorder - cornerOffset);
     Position mapSize = this->map.getSize();
 
+    std::cout << firstCorner.x << ", " << firstCorner.y << " ; " << secondCorner.x << ", " << secondCorner.y << std::endl;
     if (position.X + TILE_SIZE / 2 >= mapSize.x * TILE_SIZE - TILE_SIZE / 2 || position.X < 0 ||
         position.Z + TILE_SIZE / 2.0f >= mapSize.y * TILE_SIZE - TILE_SIZE / 2 || position.Z < 0)
         return false;
-    Tiles tile = this->map.getInfoAtCoord(pos2d);
-    return (tile != BLOCKBREAKABLE && tile != BOMB);
+
+    Tiles firstCornerTile = this->map.getInfoAtCoord(firstCorner);
+    Tiles secondCornerTile = this->map.getInfoAtCoord(secondCorner);
+    return (firstCornerTile != BLOCKBREAKABLE && firstCornerTile != BOMB &&
+            secondCornerTile != BLOCKBREAKABLE && secondCornerTile != BOMB);
 }
