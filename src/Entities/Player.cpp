@@ -81,7 +81,8 @@ const bool ind::Player::isWalkable(irr::core::vector3df &position)
     Position pos2d = to2d(position);
     Position mapSize = this->map.getSize();
 
-    if (pos2d.x >= mapSize.x || position.X < 0 || pos2d.y >= mapSize.y || position.Z < 0)
+    if (position.X + TILE_SIZE / 2 >= mapSize.x * TILE_SIZE - TILE_SIZE / 2 || position.X < 0 ||
+        position.Z + TILE_SIZE / 2.0f >= mapSize.y * TILE_SIZE - TILE_SIZE / 2 || position.Z < 0)
         return false;
     Tiles tile = this->map.getInfoAtCoord(pos2d);
     return (tile != BLOCKBREAKABLE && tile != BOMB);
