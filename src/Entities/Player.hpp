@@ -41,5 +41,7 @@ namespace ind {
             short bombNumber = 1;
             float movementSpeed = 30.0f;
             Board &map;
+
+        irr::core::vector3df correctMovement(const irr::core::vector3df &actualPosition);
     };
 }

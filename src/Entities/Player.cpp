@@ -34,10 +34,11 @@ void ind::Player::draw()
 {
     std::cout << "POSITION : x " << this->getPosition().x << " Y : " << this->getPosition().y << std::endl;
     irr::core::vector3df actualPosition = this->object->getPosition();
+    const irr::core::vector3df futurePosition = this->correctMovement(actualPosition);
+    Position futurePosition2d = to2d(futurePosition);
 
-    this->object->setPosition(irr::core::vector3df(this->object->getPosition().X - this->force.Y, this->object->getPosition().Y, this->object->getPosition().Z - this->force.X));
-    Position newPosition = to2d(this->object->getPosition());
-    this->setPosition(newPosition);
+    this->object->setPosition(futurePosition);
+    this->setPosition(futurePosition2d);
     this->force.X = 0;
     this->force.Y = 0;
 }
@@ -57,4 +58,14 @@ void ind::Player::decreaseBombNumber(short number)
 float ind::Player::getSpeed() const
 {
     return this->movementSpeed;
+}
+
+irr::core::vector3df ind::Player::correctMovement(const irr::core::vector3df &actualPosition)
+{
+    irr::core::vector3df nextPos = irr::core::vector3df(actualPosition.X - this->force.Y, actualPosition.Y, actualPosition.Z - this->force.X);
+    Tiles aimedTile = this->map.getInfoAtCoord(to2d(nextPos));
+
+    if (aimedTile != BLOCKBREAKABLE && aimedTile != BOMB)
+        return nextPos;
+    return actualPosition;
 }
