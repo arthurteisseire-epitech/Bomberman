@@ -11,5 +11,5 @@
 #include <irrlicht/irrlicht.h>
 
 namespace ind {
-    Position to2d(irr::core::vector3df pos3d);
+    Position to2d(const irr::core::vector3df& pos3d);
 }
