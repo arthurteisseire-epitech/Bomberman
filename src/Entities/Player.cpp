@@ -32,6 +32,9 @@ void ind::Player::placeBomb()
 
 void ind::Player::draw()
 {
+    if (this->force == irr::core::vector2df(0, 0))
+        return;
+
     irr::core::vector3df actualPosition = this->object->getPosition();
     const irr::core::vector3df futurePosition = this->correctMovement(actualPosition);
     Position futurePosition2d = to2d(futurePosition);
