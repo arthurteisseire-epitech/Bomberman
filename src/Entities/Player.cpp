@@ -62,10 +62,24 @@ float ind::Player::getSpeed() const
 
 irr::core::vector3df ind::Player::correctMovement(const irr::core::vector3df &actualPosition)
 {
+    irr::core::vector3df horizontalNextPos = irr::core::vector3df(actualPosition.X, actualPosition.Y, actualPosition.Z - this->force.X);
+    irr::core::vector3df verticalNextPos = irr::core::vector3df(actualPosition.X - this->force.Y, actualPosition.Y, actualPosition.Z);
     irr::core::vector3df nextPos = irr::core::vector3df(actualPosition.X - this->force.Y, actualPosition.Y, actualPosition.Z - this->force.X);
-    Tiles aimedTile = this->map.getInfoAtCoord(to2d(nextPos));
+    const bool horizontalWalkable = isWalkable(horizontalNextPos);
+    const bool verticalWalkable = isWalkable(verticalNextPos);
 
-    if (aimedTile != BLOCKBREAKABLE && aimedTile != BOMB)
+    if (horizontalWalkable && verticalWalkable)
         return nextPos;
+    if (horizontalWalkable)
+        return horizontalNextPos;
+    if (verticalWalkable)
+        return verticalNextPos;
     return actualPosition;
+}
+
+const bool ind::Player::isWalkable(irr::core::vector3df &position)
+{
+    Tiles tile = this->map.getInfoAtCoord(to2d(position));
+
+    return (tile != BLOCKBREAKABLE && tile != BOMB);
 }

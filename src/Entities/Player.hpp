@@ -42,6 +42,7 @@ namespace ind {
             float movementSpeed = 30.0f;
             Board &map;
 
-        irr::core::vector3df correctMovement(const irr::core::vector3df &actualPosition);
+            irr::core::vector3df correctMovement(const irr::core::vector3df &actualPosition);
+            const bool isWalkable(irr::core::vector3df &position);
     };
 }
