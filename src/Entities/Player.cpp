@@ -17,7 +17,7 @@ void ind::Player::placeBomb()
 
     if (this->actualBombs < this->bombNumber)
     {
-        auto *cube = this->object->getSceneManager()->addCubeSceneNode(10.0f, nullptr, -1);
+        auto *cube = this->object->getSceneManager()->addCubeSceneNode(TILE_SIZE, nullptr, -1);
         cube->setPosition(this->object->getPosition());
         cube->setMaterialTexture(0, this->object->getSceneManager()->getVideoDriver()->getTexture(((path + DIRECTORYSEPARATOR + "tnt.jpg").c_str())));
         auto *bomb = new Bomb(this->getPosition(), this->getRotation(), this->map, this->bombPower, [this](Bomb *bomb){

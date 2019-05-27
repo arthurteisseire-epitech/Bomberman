@@ -30,7 +30,7 @@ ind::Game::Game(char *exec, irr::IrrlichtDevice *device) : device(device), manag
     this->environment = this->device->getGUIEnvironment();
     this->device->setEventReceiver(&(SingleTon<KeyService>::getInstance()));
     this->device->setWindowCaption(L"Bomberman");
-    auto cube = this->manager->addCubeSceneNode(10.0f, nullptr, -1);
+    auto cube = this->manager->addCubeSceneNode(TILE_SIZE, nullptr, -1);
     cube->setPosition(irr::core::vector3df(0, 0, 0));
     cube->setMaterialTexture(0, this->driver->getTexture((this->rootPath + "assets" + DIRECTORYSEPARATOR + "creeper.jpg").c_str()));
     auto *player = new Player(Position(0, 0), SOUTH, PLAYER_ONE, this->map, cube);

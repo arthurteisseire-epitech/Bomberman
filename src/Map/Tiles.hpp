@@ -7,6 +7,8 @@
 
 #pragma once
 
+#define TILE_SIZE 10.0f
+
 namespace ind
 {
     enum Tiles : int {
