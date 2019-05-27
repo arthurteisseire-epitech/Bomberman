@@ -44,5 +44,6 @@ namespace ind {
 
             irr::core::vector3df correctMovement(const irr::core::vector3df &actualPosition);
             const bool isWalkable(const irr::core::vector3df &position, const irr::core::vector3df &force);
+            bool checkWalkableTile(const ind::Tiles &Tile) const;
     };
 }

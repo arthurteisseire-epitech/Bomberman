@@ -94,6 +94,10 @@ const bool ind::Player::isWalkable(const irr::core::vector3df &position, const i
 
     Tiles firstCornerTile = this->map.getInfoAtCoord(firstCorner);
     Tiles secondCornerTile = this->map.getInfoAtCoord(secondCorner);
-    return (firstCornerTile != BLOCKBREAKABLE && firstCornerTile != BOMB &&
-            secondCornerTile != BLOCKBREAKABLE && secondCornerTile != BOMB);
+    return (checkWalkableTile(firstCornerTile) && checkWalkableTile(secondCornerTile));
+}
+
+bool ind::Player::checkWalkableTile(const ind::Tiles &Tile) const
+{
+    return Tile != BLOCKBREAKABLE && (Tile != BOMB || this->map.getInfoAtCoord(this->getPosition()) == BOMB);
 }
