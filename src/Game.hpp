@@ -27,7 +27,6 @@ namespace ind {
         irr::scene::ISceneManager *manager = nullptr;
         irr::video::IVideoDriver *driver = nullptr;
         Board map;
-        int playerNumber;
         std::vector<std::unique_ptr<Player>> players;
     };
 }

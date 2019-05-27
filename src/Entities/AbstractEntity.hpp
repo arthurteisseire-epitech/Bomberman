@@ -20,7 +20,6 @@ namespace ind {
     class AbstractEntity {
         public:
             AbstractEntity(const Position &boardPosition, ORIENTATION rotation, irr::scene::IMeshSceneNode *object);
-            AbstractEntity(const AbstractEntity &) = default;
             virtual ~AbstractEntity();
             virtual void draw() = 0;
             void move(ORIENTATION direction, float deltaTime, float movementSpeed);
