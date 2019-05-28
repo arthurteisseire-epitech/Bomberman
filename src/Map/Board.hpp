@@ -19,14 +19,13 @@ namespace ind {
             explicit Board(Position size, irr::scene::ISceneManager *manager);
             ~Board() = default;
             Tile getInfoAtCoord(Position coord) const;
-//            void setEntityAtCoord(Position coord, AbstractEntity *entity);
             void printMap() const;
             Position getSize() const;
-            void emptyTile(std::shared_ptr<ind::BoardObject> &tile);
+            void emptyTile(std::unique_ptr<BoardObject> &tile);
             void emptyTile(Position position);
 
         private:
-            std::vector<std::vector<std::shared_ptr<BoardObject>>> map;
+            std::vector<std::vector<std::unique_ptr<BoardObject>>> map;
             Position size;
             irr::scene::ISceneManager *manager = nullptr;
     };
