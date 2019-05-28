@@ -20,7 +20,7 @@ ind::Board::Board(Position size, irr::scene::ISceneManager *manager) : size(size
     for (int i = 0; i < size.x; ++i) {
         map.emplace_back();
         for (int j = 0; j < size.y; ++j) {
-            auto first = (ind::Tile)((rand() % 2) + 1);
+            auto first = static_cast<Tile>((rand() % 2) + 1);
             if (first == BLOCKBREAKABLE)
                 obj = new BlockBreakable(manager, Position(i, j));
             else
@@ -28,7 +28,11 @@ ind::Board::Board(Position size, irr::scene::ISceneManager *manager) : size(size
             map[i].emplace_back(obj);
         }
     }
-    std::cout << map.size() << std::endl;
+    cleanCorners();
+}
+
+void ind::Board::cleanCorners()
+{
     emptyTile(map[0][0]);
     emptyTile(map[1][0]);
     emptyTile(map[0][1]);
@@ -41,8 +45,6 @@ ind::Board::Board(Position size, irr::scene::ISceneManager *manager) : size(size
     emptyTile(map[size.x - 1][0]);
     emptyTile(map[size.x - 2][0]);
     emptyTile(map[size.x - 1][1]);
-
-    printMap();
 }
 
 ind::Tile ind::Board::getInfoAtCoord(Position coord) const
