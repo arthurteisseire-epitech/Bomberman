@@ -31,7 +31,7 @@ namespace ind {
             void removeChild(AbstractEntity *entity);
             void setRotation(ORIENTATION orientation);
             const IBehaviour &getBehaviour() const;
-            void setBehaviour(IBehaviour *behaviour);
+            void setBehaviour(IBehaviour *newBehavior);
             irr::scene::IMeshSceneNode *getObject();
 
         protected:
