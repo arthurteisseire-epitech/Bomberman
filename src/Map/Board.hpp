@@ -10,23 +10,24 @@
 #include <vector>
 #include <utility>
 #include "AbstractEntity.hpp"
-#include "Tiles.hpp"
+#include "BoardObject.hpp"
+#include "Tile.hpp"
 
 namespace ind {
     class Board {
         public:
             explicit Board(Position size, irr::scene::ISceneManager *manager);
             ~Board() = default;
-            Tiles getInfoAtCoord(Position coord) const;
-            void setAtCoord(Position coord, Tiles tile);
-            void setEntityAtCoord(Position coord, AbstractEntity *entity);
+            Tile getInfoAtCoord(Position coord) const;
+            void setAtCoord(Position coord, Tile tile);
+//            void setEntityAtCoord(Position coord, AbstractEntity *entity);
             void printMap() const;
             Position getSize() const;
-            void emptyTile(std::pair<ind::Tiles, std::shared_ptr<ind::AbstractEntity>> &tile);
+            void emptyTile(std::pair<ind::Tile, std::shared_ptr<ind::BoardObject>> &tile);
             void emptyTile(Position position);
 
         private:
-            std::vector<std::vector<std::pair<ind::Tiles, std::shared_ptr<ind::AbstractEntity>>>> map;
+            std::vector<std::vector<std::pair<ind::Tile, std::shared_ptr<ind::BoardObject>>>> map;
             Position size;
             irr::scene::ISceneManager *manager = nullptr;
     };

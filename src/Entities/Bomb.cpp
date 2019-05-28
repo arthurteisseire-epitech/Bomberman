@@ -10,11 +10,16 @@
 #include "Bomb.hpp"
 #include "BombBehaviour.hpp"
 
-ind::Bomb::Bomb(const ind::Position &position, ind::ORIENTATION rotation,
-                ind::Board &map, int power, std::function<void(Bomb *bomb)> onExplode,
-                irr::scene::IMeshSceneNode *object) :
-    AbstractEntity(position, rotation, object), map(map), power(power), onExplode(std::move(onExplode))
+ind::Bomb::Bomb(irr::scene::ISceneManager *mgr, const ind::Position &position, ind::Board &map, int power, std::function<void(Bomb *bomb)> onExplode) :
+    BoardObject(mgr, position, "assets/tnt.jpg"),
+    map(map),
+    power(power),
+    onExplode(std::move(onExplode))
 {
+    node = manager->addCubeSceneNode(TILE_SIZE, nullptr, -1);
+    node->setPosition(irr::core::vector3df(position.x * TILE_SIZE, 0, position.y * TILE_SIZE));
+    node->setMaterialTexture(0, texture);
+
     auto *behaviour = new BombBehaviour(*this);
     setBehaviour(static_cast<IBehaviour *>(behaviour));
 }
@@ -56,10 +61,12 @@ bool ind::Bomb::explodeTile(const Position &pos)
     return isEnd;
 }
 
-void ind::Bomb::draw()
-{}
-
 bool ind::Bomb::inMap(const Position &pos) const
 {
     return pos.x >= 0 && pos.x < map.getSize().x && pos.y >= 0 && pos.y < map.getSize().y;
+}
+
+ind::Tile ind::Bomb::getTile() const
+{
+    return BOMB;
 }

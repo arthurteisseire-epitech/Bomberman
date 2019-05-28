@@ -13,16 +13,15 @@
 
 namespace ind {
 
-    class Bomb : public AbstractEntity {
+    class Bomb : public BoardObject {
 
     public:
-        Bomb(const Position &position, ORIENTATION rotation, Board &map, int power,
-             std::function<void(Bomb *bomb)> onExplode, irr::scene::IMeshSceneNode *object);
+        Bomb(irr::scene::ISceneManager *mgr, const Position &position, Board &map, int power, std::function<void(Bomb *bomb)> onExplode);
         ~Bomb() override = default;
+        Tile getTile() const override;
         void decreaseTime(float n);
         void explode();
         float getTime() const;
-        void draw() override;
         bool inMap(const Position &pos) const;
 
         template <typename Func>

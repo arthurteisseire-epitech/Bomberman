@@ -10,31 +10,9 @@
 #include <iostream>
 #include "AbstractEntity.hpp"
 
-ind::ORIENTATION ind::AbstractEntity::getRotation() const
-{
-    return rotation;
-}
-
-const ind::Position &ind::AbstractEntity::getPosition() const
-{
-    return boardPosition;
-}
-
-ind::AbstractEntity::AbstractEntity(const Position &boardPosition, ind::ORIENTATION rotation, irr::scene::IMeshSceneNode *object) :
-    rotation(rotation),
-    boardPosition(boardPosition),
-    object(object)
+ind::AbstractEntity::AbstractEntity(irr::scene::ISceneManager *mgr) :
+    manager(mgr)
 {}
-
-void ind::AbstractEntity::setRotation(ind::ORIENTATION orientation)
-{
-    rotation = orientation;
-}
-
-const ind::IBehaviour &ind::AbstractEntity::getBehaviour() const
-{
-    return *behaviour;
-}
 
 void ind::AbstractEntity::setBehaviour(IBehaviour *newBehavior)
 {
@@ -72,9 +50,8 @@ void ind::AbstractEntity::removeChild(ind::AbstractEntity *entity)
     }
 }
 
-void ind::AbstractEntity::move(ind::ORIENTATION direction, float deltaTime, float movementSpeed)
+void ind::AbstractEntity::move(ORIENTATION direction, float deltaTime, float movementSpeed)
 {
-    rotation = direction;
     if (direction == NORTH) {
         force.Y -= deltaTime * movementSpeed;
     } else if (direction == SOUTH) {
@@ -84,19 +61,4 @@ void ind::AbstractEntity::move(ind::ORIENTATION direction, float deltaTime, floa
     } else if (direction == EAST) {
         force.X += deltaTime * movementSpeed;
     }
-}
-
-irr::scene::IMeshSceneNode *ind::AbstractEntity::getObject()
-{
-    return object;
-}
-
-ind::AbstractEntity::~AbstractEntity()
-{
-    object->remove();
-}
-
-void ind::AbstractEntity::setPosition(Position &position)
-{
-    boardPosition = position;
 }

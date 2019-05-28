@@ -20,21 +20,21 @@ ind::Game::Game(char *exec, irr::IrrlichtDevice *device) : device(device), manag
     std::string ex = exec;
     std::size_t last_slash = ex.find_last_of(DIRECTORYSEPARATOR);
     if (last_slash == std::string::npos) {
-        this->rootPath = ".";
-        this->rootPath += DIRECTORYSEPARATOR;
+        rootPath = ".";
+        rootPath += DIRECTORYSEPARATOR;
     } else {
-        this->rootPath = ex.substr(0, last_slash);
-        this->rootPath += DIRECTORYSEPARATOR;
+        rootPath = ex.substr(0, last_slash);
+        rootPath += DIRECTORYSEPARATOR;
     }
-    this->driver = this->device->getVideoDriver();
-    this->environment = this->device->getGUIEnvironment();
-    this->device->setEventReceiver(&(SingleTon<KeyService>::getInstance()));
-    this->device->setWindowCaption(L"Bomberman");
-    auto cube = this->manager->addCubeSceneNode(TILE_SIZE, nullptr, -1);
+    driver = device->getVideoDriver();
+    environment = device->getGUIEnvironment();
+    device->setEventReceiver(&(SingleTon<KeyService>::getInstance()));
+    device->setWindowCaption(L"Bomberman");
+    auto cube = manager->addCubeSceneNode(TILE_SIZE, nullptr, -1);
     cube->setPosition(irr::core::vector3df(0, 0, 0));
-    cube->setMaterialTexture(0, this->driver->getTexture((this->rootPath + "assets" + DIRECTORYSEPARATOR + "creeper.jpg").c_str()));
-    auto *player = new Player(Position(0, 0), SOUTH, PLAYER_ONE, this->map, cube);
-    this->players.emplace_back(player);
+    cube->setMaterialTexture(0, driver->getTexture((rootPath + "assets" + DIRECTORYSEPARATOR + "creeper.jpg").c_str()));
+    auto *player = new Player(manager, Position(0, 0), PLAYER_ONE, map, cube);
+    players.emplace_back(player);
 }
 
 void ind::Game::run()
@@ -43,7 +43,7 @@ void ind::Game::run()
 
     board.create([this]() {
         auto cube = manager->addCubeSceneNode(10.0f, nullptr, -1);
-        cube->setMaterialTexture(0, this->driver->getTexture((this->rootPath + "assets" + DIRECTORYSEPARATOR + "wood.png").c_str()));
+        cube->setMaterialTexture(0, driver->getTexture((rootPath + "assets" + DIRECTORYSEPARATOR + "wood.png").c_str()));
         cube->setMaterialFlag(irr::video::EMF_LIGHTING, false);
         return cube;
     });*/
@@ -54,7 +54,7 @@ void ind::Game::run()
    // std::string path = "/home/Taz/Desktop/wolfanim/";
    // ind::animations::AnimatedMesh bite(*manager, path);
 
-    //auto mob = this->manager->addAnimatedMeshSceneNode(&bite);
+    //auto mob = manager->addAnimatedMeshSceneNode(&bite);
     //mob->setScale({10, 10, 10});
     //mob->setAnimationSpeed(24);
     //mob->setLoopMode(false);

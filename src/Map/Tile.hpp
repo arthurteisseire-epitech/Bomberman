@@ -11,7 +11,7 @@
 
 namespace ind
 {
-    enum Tiles : int {
+    enum Tile : int {
         EMPTY = 1,
         BLOCKBREAKABLE = 2,
         BOMBUP = 3,
