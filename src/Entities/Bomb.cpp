@@ -38,7 +38,6 @@ void ind::Bomb::explode()
 {
     const auto &pos = getPosition();
 
-    map.setAtCoord(pos, EXPLOSION);
     explodeRow([pos](int i) { return Position(pos.x + i, pos.y); });
     explodeRow([pos](int i) { return Position(pos.x - i, pos.y); });
     explodeRow([pos](int i) { return Position(pos.x, pos.y + i); });
@@ -56,7 +55,6 @@ bool ind::Bomb::explodeTile(const Position &pos)
             isEnd = true;
             //TODO: put powerup ?
         }
-        map.setAtCoord(pos, EXPLOSION);
     }
     return isEnd;
 }
