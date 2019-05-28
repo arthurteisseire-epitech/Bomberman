@@ -21,6 +21,8 @@ namespace ind {
 
         void run();
     private:
+        void startMenu() const;
+
         std::string rootPath;
         irr::IrrlichtDevice *device = nullptr;
         irr::gui::IGUIEnvironment *environment = nullptr;
