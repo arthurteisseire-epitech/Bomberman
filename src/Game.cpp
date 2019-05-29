@@ -15,7 +15,12 @@
 #include "PlayerBehaviour.hpp"
 #include "Player.hpp"
 
-ind::Game::Game(char *exec, irr::IrrlichtDevice *device) : device(device), manager(device->getSceneManager()), map(Position(15,15), manager)
+ind::Game::Game(char *exec) :
+    deviceService(&SingleTon<DeviceService>::getInstance()),
+    device(deviceService->getDevice()),
+    driver(device->getVideoDriver()),
+    manager(device->getSceneManager()),
+    map(Position(15,15), manager)
 {
     std::string ex = exec;
     std::size_t last_slash = ex.find_last_of(DIRECTORYSEPARATOR);
@@ -26,13 +31,9 @@ ind::Game::Game(char *exec, irr::IrrlichtDevice *device) : device(device), manag
         rootPath = ex.substr(0, last_slash);
         rootPath += DIRECTORYSEPARATOR;
     }
-    driver = device->getVideoDriver();
-    environment = device->getGUIEnvironment();
-    device->setEventReceiver(&(SingleTon<KeyService>::getInstance()));
-    device->setWindowCaption(L"Bomberman");
     auto cube = manager->addCubeSceneNode(TILE_SIZE, nullptr, -1);
     cube->setPosition(irr::core::vector3df(0, 0, 0));
-    cube->setMaterialTexture(0, driver->getTexture((rootPath + "assets" + DIRECTORYSEPARATOR + "creeper.jpg").c_str()));
+    cube->setMaterialTexture(0, manager->getVideoDriver()->getTexture((rootPath + "assets" + DIRECTORYSEPARATOR + "creeper.jpg").c_str()));
     auto *player = new Player(manager, Position(0, 0), PLAYER_ONE, map, cube);
     players.emplace_back(player);
 }
@@ -105,5 +106,3 @@ void ind::Game::startMenu() const
         this->driver->endScene();
     }
 }
-
-

@@ -11,11 +11,12 @@
 #include <string>
 #include "Board.hpp"
 #include "Player.hpp"
+#include "DeviceService.hpp"
 
 namespace ind {
     class Game {
         public:
-        explicit Game(char *exec, irr::IrrlichtDevice *device);
+        explicit Game(char *exec);
 
         ~Game() = default;
 
@@ -23,11 +24,11 @@ namespace ind {
     private:
         void startMenu() const;
 
+        DeviceService *deviceService;
+        irr::IrrlichtDevice *device;
+        irr::video::IVideoDriver *driver;
+        irr::scene::ISceneManager *manager;
         std::string rootPath;
-        irr::IrrlichtDevice *device = nullptr;
-        irr::gui::IGUIEnvironment *environment = nullptr;
-        irr::scene::ISceneManager *manager = nullptr;
-        irr::video::IVideoDriver *driver = nullptr;
         Board map;
         std::vector<std::unique_ptr<Player>> players;
     };
