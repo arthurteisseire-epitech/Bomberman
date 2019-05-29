@@ -8,11 +8,11 @@
 #include "BlockBreakable.hpp"
 #include "Ground.hpp"
 
-ind::BlockBreakable::BlockBreakable(irr::scene::ISceneManager *mgr, Position position) :
-    BoardObject(mgr, position, "assets/wood.png")
+ind::BlockBreakable::BlockBreakable(Position position) :
+    BoardObject(position, "assets/wood.png")
 {
     createGraphicalCube();
-    addChild(new Ground(manager, position));
+    addChild(new Ground(position));
 }
 
 ind::Tile ind::BlockBreakable::getTile() const

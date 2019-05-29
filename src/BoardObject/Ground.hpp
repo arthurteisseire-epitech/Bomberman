@@ -13,7 +13,7 @@
 namespace ind {
     class Ground : public BoardObject {
     public:
-        Ground(irr::scene::ISceneManager *mgr, Position position);
+        explicit Ground(Position position);
 
         Tile getTile() const override;
     };

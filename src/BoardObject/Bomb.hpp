@@ -16,7 +16,7 @@ namespace ind {
     class Bomb : public BoardObject {
 
     public:
-        Bomb(irr::scene::ISceneManager *mgr, const Position &position, Board &map, int power, std::function<void(Bomb *bomb)> onExplode);
+        Bomb(const Position &position, Board &map, int power, std::function<void(Bomb *bomb)> onExplode);
         ~Bomb() override = default;
         Tile getTile() const override;
         void decreaseTime(float n);

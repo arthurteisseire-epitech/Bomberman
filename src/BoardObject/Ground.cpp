@@ -8,8 +8,8 @@
 #include "Tile.hpp"
 #include "Ground.hpp"
 
-ind::Ground::Ground(irr::scene::ISceneManager *mgr, ind::Position position) :
-    BoardObject(mgr, position, "assets/stone.png")
+ind::Ground::Ground(Position position) :
+    BoardObject(position, "assets/stone.png")
 {
     createGraphicalCube(-1);
 }

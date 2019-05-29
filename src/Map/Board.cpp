@@ -13,7 +13,7 @@
 #include "Board.hpp"
 #include "Position.hpp"
 
-ind::Board::Board(Position size, irr::scene::ISceneManager *manager) : size(size), manager(manager)
+ind::Board::Board(Position size) : size(size)
 {
     BoardObject *obj;
 
@@ -24,9 +24,9 @@ ind::Board::Board(Position size, irr::scene::ISceneManager *manager) : size(size
         for (int j = 0; j < size.y; ++j) {
             auto first = static_cast<Tile>((rand() % 2) + 1);
             if (first == BLOCKBREAKABLE)
-                obj = new BlockBreakable(manager, Position(i, j));
+                obj = new BlockBreakable(Position(i, j));
             else
-                obj = new Ground(manager, Position(i, j));
+                obj = new Ground(Position(i, j));
             map[i].emplace_back(obj);
         }
     }
@@ -74,7 +74,7 @@ ind::Position ind::Board::getSize() const
 
 void ind::Board::emptyTile(std::unique_ptr<BoardObject> &tile)
 {
-    tile.reset(new Ground(manager, tile->getPosition()));
+    tile.reset(new Ground(tile->getPosition()));
 }
 
 void ind::Board::emptyTile(ind::Position position)

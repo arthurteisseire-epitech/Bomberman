@@ -18,7 +18,7 @@
 namespace ind {
     class BoardObject : public AbstractEntity {
     public:
-        BoardObject(irr::scene::ISceneManager *mgr, Position position, const irr::io::path &path);
+        BoardObject(Position position, const irr::io::path &path);
         ~BoardObject() override;
 
         virtual Tile getTile() const = 0;

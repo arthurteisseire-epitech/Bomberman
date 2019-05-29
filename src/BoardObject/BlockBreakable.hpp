@@ -13,7 +13,7 @@
 namespace ind {
     class BlockBreakable : public BoardObject {
     public:
-        BlockBreakable(irr::scene::ISceneManager *mgr, Position position);
+        explicit BlockBreakable(Position position);
 
         Tile getTile() const override;
     };

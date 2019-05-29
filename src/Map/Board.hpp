@@ -16,7 +16,7 @@
 namespace ind {
     class Board {
     public:
-        explicit Board(Position size, irr::scene::ISceneManager *manager);
+        explicit Board(Position size);
         ~Board() = default;
         Tile getInfoAtCoord(Position coord) const;
         void printMap() const;
@@ -28,6 +28,5 @@ namespace ind {
     private:
         std::vector<std::vector<std::unique_ptr<BoardObject>>> map;
         Position size;
-        irr::scene::ISceneManager *manager = nullptr;
     };
 }

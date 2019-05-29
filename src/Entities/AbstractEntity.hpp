@@ -19,7 +19,7 @@ namespace ind {
 
     class AbstractEntity {
     public:
-        explicit AbstractEntity(irr::scene::ISceneManager *mgr);
+        explicit AbstractEntity();
         virtual ~AbstractEntity() = default;
         void move(ORIENTATION direction, float deltaTime, float movementSpeed);
         virtual void update(float deltaTime);

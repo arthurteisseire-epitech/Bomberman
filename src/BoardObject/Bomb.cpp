@@ -10,8 +10,8 @@
 #include "Bomb.hpp"
 #include "BombBehaviour.hpp"
 
-ind::Bomb::Bomb(irr::scene::ISceneManager *mgr, const ind::Position &position, ind::Board &map, int power, std::function<void(Bomb *bomb)> onExplode) :
-    BoardObject(mgr, position, "assets/tnt.jpg"),
+ind::Bomb::Bomb(const ind::Position &position, ind::Board &map, int power, std::function<void(Bomb *bomb)> onExplode) :
+    BoardObject(position, "assets/tnt.jpg"),
     map(map),
     power(power),
     onExplode(std::move(onExplode))

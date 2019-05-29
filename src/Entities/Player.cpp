@@ -11,9 +11,8 @@
 #include "Utilities/to2d.hpp"
 #include "PlayerBehaviour.hpp"
 
-ind::Player::Player(irr::scene::ISceneManager *mgr, const Position &position, PlayerNumber playerNum, Board &map,
-                    irr::scene::IMeshSceneNode *object) :
-    AbstractEntity(mgr),
+ind::Player::Player(const Position &position, PlayerNumber playerNum, Board &map, irr::scene::IMeshSceneNode *object) :
+    AbstractEntity(),
     boardPosition(0, 0),
     map(map),
     object(object)
@@ -27,7 +26,7 @@ void ind::Player::placeBomb()
     std::string path = "assets";
 
     if (actualBombs < bombNumber) {
-        auto *bomb = new Bomb(manager, boardPosition, map, bombPower, [this](Bomb *bomb) {
+        auto *bomb = new Bomb(boardPosition, map, bombPower, [this](Bomb *bomb) {
             decreaseBombNumber(1);
             removeChild(bomb);
         });

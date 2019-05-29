@@ -29,7 +29,7 @@ namespace ind {
 
     class Player : public AbstractEntity {
         public:
-            Player(irr::scene::ISceneManager *mgr, const Position &position, PlayerNumber playerNum, Board &map, irr::scene::IMeshSceneNode *object);
+            Player(const Position &position, PlayerNumber playerNum, Board &map, irr::scene::IMeshSceneNode *object);
             ~Player() override = default;
             void draw();
             void placeBomb();

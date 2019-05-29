@@ -20,7 +20,7 @@ ind::Game::Game(char *exec) :
     device(deviceService->getDevice()),
     driver(device->getVideoDriver()),
     manager(device->getSceneManager()),
-    map(Position(15,15), manager)
+    map(Position(15,15))
 {
     std::string ex = exec;
     std::size_t last_slash = ex.find_last_of(DIRECTORYSEPARATOR);
@@ -34,7 +34,7 @@ ind::Game::Game(char *exec) :
     auto cube = manager->addCubeSceneNode(TILE_SIZE, nullptr, -1);
     cube->setPosition(irr::core::vector3df(0, 0, 0));
     cube->setMaterialTexture(0, manager->getVideoDriver()->getTexture((rootPath + "assets" + DIRECTORYSEPARATOR + "creeper.jpg").c_str()));
-    auto *player = new Player(manager, Position(0, 0), PLAYER_ONE, map, cube);
+    auto *player = new Player(Position(0, 0), PLAYER_ONE, map, cube);
     players.emplace_back(player);
 }
 

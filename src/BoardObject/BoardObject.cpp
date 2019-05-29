@@ -7,8 +7,8 @@
 
 #include "BoardObject.hpp"
 
-ind::BoardObject::BoardObject(irr::scene::ISceneManager *mgr, Position position, const irr::io::path& path) :
-    AbstractEntity(mgr),
+ind::BoardObject::BoardObject(Position position, const irr::io::path &path) :
+    AbstractEntity(),
     position(position),
     node(nullptr)
 {

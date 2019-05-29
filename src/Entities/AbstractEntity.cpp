@@ -9,9 +9,11 @@
 #include <algorithm>
 #include <iostream>
 #include "AbstractEntity.hpp"
+#include "Singleton.hpp"
+#include "DeviceService.hpp"
 
-ind::AbstractEntity::AbstractEntity(irr::scene::ISceneManager *mgr) :
-    manager(mgr)
+ind::AbstractEntity::AbstractEntity() :
+    manager(SingleTon<DeviceService>::getInstance().getSceneManager())
 {}
 
 void ind::AbstractEntity::setBehaviour(IBehaviour *newBehavior)
