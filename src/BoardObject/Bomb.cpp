@@ -9,6 +9,7 @@
 #include <iostream>
 #include "Bomb.hpp"
 #include "BombBehaviour.hpp"
+#include "Explosion.hpp"
 
 ind::Bomb::Bomb(const ind::Position &position, ind::Board &map, int power, std::function<void(Bomb *bomb)> onExplode) :
     BoardObject(position, "assets/tnt.jpg"),
@@ -34,6 +35,7 @@ void ind::Bomb::explode()
 {
     const auto &pos = getPosition();
 
+    map.explodeTile(pos);
     explodeRow([pos](int i) { return Position(pos.x + i, pos.y); });
     explodeRow([pos](int i) { return Position(pos.x - i, pos.y); });
     explodeRow([pos](int i) { return Position(pos.x, pos.y + i); });
@@ -51,6 +53,7 @@ bool ind::Bomb::explodeTile(const Position &pos)
             isEnd = true;
             //TODO: put powerup ?
         }
+        map.explodeTile(pos);
     }
     return isEnd;
 }

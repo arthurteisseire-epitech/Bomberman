@@ -24,6 +24,7 @@ namespace ind {
         Position getSize() const;
         void emptyTile(std::unique_ptr<BoardObject> &tile);
         void emptyTile(Position position);
+        void explodeTile(const Position &position);
         void cleanCorners();
         void initGround();
         void initBlocks();

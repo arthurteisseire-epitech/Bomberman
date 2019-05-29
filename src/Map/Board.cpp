@@ -9,6 +9,7 @@
 #include <iostream>
 #include <irrlicht/irrlicht.h>
 #include <cstdlib>
+#include "Explosion.hpp"
 #include "BlockBreakable.hpp"
 #include "Ground.hpp"
 #include "Board.hpp"
@@ -100,4 +101,9 @@ void ind::Board::emptyTile(std::unique_ptr<BoardObject> &tile)
 void ind::Board::emptyTile(ind::Position position)
 {
     return emptyTile(map[position.x][position.y]);
+}
+
+void ind::Board::explodeTile(const ind::Position &position)
+{
+    map[position.x][position.y].reset(new Explosion(position));
 }
