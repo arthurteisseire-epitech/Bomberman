@@ -16,7 +16,7 @@
 namespace ind {
     class Game {
         public:
-        explicit Game(char *exec);
+        explicit Game();
 
         ~Game() = default;
 
@@ -28,8 +28,5 @@ namespace ind {
         irr::IrrlichtDevice *device;
         irr::video::IVideoDriver *driver;
         irr::scene::ISceneManager *manager;
-        std::string rootPath;
-        Board map;
-        std::vector<std::unique_ptr<Player>> players;
     };
 }

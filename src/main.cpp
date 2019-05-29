@@ -12,6 +12,7 @@
 #include "Game.hpp"
 #include "Board.hpp"
 #include "Singleton.hpp"
+#include "FullPath.hpp"
 
 using namespace irr;
 
@@ -24,7 +25,8 @@ int main(int, char **av)
 {
     srand(time(nullptr));
     try {
-        ind::Game game(av[0]);
+        ind::FullPath::changePath(av[0]);
+        ind::Game game;
         game.run();
     } catch (const std::exception &e) {
         std::cout << e.what() << std::endl;

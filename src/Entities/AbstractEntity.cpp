@@ -16,9 +16,9 @@ ind::AbstractEntity::AbstractEntity() :
     manager(SingleTon<DeviceService>::getInstance().getSceneManager())
 {}
 
-void ind::AbstractEntity::setBehaviour(IBehaviour *newBehavior)
+void ind::AbstractEntity::setBehaviour(IBehaviour *newBehaviour)
 {
-    behaviour = std::unique_ptr<IBehaviour>(newBehavior);
+    behaviour = std::unique_ptr<IBehaviour>(newBehaviour);
 }
 
 void ind::AbstractEntity::update(float deltaTime)

@@ -18,6 +18,8 @@ include_directories(
 		src/Behaviour
 		src/Map
 		src/BoardObject
+		src/Scenes
+		src/Utilities
 )
 
 file(GLOB_RECURSE SOURCE_FILES src/*.cpp src/*.hpp)

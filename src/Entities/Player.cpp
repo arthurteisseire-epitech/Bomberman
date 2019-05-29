@@ -84,7 +84,7 @@ const bool ind::Player::isWalkable(const irr::core::vector3df &pos, const irr::c
 {
     const irr::core::vector3df posBorder = pos - direction * (TILE_SIZE / 2);
     const irr::core::vector3df cornerOffset = (direction.X != 0 ? irr::core::vector3df(0, 0, TILE_SIZE / 2.3)
-        : irr::core::vector3df(TILE_SIZE / 2.3, 0, 0));
+                                                                : irr::core::vector3df(TILE_SIZE / 2.3, 0, 0));
     const Position firstCorner = to2d(posBorder + cornerOffset);
     const Position secondCorner = to2d(posBorder - cornerOffset);
     const Position mapSize = map.getSize();

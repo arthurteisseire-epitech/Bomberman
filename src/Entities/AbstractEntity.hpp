@@ -25,12 +25,12 @@ namespace ind {
         virtual void update(float deltaTime);
         void addChild(AbstractEntity *entity);
         void removeChild(AbstractEntity *entity);
-        void setBehaviour(IBehaviour *newBehavior);
+        void setBehaviour(IBehaviour *newBehaviour);
 
     protected:
-        irr::scene::ISceneManager *manager;
         std::unique_ptr<IBehaviour> behaviour = nullptr;
         std::vector<std::unique_ptr<AbstractEntity>> children;
         irr::core::vector2df force;
+	    irr::scene::ISceneManager *manager;
     };
 }
