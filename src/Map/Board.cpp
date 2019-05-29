@@ -15,19 +15,20 @@
 
 ind::Board::Board(Position size) : size(size)
 {
-    BoardObject *obj;
-
     map.reserve(size.x);
+    ground.reserve(size.x);
     for (int i = 0; i < size.x; ++i) {
         map.emplace_back();
+        ground.emplace_back();
         map[i].reserve(size.y);
+        ground[i].reserve(size.y);
         for (int j = 0; j < size.y; ++j) {
             auto first = static_cast<Tile>((rand() % 2) + 1);
+            ground[i].emplace_back(new Ground(Position(i, j)));
             if (first == BLOCKBREAKABLE)
-                obj = new BlockBreakable(Position(i, j));
+                map[i].emplace_back(new BlockBreakable(Position(i, j)));
             else
-                obj = new Ground(Position(i, j));
-            map[i].emplace_back(obj);
+                map[i].emplace_back(nullptr);
         }
     }
     cleanCorners();
@@ -51,7 +52,11 @@ void ind::Board::cleanCorners()
 
 ind::Tile ind::Board::getInfoAtCoord(Position coord) const
 {
-    return map[coord.x][coord.y]->getTile();
+    auto &tile = map[coord.x][coord.y];
+
+    if (tile == nullptr)
+        return EMPTY;
+    return tile->getTile();
 }
 
 void ind::Board::printMap() const
@@ -74,7 +79,8 @@ ind::Position ind::Board::getSize() const
 
 void ind::Board::emptyTile(std::unique_ptr<BoardObject> &tile)
 {
-    tile.reset(new Ground(tile->getPosition()));
+    if (tile != nullptr)
+        tile.reset(new Ground(tile->getPosition()));
 }
 
 void ind::Board::emptyTile(ind::Position position)

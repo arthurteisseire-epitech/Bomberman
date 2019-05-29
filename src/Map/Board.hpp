@@ -11,6 +11,7 @@
 #include <utility>
 #include "AbstractEntity.hpp"
 #include "BoardObject.hpp"
+#include "Ground.hpp"
 #include "Tile.hpp"
 
 namespace ind {
@@ -26,6 +27,7 @@ namespace ind {
         void cleanCorners();
 
     private:
+        std::vector<std::vector<std::unique_ptr<Ground>>> ground;
         std::vector<std::vector<std::unique_ptr<BoardObject>>> map;
         Position size;
     };
