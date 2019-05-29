@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <irrlicht/irrlicht.h>
+#include <cstdlib>
 #include "BlockBreakable.hpp"
 #include "Ground.hpp"
 #include "Board.hpp"
@@ -15,23 +16,37 @@
 
 ind::Board::Board(Position size) : size(size)
 {
-    map.reserve(size.x);
+    initGround();
+    initBlocks();
+    cleanCorners();
+}
+
+void ind::Board::initGround()
+{
     ground.reserve(size.x);
     for (int i = 0; i < size.x; ++i) {
-        map.emplace_back();
         ground.emplace_back();
-        map[i].reserve(size.y);
         ground[i].reserve(size.y);
         for (int j = 0; j < size.y; ++j) {
-            auto first = static_cast<Tile>((rand() % 2) + 1);
             ground[i].emplace_back(new Ground(Position(i, j)));
-            if (first == BLOCKBREAKABLE)
-                map[i].emplace_back(new BlockBreakable(Position(i, j)));
+        }
+    }
+}
+
+void ind::Board::initBlocks()
+{
+    map.reserve(size.x);
+    for (int i = 0; i < size.x; ++i) {
+        map.emplace_back();
+        map[i].reserve(size.y);
+        for (int j = 0; j < size.y; ++j) {
+            auto first = static_cast<ind::Tile>((rand() % 2) + 1);
+            if (first == ind::BLOCKBREAKABLE)
+                map[i].emplace_back(new ind::BlockBreakable(ind::Position(i, j)));
             else
                 map[i].emplace_back(nullptr);
         }
     }
-    cleanCorners();
 }
 
 void ind::Board::cleanCorners()

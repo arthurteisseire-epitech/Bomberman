@@ -25,6 +25,8 @@ namespace ind {
         void emptyTile(std::unique_ptr<BoardObject> &tile);
         void emptyTile(Position position);
         void cleanCorners();
+        void initGround();
+        void initBlocks();
 
     private:
         std::vector<std::vector<std::unique_ptr<Ground>>> ground;
