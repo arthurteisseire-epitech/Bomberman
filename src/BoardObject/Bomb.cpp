@@ -13,22 +13,13 @@
 
 ind::Bomb::Bomb(const ind::Position &position, ind::Board &map, int power, std::function<void(Bomb *bomb)> onExplode) :
     BoardObject(position, "assets/tnt.jpg"),
+    TimeoutObject(1),
     map(map),
     power(power),
     onExplode(std::move(onExplode))
 {
     createGraphicalCube();
     setBehaviour(new BombBehaviour(*this));
-}
-
-float ind::Bomb::getTime() const
-{
-    return timeBeforeExplosion;
-}
-
-void ind::Bomb::decreaseTime(float n)
-{
-    timeBeforeExplosion -= n;
 }
 
 void ind::Bomb::explode()
