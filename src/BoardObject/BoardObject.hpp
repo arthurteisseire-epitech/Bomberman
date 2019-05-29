@@ -19,12 +19,14 @@ namespace ind {
     class BoardObject : public AbstractEntity {
     public:
         BoardObject(irr::scene::ISceneManager *mgr, Position position, const irr::io::path &path);
-        ~BoardObject();
+        ~BoardObject() override;
 
         virtual Tile getTile() const = 0;
         const Position &getPosition() const;
 
     protected:
+        void createGraphicalCube(int height = 0);
+
         Position position;
         irr::video::ITexture *texture;
         irr::scene::ISceneNode *node;

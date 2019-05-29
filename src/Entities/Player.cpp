@@ -31,7 +31,6 @@ void ind::Player::placeBomb()
             decreaseBombNumber(1);
             removeChild(bomb);
         });
-        map.setAtCoord(boardPosition, BOMB);
         addChild(bomb);
         actualBombs += 1;
     }

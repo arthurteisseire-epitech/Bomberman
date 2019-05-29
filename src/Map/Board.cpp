@@ -13,53 +13,52 @@
 #include "Board.hpp"
 #include "Position.hpp"
 
-ind::Tile ind::Board::getInfoAtCoord(Position coord) const
-{
-    return this->map[coord.x][coord.y].first;
-}
-
 ind::Board::Board(Position size, irr::scene::ISceneManager *manager) : size(size), manager(manager)
 {
-    std::vector<std::pair<Tile, std::shared_ptr<BoardObject>>> tiles;
+    BoardObject *obj;
 
+    map.reserve(size.x);
     for (int i = 0; i < size.x; ++i) {
+        map.emplace_back();
+        map[i].reserve(size.y);
         for (int j = 0; j < size.y; ++j) {
-            auto first = (ind::Tile)((rand() % 2) + 1);
-            if (first == BLOCKBREAKABLE) {
-                auto *block = new BlockBreakable(manager, Position(i, j));
-                std::pair<Tile, std::shared_ptr<BoardObject>> tmp(first, block);
-                tiles.emplace_back(tmp);
-            } else {
-                auto *ground = new Ground(manager, Position(i, j));
-                std::pair<Tile, std::shared_ptr<BoardObject>> tmp(first, ground);
-                tiles.emplace_back(tmp);
-            }
+            auto first = static_cast<Tile>((rand() % 2) + 1);
+            if (first == BLOCKBREAKABLE)
+                obj = new BlockBreakable(manager, Position(i, j));
+            else
+                obj = new Ground(manager, Position(i, j));
+            map[i].emplace_back(obj);
         }
-        this->map.emplace_back(tiles);
-        tiles.clear();
     }
-    std::cout << this->map.size() << std::endl;
-    emptyTile(this->map[0][0]);
-    emptyTile(this->map[1][0]);
-    emptyTile(this->map[0][1]);
-    emptyTile(this->map[0][size.y - 1]);
-    emptyTile(this->map[0][size.y - 2]);
-    emptyTile(this->map[1][size.y - 1]);
-    emptyTile(this->map[size.x - 1][size.y - 1]);
-    emptyTile(this->map[size.x - 1][size.y - 2]);
-    emptyTile(this->map[size.x - 2][size.y - 1]);
-    emptyTile(this->map[size.x - 1][0]);
-    emptyTile(this->map[size.x - 2][0]);
-    emptyTile(this->map[size.x - 1][1]);
+    cleanCorners();
+}
 
-    this->printMap();
+void ind::Board::cleanCorners()
+{
+    emptyTile(map[0][0]);
+    emptyTile(map[1][0]);
+    emptyTile(map[0][1]);
+    emptyTile(map[0][size.y - 1]);
+    emptyTile(map[0][size.y - 2]);
+    emptyTile(map[1][size.y - 1]);
+    emptyTile(map[size.x - 1][size.y - 1]);
+    emptyTile(map[size.x - 1][size.y - 2]);
+    emptyTile(map[size.x - 2][size.y - 1]);
+    emptyTile(map[size.x - 1][0]);
+    emptyTile(map[size.x - 2][0]);
+    emptyTile(map[size.x - 1][1]);
+}
+
+ind::Tile ind::Board::getInfoAtCoord(Position coord) const
+{
+    return map[coord.x][coord.y]->getTile();
 }
 
 void ind::Board::printMap() const
 {
-    for (auto &it : this->map) {
+    for (auto &it : map) {
         for (const auto &it2: it) {
-            if (it2.first == EMPTY)
+            if (it2->getTile() != EMPTY)
                 std::cout << "o";
             else
                 std::cout << "x";
@@ -68,32 +67,17 @@ void ind::Board::printMap() const
     }
 }
 
-void ind::Board::setAtCoord(Position coord, ind::Tile tile)
-{
-    this->map[coord.x][coord.y].first = tile;
-}
-
 ind::Position ind::Board::getSize() const
 {
-    return this->size;
+    return size;
 }
 
-//void ind::Board::setEntityAtCoord(Position coord, ind::AbstractEntity *entity)
-//{
-//    this->map[coord.x][coord.y] = std::pair<Tile, std::unique_ptr<AbstractEntity>>
-//        (this->map[coord.x][coord.y].first, entity);
-//}
-
-void ind::Board::emptyTile(std::pair<ind::Tile, std::shared_ptr<ind::BoardObject>> &tile)
+void ind::Board::emptyTile(std::unique_ptr<BoardObject> &tile)
 {
-    tile.first = EMPTY;
-
-    auto *ground = new Ground(manager, tile.second->getPosition());
-    std::pair<ind::Tile, std::shared_ptr<ind::BoardObject>> newTile(EMPTY, ground);
-    tile = newTile;
+    tile.reset(new Ground(manager, tile->getPosition()));
 }
 
 void ind::Board::emptyTile(ind::Position position)
 {
-    return this->emptyTile(this->map[position.x][position.y]);
+    return emptyTile(map[position.x][position.y]);
 }

@@ -16,12 +16,8 @@ ind::Bomb::Bomb(irr::scene::ISceneManager *mgr, const ind::Position &position, i
     power(power),
     onExplode(std::move(onExplode))
 {
-    node = manager->addCubeSceneNode(TILE_SIZE, nullptr, -1);
-    node->setPosition(irr::core::vector3df(position.x * TILE_SIZE, 0, position.y * TILE_SIZE));
-    node->setMaterialTexture(0, texture);
-
-    auto *behaviour = new BombBehaviour(*this);
-    setBehaviour(static_cast<IBehaviour *>(behaviour));
+    createGraphicalCube();
+    setBehaviour(new BombBehaviour(*this));
 }
 
 float ind::Bomb::getTime() const
@@ -38,7 +34,6 @@ void ind::Bomb::explode()
 {
     const auto &pos = getPosition();
 
-    map.setAtCoord(pos, EXPLOSION);
     explodeRow([pos](int i) { return Position(pos.x + i, pos.y); });
     explodeRow([pos](int i) { return Position(pos.x - i, pos.y); });
     explodeRow([pos](int i) { return Position(pos.x, pos.y + i); });
@@ -56,7 +51,6 @@ bool ind::Bomb::explodeTile(const Position &pos)
             isEnd = true;
             //TODO: put powerup ?
         }
-        map.setAtCoord(pos, EXPLOSION);
     }
     return isEnd;
 }
