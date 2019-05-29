@@ -14,9 +14,7 @@ namespace ind
     enum Tile : int {
         EMPTY = 1,
         BLOCKBREAKABLE = 2,
-        BOMBUP = 3,
-        SPEEDUP = 4,
-        BOMBPOWERUP = 5,
+        POWERUP = 3,
         BOMB = 6,
         EXPLOSION = 7,
     };

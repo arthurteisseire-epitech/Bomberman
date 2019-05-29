@@ -35,6 +35,8 @@ namespace ind {
             void placeBomb();
             void decreaseBombNumber(short number);
             float getSpeed() const;
+            short getBombNumber() const;
+            void setBombNumber(short);
         private:
             short actualBombs = 0;
             short bombPower = 5;

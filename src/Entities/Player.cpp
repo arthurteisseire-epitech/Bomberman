@@ -102,3 +102,14 @@ bool ind::Player::checkWalkableTile(const ind::Tile &Tile) const
 {
     return Tile != BLOCKBREAKABLE && (Tile != BOMB || map.getInfoAtCoord(boardPosition) == BOMB);
 }
+
+short ind::Player::getBombNumber() const
+{
+    return this->bombNumber;
+}
+
+void ind::Player::setBombNumber(short bombNumber)
+{
+    this->bombNumber = bombNumber;
+}
+
