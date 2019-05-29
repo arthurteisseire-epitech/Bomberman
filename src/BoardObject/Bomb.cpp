@@ -16,9 +16,7 @@ ind::Bomb::Bomb(irr::scene::ISceneManager *mgr, const ind::Position &position, i
     power(power),
     onExplode(std::move(onExplode))
 {
-    node = manager->addCubeSceneNode(TILE_SIZE, nullptr, -1);
-    node->setPosition(irr::core::vector3df(position.x * TILE_SIZE, 0, position.y * TILE_SIZE));
-    node->setMaterialTexture(0, texture);
+    createGraphicalCube();
 
     auto *behaviour = new BombBehaviour(*this);
     setBehaviour(static_cast<IBehaviour *>(behaviour));

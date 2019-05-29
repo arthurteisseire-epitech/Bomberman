@@ -8,15 +8,11 @@
 #include "BlockBreakable.hpp"
 #include "Ground.hpp"
 
-ind::BlockBreakable::BlockBreakable(irr::scene::ISceneManager *mgr, ind::Position position, int height) :
+ind::BlockBreakable::BlockBreakable(irr::scene::ISceneManager *mgr, Position position) :
     BoardObject(mgr, position, "assets/wood.png")
 {
-    node = manager->addCubeSceneNode(TILE_SIZE, nullptr, -1);
-    node->setPosition(irr::core::vector3df(position.x * TILE_SIZE, height, position.y * TILE_SIZE));
-    node->setMaterialTexture(0, texture);
-
-    auto *ground = new Ground(manager, position);
-    addChild(ground);
+    createGraphicalCube();
+    addChild(new Ground(manager, position));
 }
 
 ind::Tile ind::BlockBreakable::getTile() const

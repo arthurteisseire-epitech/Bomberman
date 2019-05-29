@@ -25,6 +25,8 @@ namespace ind {
         const Position &getPosition() const;
 
     protected:
+        void createGraphicalCube(int height = 0);
+
         Position position;
         irr::video::ITexture *texture;
         irr::scene::ISceneNode *node;
