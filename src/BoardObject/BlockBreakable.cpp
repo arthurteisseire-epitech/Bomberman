@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** bomberman
 ** File description:
-** OldBlockBreakable.cpp
+** BlockBreakable.cpp
 */
 
 #include "BlockBreakable.hpp"

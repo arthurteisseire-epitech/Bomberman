@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** bomberman
 ** File description:
-** OldBlockBreakable.hpp
+** BlockBreakable.hpp
 */
 
 #ifndef BOMBERMAN_BLOCKBREAKABLE_HPP
