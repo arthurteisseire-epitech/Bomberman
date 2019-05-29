@@ -17,8 +17,10 @@ ind::Board::Board(Position size, irr::scene::ISceneManager *manager) : size(size
 {
     BoardObject *obj;
 
+    map.reserve(size.x);
     for (int i = 0; i < size.x; ++i) {
         map.emplace_back();
+        map[i].reserve(size.y);
         for (int j = 0; j < size.y; ++j) {
             auto first = static_cast<Tile>((rand() % 2) + 1);
             if (first == BLOCKBREAKABLE)
