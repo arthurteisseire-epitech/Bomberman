@@ -17,9 +17,7 @@ ind::Bomb::Bomb(irr::scene::ISceneManager *mgr, const ind::Position &position, i
     onExplode(std::move(onExplode))
 {
     createGraphicalCube();
-
-    auto *behaviour = new BombBehaviour(*this);
-    setBehaviour(static_cast<IBehaviour *>(behaviour));
+    setBehaviour(new BombBehaviour(*this));
 }
 
 float ind::Bomb::getTime() const
