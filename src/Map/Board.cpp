@@ -79,8 +79,7 @@ ind::Position ind::Board::getSize() const
 
 void ind::Board::emptyTile(std::unique_ptr<BoardObject> &tile)
 {
-    if (tile != nullptr)
-        tile.reset(new Ground(tile->getPosition()));
+    tile = nullptr;
 }
 
 void ind::Board::emptyTile(ind::Position position)
