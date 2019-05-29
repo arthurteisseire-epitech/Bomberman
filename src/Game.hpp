@@ -12,21 +12,23 @@
 #include "Board.hpp"
 #include "Player.hpp"
 #include "DeviceService.hpp"
+#include "AScene.hpp"
+#include "SceneManager.hpp"
 
 namespace ind {
     class Game {
-        public:
+    public:
         explicit Game();
-
         ~Game() = default;
 
         void run();
     private:
-        void startMenu() const;
-
         DeviceService *deviceService;
         irr::IrrlichtDevice *device;
         irr::video::IVideoDriver *driver;
         irr::scene::ISceneManager *manager;
+
+        SceneType changeScene(SceneManager &sceneManager, const SceneType &newScene) const;
+        irr::f32 updateDeltaTime(irr::u32 &then) const;
     };
 }

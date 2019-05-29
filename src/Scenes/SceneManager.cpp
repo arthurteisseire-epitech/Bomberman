@@ -30,5 +30,7 @@ void ind::SceneManager::buildScene(ind::SceneType type)
         case GAME:
             _currentScene = std::unique_ptr<GameScene>(new GameScene());
             break;
+        default:
+            return;
     }
 }
