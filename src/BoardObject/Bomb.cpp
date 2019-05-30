@@ -9,9 +9,12 @@
 #include <iostream>
 #include "Bomb.hpp"
 #include "BombBehaviour.hpp"
+#include "Explosion.hpp"
+#include "TimeoutObjectBehaviour.hpp"
 
 ind::Bomb::Bomb(const ind::Position &position, ind::Board &map, int power, std::function<void(Bomb *bomb)> onExplode) :
     BoardObject(position, "assets/tnt.jpg"),
+    TimeoutObject(1),
     map(map),
     power(power),
     onExplode(std::move(onExplode))
@@ -20,20 +23,11 @@ ind::Bomb::Bomb(const ind::Position &position, ind::Board &map, int power, std::
     setBehaviour(new BombBehaviour(*this));
 }
 
-float ind::Bomb::getTime() const
-{
-    return timeBeforeExplosion;
-}
-
-void ind::Bomb::decreaseTime(float n)
-{
-    timeBeforeExplosion -= n;
-}
-
 void ind::Bomb::explode()
 {
     const auto &pos = getPosition();
 
+    map.explodeTile(pos);
     explodeRow([pos](int i) { return Position(pos.x + i, pos.y); });
     explodeRow([pos](int i) { return Position(pos.x - i, pos.y); });
     explodeRow([pos](int i) { return Position(pos.x, pos.y + i); });
@@ -51,6 +45,8 @@ bool ind::Bomb::explodeTile(const Position &pos)
             isEnd = true;
             //TODO: put powerup ?
         }
+        if (map.getInfoAtCoord(pos) == EMPTY)
+            map.explodeTile(pos);
     }
     return isEnd;
 }

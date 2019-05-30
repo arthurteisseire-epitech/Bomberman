@@ -25,12 +25,12 @@ void ind::Player::placeBomb()
 {
     std::string path = "assets";
 
+    if (map.getInfoAtCoord(boardPosition) != EMPTY)
+        return;
     if (actualBombs < bombNumber) {
-        auto *bomb = new Bomb(boardPosition, map, bombPower, [this](Bomb *bomb) {
+        map.placeBomb(boardPosition, bombPower, [this](Bomb *bomb) {
             decreaseBombNumber(1);
-            removeChild(bomb);
         });
-        addChild(bomb);
         actualBombs += 1;
     }
 }

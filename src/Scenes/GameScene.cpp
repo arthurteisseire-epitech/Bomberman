@@ -51,6 +51,7 @@ ind::SceneType ind::GameScene::execute(irr::f32 deltaTime)
         it->update(deltaTime);
         it->draw();
     }
+    _map.update(deltaTime);
     return GAME;
 }
 

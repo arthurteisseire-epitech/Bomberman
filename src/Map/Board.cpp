@@ -9,16 +9,22 @@
 #include <iostream>
 #include <irrlicht/irrlicht.h>
 #include <cstdlib>
+#include "Bomb.hpp"
+#include "BoardBehaviour.hpp"
+#include "Explosion.hpp"
 #include "BlockBreakable.hpp"
 #include "Ground.hpp"
 #include "Board.hpp"
 #include "Position.hpp"
 
-ind::Board::Board(Position size) : size(size)
+ind::Board::Board(Position size) :
+    AbstractEntity(),
+    size(size)
 {
     initGround();
     initBlocks();
     cleanCorners();
+    setBehaviour(new BoardBehaviour(*this));
 }
 
 void ind::Board::initGround()
@@ -92,7 +98,7 @@ ind::Position ind::Board::getSize() const
     return size;
 }
 
-void ind::Board::emptyTile(std::unique_ptr<BoardObject> &tile)
+void ind::Board::emptyTile(std::shared_ptr<BoardObject> &tile)
 {
     tile = nullptr;
 }
@@ -100,4 +106,38 @@ void ind::Board::emptyTile(std::unique_ptr<BoardObject> &tile)
 void ind::Board::emptyTile(ind::Position position)
 {
     return emptyTile(map[position.x][position.y]);
+}
+
+void ind::Board::explodeTile(const ind::Position &position)
+{
+    auto explosion = new Explosion(position);
+
+    map[position.x][position.y].reset(explosion);
+    timeoutObjectManager.addObject(map[position.x][position.y], explosion);
+    addChild(explosion);
+}
+
+void ind::Board::placeBomb(const ind::Position &position, int power, const std::function<void(Bomb *)> &f)
+{
+    auto bomb = new Bomb(position, *this, power, [this, f](Bomb *b) {
+        f(b);
+        removeChild(b);
+    });
+
+    map[position.x][position.y].reset(bomb);
+    timeoutObjectManager.addObject(map[position.x][position.y], bomb);
+    addChild(bomb);
+}
+
+void ind::Board::removeDeadObjects()
+{
+    auto deadObjects = timeoutObjectManager.popDeadObjects();
+    for (auto &row : map)
+        for (auto &tile : row)
+            if (std::find(deadObjects.begin(), deadObjects.end(), tile) != deadObjects.end()) {
+                std::cout << "remove child" << std::endl;
+                removeChild(tile.get());
+                std::cout << "remove tile" << std::endl;
+                tile = nullptr;
+            }
 }

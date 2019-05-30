@@ -29,7 +29,7 @@ namespace ind {
 
     protected:
         std::unique_ptr<IBehaviour> behaviour = nullptr;
-        std::vector<std::unique_ptr<AbstractEntity>> children;
+        std::vector<AbstractEntity *> children;
         irr::core::vector2df force;
 	    irr::scene::ISceneManager *manager;
     };

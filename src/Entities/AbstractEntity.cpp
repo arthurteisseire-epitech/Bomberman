@@ -43,13 +43,7 @@ void ind::AbstractEntity::addChild(ind::AbstractEntity *entity)
 
 void ind::AbstractEntity::removeChild(ind::AbstractEntity *entity)
 {
-    auto found = std::find_if(children.begin(), children.end(),
-        [entity](std::unique_ptr<AbstractEntity> &elem) {
-        return entity == elem.get();
-    });
-    if (found != children.end()) {
-        children.erase(found++);
-    }
+    children.erase(std::find(children.begin(), children.end(), entity));
 }
 
 void ind::AbstractEntity::move(ORIENTATION direction, float deltaTime, float movementSpeed)

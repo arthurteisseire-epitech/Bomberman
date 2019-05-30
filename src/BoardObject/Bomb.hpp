@@ -10,18 +10,18 @@
 #include <functional>
 #include "AbstractEntity.hpp"
 #include "Board.hpp"
+#include "TimeoutObject.hpp"
 
 namespace ind {
 
-    class Bomb : public BoardObject {
+    class Board;
+    class Bomb : public BoardObject, public TimeoutObject {
 
     public:
         Bomb(const Position &position, Board &map, int power, std::function<void(Bomb *bomb)> onExplode);
         ~Bomb() override = default;
         Tile getTile() const override;
-        void decreaseTime(float n);
         void explode();
-        float getTime() const;
         bool inMap(const Position &pos) const;
 
         template <typename Func>
@@ -36,7 +36,6 @@ namespace ind {
     private:
         Board &map;
         int power;
-        float timeBeforeExplosion = 1.0f;
         std::function<void(Bomb *bomb)> onExplode;
     };
 }
