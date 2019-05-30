@@ -29,17 +29,25 @@ namespace ind {
 
     class Player : public AbstractEntity {
         public:
-            Player(const Position &position, ORIENTATION rotation, PlayerNumber playerNum, Board &map, irr::scene::IMeshSceneNode *object);
+            Player(const Position &position, PlayerNumber playerNum, Board &map, irr::scene::IMeshSceneNode *object);
             ~Player() override = default;
-            void draw() override;
+            void draw();
             void placeBomb();
             void decreaseBombNumber(short number);
             float getSpeed() const;
+            short getBombNumber() const;
+            void setBombNumber(short);
         private:
             short actualBombs = 0;
             short bombPower = 5;
             short bombNumber = 1;
             float movementSpeed = 30.0f;
+            Position boardPosition;
             Board &map;
+            irr::scene::IMeshSceneNode *object;
+
+            irr::core::vector3df correctMovement(const irr::core::vector3df &actualPosition);
+            const bool isWalkable(const irr::core::vector3df &pos, const irr::core::vector3df &direction);
+            bool checkWalkableTile(const ind::Tile &Tile) const;
     };
 }

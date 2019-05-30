@@ -12,6 +12,7 @@
 #include "Game.hpp"
 #include "Board.hpp"
 #include "Singleton.hpp"
+#include "FullPath.hpp"
 
 using namespace irr;
 
@@ -22,12 +23,10 @@ using namespace gui;
 
 int main(int, char **av)
 {
-    srand(time(NULL));
+    srand(time(nullptr));
     try {
-        irr::IrrlichtDevice *device = irr::createDevice(irr::video::EDT_OPENGL, irr::core::dimension2d<u32>(1920, 1080),16,false,true);
-        if (device == NULL)
-            exit(1);
-        ind::Game game(av[0], device);
+        ind::FullPath::changePath(av[0]);
+        ind::Game game;
         game.run();
     } catch (const std::exception &e) {
         std::cout << e.what() << std::endl;

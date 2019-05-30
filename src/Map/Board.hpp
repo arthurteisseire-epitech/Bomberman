@@ -10,24 +10,35 @@
 #include <vector>
 #include <utility>
 #include "AbstractEntity.hpp"
-#include "Tiles.hpp"
+#include "BoardObject.hpp"
+#include "Ground.hpp"
+#include "Tile.hpp"
+#include "TimeoutObjectManager.hpp"
+#include "Bomb.hpp"
 
 namespace ind {
-    class Board {
-        public:
-            explicit Board(Position size, irr::scene::ISceneManager *manager);
-            ~Board() = default;
-            Tiles getInfoAtCoord(Position coord) const;
-            void setAtCoord(Position coord, Tiles tile);
-            void setEntityAtCoord(Position coord, AbstractEntity *entity);
-            void printMap() const;
-            Position getSize() const;
-            void emptyTile(std::pair<ind::Tiles, std::shared_ptr<ind::AbstractEntity>> &tile);
-            void emptyTile(Position position);
+    class Bomb;
+    class Board : public AbstractEntity {
+    public:
+        explicit Board(Position size);
+        ~Board() override = default;
+        Tile getInfoAtCoord(Position coord) const;
+        Position getSize() const;
+        void emptyTile(std::shared_ptr<BoardObject> &tile);
+        void emptyTile(Position position);
+        void explodeTile(const Position &position);
+        void placeBomb(const Position &position, int power, const std::function<void(Bomb *)> &f);
+        void removeDeadObjects();
 
-        private:
-            std::vector<std::vector<std::pair<ind::Tiles, std::shared_ptr<ind::AbstractEntity>>>> map;
-            Position size;
-            irr::scene::ISceneManager *manager = nullptr;
+    private:
+        void printMap() const;
+        void cleanCorners();
+        void initGround();
+        void initBlocks();
+
+        std::vector<std::vector<std::unique_ptr<Ground>>> ground;
+        std::vector<std::vector<std::shared_ptr<BoardObject>>> map;
+        TimeoutObjectManager<BoardObject> timeoutObjectManager;
+        Position size;
     };
 }

@@ -12,11 +12,11 @@
 
 namespace ind {
     struct Position {
-        Position(size_t x, size_t y) : x(x), y(y)
+        Position(int x, int y) : x(x), y(y)
         {}
 
-        size_t x;
-        size_t y;
+        int x;
+        int y;
     };
 }
 

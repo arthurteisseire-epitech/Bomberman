@@ -8,69 +8,83 @@
 #include <stdlib.h>
 #include <iostream>
 #include <irrlicht/irrlicht.h>
-#include <Entities/BlockBreakable.hpp>
-#include "Board.hpp"
+#include <cstdlib>
+#include "Bomb.hpp"
+#include "BoardBehaviour.hpp"
+#include "Explosion.hpp"
+#include "BlockBreakable.hpp"
 #include "Ground.hpp"
+#include "Board.hpp"
 #include "Position.hpp"
 
-ind::Tiles ind::Board::getInfoAtCoord(Position coord) const
+ind::Board::Board(Position size) :
+    AbstractEntity(),
+    size(size)
 {
-    return this->map[coord.x][coord.y].first;
+    initGround();
+    initBlocks();
+    cleanCorners();
+    setBehaviour(new BoardBehaviour(*this));
 }
 
-ind::Board::Board(Position size, irr::scene::ISceneManager *manager) : manager(manager), size(size)
+void ind::Board::initGround()
 {
-    std::vector<std::pair<Tiles, std::shared_ptr<AbstractEntity>>> tiles;
-
-    for (int i = 0; i < size.x; ++i)
-    {
-        for (int j = 0; j < size.y; ++j)
-        {
-
-            auto first = (ind::Tiles )((rand() % 2) + 1);
-            if (first == BLOCKBREAKABLE) {
-                auto *cube = this->manager->addCubeSceneNode(10.0f, NULL, -1);
-                cube->setPosition(irr::core::vector3df(i * 10.0f , 0, j * 10.0f));
-                cube->setMaterialTexture(0, cube->getSceneManager()->getVideoDriver()->getTexture("assets/wood.png"));
-                auto *block = new BlockBreakable(Position(i, j), NONE, cube, *this);
-                std::pair<Tiles, std::shared_ptr<AbstractEntity>> tmp(first, block);
-                tiles.emplace_back(tmp);
-            } else {
-                auto *cube = this->manager->addCubeSceneNode(10.0f, NULL, -1);
-                cube->setPosition(irr::core::vector3df(i * 10.0f , -10.0f, j * 10.0f));
-                std::cout << "position : X : " << size.x * 10.0f << " Y : " << size.y * 10.0f << std::endl;
-                cube->setMaterialTexture(0, cube->getSceneManager()->getVideoDriver()->getTexture("assets/stone.png"));
-
-                auto *ground = new Ground(Position(i, j), NONE, cube);
-                std::pair<Tiles, std::shared_ptr<AbstractEntity>> tmp(first, ground);
-                tiles.emplace_back(tmp);
-            }
+    ground.reserve(size.x);
+    for (int i = 0; i < size.x; ++i) {
+        ground.emplace_back();
+        ground[i].reserve(size.y);
+        for (int j = 0; j < size.y; ++j) {
+            ground[i].emplace_back(new Ground(Position(i, j)));
         }
-        this->map.emplace_back(tiles);
-        tiles.clear();
     }
-    std::cout << this->map.size() << std::endl;
-    emptyTile(this->map[0][0]);
-    emptyTile(this->map[1][0]);
-    emptyTile(this->map[0][1]);
-    emptyTile(this->map[0][size.y -1]);
-    emptyTile(this->map[0][size.y - 2]);
-    emptyTile(this->map[1][size.y -1]);
-    emptyTile(this->map[size.x - 1][size.y -1]);
-    emptyTile(this->map[size.x - 1][size.y - 2]);
-    emptyTile(this->map[size.x - 2][size.y -1]);
-    emptyTile(this->map[size.x - 1][0]);
-    emptyTile(this->map[size.x - 2][0]);
-    emptyTile(this->map[size.x - 1][1]);
+}
 
-    this->printMap();
+void ind::Board::initBlocks()
+{
+    map.reserve(size.x);
+    for (int i = 0; i < size.x; ++i) {
+        map.emplace_back();
+        map[i].reserve(size.y);
+        for (int j = 0; j < size.y; ++j) {
+            auto first = static_cast<ind::Tile>((rand() % 2) + 1);
+            if (first == ind::BLOCKBREAKABLE)
+                map[i].emplace_back(new ind::BlockBreakable(ind::Position(i, j)));
+            else
+                map[i].emplace_back(nullptr);
+        }
+    }
+}
+
+void ind::Board::cleanCorners()
+{
+    emptyTile(map[0][0]);
+    emptyTile(map[1][0]);
+    emptyTile(map[0][1]);
+    emptyTile(map[0][size.y - 1]);
+    emptyTile(map[0][size.y - 2]);
+    emptyTile(map[1][size.y - 1]);
+    emptyTile(map[size.x - 1][size.y - 1]);
+    emptyTile(map[size.x - 1][size.y - 2]);
+    emptyTile(map[size.x - 2][size.y - 1]);
+    emptyTile(map[size.x - 1][0]);
+    emptyTile(map[size.x - 2][0]);
+    emptyTile(map[size.x - 1][1]);
+}
+
+ind::Tile ind::Board::getInfoAtCoord(Position coord) const
+{
+    auto &tile = map[coord.x][coord.y];
+
+    if (tile == nullptr)
+        return EMPTY;
+    return tile->getTile();
 }
 
 void ind::Board::printMap() const
 {
-    for (auto &it : this->map) {
+    for (auto &it : map) {
         for (const auto &it2: it) {
-            if (it2.first == EMPTY)
+            if (it2->getTile() != EMPTY)
                 std::cout << "o";
             else
                 std::cout << "x";
@@ -79,39 +93,51 @@ void ind::Board::printMap() const
     }
 }
 
-void ind::Board::setAtCoord(Position coord, ind::Tiles tile)
-{
-    this->map[coord.x][coord.y].first = tile;
-}
-
 ind::Position ind::Board::getSize() const
 {
-    return this->size;
+    return size;
 }
 
-void ind::Board::setEntityAtCoord(Position coord,
-    ind::AbstractEntity *entity
-)
+void ind::Board::emptyTile(std::shared_ptr<BoardObject> &tile)
 {
-    this->map[coord.x][coord.y] =
-        std::pair<Tiles, std::unique_ptr<AbstractEntity>>
-        (this->map[coord.x][coord.y].first, entity);
-}
-
-void ind::Board::emptyTile(std::pair<ind::Tiles, std::shared_ptr<ind::AbstractEntity>> &tile)
-{
-    irr::core::vector3df pos = tile.second->getObject()->getPosition();
-    tile.first = EMPTY;
-    auto *cube = tile.second->getObject()->getSceneManager()->addCubeSceneNode();
-    cube->setMaterialTexture(0, tile.second->getObject()->getSceneManager()->getVideoDriver()->getTexture("assets/stone.png"));
-    cube->setPosition(irr::core::vector3df(pos.X, -10.0f, pos.Z));
-
-    auto *ground = new Ground(tile.second->getPosition(), NONE, cube);
-    std::pair<ind::Tiles, std::shared_ptr<ind::AbstractEntity>> newTile(EMPTY, ground);
-    tile = newTile;
+    tile = nullptr;
 }
 
 void ind::Board::emptyTile(ind::Position position)
 {
-    return this->emptyTile(this->map[position.x][position.y]);
+    return emptyTile(map[position.x][position.y]);
+}
+
+void ind::Board::explodeTile(const ind::Position &position)
+{
+    auto explosion = new Explosion(position);
+
+    map[position.x][position.y].reset(explosion);
+    timeoutObjectManager.addObject(map[position.x][position.y], explosion);
+    addChild(explosion);
+}
+
+void ind::Board::placeBomb(const ind::Position &position, int power, const std::function<void(Bomb *)> &f)
+{
+    auto bomb = new Bomb(position, *this, power, [this, f](Bomb *b) {
+        f(b);
+        removeChild(b);
+    });
+
+    map[position.x][position.y].reset(bomb);
+    timeoutObjectManager.addObject(map[position.x][position.y], bomb);
+    addChild(bomb);
+}
+
+void ind::Board::removeDeadObjects()
+{
+    auto deadObjects = timeoutObjectManager.popDeadObjects();
+    for (auto &row : map)
+        for (auto &tile : row)
+            if (std::find(deadObjects.begin(), deadObjects.end(), tile) != deadObjects.end()) {
+                std::cout << "remove child" << std::endl;
+                removeChild(tile.get());
+                std::cout << "remove tile" << std::endl;
+                tile = nullptr;
+            }
 }

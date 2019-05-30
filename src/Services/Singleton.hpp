@@ -9,15 +9,16 @@
 
 template <class T>
 class SingleTon {
-    public:
-        static T &getInstance() {
-            if (SingleTon<T>::instance == nullptr)
-            {
-                SingleTon<T>::instance = new T();
-            }
-            return *SingleTon<T>::instance;
-        };
-        static T *instance;
+public:
+    static T &getInstance()
+    {
+        if (SingleTon<T>::instance == nullptr) {
+            SingleTon<T>::instance = new T();
+        }
+        return *SingleTon<T>::instance;
+    };
+private:
+    static T *instance;
 };
 
 template <class T>

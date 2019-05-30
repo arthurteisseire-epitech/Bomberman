@@ -11,23 +11,24 @@
 #include <string>
 #include "Board.hpp"
 #include "Player.hpp"
+#include "DeviceService.hpp"
+#include "AScene.hpp"
+#include "SceneManager.hpp"
 
 namespace ind {
     class Game {
-        public:
-        explicit Game(char *exec, irr::IrrlichtDevice *device);
-
+    public:
+        explicit Game();
         ~Game() = default;
 
         void run();
     private:
-        std::string rootPath;
-        irr::IrrlichtDevice *device = nullptr;
-        irr::gui::IGUIEnvironment *environment = nullptr;
-        irr::scene::ISceneManager *manager = nullptr;
-        irr::video::IVideoDriver *driver = nullptr;
-        Board map;
-        int playerNumber;
-        std::vector<std::unique_ptr<Player>> players;
+        DeviceService *deviceService;
+        irr::IrrlichtDevice *device;
+        irr::video::IVideoDriver *driver;
+        irr::scene::ISceneManager *manager;
+
+        SceneType changeScene(SceneManager &sceneManager, const SceneType &newScene) const;
+        irr::f32 updateDeltaTime(irr::u32 &then) const;
     };
 }

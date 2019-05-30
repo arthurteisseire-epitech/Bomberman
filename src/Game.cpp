@@ -13,69 +13,48 @@
 #include "crossPlatform.hpp"
 #include "KeyService.hpp"
 #include "PlayerBehaviour.hpp"
-#include "Player.hpp"
 
-ind::Game::Game(char *exec, irr::IrrlichtDevice *device) : device(device), manager(device->getSceneManager()), map(Position(15,15), manager)
+ind::Game::Game() :
+        deviceService(&SingleTon<DeviceService>::getInstance()),
+        device(deviceService->getDevice()),
+        driver(device->getVideoDriver()),
+        manager(device->getSceneManager())
 {
-    std::string ex = exec;
-    std::size_t last_slash = ex.find_last_of(DIRECTORYSEPARATOR);
-    if (last_slash == std::string::npos) {
-        this->rootPath = ".";
-        this->rootPath += DIRECTORYSEPARATOR;
-    } else {
-        this->rootPath = ex.substr(0, last_slash);
-        this->rootPath += DIRECTORYSEPARATOR;
-    }
-    this->driver = this->device->getVideoDriver();
-    this->environment = this->device->getGUIEnvironment();
-    this->device->setEventReceiver(&(SingleTon<KeyService>::getInstance()));
-    this->device->setWindowCaption(L"Bomberman");
-    auto cube = this->manager->addCubeSceneNode(10.0f, nullptr, -1);
-    cube->setPosition(irr::core::vector3df(0, 0, 0));
-    cube->setMaterialTexture(0, this->driver->getTexture((this->rootPath + "assets" + DIRECTORYSEPARATOR + "creeper.jpg").c_str()));
-    auto *player = new Player(Position(0, 0), SOUTH, PLAYER_ONE, this->map, cube);
-    this->players.emplace_back(player);
 }
 
 void ind::Game::run()
 {
-/*    GraphicalBoard board(Size(15, 13));
-
-    board.create([this]() {
-        auto cube = manager->addCubeSceneNode(10.0f, nullptr, -1);
-        cube->setMaterialTexture(0, this->driver->getTexture((this->rootPath + "assets" + DIRECTORYSEPARATOR + "wood.png").c_str()));
-        cube->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-        return cube;
-    });*/
-    manager->addLightSceneNode(0, irr::core::vector3df(90, 200, 70), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
-    manager->addCameraSceneNode(nullptr, irr::core::vector3df(-20, 200, 70), irr::core::vector3df(60, 0, 70));
+    irr::f32 deltaTime;
+    SceneManager sceneManager(MAIN_MENU);
     irr::u32 then = device->getTimer()->getTime();
+    SceneType currentScene = MAIN_MENU;
+    SceneType newScene;
 
-   // std::string path = "/home/Taz/Desktop/wolfanim/";
-   // ind::animations::AnimatedMesh bite(*manager, path);
-
-    //auto mob = this->manager->addAnimatedMeshSceneNode(&bite);
-    //mob->setScale({10, 10, 10});
-    //mob->setAnimationSpeed(24);
-    //mob->setLoopMode(false);
-
-    manager->getActiveCamera()->setFOV(0.7);
-
-    while (device->run()) {
-        const irr::u32 now = device->getTimer()->getTime();
-        const irr::f32 deltaTime = (irr::f32)(now - then) / 1000.f;
-
-        then = now;
+    while (device->run() && currentScene != END) {
         driver->beginScene(true, true, irr::video::SColor(255, 255, 255, 255));
-
-        for (auto &it : players) {
-            it->update(deltaTime);
-            it->draw();
-        }
+        deltaTime = updateDeltaTime(then);
+        newScene = sceneManager.executeScene(deltaTime);
+        if (newScene != currentScene)
+            currentScene = changeScene(sceneManager, newScene);
         manager->drawAll();
         driver->endScene();
     }
-    for (auto &it: players)
-        it = nullptr;
-    //device->drop();
+//    device->drop();
+}
+
+irr::f32 ind::Game::updateDeltaTime(irr::u32 &then) const
+{
+    irr::f32 deltaTime;
+    irr::u32 now;
+
+    now = this->device->getTimer()->getTime();
+    deltaTime = (irr::f32) (now - then) / 1000.f;
+    then = now;
+    return deltaTime;
+}
+
+ind::SceneType ind::Game::changeScene(ind::SceneManager &sceneManager, const ind::SceneType &newScene) const
+{
+    sceneManager.buildScene(newScene);
+    return newScene;
 }

@@ -17,6 +17,9 @@ include_directories(
 		src/Services
 		src/Behaviour
 		src/Map
+		src/BoardObject
+		src/Scenes
+		src/Utilities
 )
 
 file(GLOB_RECURSE SOURCE_FILES src/*.cpp src/*.hpp)
