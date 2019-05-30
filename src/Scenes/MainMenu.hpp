@@ -26,6 +26,7 @@ namespace ind {
         irr::gui::IGUIButton *_optionsButton;
         irr::gui::IGUIButton *_exitButton;
         irr::video::ITexture *_background;
+        irr::gui::IGUIButton *initButton(const irr::core::rect<irr::s32> &rect, const char *string);
     };
 }
 

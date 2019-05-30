@@ -9,33 +9,40 @@
 #include <irrlicht/IGUIButton.h>
 #include <iostream>
 #include "MainMenu.hpp"
+#include "PlaceRectangle.hpp"
 
 ind::MainMenu::MainMenu() :
         AScene(),
         _gui(_manager->getGUIEnvironment())
 {
     irr::video::IVideoDriver *driver = _gui->getVideoDriver();
-    irr::core::dimension2d<irr::u32> size = _gui->getVideoDriver()->getScreenSize();
-    irr::u32 xCorner = size.Width / 3;
-    irr::u32 yCorner = size.Height / 8;
+    const irr::core::dimension2d<irr::u32> &size = _gui->getVideoDriver()->getScreenSize();
+    const irr::u32 &x = size.Width;
+    const irr::u32 &y = size.Height;
 
-    _startButton = _gui->addButton(irr::core::rect<irr::s32>(xCorner, yCorner, 2 * xCorner, 2 * yCorner));
-    _optionsButton = _gui->addButton(irr::core::rect<irr::s32>(xCorner, 3 * yCorner, 2 * xCorner, 4 * yCorner));
-    _exitButton = _gui->addButton(irr::core::rect<irr::s32>(xCorner, 5 * yCorner, 2 * xCorner, 6 * yCorner));
+    _startButton = initButton(PlaceRectangle::getRectangle({x / 3, y / 2}, {x / 6, y / 14}), "./assets/play_button.png");
+    _optionsButton = initButton(PlaceRectangle::getRectangle({x * 2 / 3, y / 2}, {x / 6, y / 14}), "./assets/options_buttons.png");
+    _exitButton = initButton(PlaceRectangle::getRectangle({x / 2, y * 2 / 3}, {x / 6, y / 14}), "./assets/exit.png");
     _background = driver->getTexture("./assets/bomb_background.png");
+}
 
-    irr::video::ITexture *startButtonImage = driver->getTexture("./assets/play_button.png");
-    irr::video::ITexture *optionsImage = driver->getTexture("./assets/options_buttons.png");
-    irr::video::ITexture *exitImage = driver->getTexture("./assets/exit.png");
-
-    _startButton->setImage(startButtonImage);
-    _exitButton->setImage(exitImage);
-    _optionsButton->setImage(optionsImage);
+irr::gui::IGUIButton *ind::MainMenu::initButton(const irr::core::rect<irr::s32> &rect, const char *string)
+{
+    irr::gui::IGUIButton *button = _gui->addButton(rect);
+    button->setImage(_gui->getVideoDriver()->getTexture(string));
+    button->setDrawBorder(false);
+    return button;
 }
 
 ind::SceneType ind::MainMenu::execute(__attribute__((unused)) irr::f32 deltaTime)
 {
-    irr::core::dimension2d<irr::u32> size = _gui->getVideoDriver()->getScreenSize();
+    const irr::core::dimension2d<irr::u32> &size = _gui->getVideoDriver()->getScreenSize();
+    const irr::u32 &x = size.Width;
+    const irr::u32 &y = size.Height;
+
+    _startButton->setRelativePosition(PlaceRectangle::getRectangle({x / 5, y / 2}, {x / 6, y / 14}));
+    _optionsButton->setRelativePosition(PlaceRectangle::getRectangle({x * 4 / 5, y / 2}, {x / 6, y / 14}));
+    _exitButton->setRelativePosition(PlaceRectangle::getRectangle({x / 2, y * 4 / 5}, {x / 6, y / 14}));
     if (_startButton->isPressed())
         return GAME;
     if (_exitButton->isPressed())
