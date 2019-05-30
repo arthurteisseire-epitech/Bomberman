@@ -10,7 +10,7 @@ namespace services
         CANNOT_ACCESS,
         FILE,
         DIRECTORY,
-        UNKNOW
+        UNKNOWN
     };
 
     class FileSystemService {

@@ -1,5 +1,9 @@
 #include "FileSystemService.hpp"
 
+/*
+ * TODO : Use boost
+ */
+
 services::FILE_STATUS services::FileSystemService::exists(std::string &path)
 {
     struct stat info;
@@ -10,5 +14,5 @@ services::FILE_STATUS services::FileSystemService::exists(std::string &path)
         return FILE_STATUS::DIRECTORY;
     else if (info.st_mode & S_IFREG)
         return FILE_STATUS::FILE;
-    return FILE_STATUS::UNKNOW;
+    return FILE_STATUS::UNKNOWN;
 }

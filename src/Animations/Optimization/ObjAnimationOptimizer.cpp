@@ -2,7 +2,6 @@
 #include "ObjAnimationOptimizer.hpp"
 #include "Services/Singleton.hpp"
 #include "Services/FileSystemService.hpp"
-#include <boost/filesystem.hpp>
 
 ind::animations::optimization::ObjAnimationOptimizer::ObjAnimationOptimizer(
     std::string &folder) : _folder(folder)
