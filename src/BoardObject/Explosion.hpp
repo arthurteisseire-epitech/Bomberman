@@ -9,9 +9,10 @@
 #define BOMBERMAN_EXPLOSION_HPP
 
 #include "BoardObject.hpp"
+#include "TimeoutObject.hpp"
 
 namespace ind {
-    class Explosion : public BoardObject {
+    class Explosion : public BoardObject, public TimeoutObject {
     public:
         explicit Explosion(Position position);
         Tile getTile() const override;

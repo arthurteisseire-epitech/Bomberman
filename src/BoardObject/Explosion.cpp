@@ -8,7 +8,8 @@
 #include "Explosion.hpp"
 
 ind::Explosion::Explosion(ind::Position position) :
-    BoardObject(position, "assets/red.jpg")
+    BoardObject(position, "assets/red.jpg"),
+    TimeoutObject(1)
 {
     createGraphicalCube();
 }

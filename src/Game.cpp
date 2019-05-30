@@ -76,6 +76,7 @@ void ind::Game::run()
             it->update(deltaTime);
             it->draw();
         }
+        map.update(deltaTime);
         manager->drawAll();
         driver->endScene();
     }

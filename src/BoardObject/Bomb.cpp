@@ -10,6 +10,7 @@
 #include "Bomb.hpp"
 #include "BombBehaviour.hpp"
 #include "Explosion.hpp"
+#include "TimeoutObjectBehaviour.hpp"
 
 ind::Bomb::Bomb(const ind::Position &position, ind::Board &map, int power, std::function<void(Bomb *bomb)> onExplode) :
     BoardObject(position, "assets/tnt.jpg"),

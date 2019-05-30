@@ -9,17 +9,21 @@
 #include <iostream>
 #include <irrlicht/irrlicht.h>
 #include <cstdlib>
+#include "BoardBehaviour.hpp"
 #include "Explosion.hpp"
 #include "BlockBreakable.hpp"
 #include "Ground.hpp"
 #include "Board.hpp"
 #include "Position.hpp"
 
-ind::Board::Board(Position size) : size(size)
+ind::Board::Board(Position size) :
+    AbstractEntity(),
+    size(size)
 {
     initGround();
     initBlocks();
     cleanCorners();
+    setBehaviour(new BoardBehaviour(*this));
 }
 
 void ind::Board::initGround()
@@ -93,7 +97,7 @@ ind::Position ind::Board::getSize() const
     return size;
 }
 
-void ind::Board::emptyTile(std::unique_ptr<BoardObject> &tile)
+void ind::Board::emptyTile(std::shared_ptr<BoardObject> &tile)
 {
     tile = nullptr;
 }
@@ -105,5 +109,19 @@ void ind::Board::emptyTile(ind::Position position)
 
 void ind::Board::explodeTile(const ind::Position &position)
 {
-    map[position.x][position.y].reset(new Explosion(position));
+    auto explosion = new Explosion(position);
+
+    map[position.x][position.y].reset(explosion);
+    timeoutObjectManager.addObject(map[position.x][position.y], explosion);
+}
+
+void ind::Board::updateTimeoutObjects(float deltaTime)
+{
+    timeoutObjectManager.update(deltaTime);
+
+    auto deadObjects = timeoutObjectManager.popDeadObjects();
+    for (auto &row : map)
+        for (auto &tile : row)
+            if (std::find(deadObjects.begin(), deadObjects.end(), tile) != deadObjects.end())
+                tile = nullptr;
 }
