@@ -5,6 +5,7 @@
 ** Explosion.cpp
 */
 
+#include "TimeoutObjectBehaviour.hpp"
 #include "Explosion.hpp"
 
 ind::Explosion::Explosion(ind::Position position) :
@@ -12,6 +13,7 @@ ind::Explosion::Explosion(ind::Position position) :
     TimeoutObject(1)
 {
     createGraphicalCube();
+    setBehaviour(new TimeoutObjectBehaviour(*this));
 }
 
 ind::Tile ind::Explosion::getTile() const

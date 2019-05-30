@@ -13,5 +13,5 @@ ind::TimeoutObjectBehaviour::TimeoutObjectBehaviour(TimeoutObject &obj) : object
 
 void ind::TimeoutObjectBehaviour::update(float deltaTime)
 {
-//    object.decreaseTime(deltaTime);
+    object.decreaseTime(deltaTime);
 }

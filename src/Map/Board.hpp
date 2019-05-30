@@ -26,6 +26,7 @@ namespace ind {
         void emptyTile(std::shared_ptr<BoardObject> &tile);
         void emptyTile(Position position);
         void explodeTile(const Position &position);
+        void placeBomb(const Position &position, int power);
         void updateTimeoutObjects(float deltaTime);
         void cleanCorners();
         void initGround();

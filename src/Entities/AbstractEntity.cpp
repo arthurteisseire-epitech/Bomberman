@@ -44,8 +44,8 @@ void ind::AbstractEntity::addChild(ind::AbstractEntity *entity)
 void ind::AbstractEntity::removeChild(ind::AbstractEntity *entity)
 {
     auto found = std::find_if(children.begin(), children.end(),
-        [entity](std::unique_ptr<AbstractEntity> &elem) {
-        return entity == elem.get();
+        [entity](AbstractEntity *elem) {
+        return entity == elem;
     });
     if (found != children.end()) {
         children.erase(found++);

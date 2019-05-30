@@ -12,9 +12,8 @@ ind::BombBehaviour::BombBehaviour(ind::Bomb &bomb) : bomb(bomb)
 
 void ind::BombBehaviour::update(float deltaTime)
 {
-    this->bomb.decreaseTime(deltaTime);
-    if (this->bomb.getTime() <= 0.0f)
-    {
-        this->bomb.explode();
+    bomb.decreaseTime(deltaTime);
+    if (bomb.getTime() <= 0.0f) {
+        bomb.explode();
     }
 }

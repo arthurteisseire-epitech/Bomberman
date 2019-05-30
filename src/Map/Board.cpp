@@ -9,6 +9,7 @@
 #include <iostream>
 #include <irrlicht/irrlicht.h>
 #include <cstdlib>
+#include "Bomb.hpp"
 #include "BoardBehaviour.hpp"
 #include "Explosion.hpp"
 #include "BlockBreakable.hpp"
@@ -113,15 +114,25 @@ void ind::Board::explodeTile(const ind::Position &position)
 
     map[position.x][position.y].reset(explosion);
     timeoutObjectManager.addObject(map[position.x][position.y], explosion);
+    addChild(explosion);
+}
+
+void ind::Board::placeBomb(const ind::Position &position, int power)
+{
+    auto bomb = new Bomb(position, *this, power, nullptr);
+
+    map[position.x][position.y].reset(bomb);
+    timeoutObjectManager.addObject(map[position.x][position.y], bomb);
+    addChild(bomb);
 }
 
 void ind::Board::updateTimeoutObjects(float deltaTime)
 {
-    timeoutObjectManager.update(deltaTime);
-
     auto deadObjects = timeoutObjectManager.popDeadObjects();
     for (auto &row : map)
         for (auto &tile : row)
-            if (std::find(deadObjects.begin(), deadObjects.end(), tile) != deadObjects.end())
+            if (std::find(deadObjects.begin(), deadObjects.end(), tile) != deadObjects.end()) {
+                removeChild(tile.get());
                 tile = nullptr;
+            }
 }

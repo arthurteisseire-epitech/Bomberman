@@ -32,7 +32,7 @@ void ind::Bomb::explode()
     explodeRow([pos](int i) { return Position(pos.x - i, pos.y); });
     explodeRow([pos](int i) { return Position(pos.x, pos.y + i); });
     explodeRow([pos](int i) { return Position(pos.x, pos.y - i); });
-    onExplode(this);
+//    onExplode(this);
 }
 
 bool ind::Bomb::explodeTile(const Position &pos)

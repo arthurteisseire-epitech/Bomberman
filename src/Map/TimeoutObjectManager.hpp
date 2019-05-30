@@ -40,13 +40,6 @@ namespace ind {
             return deadObjects;
         }
 
-        void update(float deltaTime)
-        {
-            std::for_each(objects.begin(), objects.end(), [&](std::pair<std::shared_ptr<T>, TimeoutObject *> &pair) {
-                pair.second->decreaseTime(deltaTime);
-            });
-        }
-
     private:
         std::vector<std::pair<std::shared_ptr<T>, TimeoutObject *>> objects;
     };
