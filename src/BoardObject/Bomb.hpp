@@ -14,6 +14,7 @@
 
 namespace ind {
 
+    class Board;
     class Bomb : public BoardObject, public TimeoutObject {
 
     public:

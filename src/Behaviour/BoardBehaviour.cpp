@@ -13,7 +13,7 @@ ind::BoardBehaviour::BoardBehaviour(ind::Board &board) :
 {
 }
 
-void ind::BoardBehaviour::update(float deltaTime)
+void ind::BoardBehaviour::update(float)
 {
-    board.updateTimeoutObjects(deltaTime);
+    board.removeDeadObjects();
 }

@@ -14,25 +14,28 @@
 #include "Ground.hpp"
 #include "Tile.hpp"
 #include "TimeoutObjectManager.hpp"
+#include "Bomb.hpp"
 
 namespace ind {
+    class Bomb;
     class Board : public AbstractEntity {
     public:
         explicit Board(Position size);
         ~Board() override = default;
         Tile getInfoAtCoord(Position coord) const;
-        void printMap() const;
         Position getSize() const;
         void emptyTile(std::shared_ptr<BoardObject> &tile);
         void emptyTile(Position position);
         void explodeTile(const Position &position);
-        void placeBomb(const Position &position, int power);
-        void updateTimeoutObjects(float deltaTime);
+        void placeBomb(const Position &position, int power, const std::function<void(Bomb *)> &f);
+        void removeDeadObjects();
+
+    private:
+        void printMap() const;
         void cleanCorners();
         void initGround();
         void initBlocks();
 
-    private:
         std::vector<std::vector<std::unique_ptr<Ground>>> ground;
         std::vector<std::vector<std::shared_ptr<BoardObject>>> map;
         TimeoutObjectManager<BoardObject> timeoutObjectManager;

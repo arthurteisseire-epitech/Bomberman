@@ -117,22 +117,27 @@ void ind::Board::explodeTile(const ind::Position &position)
     addChild(explosion);
 }
 
-void ind::Board::placeBomb(const ind::Position &position, int power)
+void ind::Board::placeBomb(const ind::Position &position, int power, const std::function<void(Bomb *)> &f)
 {
-    auto bomb = new Bomb(position, *this, power, nullptr);
+    auto bomb = new Bomb(position, *this, power, [this, f](Bomb *b) {
+        f(b);
+        removeChild(b);
+    });
 
     map[position.x][position.y].reset(bomb);
     timeoutObjectManager.addObject(map[position.x][position.y], bomb);
     addChild(bomb);
 }
 
-void ind::Board::updateTimeoutObjects(float deltaTime)
+void ind::Board::removeDeadObjects()
 {
     auto deadObjects = timeoutObjectManager.popDeadObjects();
     for (auto &row : map)
         for (auto &tile : row)
             if (std::find(deadObjects.begin(), deadObjects.end(), tile) != deadObjects.end()) {
+                std::cout << "remove child" << std::endl;
                 removeChild(tile.get());
+                std::cout << "remove tile" << std::endl;
                 tile = nullptr;
             }
 }
