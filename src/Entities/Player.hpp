@@ -30,7 +30,7 @@ namespace ind {
     class Player : public AbstractEntity {
         public:
             Player(const Position &position, PlayerNumber playerNum, Board &map, irr::scene::IMeshSceneNode *object);
-            ~Player() override = default;
+            ~Player() override;
             void draw();
             void placeBomb();
             void decreaseBombNumber(short number);
@@ -40,7 +40,7 @@ namespace ind {
         private:
             short actualBombs = 0;
             short bombPower = 5;
-            short bombNumber = 1;
+            short _bombNumber = 1;
             float movementSpeed = 30.0f;
             Position boardPosition;
             Board &map;

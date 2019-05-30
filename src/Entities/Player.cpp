@@ -18,7 +18,12 @@ ind::Player::Player(const Position &position, PlayerNumber playerNum, Board &map
     object(object)
 {
     auto *behaviour = new PlayerBehaviour(*this, playerNum);
-    setBehaviour(static_cast<IBehaviour *>(behaviour));
+    setBehaviour(behaviour);
+}
+
+ind::Player::~Player()
+{
+    object->remove();
 }
 
 void ind::Player::placeBomb()
@@ -27,7 +32,7 @@ void ind::Player::placeBomb()
 
     if (map.getInfoAtCoord(boardPosition) != EMPTY)
         return;
-    if (actualBombs < bombNumber) {
+    if (actualBombs < _bombNumber) {
         map.placeBomb(boardPosition, bombPower, [this](Bomb *bomb) {
             decreaseBombNumber(1);
         });
@@ -105,11 +110,11 @@ bool ind::Player::checkWalkableTile(const ind::Tile &Tile) const
 
 short ind::Player::getBombNumber() const
 {
-    return this->bombNumber;
+    return this->_bombNumber;
 }
 
 void ind::Player::setBombNumber(short bombNumber)
 {
-    this->bombNumber = bombNumber;
+    this->_bombNumber = bombNumber;
 }
 
