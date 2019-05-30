@@ -23,6 +23,9 @@ namespace ind {
     private:
         irr::gui::IGUIEnvironment *_gui;
         irr::gui::IGUIButton *_startButton;
+        irr::gui::IGUIButton *_optionsButton;
+        irr::gui::IGUIButton *_exitButton;
+        irr::video::ITexture *_background;
     };
 }
 
