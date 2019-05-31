@@ -15,7 +15,11 @@ namespace ind {
     class Explosion : public BoardObject, public TimeoutObject {
     public:
         explicit Explosion(Position position);
+        ~Explosion() override;
         Tile getTile() const override;
+
+        private:
+            irr::scene::IParticleSystemSceneNode *particleSystem = nullptr;
     };
 }
 

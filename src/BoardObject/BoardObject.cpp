@@ -22,7 +22,8 @@ const ind::Position &ind::BoardObject::getPosition() const
 
 ind::BoardObject::~BoardObject()
 {
-    node->remove();
+    if (node)
+        node->remove();
 }
 
 void ind::BoardObject::createGraphicalCube(int height)
