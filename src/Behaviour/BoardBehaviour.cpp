@@ -16,4 +16,5 @@ ind::BoardBehaviour::BoardBehaviour(ind::Board &board) :
 void ind::BoardBehaviour::update(float)
 {
     board.removeDeadObjects();
+    board.killDeadPlayers();
 }

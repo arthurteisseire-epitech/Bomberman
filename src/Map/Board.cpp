@@ -173,3 +173,13 @@ irr::scene::IMeshSceneNode *ind::Board::initializePlayerCube() const
     cube->setMaterialTexture(0, manager->getVideoDriver()->getTexture("assets/creeper.jpg"));
     return cube;
 }
+
+void ind::Board::killDeadPlayers()
+{
+    players.erase(std::remove_if(players.begin(), players.end(), [this] (std::unique_ptr<Player> &player) {
+        bool match = !player->isAlive();
+        if (match)
+            removeChild(player.get());
+        return match;
+    }), players.end());
+}

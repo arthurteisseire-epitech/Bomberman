@@ -37,6 +37,7 @@ namespace ind {
             float getSpeed() const;
             short getBombNumber() const;
             void setBombNumber(short);
+            bool isAlive() const;
         private:
             short actualBombs = 0;
             short bombPower = 5;
@@ -45,6 +46,7 @@ namespace ind {
             Position boardPosition;
             Board &map;
             irr::scene::IMeshSceneNode *object;
+            bool alive;
 
             irr::core::vector3df correctMovement(const irr::core::vector3df &actualPosition);
             const bool isWalkable(const irr::core::vector3df &pos, const irr::core::vector3df &direction);

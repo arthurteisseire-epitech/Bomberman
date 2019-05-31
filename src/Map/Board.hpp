@@ -30,6 +30,7 @@ namespace ind {
         void explodeTile(const Position &position);
         void placeBomb(const Position &position, int power, const std::function<void(Bomb *)> &f);
         void removeDeadObjects();
+        void killDeadPlayers();
         void putPowerUp(const Position &position);
         PowerUp *getPowerUp(const Position &position);
         irr::scene::IMeshSceneNode *initializePlayerCube() const;
