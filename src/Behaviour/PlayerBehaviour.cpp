@@ -42,5 +42,6 @@ void ind::PlayerBehaviour::update(float deltaTime)
         if (keyService.isKeyPressed(playerTwoKeys[Right]))
             player.move(EAST, deltaTime, player.getSpeed());
     }
+    this->player.getAnimator().update();
     player.draw();
 }
