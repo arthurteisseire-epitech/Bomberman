@@ -9,6 +9,7 @@
 
 #include <vector>
 #include <utility>
+#include "PowerUp.hpp"
 #include "AbstractEntity.hpp"
 #include "BoardObject.hpp"
 #include "Ground.hpp"
@@ -29,6 +30,10 @@ namespace ind {
         void explodeTile(const Position &position);
         void placeBomb(const Position &position, int power, const std::function<void(Bomb *)> &f);
         void removeDeadObjects();
+        void killDeadPlayers();
+        void putPowerUp(const Position &position);
+        PowerUp *getPowerUp(const Position &position);
+        irr::scene::IMeshSceneNode *initializePlayerCube() const;
 
     private:
         void printMap() const;
@@ -36,6 +41,7 @@ namespace ind {
         void initGround();
         void initBlocks();
 
+        std::vector<std::unique_ptr<Player>> players;
         std::vector<std::vector<std::unique_ptr<Ground>>> ground;
         std::vector<std::vector<std::shared_ptr<BoardObject>>> map;
         TimeoutObjectManager<BoardObject> timeoutObjectManager;

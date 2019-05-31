@@ -23,11 +23,8 @@ namespace ind {
         SceneType type() final;
     private:
         Board _map;
-        std::string _rootPath;
-        std::vector<std::unique_ptr<Player>> players;
-        ind::animations::AnimatedMesh *mesh = nullptr;
-        irr::scene::IMeshSceneNode *initializePlayerCube() const;
         void initRootPath();
+        std::string _rootPath;
     };
 }
 

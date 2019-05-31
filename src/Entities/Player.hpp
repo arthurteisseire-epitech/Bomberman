@@ -31,7 +31,7 @@ namespace ind {
     class Player : public AbstractEntity {
         public:
             Player(const Position &position, PlayerNumber playerNum, Board &map, irr::scene::IMeshSceneNode *object);
-            ~Player() override = default;
+            ~Player() override;
             void draw();
             void placeBomb();
             void decreaseBombNumber(short number);
@@ -39,14 +39,17 @@ namespace ind {
             short getBombNumber() const;
             void setBombNumber(short);
             ind::animations::Animator &getAnimator();
+            bool isAlive() const;
+
         private:
             short actualBombs = 0;
             short bombPower = 5;
-            short bombNumber = 1;
+            short _bombNumber = 1;
             float movementSpeed = 30.0f;
             Position boardPosition;
             Board &map;
             irr::scene::IMeshSceneNode *object;
+            bool alive;
 
             irr::core::vector3df correctMovement(const irr::core::vector3df &actualPosition);
             const bool isWalkable(const irr::core::vector3df &pos, const irr::core::vector3df &direction);

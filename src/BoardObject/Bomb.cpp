@@ -43,7 +43,8 @@ bool ind::Bomb::explodeTile(const Position &pos)
         if (map.getInfoAtCoord(pos) == BLOCKBREAKABLE) {
             map.emptyTile(pos);
             isEnd = true;
-            //TODO: put powerup ?
+            if (rand() % 3 == 0)
+                this->map.putPowerUp(pos);
         }
         if (map.getInfoAtCoord(pos) == EMPTY)
             map.explodeTile(pos);
