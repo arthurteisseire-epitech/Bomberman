@@ -34,5 +34,19 @@ namespace ind {
                 {Right, irr::KEY_KEY_D},
                 {Down, irr::KEY_KEY_S},
             };
+            std::map<ind::Actions, ind::ORIENTATION> directionsMapping = {
+                {Up, ind::NORTH},
+                {Down, ind::SOUTH},
+                {Left, ind::WEST},
+                {Right, ind::EAST}
+            };
+            std::map<ind::ORIENTATION, irr::core::vector3df> directionAngles = {
+                {ind::NORTH, {0, 90, 0}},
+                {ind::SOUTH, {0, 270, 0}},
+                {ind::EAST, {0, 180, 0}},
+                {ind::WEST, {0, 0, 0}}
+            };
+
+            bool wantToWalk(bool player1) const;
     };
 }

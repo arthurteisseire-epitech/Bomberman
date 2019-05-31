@@ -27,10 +27,7 @@ namespace ind {
                 void setHardwareMappingHint(irr::scene::E_HARDWARE_MAPPING newMappingHint, irr::scene::E_BUFFER_TYPE buffer) override;
                 void setDirty(irr::scene::E_BUFFER_TYPE buffer) override;
                 irr::scene::IAnimatedMeshSceneNode *getSceneNode();
-                void resetToZero();
-                const bool getToZero() const;
             private:
-                bool _toZero = false;
                 irr::s32 _frameIndex = 0;
                 void loadFolder(irr::scene::ISceneManager &manager);
                 void loadTexture(irr::scene::ISceneManager &manager, std::string &texture);

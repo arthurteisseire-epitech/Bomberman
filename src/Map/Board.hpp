@@ -34,6 +34,7 @@ namespace ind {
         void putPowerUp(const Position &position);
         PowerUp *getPowerUp(const Position &position);
         irr::scene::IMeshSceneNode *initializePlayerCube() const;
+        std::vector<std::unique_ptr<Player>> &getPlayers();
 
     private:
         void printMap() const;

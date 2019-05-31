@@ -30,8 +30,10 @@ ind::Board::Board(Position size) :
     cleanCorners();
     setBehaviour(new BoardBehaviour(*this));
 
-    auto cube = initializePlayerCube();
-    std::unique_ptr<Player> player(new Player(Position(0, 0), PLAYER_ONE, *this, cube));
+    // auto cube = initializePlayerCube();
+    std::unique_ptr<Player> player(new Player(Position(0, 0), PLAYER_ONE, *this));
+
+
     players.emplace_back(std::move(player));
     addChild(players[0].get());
 }
@@ -182,4 +184,9 @@ void ind::Board::killDeadPlayers()
             removeChild(player.get());
         return match;
     }), players.end());
+}
+
+std::vector<std::unique_ptr<ind::Player>> &ind::Board::getPlayers()
+{
+    return this->players;
 }

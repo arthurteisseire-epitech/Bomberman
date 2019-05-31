@@ -11,20 +11,27 @@
 #include "Utilities/to2d.hpp"
 #include "PlayerBehaviour.hpp"
 
-ind::Player::Player(const Position &position, PlayerNumber playerNum, Board &map, irr::scene::IMeshSceneNode *object) :
+ind::Player::Player(const Position &position, PlayerNumber playerNum, Board &map) :
     AbstractEntity(),
     boardPosition(0, 0),
     map(map),
-    object(object),
     alive(true)
 {
     auto *behaviour = new PlayerBehaviour(*this, playerNum);
     setBehaviour(behaviour);
-}
 
-ind::Player::~Player()
-{
-    object->remove();
+    /*
+     * TODO : RAW PATH :'(
+     */
+    if (playerNum == PLAYER_ONE) {
+        this->getAnimator().registerAnimation("walk", "assets/PlayerA/walking", "assets/PlayerA/MAW_diffuse.png", *manager)
+                           .setCurrentAnimation("walk").setCurrentAnimationSpeed(50)
+                           .registerAnimation("idle", "assets/PlayerA/idle", "assets/PlayerA/MAW_diffuse.png", *manager)
+                           .setCurrentAnimation("idle")
+                           .setAnimationsScale({2, 2, 2})
+                           .playAnimation();
+    } else {
+    }
 }
 
 void ind::Player::placeBomb()
@@ -48,12 +55,12 @@ void ind::Player::draw()
     if (force == irr::core::vector2df(0, 0))
         return;
 
-    const irr::core::vector3df actualPosition = this->getAnimator().getAnimationPosition();
+    const irr::core::vector3df actualPosition = this->getAnimator().getCurrentAnimationPosition();
     const irr::core::vector3df futurePosition = correctMovement(actualPosition);
     Position futurePosition2d = to2d(futurePosition);
 
    // object->setPosition(futurePosition);
-    this->getAnimator().setAnimationPosition(futurePosition);
+    this->getAnimator().setAnimationsPosition(futurePosition);
 
     boardPosition = futurePosition2d;
     force.X = 0;
@@ -137,4 +144,24 @@ bool ind::Player::isAlive() const
 ind::animations::Animator &ind::Player::getAnimator()
 {
     return this->_animator;
+}
+
+const ind::Actions ind::Player::getAction()
+{
+    return this->_action;
+}
+
+void ind::Player::setAction(ind::Actions action)
+{
+    this->_action = action;
+}
+
+const ind::ORIENTATION  ind::Player::getDirection()
+{
+    return this->_direction;
+}
+
+void ind::Player::setDirection(ind::ORIENTATION direction)
+{
+    this->_direction = direction;
 }

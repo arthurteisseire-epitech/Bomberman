@@ -21,8 +21,6 @@ ind::GameScene::GameScene() :
     _manager->addCameraSceneNode(nullptr, irr::core::vector3df(-20, 200, 70), irr::core::vector3df(60, 0, 70));
     _manager->getActiveCamera()->setFOV(0.7);
     _manager->addLightSceneNode(nullptr, irr::core::vector3df(90, 200, 70), irr::video::SColorf(1.0f, 1.0f, 1.0f), 10000.0f);
-
-
 }
 
 void ind::GameScene::initRootPath()

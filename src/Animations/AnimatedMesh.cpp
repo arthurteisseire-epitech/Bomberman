@@ -56,16 +56,6 @@ irr::scene::IMesh *ind::animations::AnimatedMesh::getMesh(irr::s32 frame,
 {
     if (frame > this->_frames.size())
         throw BAD_FRAME_INDEX_ERROR;
-    std::cout << "salut3\n";
-    if (this->_toZero) {
-        if (this->_frameIndex > 0) {
-            this->_frameIndex--;
-            return this->_frames[this->_frameIndex]->getMesh(0, detailLevel, startFrameLoop, endFrameLoop);
-        } else {
-            this->_toZero = false;
-            return this->_frames[this->_frameIndex]->getMesh(0, detailLevel, startFrameLoop, endFrameLoop);
-        }
-    }
     this->_frame = this->_frames[(ulong)frame];
     this->_frameIndex = frame;
     return this->_frame->getMesh(0, detailLevel, startFrameLoop, endFrameLoop);
@@ -85,7 +75,7 @@ irr::scene::E_ANIMATED_MESH_TYPE ind::animations::AnimatedMesh::getMeshType() co
 
 void ind::animations::AnimatedMesh::setAnimationSpeed(irr::f32 fps)
 {
-    // TODO
+    this->getSceneNode()->setAnimationSpeed(fps);
 }
 
 irr::u32 ind::animations::AnimatedMesh::getMeshBufferCount() const
@@ -162,15 +152,5 @@ void ind::animations::AnimatedMesh::loadTexture(irr::scene::ISceneManager &manag
 irr::scene::IAnimatedMeshSceneNode *ind::animations::AnimatedMesh::getSceneNode()
 {
     return this->_sceneNode;
-}
-
-void ind::animations::AnimatedMesh::resetToZero()
-{
-    this->_toZero = true;
-}
-
-const bool ind::animations::AnimatedMesh::getToZero() const
-{
-    return this->_toZero;
 }
 

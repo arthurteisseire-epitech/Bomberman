@@ -17,15 +17,15 @@ namespace ind {
                 Animator &playAnimation(bool loop = true);
                 Animator &stopAnimation();
                 Animator &setCurrentAnimation(std::string id);
-                Animator &resetCurrentAnimationToZeroThenSet(std::string id);
-                void setAnimationPosition(const irr::core::vector3df &position);
-                const irr::core::vector3df &getAnimationPosition();
+                Animator &setCurrentAnimationSpeed(irr::s32 speed);
+                Animator &setAnimationsScale(const irr::core::vector3df &scale);
+                Animator &setAnimationsRotation(const irr::core::vector3df &rotation);
+                Animator &setAnimationsPosition(const irr::core::vector3df &position);
+                const irr::core::vector3df &getCurrentAnimationPosition();
             private:
-                std::string _nextAnimationId = "";
                 std::string _currentAnimationId = "";
-                bool _waitForCurrentAnimationToFinish = false;
                 std::unique_ptr<ind::animations::AnimatedMesh> *_currentAnimation = nullptr;
-                std::map<std::string, std::unique_ptr<ind::animations::AnimatedMesh>> *_animations = nullptr;
+                std::map<std::string, std::unique_ptr<ind::animations::AnimatedMesh>> _animations;
         };
     }
 }

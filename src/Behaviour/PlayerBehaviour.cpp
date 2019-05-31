@@ -16,32 +16,42 @@ ind::PlayerBehaviour::PlayerBehaviour(ind::Player &player,
 
 void ind::PlayerBehaviour::update(float deltaTime)
 {
+    std::vector<Actions> check = {Up, Down, Left, Right};
     KeyService &keyService = SingleTon<KeyService>::getInstance();
 
-    if (playerNumber == PLAYER_ONE) {
-        if (keyService.isKeyPressed(playerOneKeys[PlaceBomb]))
-            player.placeBomb();
-        if (keyService.isKeyPressed(playerOneKeys[Up]))
-            player.move(NORTH, deltaTime, player.getSpeed());
-        if (keyService.isKeyPressed(playerOneKeys[Down]))
-            player.move(SOUTH, deltaTime, player.getSpeed());
-        if (keyService.isKeyPressed(playerOneKeys[Left]))
-            player.move(WEST, deltaTime, player.getSpeed());
-        if (keyService.isKeyPressed(playerOneKeys[Right]))
-            player.move(EAST, deltaTime, player.getSpeed());
+    if (this->wantToWalk(playerNumber == PLAYER_ONE)) {
+        if (this->player.getAction() != Actions::Walking) {
+            this->player.getAnimator().setCurrentAnimation("walk")
+                                      .playAnimation();
+        }
+        this->player.setAction(Actions::Walking);
+    } else {
+        if (this->player.getAction() != Actions::Idle) {
+            this->player.getAnimator().setCurrentAnimation("idle")
+                                      .playAnimation();
+        }
+        this->player.setAction(Actions::Idle);
     }
-    if (playerNumber == PLAYER_TWO) {
-        if (keyService.isKeyPressed(playerTwoKeys[PlaceBomb]))
-            player.placeBomb();
-        if (keyService.isKeyPressed(playerTwoKeys[Up]))
-            player.move(NORTH, deltaTime, player.getSpeed());
-        if (keyService.isKeyPressed(playerTwoKeys[Down]))
-            player.move(SOUTH, deltaTime, player.getSpeed());
-        if (keyService.isKeyPressed(playerTwoKeys[Left]))
-            player.move(WEST, deltaTime, player.getSpeed());
-        if (keyService.isKeyPressed(playerTwoKeys[Right]))
-            player.move(EAST, deltaTime, player.getSpeed());
+    for (const auto &action : check) {
+        if (keyService.isKeyPressed(playerNumber == PLAYER_ONE ? playerOneKeys[action] : playerTwoKeys[action])) {
+            if (player.getDirection() != this->directionsMapping[action]) {
+                player.setDirection(this->directionsMapping[action]);
+                player.getAnimator().setAnimationsRotation(this->directionAngles[this->directionsMapping[action]]);
+            }
+            player.move(this->directionsMapping[action], deltaTime, player.getSpeed());
+            player.draw();
+            return;
+        }
     }
-    this->player.getAnimator().update();
-    player.draw();
 }
+
+bool ind::PlayerBehaviour::wantToWalk(bool player1) const
+{
+    KeyService &keyService = SingleTon<KeyService>::getInstance();
+
+    return keyService.isKeyPressed(player1 ? playerOneKeys.at(Up) : playerTwoKeys.at(Up)) ||
+           keyService.isKeyPressed(player1 ? playerOneKeys.at(Down) : playerTwoKeys.at(Down)) ||
+           keyService.isKeyPressed(player1 ? playerOneKeys.at(Left) : playerTwoKeys.at(Left)) ||
+           keyService.isKeyPressed(player1 ? playerOneKeys.at(Right) : playerTwoKeys.at(Right));
+}
+
