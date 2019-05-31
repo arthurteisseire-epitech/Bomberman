@@ -24,9 +24,7 @@ namespace ind {
     private:
         std::string _rootPath;
         Board _map;
-        std::vector<std::unique_ptr<Player>> players;
 
-        irr::scene::IMeshSceneNode *initializePlayerCube() const;
         void initRootPath();
     };
 }

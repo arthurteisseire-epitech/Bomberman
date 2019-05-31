@@ -18,6 +18,8 @@
 #include "PowerUp.hpp"
 #include "Board.hpp"
 #include "Position.hpp"
+#include "Player.hpp"
+#include "Singleton.hpp"
 
 ind::Board::Board(Position size) :
     AbstractEntity(),
@@ -27,6 +29,11 @@ ind::Board::Board(Position size) :
     initBlocks();
     cleanCorners();
     setBehaviour(new BoardBehaviour(*this));
+
+    auto cube = initializePlayerCube();
+    std::unique_ptr<Player> player(new Player(Position(0, 0), PLAYER_ONE, *this, cube));
+    players.emplace_back(std::move(player));
+    addChild(players[0].get());
 }
 
 void ind::Board::initGround()
@@ -156,4 +163,13 @@ ind::PowerUp *ind::Board::getPowerUp(
 {
     auto *ptr = dynamic_cast<PowerUp *>(this->map[position.x][position.y].get());
     return ptr;
+}
+
+irr::scene::IMeshSceneNode *ind::Board::initializePlayerCube() const
+{
+    auto cube = manager->addCubeSceneNode(TILE_SIZE, nullptr, -1);
+
+    cube->setPosition(irr::core::vector3df(0, 0, 0));
+    cube->setMaterialTexture(0, manager->getVideoDriver()->getTexture("assets/creeper.jpg"));
+    return cube;
 }

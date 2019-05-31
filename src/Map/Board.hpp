@@ -32,6 +32,7 @@ namespace ind {
         void removeDeadObjects();
         void putPowerUp(const Position &position);
         PowerUp *getPowerUp(const Position &position);
+        irr::scene::IMeshSceneNode *initializePlayerCube() const;
 
     private:
         void printMap() const;
@@ -39,6 +40,7 @@ namespace ind {
         void initGround();
         void initBlocks();
 
+        std::vector<std::unique_ptr<Player>> players;
         std::vector<std::vector<std::unique_ptr<Ground>>> ground;
         std::vector<std::vector<std::shared_ptr<BoardObject>>> map;
         TimeoutObjectManager<BoardObject> timeoutObjectManager;

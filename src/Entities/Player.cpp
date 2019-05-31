@@ -55,8 +55,7 @@ void ind::Player::draw()
     force.Y = 0;
     auto *powerUp = this->map.getPowerUp(boardPosition);
 
-    if (powerUp)
-    {
+    if (powerUp) {
         powerUp->upgrade(*this);
         this->map.emptyTile(powerUp->getPosition());
     }
