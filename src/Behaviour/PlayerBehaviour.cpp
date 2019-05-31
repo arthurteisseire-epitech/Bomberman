@@ -32,6 +32,10 @@ void ind::PlayerBehaviour::update(float deltaTime)
         }
         this->player.setAction(Actions::Idle);
     }
+    if (keyService.isKeyPressed(playerNumber == PLAYER_ONE ? playerOneKeys[PlaceBomb] : playerTwoKeys[PlaceBomb])) {
+        player.placeBomb();
+        return;
+    }
     for (const auto &action : check) {
         if (keyService.isKeyPressed(playerNumber == PLAYER_ONE ? playerOneKeys[action] : playerTwoKeys[action])) {
             if (player.getDirection() != this->directionsMapping[action]) {
