@@ -21,12 +21,19 @@ void ind::PlayerBehaviour::update(float deltaTime)
     if (this->playerNumber == PLAYER_ONE) {
         if (keyService.isKeyPressed(this->playerOneKeys[PlaceBomb]))
             this->player.placeBomb();
-        if (keyService.isKeyPressed(this->playerOneKeys[Up]))
+        if (keyService.isKeyPressed(this->playerOneKeys[Up])) {
+            std::cout << "salut1" << std::endl;
+            this->player.getAnimator().setCurrentAnimation("idle")
+                                      .playAnimation();
             this->player.move(NORTH, deltaTime, this->player.getSpeed());
+        }
         if (keyService.isKeyPressed(this->playerOneKeys[Down]))
             this->player.move(SOUTH, deltaTime, this->player.getSpeed());
-        if (keyService.isKeyPressed(this->playerOneKeys[Left]))
+        if (keyService.isKeyPressed(this->playerOneKeys[Left])) {
+            this->player.getAnimator().setCurrentAnimation("walk")
+                                      .playAnimation();
             this->player.move(WEST, deltaTime, this->player.getSpeed());
+        }
         if (keyService.isKeyPressed(this->playerOneKeys[Right]))
             this->player.move(EAST, deltaTime, this->player.getSpeed());
     }
@@ -42,4 +49,6 @@ void ind::PlayerBehaviour::update(float deltaTime)
         if (keyService.isKeyPressed(this->playerTwoKeys[Right]))
             this->player.move(EAST, deltaTime, this->player.getSpeed());
     }
+
+    this->player.getAnimator().update();
 }

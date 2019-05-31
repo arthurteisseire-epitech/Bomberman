@@ -8,6 +8,7 @@
 #pragma once
 
 #include <vector>
+#include <Animations/Animator.hpp>
 #include "AbstractEntity.hpp"
 #include "Bomb.hpp"
 #include "Orientation.hpp"
@@ -37,6 +38,7 @@ namespace ind {
             float getSpeed() const;
             short getBombNumber() const;
             void setBombNumber(short);
+            ind::animations::Animator &getAnimator();
         private:
             short actualBombs = 0;
             short bombPower = 5;
@@ -49,5 +51,8 @@ namespace ind {
             irr::core::vector3df correctMovement(const irr::core::vector3df &actualPosition);
             const bool isWalkable(const irr::core::vector3df &pos, const irr::core::vector3df &direction);
             bool checkWalkableTile(const ind::Tile &Tile) const;
+
+        private:
+            ind::animations::Animator _animator;
     };
 }

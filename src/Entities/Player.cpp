@@ -40,11 +40,13 @@ void ind::Player::draw()
     if (force == irr::core::vector2df(0, 0))
         return;
 
-    const irr::core::vector3df actualPosition = object->getPosition();
+    const irr::core::vector3df actualPosition = this->getAnimator().getAnimationPosition();
     const irr::core::vector3df futurePosition = correctMovement(actualPosition);
     Position futurePosition2d = to2d(futurePosition);
 
-    object->setPosition(futurePosition);
+   // object->setPosition(futurePosition);
+    this->getAnimator().setAnimationPosition(futurePosition);
+
     boardPosition = futurePosition2d;
     force.X = 0;
     force.Y = 0;
@@ -113,3 +115,7 @@ void ind::Player::setBombNumber(short bombNumber)
     this->bombNumber = bombNumber;
 }
 
+ind::animations::Animator &ind::Player::getAnimator()
+{
+    return this->_animator;
+}

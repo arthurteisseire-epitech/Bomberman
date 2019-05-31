@@ -13,6 +13,7 @@
 #include "AScene.hpp"
 #include "Board.hpp"
 #include "Player.hpp"
+#include "Animations/AnimatedMesh.hpp"
 
 namespace ind {
     class GameScene : public AScene {
@@ -20,12 +21,11 @@ namespace ind {
         explicit GameScene();
         SceneType execute(irr::f32 deltaTime) final;
         SceneType type() final;
-
     private:
-        std::string _rootPath;
         Board _map;
+        std::string _rootPath;
         std::vector<std::unique_ptr<Player>> players;
-
+        ind::animations::AnimatedMesh *mesh = nullptr;
         irr::scene::IMeshSceneNode *initializePlayerCube() const;
         void initRootPath();
     };
