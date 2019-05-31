@@ -14,8 +14,12 @@
 #include "Explosion.hpp"
 #include "BlockBreakable.hpp"
 #include "Ground.hpp"
+#include "BombUp.hpp"
+#include "PowerUp.hpp"
 #include "Board.hpp"
 #include "Position.hpp"
+#include "Player.hpp"
+#include "Singleton.hpp"
 
 ind::Board::Board(Position size) :
     AbstractEntity(),
@@ -25,6 +29,11 @@ ind::Board::Board(Position size) :
     initBlocks();
     cleanCorners();
     setBehaviour(new BoardBehaviour(*this));
+
+    auto cube = initializePlayerCube();
+    std::unique_ptr<Player> player(new Player(Position(0, 0), PLAYER_ONE, *this, cube));
+    players.emplace_back(std::move(player));
+    addChild(players[0].get());
 }
 
 void ind::Board::initGround()
@@ -140,4 +149,37 @@ void ind::Board::removeDeadObjects()
                 std::cout << "remove tile" << std::endl;
                 tile = nullptr;
             }
+}
+
+void ind::Board::putPowerUp(const ind::Position &position)
+{
+    std::shared_ptr<BombUp> powerUp = std::make_shared<BombUp>(position, "assets/bombUp.png");
+    this->map[position.x][position.y] = powerUp;
+}
+
+ind::PowerUp *ind::Board::getPowerUp(
+    const ind::Position &position
+)
+{
+    auto *ptr = dynamic_cast<PowerUp *>(this->map[position.x][position.y].get());
+    return ptr;
+}
+
+irr::scene::IMeshSceneNode *ind::Board::initializePlayerCube() const
+{
+    auto cube = manager->addCubeSceneNode(TILE_SIZE, nullptr, -1);
+
+    cube->setPosition(irr::core::vector3df(0, 0, 0));
+    cube->setMaterialTexture(0, manager->getVideoDriver()->getTexture("assets/creeper.jpg"));
+    return cube;
+}
+
+void ind::Board::killDeadPlayers()
+{
+    players.erase(std::remove_if(players.begin(), players.end(), [this] (std::unique_ptr<Player> &player) {
+        bool match = !player->isAlive();
+        if (match)
+            removeChild(player.get());
+        return match;
+    }), players.end());
 }

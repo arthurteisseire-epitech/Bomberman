@@ -15,7 +15,8 @@ ind::Player::Player(const Position &position, PlayerNumber playerNum, Board &map
     AbstractEntity(),
     boardPosition(0, 0),
     map(map),
-    object(object)
+    object(object),
+    alive(true)
 {
     auto *behaviour = new PlayerBehaviour(*this, playerNum);
     setBehaviour(behaviour);
@@ -42,6 +43,8 @@ void ind::Player::placeBomb()
 
 void ind::Player::draw()
 {
+    if (map.getInfoAtCoord(boardPosition) == EXPLOSION)
+        alive = false;
     if (force == irr::core::vector2df(0, 0))
         return;
 
@@ -53,6 +56,12 @@ void ind::Player::draw()
     boardPosition = futurePosition2d;
     force.X = 0;
     force.Y = 0;
+    auto *powerUp = this->map.getPowerUp(boardPosition);
+
+    if (powerUp) {
+        powerUp->upgrade(*this);
+        this->map.emptyTile(powerUp->getPosition());
+    }
 }
 
 void ind::Player::decreaseBombNumber(short number)
@@ -116,5 +125,10 @@ short ind::Player::getBombNumber() const
 void ind::Player::setBombNumber(short bombNumber)
 {
     this->_bombNumber = bombNumber;
+}
+
+bool ind::Player::isAlive() const
+{
+    return alive;
 }
 
