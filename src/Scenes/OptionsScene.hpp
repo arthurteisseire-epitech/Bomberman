@@ -31,15 +31,19 @@ namespace ind {
     private:
         irr::gui::IGUIEnvironment *gui;
         irr::gui::IGUIButton *returnButton;
-        irr::gui::IGUIButton *playerMaxBombsPlaced;
+        irr::gui::IGUIButton *maxBombsPlacedButton;
         irr::gui::IGUIButton *bombsPlacedUp;
         irr::gui::IGUIButton *bombsPlacedDown;
         irr::gui::IGUIButton *speedButton;
         irr::gui::IGUIButton *speedDownButton;
         irr::gui::IGUIButton *speedUpButton;
-        irr::gui::IGUIButton *speedNumber;
+        irr::gui::IGUIButton *speedNumberButton;
         irr::video::ITexture *background;
         irr::gui::IGUIButton *bombsPlacedNumber;
+        irr::gui::IGUIButton *bombsPowerButton;
+        irr::gui::IGUIButton *bombsPowerUpButton;
+        irr::gui::IGUIButton *bombsPowerDownButton;
+        irr::gui::IGUIButton *bombsPowerNumberButton;
         std::map<irr::gui::IGUIButton *, ButtonPosition> buttonsPlace;
         std::map<irr::gui::IGUIButton *, void (ind::OptionsScene::*)(void)> buttonsFunction;
 
@@ -54,6 +58,8 @@ namespace ind {
         void decrementMaxBombsPlaced();
         void incrementSpeed();
         void decrementSpeed();
+        void decrementBombsPower();
+        void incrementBombsPower();
     };
 }
 

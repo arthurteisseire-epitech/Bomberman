@@ -37,11 +37,12 @@ void ind::OptionsScene::initButtons(const irr::core::dimension2d<irr::s32> &size
 {
     float bombsHeight = 1.0f / 4;
     float speedHeight = 2.0f / 5;
+    float bombPowerHeight = 3.0f / 5;
     irr::core::dimension2df signSize = {1.0f / 20, 1.0f / 30};
 
     returnButton = initButton({1.0f / 2, 3.0f / 4}, {1.0f / 10, 1.0f / 20}, size, "./assets/return.png", nullptr);
 
-    playerMaxBombsPlaced = initButton({1.0f / 5, bombsHeight}, {1.0f / 10, 1.0f / 15}, size, "./assets/settings/bombs_placed_max.png", nullptr);
+    maxBombsPlacedButton = initButton({1.0f / 5, bombsHeight}, {1.0f / 10, 1.0f / 15}, size, "./assets/settings/bombs_placed_max.png", nullptr);
     bombsPlacedDown = initButton({3.0f / 5, bombsHeight}, signSize, size, "./assets/settings/minus.png", &ind::OptionsScene::decrementMaxBombsPlaced);
     bombsPlacedUp = initButton({4.0f / 5, bombsHeight}, signSize, size, "./assets/settings/plus.png", &ind::OptionsScene::incrementMaxBombsPlaced);
     bombsPlacedNumber = initButton({3.5f / 5, bombsHeight}, signSize, size, "./assets/settings/empty.png", nullptr);
@@ -49,13 +50,21 @@ void ind::OptionsScene::initButtons(const irr::core::dimension2d<irr::s32> &size
     speedButton = initButton({1.0f / 5, speedHeight}, {1.0f / 10, 1.0f / 20}, size, "./assets/settings/movement_speed.png", nullptr);
     speedDownButton = initButton({3.0f / 5, speedHeight}, signSize, size, "./assets/settings/minus.png", &ind::OptionsScene::decrementSpeed);
     speedUpButton = initButton({4.0f / 5, speedHeight}, signSize, size, "./assets/settings/plus.png", &ind::OptionsScene::incrementSpeed);
-    speedNumber = initButton({3.5f / 5, speedHeight}, signSize, size, "./assets/settings/empty.png", nullptr);
+    speedNumberButton = initButton({3.5f / 5, speedHeight}, signSize, size, "./assets/settings/empty.png", nullptr);
+
+    bombsPowerButton = initButton({1.0f / 5, bombPowerHeight}, {1.0f / 10, 1.0f / 20}, size, "./assets/settings/bombs_power.png", nullptr);
+    bombsPowerDownButton = initButton({3.0f / 5, bombPowerHeight}, signSize, size, "./assets/settings/minus.png", &ind::OptionsScene::decrementBombsPower);
+    bombsPowerUpButton = initButton({4.0f / 5, bombPowerHeight}, signSize, size, "./assets/settings/plus.png", &ind::OptionsScene::incrementBombsPower);
+    bombsPowerNumberButton = initButton({3.5f / 5, bombPowerHeight}, signSize, size, "./assets/settings/empty.png", nullptr);
 
     std::string maxBombsPlacedStr = std::to_string(PlayersSettingsSave::defaultSettings().maxBombsPlaced);
     bombsPlacedNumber->setText(std::wstring(maxBombsPlacedStr.begin(), maxBombsPlacedStr.end()).c_str());
 
     std::string speedStr = std::to_string(PlayersSettingsSave::defaultSettings().speed);
-    speedNumber->setText(std::wstring(speedStr.begin(), speedStr.end()).c_str());
+    speedNumberButton->setText(std::wstring(speedStr.begin(), speedStr.end()).c_str());
+
+    std::string powerStr = std::to_string(PlayersSettingsSave::defaultSettings().bombPower);
+    bombsPowerNumberButton->setText(std::wstring(powerStr.begin(), powerStr.end()).c_str());
 }
 
 irr::gui::IGUIButton *ind::OptionsScene::initButton(const irr::core::dimension2df &center,
@@ -157,7 +166,7 @@ void ind::OptionsScene::incrementSpeed()
 
     ++PlayersSettingsSave::defaultSettings().speed;
     std::string speedStr = std::to_string(PlayersSettingsSave::defaultSettings().speed);
-    speedNumber->setText(std::wstring(speedStr.begin(), speedStr.end()).c_str());
+    speedNumberButton->setText(std::wstring(speedStr.begin(), speedStr.end()).c_str());
     speedUpButton->setPressed(false);
 }
 
@@ -169,6 +178,30 @@ void ind::OptionsScene::decrementSpeed()
     --PlayersSettingsSave::defaultSettings().speed;
 
     std::string speedStr = std::to_string(PlayersSettingsSave::defaultSettings().speed);
-    speedNumber->setText(std::wstring(speedStr.begin(), speedStr.end()).c_str());
+    speedNumberButton->setText(std::wstring(speedStr.begin(), speedStr.end()).c_str());
     speedDownButton->setPressed(false);
+}
+
+void ind::OptionsScene::decrementBombsPower()
+{
+    if (PlayersSettingsSave::defaultSettings().bombPower <= 1)
+        return;
+
+    --PlayersSettingsSave::defaultSettings().bombPower;
+
+    std::string bombsPowerStr = std::to_string(PlayersSettingsSave::defaultSettings().bombPower);
+    bombsPowerNumberButton->setText(std::wstring(bombsPowerStr.begin(), bombsPowerStr.end()).c_str());
+    bombsPowerDownButton->setPressed(false);
+}
+
+void ind::OptionsScene::incrementBombsPower()
+{
+    if (PlayersSettingsSave::defaultSettings().bombPower >= SHRT_MAX)
+        return;
+
+    ++PlayersSettingsSave::defaultSettings().bombPower;
+
+    std::string bombsPowerStr = std::to_string(PlayersSettingsSave::defaultSettings().bombPower);
+    bombsPowerNumberButton->setText(std::wstring(bombsPowerStr.begin(), bombsPowerStr.end()).c_str());
+    bombsPowerUpButton->setPressed(false);
 }
