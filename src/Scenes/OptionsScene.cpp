@@ -5,6 +5,7 @@
 ** Created by Arthamios
 */
 
+#include <climits>
 #include <irrlicht/IVideoDriver.h>
 #include <irrlicht/IGUIButton.h>
 #include "PlayersSettingsSave.hpp"
@@ -25,22 +26,22 @@ ind::OptionsScene::OptionsScene() :
 ind::OptionsScene::~OptionsScene()
 {
     returnButton->remove();
-    playerBombsAtStartButton->remove();
-    bombInitDown->remove();
-    bombInitUp->remove();
-    bombInitNumber->remove();
+    playerMaxBombsPlaced->remove();
+    bombsPlacedDown->remove();
+    bombsPlacedUp->remove();
+    bombsPlacedNumber->remove();
 }
 
 void ind::OptionsScene::initButtons(const irr::core::dimension2d<irr::s32> &size)
 {
-    returnButton = initButton({1.0f / 2, 2.0f / 3}, {1.0f / 6, 1.0f / 14}, size, "./assets/return.png");
-    playerBombsAtStartButton = initButton({1.0f / 4, 1.0f / 4}, {1.0f / 6, 1.0f / 14}, size, "./assets/settings/player_bombs.png");
-    bombInitDown = initButton({3.0f / 5, 1.0f / 4}, {1.0f / 10, 1.0f / 20}, size, "./assets/settings/minus.png");
-    bombInitNumber = initButton({3.5f / 5, 1.0f / 4}, {1.0f / 10, 1.0f / 20}, size, "./assets/settings/empty.png");
+    returnButton = initButton({1.0f / 2, 3.0f / 4}, {1.0f / 10, 1.0f / 20}, size, "./assets/return.png");
+    playerMaxBombsPlaced = initButton({1.0f / 4, 1.0f / 4}, {1.0f / 10, 1.0f / 15}, size, "./assets/settings/bombs_placed_max.png");
+    bombsPlacedDown = initButton({3.0f / 5, 1.0f / 4}, {1.0f / 20, 1.0f / 30}, size, "./assets/settings/minus.png");
+    bombsPlacedUp = initButton({4.0f / 5, 1.0f / 4}, {1.0f / 20, 1.0f / 30}, size, "./assets/settings/plus.png");
 
-    std::string initBombStr = std::to_string(PlayersSettingsSave::defaultSettings().initBombs);
-    bombInitNumber->setText(std::wstring(initBombStr.begin(), initBombStr.end()).c_str());
-    bombInitUp = initButton({4.0f / 5, 1.0f / 4}, {1.0f / 10, 1.0f / 20}, size, "./assets/settings/plus.png");
+    bombsPlacedNumber = initButton({3.5f / 5, 1.0f / 4}, {1.0f / 20, 1.0f / 30}, size, "./assets/settings/empty.png");
+    std::string maxBombsPlacedstr = std::to_string(PlayersSettingsSave::defaultSettings().maxBombsPlaced);
+    bombsPlacedNumber->setText(std::wstring(maxBombsPlacedstr.begin(), maxBombsPlacedstr.end()).c_str());
 }
 
 irr::gui::IGUIButton *ind::OptionsScene::initButton(const irr::core::dimension2df &center,
@@ -68,6 +69,10 @@ ind::SceneType ind::OptionsScene::execute(__attribute__((unused)) irr::f32 delta
     }
     if (returnButton->isPressed())
         return MAIN_MENU;
+    if (bombsPlacedUp->isPressed())
+        incrementBombsInit();
+    if (bombsPlacedDown->isPressed())
+        decrementBombsInit();
     draw(size);
     return OPTIONS;
 }
@@ -88,12 +93,12 @@ void ind::OptionsScene::resizeButtons(const irr::core::dimension2d<irr::u32> &cu
     const irr::u32 &y = currSize.Height;
 
     returnButton->setRelativePosition(findPosition(x, y, returnButton));
-    playerBombsAtStartButton->setRelativePosition(findPosition(x, y, playerBombsAtStartButton));
-    bombInitDown->setRelativePosition(findPosition(x, y, bombInitDown));
-    bombInitUp->setRelativePosition(findPosition(x, y, bombInitUp));
+    playerMaxBombsPlaced->setRelativePosition(findPosition(x, y, playerMaxBombsPlaced));
+    bombsPlacedDown->setRelativePosition(findPosition(x, y, bombsPlacedDown));
+    bombsPlacedUp->setRelativePosition(findPosition(x, y, bombsPlacedUp));
+    bombsPlacedNumber->setRelativePosition(findPosition(x, y, bombsPlacedNumber));
 }
 
-#include <iostream>
 irr::core::rect<irr::s32> ind::OptionsScene::findPosition(const irr::u32 &x, const irr::u32 &y,
                                                           irr::gui::IGUIButton *button) const
 {
@@ -107,4 +112,29 @@ irr::core::rect<irr::s32> ind::OptionsScene::findPosition(const irr::u32 &x, con
 ind::SceneType ind::OptionsScene::type()
 {
     return OPTIONS;
+}
+
+void ind::OptionsScene::incrementBombsInit()
+{
+    if (PlayersSettingsSave::defaultSettings().maxBombsPlaced == SHRT_MAX)
+        return;
+
+    ++PlayersSettingsSave::defaultSettings().maxBombsPlaced;
+
+    std::string maxBombsPlacedtr = std::to_string(PlayersSettingsSave::defaultSettings().maxBombsPlaced);
+    bombsPlacedNumber->setText(std::wstring(maxBombsPlacedtr.begin(), maxBombsPlacedtr.end()).c_str());
+    bombsPlacedUp->setPressed(false);
+}
+
+void ind::OptionsScene::decrementBombsInit()
+{
+    if (PlayersSettingsSave::defaultSettings().maxBombsPlaced <= 1)
+        return;
+
+    --PlayersSettingsSave::defaultSettings().maxBombsPlaced;
+
+    std::string maxBombsPlacedtr = std::to_string(PlayersSettingsSave::defaultSettings().maxBombsPlaced);
+    bombsPlacedNumber->setText(std::wstring(maxBombsPlacedtr.begin(), maxBombsPlacedtr.end()).c_str());
+    bombsPlacedDown->setOverrideFont();
+    bombsPlacedDown->setPressed(false);
 }

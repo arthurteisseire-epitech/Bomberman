@@ -24,11 +24,11 @@ namespace ind {
     private:
         irr::gui::IGUIEnvironment *gui;
         irr::gui::IGUIButton *returnButton;
-        irr::gui::IGUIButton *playerBombsAtStartButton;
-        irr::gui::IGUIButton *bombInitUp;
-        irr::gui::IGUIButton *bombInitDown;
+        irr::gui::IGUIButton *playerMaxBombsPlaced;
+        irr::gui::IGUIButton *bombsPlacedUp;
+        irr::gui::IGUIButton *bombsPlacedDown;
         irr::video::ITexture *background;
-        irr::gui::IGUIButton *bombInitNumber;
+        irr::gui::IGUIButton *bombsPlacedNumber;
         std::map<irr::gui::IGUIButton *, std::unique_ptr<irr::core::dimension2d<irr::core::dimension2df>>> buttonsPlace;
 
         void initButtons(const irr::core::dimension2d<irr::s32> &size);
@@ -37,6 +37,8 @@ namespace ind {
         void resizeButtons(const irr::core::dimension2d<irr::u32> &currSize) const;
         void draw(const irr::core::dimension2d<irr::u32> &size) const;
         irr::core::rect<irr::s32> findPosition(const irr::u32 &x, const irr::u32 &y, irr::gui::IGUIButton *button) const;
+        void incrementBombsInit();
+        void decrementBombsInit();
     };
 }
 
