@@ -14,12 +14,15 @@
 
 ind::Bomb::Bomb(const ind::Position &position, ind::Board &map, int power, std::function<void(Bomb *bomb)> onExplode) :
     BoardObject(position, "assets/tnt.jpg"),
-    TimeoutObject(1),
+    TimeoutObject(5),
     map(map),
     power(power),
     onExplode(std::move(onExplode))
 {
-    createGraphicalCube();
+    //createGraphicalCube();
+    this->node = this->manager->addMeshSceneNode(this->manager->getMesh("assets/Bomb/exportbomb.obj"));
+    this->node->setMaterialTexture(0, manager->getVideoDriver()->getTexture("diffusecolorretocado.jpg"));
+    node->setPosition(irr::core::vector3df(position.x * TILE_SIZE, 0, position.y * TILE_SIZE));
     setBehaviour(new BombBehaviour(*this));
 }
 

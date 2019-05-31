@@ -46,6 +46,15 @@ void ind::animations::AnimatedMesh::loadFolder(irr::scene::ISceneManager &manage
     closedir(dir);
 }
 
+void ind::animations::AnimatedMesh::loadTexture(irr::scene::ISceneManager &manager, std::string &texture)
+{
+    if (texture.empty())
+        return;
+    this->_sceneNode->setMaterialTexture(0, manager.getVideoDriver()->getTexture(texture.c_str()));
+    this->_sceneNode->setMaterialFlag(irr::video::EMF_LIGHTING, true); // enable dynamic lighting
+    this->_sceneNode->getMaterial(0).Shininess = 20.0f; // set size of specular highlights
+}
+
 irr::f32 ind::animations::AnimatedMesh::getAnimationSpeed() const
 {
     return 24;
@@ -138,15 +147,6 @@ void ind::animations::AnimatedMesh::setDirty(irr::scene::E_BUFFER_TYPE buffer)
     if (this->_frame == nullptr)
         throw EMPTY_FRAME_ERROR;
     return _frame->setDirty(buffer);
-}
-
-void ind::animations::AnimatedMesh::loadTexture(irr::scene::ISceneManager &manager, std::string &texture)
-{
-    if (texture.empty())
-        return;
-    this->_sceneNode->setMaterialTexture(0, manager.getVideoDriver()->getTexture(texture.c_str()));
-    this->_sceneNode->setMaterialFlag(irr::video::EMF_LIGHTING, true); // enable dynamic lighting
-    this->_sceneNode->getMaterial(0).Shininess = 20.0f; // set size of specular highlights
 }
 
 irr::scene::IAnimatedMeshSceneNode *ind::animations::AnimatedMesh::getSceneNode()
