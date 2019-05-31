@@ -30,7 +30,7 @@ void ind::Game::run()
     SceneType currentScene = MAIN_MENU;
     SceneType newScene;
 
-    while (device->run() && currentScene != END) {
+    while (device->run() && currentScene != EXIT) {
         driver->beginScene(true, true, irr::video::SColor(255, 255, 255, 255));
         deltaTime = updateDeltaTime(then);
         newScene = sceneManager.executeScene(deltaTime);

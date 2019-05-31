@@ -10,6 +10,7 @@
 #include "SceneManager.hpp"
 #include "GameScene.hpp"
 #include "MainMenu.hpp"
+#include "OptionsScene.hpp"
 
 ind::SceneManager::SceneManager(SceneType sceneType)
 {
@@ -30,6 +31,8 @@ void ind::SceneManager::buildScene(ind::SceneType type)
         case GAME:
             _currentScene = std::unique_ptr<GameScene>(new GameScene());
             break;
+        case OPTIONS:
+            _currentScene = std::unique_ptr<OptionsScene>(new OptionsScene());
         default:
             return;
     }

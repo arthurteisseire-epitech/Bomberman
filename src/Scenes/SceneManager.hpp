@@ -14,7 +14,7 @@
 namespace ind {
     class SceneManager {
     public:
-        explicit SceneManager(SceneType sceneType);
+        explicit SceneManager(SceneType sceneType = MAIN_MENU);
         SceneType executeScene(irr::f32 deltaTime) const;
         void buildScene(ind::SceneType type);
     private:

@@ -17,7 +17,7 @@ namespace ind {
         MAIN_MENU,
         OPTIONS,
         GAME,
-        END
+        EXIT
     };
 
     class AScene {

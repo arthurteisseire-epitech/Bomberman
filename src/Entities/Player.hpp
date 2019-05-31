@@ -8,7 +8,8 @@
 #pragma once
 
 #include <vector>
-#include <Animations/Animator.hpp>
+#include "Animator.hpp"
+#include "PlayersSettingsSave.hpp"
 #include "AbstractEntity.hpp"
 #include "Bomb.hpp"
 #include "Orientation.hpp"
@@ -40,11 +41,13 @@ namespace ind {
             void setBombNumber(short);
             ind::animations::Animator &getAnimator();
             bool isAlive() const;
+            void applySettings(const PlayerSettings &settings);
 
         private:
             short actualBombs = 0;
             short bombPower = 5;
-            short _bombNumber = 1;
+            short bombsPlacedMax = 1;
+            short maxBombs = 10;
             float movementSpeed = 30.0f;
             Position boardPosition;
             Board &map;

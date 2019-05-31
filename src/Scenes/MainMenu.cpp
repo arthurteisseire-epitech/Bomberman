@@ -20,10 +20,33 @@ ind::MainMenu::MainMenu() :
     const irr::u32 &x = size.Width;
     const irr::u32 &y = size.Height;
 
-    _startButton = initButton(PlaceRectangle::getRectangle({x / 3, y / 2}, {x / 6, y / 14}), "./assets/play_button.png");
-    _optionsButton = initButton(PlaceRectangle::getRectangle({x * 2 / 3, y / 2}, {x / 6, y / 14}), "./assets/options_buttons.png");
-    _exitButton = initButton(PlaceRectangle::getRectangle({x / 2, y * 2 / 3}, {x / 6, y / 14}), "./assets/exit.png");
+    initButtons(x, y);
+    fillMapButtonScene();
     _background = driver->getTexture("./assets/bomb_background.png");
+}
+
+ind::MainMenu::~MainMenu()
+{
+	_startButton->remove();
+	_exitButton->remove();
+	_optionsButton->remove();
+}
+
+void ind::MainMenu::initButtons(const irr::u32 &x, const irr::u32 &y)
+{
+    _startButton = initButton(ind::PlaceRectangle::getRectangle({x / 3, y / 2}, {x / 6, y / 14}),
+                              "./assets/play_game.png");
+    _optionsButton = initButton(ind::PlaceRectangle::getRectangle({x * 2 / 3, y / 2}, {x / 6, y / 14}),
+                                "./assets/options.png");
+    _exitButton = initButton(ind::PlaceRectangle::getRectangle({x / 2, y * 2 / 3}, {x / 6, y / 14}),
+                             "./assets/exit.png");
+}
+
+void ind::MainMenu::fillMapButtonScene()
+{
+    _buttonScene.emplace(_startButton, ind::GAME);
+    _buttonScene.emplace(_optionsButton, ind::OPTIONS);
+    _buttonScene.emplace(_exitButton, ind::EXIT);
 }
 
 irr::gui::IGUIButton *ind::MainMenu::initButton(const irr::core::rect<irr::s32> &rect, const char *string)
@@ -36,24 +59,38 @@ irr::gui::IGUIButton *ind::MainMenu::initButton(const irr::core::rect<irr::s32> 
 
 ind::SceneType ind::MainMenu::execute(__attribute__((unused)) irr::f32 deltaTime)
 {
-    const irr::core::dimension2d<irr::u32> &size = _gui->getVideoDriver()->getScreenSize();
-    const irr::u32 &x = size.Width;
-    const irr::u32 &y = size.Height;
+    static irr::core::dimension2d<irr::u32> size = _gui->getVideoDriver()->getScreenSize();
+    irr::core::dimension2d<irr::u32> currSize = _gui->getVideoDriver()->getScreenSize();
 
-    _startButton->setRelativePosition(PlaceRectangle::getRectangle({x / 5, y / 2}, {x / 6, y / 14}));
-    _optionsButton->setRelativePosition(PlaceRectangle::getRectangle({x * 4 / 5, y / 2}, {x / 6, y / 14}));
-    _exitButton->setRelativePosition(PlaceRectangle::getRectangle({x / 2, y * 4 / 5}, {x / 6, y / 14}));
-    if (_startButton->isPressed())
-        return GAME;
-    if (_exitButton->isPressed())
-        return END;
-    _gui->getVideoDriver()->draw2DImage(_background,
-                        irr::core::position2d<irr::s32>(0, 0),
-                        irr::core::rect<irr::s32>(0,0, 1920, 1080),
-                        new irr::core::rect<irr::s32>(0, 0, size.Width, size.Height));
-
-    _gui->drawAll();
+    if (currSize != size) {
+        resizeButtons(currSize);
+        size = currSize;
+    }
+    for (auto &buttonAssocScene : _buttonScene)
+        if (buttonAssocScene.first->isPressed())
+            return buttonAssocScene.second;
+    draw(size);
     return MAIN_MENU;
+}
+
+void ind::MainMenu::draw(const irr::core::dimension2d<irr::u32> &size) const
+{
+    this->_gui->getVideoDriver()->draw2DImage(this->_background,
+                                              irr::core::position2d<irr::s32>(0, 0),
+                                              irr::core::rect<irr::s32>(0, 0, 1920, 1080),
+                                              new irr::core::rect<irr::s32>(0, 0, size.Width, size.Height));
+
+    this->_gui->drawAll();
+}
+
+void ind::MainMenu::resizeButtons(const irr::core::dimension2d<irr::u32> &currSize) const
+{
+    const irr::u32 &x = currSize.Width;
+    const irr::u32 &y = currSize.Height;
+
+    _startButton->setRelativePosition(ind::PlaceRectangle::getRectangle({x / 5, y / 2}, {x / 6, y / 14}));
+    _optionsButton->setRelativePosition(ind::PlaceRectangle::getRectangle({x * 4 / 5, y / 2}, {x / 6, y / 14}));
+    _exitButton->setRelativePosition(ind::PlaceRectangle::getRectangle({x / 2, y * 4 / 5}, {x / 6, y / 14}));
 }
 
 ind::SceneType ind::MainMenu::type()
