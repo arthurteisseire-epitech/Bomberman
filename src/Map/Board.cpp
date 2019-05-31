@@ -14,6 +14,8 @@
 #include "Explosion.hpp"
 #include "BlockBreakable.hpp"
 #include "Ground.hpp"
+#include "BombUp.hpp"
+#include "PowerUp.hpp"
 #include "Board.hpp"
 #include "Position.hpp"
 
@@ -140,4 +142,18 @@ void ind::Board::removeDeadObjects()
                 std::cout << "remove tile" << std::endl;
                 tile = nullptr;
             }
+}
+
+void ind::Board::putPowerUp(const ind::Position &position)
+{
+    std::shared_ptr<BombUp> powerUp = std::make_shared<BombUp>(position, "assets/bombUp.png");
+    this->map[position.x][position.y] = powerUp;
+}
+
+ind::PowerUp *ind::Board::getPowerUp(
+    const ind::Position &position
+)
+{
+    auto *ptr = dynamic_cast<PowerUp *>(this->map[position.x][position.y].get());
+    return ptr;
 }

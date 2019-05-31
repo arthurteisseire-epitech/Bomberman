@@ -8,9 +8,9 @@
 #pragma once
 
 #include "BoardObject.hpp"
-#include "Player.hpp"
 
 namespace ind {
+    class Player;
     class PowerUp : public BoardObject {
         public:
             PowerUp(Position position, const irr::io::path &path);

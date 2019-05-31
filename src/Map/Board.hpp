@@ -9,6 +9,7 @@
 
 #include <vector>
 #include <utility>
+#include "PowerUp.hpp"
 #include "AbstractEntity.hpp"
 #include "BoardObject.hpp"
 #include "Ground.hpp"
@@ -29,6 +30,8 @@ namespace ind {
         void explodeTile(const Position &position);
         void placeBomb(const Position &position, int power, const std::function<void(Bomb *)> &f);
         void removeDeadObjects();
+        void putPowerUp(const Position &position);
+        PowerUp *getPowerUp(const Position &position);
 
     private:
         void printMap() const;
