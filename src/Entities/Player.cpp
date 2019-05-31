@@ -6,7 +6,7 @@
 */
 
 #include <iostream>
-#include <crossPlatform.hpp>
+#include "crossPlatform.hpp"
 #include "Player.hpp"
 #include "Utilities/to2d.hpp"
 #include "PlayerBehaviour.hpp"
@@ -40,7 +40,7 @@ void ind::Player::placeBomb()
 
     if (map.getInfoAtCoord(boardPosition) != EMPTY)
         return;
-    if (actualBombs < _bombNumber) {
+    if (actualBombs < bombsPlacedMax) {
         map.placeBomb(boardPosition, bombPower, [this](Bomb *bomb) {
             decreaseBombNumber(1);
         });
@@ -128,12 +128,12 @@ bool ind::Player::checkWalkableTile(const ind::Tile &Tile) const
 
 short ind::Player::getBombNumber() const
 {
-    return this->_bombNumber;
+    return this->bombsPlacedMax;
 }
 
 void ind::Player::setBombNumber(short bombNumber)
 {
-    this->_bombNumber = bombNumber;
+    this->bombsPlacedMax = bombNumber;
 }
 
 bool ind::Player::isAlive() const
@@ -141,6 +141,14 @@ bool ind::Player::isAlive() const
     return alive;
 }
 
+void ind::Player::applySettings(const ind::PlayerSettings &settings)
+{
+	bombPower = settings.bombRange;
+	bombsPlacedMax = settings.maxBombsPlaced;
+	maxBombs = settings.maxBombs;
+	movementSpeed = settings.speed;
+	actualBombs = settings.initBombs;
+}
 ind::animations::Animator &ind::Player::getAnimator()
 {
     return this->_animator;

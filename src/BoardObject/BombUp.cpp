@@ -5,7 +5,7 @@
 ** Created by abel,
 */
 
-#include <Entities/Player.hpp>
+#include "Player.hpp"
 #include "BombUp.hpp"
 
 ind::BombUp::BombUp(ind::Position position, const irr::io::path &path)

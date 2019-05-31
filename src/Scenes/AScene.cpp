@@ -26,8 +26,8 @@ std::ostream& operator<<(std::ostream& out, const ind::SceneType type)
             s = "GAME"; break;
         case ind::OPTIONS:
             s = "OPTIONS"; break;
-        case ind::END:
-            s = "END"; break;
+        case ind::EXIT:
+            s = "EXIT"; break;
         default:
             s = "UNKNOWN_TYPE";
     }
