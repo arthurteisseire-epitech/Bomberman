@@ -49,6 +49,7 @@ namespace ind {
         const ind::ORIENTATION getDirection();
         void setDirection(ind::ORIENTATION direction);
         void applySettings(const PlayerSettings &settings);
+        void checkDeath();
 
     private:
         short bombPower;

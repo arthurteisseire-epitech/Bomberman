@@ -57,8 +57,6 @@ void ind::Player::placeBomb()
 
 void ind::Player::draw()
 {
-    if (map.getInfoAtCoord(boardPosition) == EXPLOSION)
-        alive = false;
     if (force == irr::core::vector2df(0, 0))
         return;
 
@@ -178,4 +176,10 @@ const ind::ORIENTATION  ind::Player::getDirection()
 void ind::Player::setDirection(ind::ORIENTATION direction)
 {
     this->_direction = direction;
+}
+
+void ind::Player::checkDeath()
+{
+    if (this->map.getInfoAtCoord(this->boardPosition) == EXPLOSION)
+        this->alive = false;
 }

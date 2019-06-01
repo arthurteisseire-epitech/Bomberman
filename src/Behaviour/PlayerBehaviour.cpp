@@ -16,6 +16,7 @@ ind::PlayerBehaviour::PlayerBehaviour(ind::Player &player,
 
 void ind::PlayerBehaviour::update(float deltaTime)
 {
+    this->player.checkDeath();
     std::vector<Actions> check = {Up, Down, Left, Right};
     KeyService &keyService = SingleTon<KeyService>::getInstance();
 
