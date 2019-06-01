@@ -26,9 +26,9 @@ ind::Player::Player(const Position &position, PlayerNumber playerNum, Board &map
     if (playerNum == PLAYER_ONE) {
         this->getAnimator().registerAnimation("walk", "assets/PlayerA/walking", "assets/PlayerA/MAW_diffuse.png", *manager)
                            .setCurrentAnimation("walk").setCurrentAnimationSpeed(50)
-                           .registerAnimation("idle", "assets/PlayerA/idle", "assets/PlayerA/MAW_diffuse.png", *manager)
+                           .registerAnimation("idle", "assets/PlayerB/walking", "assets/PlayerB/bear_diffuse.png", *manager)
                            .setCurrentAnimation("idle")
-                           .setAnimationsScale({2, 2, 2})
+                           .setAnimationsScale({1.3, 1.3, 1.3})
                            .playAnimation();
     } else {
     }

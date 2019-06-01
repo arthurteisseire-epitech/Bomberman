@@ -1,0 +1,16 @@
+# Blender MTL File: 'None'
+# Material Count: 1
+
+newmtl warrok_MAT
+Ns 200.000000
+Ka 0.500000 0.500000 0.500000
+Kd 0.800000 0.800000 0.800000
+Ks 0.250000 0.250000 0.250000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 6
+map_Bump -bm 0.350042 assets/PlayerB/bear_normal.png
+map_Kd assets/PlayerB/bear_diffuse.png
+map_Ks assets/PlayerB/bear_specular.png
+map_d assets/PlayerB/bear_alpha.png

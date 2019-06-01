@@ -21,7 +21,8 @@ ind::Bomb::Bomb(const ind::Position &position, ind::Board &map, int power, std::
 {
     //createGraphicalCube();
     this->node = this->manager->addMeshSceneNode(this->manager->getMesh("assets/Bomb/exportbomb.obj"));
-    this->node->setMaterialTexture(0, manager->getVideoDriver()->getTexture("diffusecolorretocado.jpg"));
+    this->node->setMaterialTexture(0, manager->getVideoDriver()->getTexture("assets/Bomb/diffusecolorretocado.jpg"));
+    this->node->setRotation(irr::core::vector3df(0, 270, 0));
     node->setPosition(irr::core::vector3df(position.x * TILE_SIZE, 0, position.y * TILE_SIZE));
     setBehaviour(new BombBehaviour(*this));
 }
