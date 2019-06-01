@@ -50,7 +50,7 @@ void ind::Player::placeBomb()
 
 void ind::Player::draw()
 {
-    if (map.getInfoAtCoord(boardPosition) == EXPLOSION)
+    if (map.isOnExplosion(boardPosition))
         alive = false;
     if (force == irr::core::vector2df(0, 0))
         return;

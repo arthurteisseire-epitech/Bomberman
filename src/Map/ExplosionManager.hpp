@@ -18,6 +18,7 @@ namespace ind {
         void update(float deltaTime);
         void addExplosion(const Position &position);
         void removeDeadExplosions();
+        bool isExplosionAt(const Position &position) const;
     private:
         std::vector<std::shared_ptr<Explosion>> explosions;
         TimeoutObjectManager<Explosion> timeoutObjectManager;

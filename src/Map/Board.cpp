@@ -186,3 +186,8 @@ void ind::Board::update(float deltaTime)
     killDeadPlayers();
     explosionManager.update(deltaTime);
 }
+
+bool ind::Board::isOnExplosion(const Position &position) const
+{
+    return explosionManager.isExplosionAt(position);
+}
