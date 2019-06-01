@@ -32,10 +32,12 @@ ind::Board::Board(Position size) :
 
     // auto cube = initializePlayerCube();
     std::unique_ptr<Player> player(new Player(Position(0, 0), PLAYER_ONE, *this));
-
+    std::unique_ptr<Player> player2(new Player(Position(10, 0), PLAYER_TWO, *this));
 
     players.emplace_back(std::move(player));
+    players.emplace_back(std::move(player2));
     addChild(players[0].get());
+    addChild(players[1].get());
 }
 
 void ind::Board::initGround()
