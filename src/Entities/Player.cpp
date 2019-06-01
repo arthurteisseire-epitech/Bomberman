@@ -180,6 +180,6 @@ void ind::Player::setDirection(ind::ORIENTATION direction)
 
 void ind::Player::checkDeath()
 {
-    if (this->map.getInfoAtCoord(this->boardPosition) == EXPLOSION)
-        this->alive = false;
+    if (map.isOnExplosion(boardPosition))
+        alive = false;
 }

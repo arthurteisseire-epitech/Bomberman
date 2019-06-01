@@ -20,7 +20,7 @@ namespace ind {
     public:
         TimeoutObjectManager() = default;
 
-        void addObject(std::shared_ptr<T> &obj, TimeoutObject *timeoutObject)
+        void addObject(const std::shared_ptr<T> &obj, TimeoutObject *timeoutObject)
         {
             auto pair = std::pair<std::shared_ptr<T>, TimeoutObject *>(obj, timeoutObject);
             objects.push_back(pair);

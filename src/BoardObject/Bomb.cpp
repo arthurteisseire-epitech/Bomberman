@@ -50,8 +50,7 @@ bool ind::Bomb::explodeTile(const Position &pos)
             if (rand() % 3 == 0)
                 this->map.putPowerUp(pos);
         }
-        if (map.getInfoAtCoord(pos) == EMPTY)
-            map.explodeTile(pos);
+        map.explodeTile(pos);
         if (map.getInfoAtCoord(pos) == BOMB)
             this->toExplode.push_back(pos);
     }
