@@ -155,8 +155,9 @@ void ind::Board::removeDeadObjects()
 
 void ind::Board::putPowerUp(const ind::Position &position)
 {
-    std::shared_ptr<BombUp> powerUp = std::make_shared<BombUp>(position, "assets/bombUp.png");
-    this->map[position.x][position.y] = powerUp;
+    auto *powerUp = new BombUp(position, "assets/bombUp.png");
+    this->map[position.x][position.y] = std::shared_ptr<PowerUp>(powerUp);
+    this->addChild(powerUp);
 }
 
 ind::PowerUp *ind::Board::getPowerUp(

@@ -26,6 +26,13 @@ namespace ind {
             objects.push_back(pair);
         }
 
+        void removeObject(TimeoutObject *timeoutObject)
+        {
+            std::remove_if(this->objects.begin(), this->objects.end(), [timeoutObject](std::pair<std::shared_ptr<T>, TimeoutObject *> pair){
+                return timeoutObject == pair.second;
+            });
+        }
+
         std::vector<std::shared_ptr<T>> popDeadObjects()
         {
             std::vector<std::shared_ptr<T>> deadObjects = {};

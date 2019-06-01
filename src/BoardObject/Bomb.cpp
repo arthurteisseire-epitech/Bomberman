@@ -52,6 +52,8 @@ bool ind::Bomb::explodeTile(const Position &pos)
         }
         if (map.getInfoAtCoord(pos) == EMPTY)
             map.explodeTile(pos);
+        if (map.getInfoAtCoord(pos) == BOMB)
+            this->toExplode.push_back(pos);
     }
     return isEnd;
 }
@@ -64,4 +66,8 @@ bool ind::Bomb::inMap(const Position &pos) const
 ind::Tile ind::Bomb::getTile() const
 {
     return BOMB;
+}
+
+ind::Bomb::~Bomb()
+{
 }

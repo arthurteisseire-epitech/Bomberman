@@ -20,6 +20,7 @@ ind::Game::Game() :
         driver(device->getVideoDriver()),
         manager(device->getSceneManager())
 {
+    manager->getVideoDriver()->getTexture("assets/powerup/bomb/bombbody_BaseColor.png"); //preLoading
 }
 
 void ind::Game::run()

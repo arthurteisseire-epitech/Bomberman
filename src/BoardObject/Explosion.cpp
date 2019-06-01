@@ -14,7 +14,6 @@ ind::Explosion::Explosion(ind::Position position) :
 {
     //createGraphicalCube();
     this->particleSystem = this->manager->addParticleSystemSceneNode(false);
-    particleSystem->setPosition(irr::core::vector3df(position.x * TILE_SIZE, 0.0f, position.y * TILE_SIZE));
     auto *emitter = particleSystem->createCylinderEmitter(
         irr::core::vector3df(0,0,0), // centre
         5.0f, //rayon
@@ -32,6 +31,7 @@ ind::Explosion::Explosion(ind::Position position) :
         irr::core::vector2df(8.0f,8.0f),
         irr::core::vector2df(10.0f,10.0f)
     );
+    particleSystem->setPosition(irr::core::vector3df(position.x * TILE_SIZE, 0.0f, position.y * TILE_SIZE));
     irr::scene::IParticleAffector* affector =    // creation du modificateur
         particleSystem->createFadeOutParticleAffector(
             irr::video::SColor(0,100,30,30),             // la couleur finale
