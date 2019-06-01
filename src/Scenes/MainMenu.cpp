@@ -34,11 +34,11 @@ ind::MainMenu::~MainMenu()
 
 void ind::MainMenu::initButtons(const irr::u32 &x, const irr::u32 &y)
 {
-    _startButton = initButton(ind::PlaceRectangle::getRectangle({x / 3, y / 2}, {x / 6, y / 14}),
+    _startButton = initButton(ind::PlaceRectangle::getRectangle({x / 4, y / 2}, {x / 6, y / 14}),
                               "./assets/play_game.png");
-    _optionsButton = initButton(ind::PlaceRectangle::getRectangle({x * 2 / 3, y / 2}, {x / 6, y / 14}),
+    _optionsButton = initButton(ind::PlaceRectangle::getRectangle({x * 3 / 4, y / 2}, {x / 6, y / 14}),
                                 "./assets/options.png");
-    _exitButton = initButton(ind::PlaceRectangle::getRectangle({x / 2, y * 2 / 3}, {x / 6, y / 14}),
+    _exitButton = initButton(ind::PlaceRectangle::getRectangle({x / 2, y * 3 / 4}, {x / 6, y / 14}),
                              "./assets/exit.png");
 }
 

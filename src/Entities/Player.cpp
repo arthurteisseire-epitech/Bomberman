@@ -19,6 +19,7 @@ ind::Player::Player(const Position &position, PlayerNumber playerNum, Board &map
 {
     auto *behaviour = new PlayerBehaviour(*this, playerNum);
     setBehaviour(behaviour);
+    applySettings(PlayersSettingsSave::defaultSettings());
 
     /*
      * TODO : RAW PATH :'(
@@ -40,11 +41,11 @@ void ind::Player::placeBomb()
 
     if (map.getInfoAtCoord(boardPosition) != EMPTY)
         return;
-    if (actualBombs < bombsPlacedMax) {
+    if (actualBombsPlaced < maxBombsPlaced) {
         map.placeBomb(boardPosition, bombPower, [this](Bomb *bomb) {
             decreaseBombNumber(1);
         });
-        actualBombs += 1;
+        ++actualBombsPlaced;
     }
 }
 
@@ -75,7 +76,7 @@ void ind::Player::draw()
 
 void ind::Player::decreaseBombNumber(short number)
 {
-    actualBombs -= number;
+    actualBombsPlaced -= number;
 }
 
 float ind::Player::getSpeed() const
@@ -128,12 +129,12 @@ bool ind::Player::checkWalkableTile(const ind::Tile &Tile) const
 
 short ind::Player::getBombNumber() const
 {
-    return this->bombsPlacedMax;
+    return this->maxBombsPlaced;
 }
 
 void ind::Player::setBombNumber(short bombNumber)
 {
-    this->bombsPlacedMax = bombNumber;
+    this->maxBombsPlaced = bombNumber;
 }
 
 bool ind::Player::isAlive() const
@@ -143,12 +144,11 @@ bool ind::Player::isAlive() const
 
 void ind::Player::applySettings(const ind::PlayerSettings &settings)
 {
-	bombPower = settings.bombRange;
-	bombsPlacedMax = settings.maxBombsPlaced;
-	maxBombs = settings.maxBombs;
+	bombPower = settings.bombPower;
+	maxBombsPlaced = settings.maxBombsPlaced;
 	movementSpeed = settings.speed;
-	actualBombs = settings.initBombs;
 }
+
 ind::animations::Animator &ind::Player::getAnimator()
 {
     return this->_animator;

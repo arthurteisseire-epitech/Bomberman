@@ -13,19 +13,16 @@
 
 namespace ind {
     struct PlayerSettings {
-        PlayerSettings(short maxBombs, short bombRange, short maxBombsPlaced, float speed, short initBombs);
+        PlayerSettings(short bombRange, short maxBombsPlaced, float speed);
 
-        short maxBombs;
-        short bombRange;
+        short bombPower;
         short maxBombsPlaced;
-        short initBombs;
         float speed;
     };
 
     class PlayersSettingsSave {
     public:
-        explicit PlayersSettingsSave(short playerID, short maxBombs, short bombRange, short maxBombsPlaced,
-                                 float speed, short initBombs);
+        explicit PlayersSettingsSave(short playerID, short bombRange, short maxBombsPlaced, float speed);
 
         PlayerSettings &operator[](short playerID);
         static PlayerSettings &defaultSettings();
