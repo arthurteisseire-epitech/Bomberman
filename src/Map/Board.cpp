@@ -157,7 +157,6 @@ void ind::Board::putPowerUp(const ind::Position &position)
 {
     auto *powerUp = new BombUp(position, "assets/bombUp.png");
     this->map[position.x][position.y] = std::shared_ptr<PowerUp>(powerUp);
-    this->addChild(powerUp);
 }
 
 ind::PowerUp *ind::Board::getPowerUp(
