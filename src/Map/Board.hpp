@@ -16,13 +16,16 @@
 #include "Tile.hpp"
 #include "TimeoutObjectManager.hpp"
 #include "Bomb.hpp"
+#include "ExplosionManager.hpp"
 
 namespace ind {
     class Bomb;
-    class Board : public AbstractEntity {
+    class Board {
     public:
         explicit Board(Position size);
-        ~Board() override = default;
+        ~Board() = default;
+
+        void update(float deltaTime);
         Tile getInfoAtCoord(Position coord) const;
         Position getSize() const;
         void emptyTile(std::shared_ptr<BoardObject> &tile);
@@ -46,6 +49,7 @@ namespace ind {
         std::vector<std::vector<std::unique_ptr<Ground>>> ground;
         std::vector<std::vector<std::shared_ptr<BoardObject>>> map;
         TimeoutObjectManager<BoardObject> timeoutObjectManager;
+        ExplosionManager explosionManager;
         Position size;
     };
 }

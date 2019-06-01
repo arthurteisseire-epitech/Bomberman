@@ -9,6 +9,7 @@
 #include <iostream>
 #include <irrlicht/irrlicht.h>
 #include <cstdlib>
+#include "DeviceService.hpp"
 #include "Bomb.hpp"
 #include "BoardBehaviour.hpp"
 #include "Explosion.hpp"
@@ -22,20 +23,17 @@
 #include "Singleton.hpp"
 
 ind::Board::Board(Position size) :
-    AbstractEntity(),
     size(size)
 {
     initGround();
     initBlocks();
     cleanCorners();
-    setBehaviour(new BoardBehaviour(*this));
 
     // auto cube = initializePlayerCube();
     std::unique_ptr<Player> player(new Player(Position(0, 0), PLAYER_ONE, *this));
 
 
     players.emplace_back(std::move(player));
-    addChild(players[0].get());
 }
 
 void ind::Board::initGround()
@@ -121,23 +119,15 @@ void ind::Board::emptyTile(ind::Position position)
 
 void ind::Board::explodeTile(const ind::Position &position)
 {
-    auto explosion = new Explosion(position);
-
-    map[position.x][position.y].reset(explosion);
-    timeoutObjectManager.addObject(map[position.x][position.y], explosion);
-    addChild(explosion);
+    explosionManager.addExplosion(position);
 }
 
 void ind::Board::placeBomb(const ind::Position &position, int power, const std::function<void(Bomb *)> &f)
 {
-    auto bomb = new Bomb(position, *this, power, [this, f](Bomb *b) {
-        f(b);
-        removeChild(b);
-    });
+    auto bomb = new Bomb(position, *this, power, f);
 
     map[position.x][position.y].reset(bomb);
     timeoutObjectManager.addObject(map[position.x][position.y], bomb);
-    addChild(bomb);
 }
 
 void ind::Board::removeDeadObjects()
@@ -145,12 +135,9 @@ void ind::Board::removeDeadObjects()
     auto deadObjects = timeoutObjectManager.popDeadObjects();
     for (auto &row : map)
         for (auto &tile : row)
-            if (std::find(deadObjects.begin(), deadObjects.end(), tile) != deadObjects.end()) {
-                std::cout << "remove child" << std::endl;
-                removeChild(tile.get());
-                std::cout << "remove tile" << std::endl;
+            if (std::find(deadObjects.begin(), deadObjects.end(), tile) != deadObjects.end())
                 tile = nullptr;
-            }
+    explosionManager.removeDeadExplosions();
 }
 
 void ind::Board::putPowerUp(const ind::Position &position)
@@ -159,9 +146,7 @@ void ind::Board::putPowerUp(const ind::Position &position)
     this->map[position.x][position.y] = powerUp;
 }
 
-ind::PowerUp *ind::Board::getPowerUp(
-    const ind::Position &position
-)
+ind::PowerUp *ind::Board::getPowerUp(const ind::Position &position)
 {
     auto *ptr = dynamic_cast<PowerUp *>(this->map[position.x][position.y].get());
     return ptr;
@@ -169,6 +154,7 @@ ind::PowerUp *ind::Board::getPowerUp(
 
 irr::scene::IMeshSceneNode *ind::Board::initializePlayerCube() const
 {
+    auto manager = SingleTon<DeviceService>::getInstance().getSceneManager();
     auto cube = manager->addCubeSceneNode(TILE_SIZE, nullptr, -1);
 
     cube->setPosition(irr::core::vector3df(0, 0, 0));
@@ -178,15 +164,25 @@ irr::scene::IMeshSceneNode *ind::Board::initializePlayerCube() const
 
 void ind::Board::killDeadPlayers()
 {
-    players.erase(std::remove_if(players.begin(), players.end(), [this] (std::unique_ptr<Player> &player) {
-        bool match = !player->isAlive();
-        if (match)
-            removeChild(player.get());
-        return match;
+    players.erase(std::remove_if(players.begin(), players.end(), [] (std::unique_ptr<Player> &player) {
+        return !player->isAlive();
     }), players.end());
 }
 
 std::vector<std::unique_ptr<ind::Player>> &ind::Board::getPlayers()
 {
     return this->players;
+}
+
+void ind::Board::update(float deltaTime)
+{
+    for (auto &row : map)
+        for (auto &tile : row)
+            if (tile)
+                tile->update(deltaTime);
+    for (auto &player : players)
+        player->update(deltaTime);
+    removeDeadObjects();
+    killDeadPlayers();
+    explosionManager.update(deltaTime);
 }
