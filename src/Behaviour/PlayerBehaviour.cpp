@@ -22,13 +22,13 @@ void ind::PlayerBehaviour::update(float deltaTime)
 
     if (this->wantToWalk(playerNumber == PLAYER_ONE)) {
         if (this->player.getAction() != Actions::Walking) {
-            this->player.getAnimator().setCurrentAnimation("walk")
+            this->player.getAnimator()->setCurrentAnimation("walk")
                                       .playAnimation();
         }
         this->player.setAction(Actions::Walking);
     } else {
         if (this->player.getAction() != Actions::Idle) {
-            this->player.getAnimator().setCurrentAnimation("idle")
+            this->player.getAnimator()->setCurrentAnimation("idle")
                                       .playAnimation();
         }
         this->player.setAction(Actions::Idle);
@@ -39,7 +39,7 @@ void ind::PlayerBehaviour::update(float deltaTime)
         if (keyService.isKeyPressed(playerNumber == PLAYER_ONE ? playerOneKeys[action] : playerTwoKeys[action])) {
             if (player.getDirection() != this->directionsMapping[action]) {
                 player.setDirection(this->directionsMapping[action]);
-                player.getAnimator().setAnimationsRotation(this->directionAngles[this->directionsMapping[action]]);
+                player.getAnimator()->setAnimationsRotation(this->directionAngles[this->directionsMapping[action]]);
             }
             player.move(this->directionsMapping[action], deltaTime, player.getSpeed());
             player.draw();

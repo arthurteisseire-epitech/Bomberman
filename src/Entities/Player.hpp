@@ -34,7 +34,7 @@ namespace ind {
 
     class Player : public AbstractEntity {
     public:
-        Player(const Position &position, PlayerNumber playerNum, Board &map);
+        Player(const Position &position, Board &map, animations::Animator *animator);
         ~Player() override = default;
         void draw();
         void placeBomb();
@@ -42,7 +42,7 @@ namespace ind {
         float getSpeed() const;
         short getBombNumber() const;
         void setBombNumber(short);
-        ind::animations::Animator &getAnimator();
+        std::unique_ptr<ind::animations::Animator> &getAnimator();
         bool isAlive() const;
         const Actions getAction();
         void setAction(Actions action);
@@ -61,7 +61,7 @@ namespace ind {
         bool alive;
         Actions _action = Actions::Idle;
         ind::ORIENTATION _direction = ind::ORIENTATION::NONE;
-        ind::animations::Animator _animator;
+        std::unique_ptr<ind::animations::Animator> _animator;
 
         irr::core::vector3df correctMovement(const irr::core::vector3df &actualPosition);
         const bool isWalkable(const irr::core::vector3df &pos, const irr::core::vector3df &direction);

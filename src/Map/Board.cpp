@@ -21,6 +21,7 @@
 #include "Position.hpp"
 #include "Player.hpp"
 #include "Singleton.hpp"
+#include "PlayerFactory.hpp"
 
 ind::Board::Board(Position size) :
     size(size)
@@ -30,8 +31,8 @@ ind::Board::Board(Position size) :
     cleanCorners();
 
     // auto cube = initializePlayerCube();
-    std::unique_ptr<Player> player(new Player(Position(0, 0), PLAYER_ONE, *this));
-    std::unique_ptr<Player> player2(new Player(Position(10, 0), PLAYER_TWO, *this));
+    std::unique_ptr<Player> player(PlayerFactory::create(PLAYER_ONE, Position(0, 0), *this));
+    std::unique_ptr<Player> player2(PlayerFactory::create(PLAYER_TWO, Position(0, 0), *this));
 
     players.emplace_back(std::move(player));
     players.emplace_back(std::move(player2));

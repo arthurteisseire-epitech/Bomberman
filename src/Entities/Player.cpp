@@ -11,34 +11,14 @@
 #include "Utilities/to2d.hpp"
 #include "PlayerBehaviour.hpp"
 
-ind::Player::Player(const Position &position, PlayerNumber playerNum, Board &map) :
+ind::Player::Player(const Position &position, Board &map, animations::Animator *animator) :
     AbstractEntity(),
     boardPosition(0, 0),
     map(map),
-    alive(true)
+    alive(true),
+    _animator(animator)
 {
-    auto *behaviour = new PlayerBehaviour(*this, playerNum);
-    setBehaviour(behaviour);
     applySettings(PlayersSettingsSave::defaultSettings());
-
-    /*
-     * TODO : RAW PATH :'(
-     */
-    if (playerNum == PLAYER_ONE) {
-        this->getAnimator().registerAnimation("walk", "assets/PlayerA/walking", "assets/PlayerA/MAW_diffuse.png", *manager)
-                           .setCurrentAnimation("walk").setCurrentAnimationSpeed(50)
-                           .registerAnimation("idle", "assets/PlayerA/idle", "assets/PlayerA/MAW_diffuse.png", *manager)
-                           .setCurrentAnimation("idle")
-                           .setAnimationsScale({1.3, 1.3, 1.3})
-                           .playAnimation();
-    } else {
-        this->getAnimator().registerAnimation("walk", "assets/PlayerB/walking", "assets/PlayerB/Mutant_diffuse.png", *manager)
-                           .setCurrentAnimation("walk").setCurrentAnimationSpeed(50)
-                           .registerAnimation("idle", "assets/PlayerB/idle", "assets/PlayerB/Mutant_diffuse.png", *manager)
-                           .setCurrentAnimation("idle")
-                           .setAnimationsScale({1.3, 1.3, 1.3})
-                           .playAnimation();
-    }
 }
 
 void ind::Player::placeBomb()
@@ -60,12 +40,12 @@ void ind::Player::draw()
     if (force == irr::core::vector2df(0, 0))
         return;
 
-    const irr::core::vector3df actualPosition = this->getAnimator().getCurrentAnimationPosition();
+    const irr::core::vector3df actualPosition = _animator->getCurrentAnimationPosition();
     const irr::core::vector3df futurePosition = correctMovement(actualPosition);
     Position futurePosition2d = to2d(futurePosition);
 
    // object->setPosition(futurePosition);
-    this->getAnimator().setAnimationsPosition(futurePosition);
+    _animator->setAnimationsPosition(futurePosition);
 
     boardPosition = futurePosition2d;
     force.X = 0;
@@ -153,11 +133,6 @@ void ind::Player::applySettings(const ind::PlayerSettings &settings)
 	movementSpeed = settings.speed;
 }
 
-ind::animations::Animator &ind::Player::getAnimator()
-{
-    return this->_animator;
-}
-
 const ind::Actions ind::Player::getAction()
 {
     return this->_action;
@@ -182,4 +157,9 @@ void ind::Player::checkDeath()
 {
     if (map.isOnExplosion(boardPosition))
         alive = false;
+}
+
+std::unique_ptr<ind::animations::Animator> &ind::Player::getAnimator()
+{
+    return _animator;
 }
