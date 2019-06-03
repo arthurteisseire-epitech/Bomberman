@@ -39,9 +39,7 @@ void ind::LoadingService::startLoad()
 
 ind::animations::Animator *ind::LoadingService::getAnimator(std::string name)
 {
-    std::cout << _loadedAnimators.size() << std::endl;
-
     if (_loadedAnimators.count(name) == 0)
-        throw std::invalid_argument("No animator called : " + name);
+        throw std::invalid_argument("No animator with name : " + name);
     return _loadedAnimators[name];
 }
