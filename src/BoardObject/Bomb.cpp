@@ -44,11 +44,13 @@ bool ind::Bomb::explodeTile(const Position &pos)
     bool isEnd = false;
 
     if (inMap(pos)) {
-        if (map.getInfoAtCoord(pos) == BLOCKBREAKABLE || map.getInfoAtCoord(pos) == WALL) {
+        if (map.getInfoAtCoord(pos) == BLOCKBREAKABLE) {
             map.emptyTile(pos);
             isEnd = true;
             if (rand() % 3 == 0)
                 this->map.putPowerUp(pos);
+        } else if (map.getInfoAtCoord(pos) == WALL) {
+            isEnd = true;
         }
         map.explodeTile(pos);
         if (map.getInfoAtCoord(pos) == BOMB)

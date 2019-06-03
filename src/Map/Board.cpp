@@ -57,17 +57,21 @@ void ind::Board::initBlocks()
     for (int i = 0; i < size.x; ++i) {
         map.emplace_back();
         map[i].reserve(size.y);
-        for (int j = 0; j < size.y; ++j)
-            map[i].emplace_back(new ind::BlockBreakable(ind::Position(i, j)));
+        for (int j = 0; j < size.y; ++j) {
+            if ((rand() & 1) == 0)
+                map[i].emplace_back(new BlockBreakable(Position(i, j)));
+            else
+                map[i].emplace_back(nullptr);
+        }
     }
 }
 
 void ind::Board::initWall()
 {
     for (int x = 0; x < size.x; ++x) {
-        if (x % 2 == 0)
+        if (x % 2 == 1)
             for (int y = 0; y < size.y; ++y)
-                if (y % 2 == 0)
+                if (y % 2 == 1)
                     map[x][y].reset(new Wall(Position(x, y)));
     }
 }
