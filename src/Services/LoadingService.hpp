@@ -19,9 +19,9 @@ namespace ind
     {
         public:
                 void startLoad();
-                LoadingService &enqueueAnimator(std::string name, std::vector<ind::LoadAnimationData> data);
-                ind::animations::Animator *getAnimator(std::string name);
+                LoadingService &enqueueAnimator(std::string name, std::vector<LoadAnimationData> data);
+                animations::Animator *getAnimator(const std::string& name);
         private:
-                std::map<std::string, std::vector<ind::LoadAnimationData>> _animators;
+                std::map<std::string, std::vector<LoadAnimationData>> _animators;
     };
 }

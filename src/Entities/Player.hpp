@@ -35,20 +35,20 @@ namespace ind {
     class Player : public AbstractEntity {
     public:
         Player(const Position &position, Board &map, animations::Animator *animator);
-        ~Player() override = default;
+        ~Player() override;
         void draw();
         void placeBomb();
         void decreaseBombNumber(short number);
         float getSpeed() const;
         short getBombNumber() const;
         void setBombNumber(short);
-        ind::animations::Animator &getAnimator();
-        void setAnimator(ind::animations::Animator *animator);
+        animations::Animator &getAnimator();
+        void setAnimator(animations::Animator *animator);
         bool isAlive() const;
         const Actions getAction();
         void setAction(Actions action);
-        const ind::ORIENTATION getDirection();
-        void setDirection(ind::ORIENTATION direction);
+        const ORIENTATION getDirection();
+        void setDirection(ORIENTATION direction);
         void applySettings(const PlayerSettings &settings);
         void checkDeath();
 
@@ -61,11 +61,11 @@ namespace ind {
         Board &map;
         bool alive;
         Actions _action = Actions::Idle;
-        ind::ORIENTATION _direction = ind::ORIENTATION::NONE;
-        ind::animations::Animator *_animator;
+        ORIENTATION _direction = ORIENTATION::NONE;
+        animations::Animator *_animator;
 
         irr::core::vector3df correctMovement(const irr::core::vector3df &actualPosition);
         const bool isWalkable(const irr::core::vector3df &pos, const irr::core::vector3df &direction);
-        bool checkWalkableTile(const ind::Tile &Tile) const;
+        bool checkWalkableTile(const Tile &Tile) const;
     };
 }

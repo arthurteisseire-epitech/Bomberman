@@ -5,8 +5,8 @@
 ** Created by abel,
 */
 
-#include <Services/Singleton.hpp>
-#include <Services/LoadingService.hpp>
+#include "Singleton.hpp"
+#include "LoadingService.hpp"
 #include "crossPlatform.hpp"
 #include "Player.hpp"
 #include "Utilities/to2d.hpp"
@@ -21,6 +21,11 @@ ind::Player::Player(const Position &position, Board &map, animations::Animator *
 {
     applySettings(PlayersSettingsSave::defaultSettings());
     _animator->setAnimationsPosition(to3d(position));
+}
+
+ind::Player::~Player()
+{
+    _animator->stopAnimation();
 }
 
 void ind::Player::placeBomb()
@@ -139,7 +144,7 @@ ind::animations::Animator &ind::Player::getAnimator()
     return *this->_animator;
 }
 
-void ind::Player::setAnimator(ind::animations::Animator *animator)
+void ind::Player::setAnimator(animations::Animator *animator)
 {
     this->_animator = animator;
 }

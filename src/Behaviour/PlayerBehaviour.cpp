@@ -9,11 +9,13 @@
 #include "Singleton.hpp"
 #include "KeyService.hpp"
 
-ind::PlayerBehaviour::PlayerBehaviour(ind::Player &player,
-                                      ind::PlayerNumber playerNumber
-) : player(player), playerNumber(playerNumber) {}
+ind::PlayerBehaviour::PlayerBehaviour(ind::Player &player, ind::PlayerNumber playerNumber) :
+        player(player),
+        playerNumber(playerNumber)
+{}
 
-void ind::PlayerBehaviour::update(float deltaTime) {
+void ind::PlayerBehaviour::update(float deltaTime)
+{
     this->player.checkDeath();
     std::vector<Actions> check = {Up, Down, Left, Right};
     KeyService &keyService = SingleTon<KeyService>::getInstance();
@@ -46,7 +48,8 @@ void ind::PlayerBehaviour::update(float deltaTime) {
     }
 }
 
-bool ind::PlayerBehaviour::wantToWalk(bool player1) const {
+bool ind::PlayerBehaviour::wantToWalk(bool player1) const
+{
     KeyService &keyService = SingleTon<KeyService>::getInstance();
 
     return keyService.isKeyPressed(player1 ? playerOneKeys.at(Up) : playerTwoKeys.at(Up)) ||
