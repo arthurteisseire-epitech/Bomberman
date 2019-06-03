@@ -10,12 +10,10 @@
 #include "KeyService.hpp"
 
 ind::PlayerBehaviour::PlayerBehaviour(ind::Player &player,
-    ind::PlayerNumber playerNumber
-) : player(player), playerNumber(playerNumber)
-{}
+                                      ind::PlayerNumber playerNumber
+) : player(player), playerNumber(playerNumber) {}
 
-void ind::PlayerBehaviour::update(float deltaTime)
-{
+void ind::PlayerBehaviour::update(float deltaTime) {
     this->player.checkDeath();
     std::vector<Actions> check = {Up, Down, Left, Right};
     KeyService &keyService = SingleTon<KeyService>::getInstance();
@@ -23,13 +21,13 @@ void ind::PlayerBehaviour::update(float deltaTime)
     if (this->wantToWalk(playerNumber == PLAYER_ONE)) {
         if (this->player.getAction() != Actions::Walking) {
             this->player.getAnimator().setCurrentAnimation("walk")
-                                      .playAnimation();
+                    .playAnimation();
         }
         this->player.setAction(Actions::Walking);
     } else {
         if (this->player.getAction() != Actions::Idle) {
             this->player.getAnimator().setCurrentAnimation("idle")
-                                      .playAnimation();
+                    .playAnimation();
         }
         this->player.setAction(Actions::Idle);
     }
@@ -48,8 +46,7 @@ void ind::PlayerBehaviour::update(float deltaTime)
     }
 }
 
-bool ind::PlayerBehaviour::wantToWalk(bool player1) const
-{
+bool ind::PlayerBehaviour::wantToWalk(bool player1) const {
     KeyService &keyService = SingleTon<KeyService>::getInstance();
 
     return keyService.isKeyPressed(player1 ? playerOneKeys.at(Up) : playerTwoKeys.at(Up)) ||
@@ -57,4 +54,3 @@ bool ind::PlayerBehaviour::wantToWalk(bool player1) const
            keyService.isKeyPressed(player1 ? playerOneKeys.at(Left) : playerTwoKeys.at(Left)) ||
            keyService.isKeyPressed(player1 ? playerOneKeys.at(Right) : playerTwoKeys.at(Right));
 }
-

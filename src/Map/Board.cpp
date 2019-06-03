@@ -6,7 +6,6 @@
 */
 
 #include <stdlib.h>
-#include <iostream>
 #include <irrlicht/irrlicht.h>
 #include <cstdlib>
 #include "DeviceService.hpp"
@@ -23,8 +22,8 @@
 #include "Singleton.hpp"
 #include "PlayerFactory.hpp"
 
-ind::Board::Board(Position size) :
-    size(size)
+ind::Board::Board(Position size_) :
+        size(size_)
 {
     initGround();
     initBlocks();
@@ -33,7 +32,7 @@ ind::Board::Board(Position size) :
 
     // auto cube = initializePlayerCube();
     std::unique_ptr<Player> player(PlayerFactory::create(PLAYER_ONE, Position(0, 0), *this));
-    std::unique_ptr<Player> player2(PlayerFactory::create(PLAYER_TWO, Position(0, 0), *this));
+    std::unique_ptr<Player> player2(PlayerFactory::create(PLAYER_TWO, Position(size.x - 1, size.y - 1), *this));
 
     players.emplace_back(std::move(player));
     players.emplace_back(std::move(player2));
@@ -176,7 +175,7 @@ irr::scene::IMeshSceneNode *ind::Board::initializePlayerCube() const
 
 void ind::Board::killDeadPlayers()
 {
-    players.erase(std::remove_if(players.begin(), players.end(), [] (std::unique_ptr<Player> &player) {
+    players.erase(std::remove_if(players.begin(), players.end(), [](std::unique_ptr<Player> &player) {
         return !player->isAlive();
     }), players.end());
 }

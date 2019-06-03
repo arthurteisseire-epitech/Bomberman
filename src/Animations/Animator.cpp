@@ -1,13 +1,13 @@
 #include <iostream>
 #include "Animator.hpp"
 
-void ind::animations::Animator::registerAnimation(std::string id, std::string modelPath, std::string texture, irr::scene::ISceneManager &manager)
+void ind::animations::Animator::registerAnimation(std::string id, std::string modelPath, std::string texture,
+                                                  irr::scene::ISceneManager &manager)
 {
     if (modelPath.empty())
         return;
     // TODO : check if folder exists
-    try
-    {
+    try {
         if (this->_animations.count(id) > 0)
             std::cerr << "Unable to register animation because id '" << id << "' already taken" << std::endl;
         else
@@ -15,7 +15,7 @@ void ind::animations::Animator::registerAnimation(std::string id, std::string mo
     } catch (std::exception &ex) {
         std::cerr << ex.what() << std::endl;
     }
- //   return *this;
+    //   return *this;
 }
 
 ind::animations::Animator &ind::animations::Animator::setCurrentAnimation(std::string id)
@@ -33,7 +33,7 @@ ind::animations::Animator &ind::animations::Animator::setCurrentAnimation(std::s
 }
 
 ind::animations::Animator &ind::animations::Animator::setCurrentAnimationSpeed(
-    const irr::s32 speed)
+        const irr::s32 speed)
 {
     if (this->_currentAnimation != nullptr)
         this->_currentAnimation->get()->getSceneNode()->setAnimationSpeed(speed);
@@ -60,7 +60,7 @@ ind::animations::Animator &ind::animations::Animator::stopAnimation()
 }
 
 ind::animations::Animator &ind::animations::Animator::setAnimationsRotation(
-    const irr::core::vector3df &rotation)
+        const irr::core::vector3df &rotation)
 {
     for (const auto &animation : this->_animations)
         animation.second->getSceneNode()->setRotation(rotation);
@@ -82,10 +82,9 @@ const irr::core::vector3df &ind::animations::Animator::getCurrentAnimationPositi
 }
 
 void ind::animations::Animator::update()
-{ }
+{}
 
-ind::animations::Animator &ind::animations::Animator::setAnimationsScale(
-    const irr::core::vector3df &scale)
+ind::animations::Animator &ind::animations::Animator::setAnimationsScale(const irr::core::vector3df &scale)
 {
     for (const auto &animation : this->_animations)
         animation.second->getSceneNode()->setScale(scale);
