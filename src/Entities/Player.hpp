@@ -34,7 +34,7 @@ namespace ind {
 
     class Player : public AbstractEntity {
     public:
-        Player(const Position &position, PlayerNumber playerNum, Board &map);
+        Player(const Position &position, Board &map, animations::Animator *animator);
         ~Player() override = default;
         void draw();
         void placeBomb();

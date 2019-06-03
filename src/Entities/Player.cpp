@@ -13,27 +13,14 @@
 #include "Utilities/to2d.hpp"
 #include "PlayerBehaviour.hpp"
 
-ind::Player::Player(const Position &position, PlayerNumber playerNum, Board &map) :
+ind::Player::Player(const Position &position, Board &map, animations::Animator *animator) :
     AbstractEntity(),
     boardPosition(0, 0),
     map(map),
-    alive(true)
+    alive(true),
+    _animator(animator)
 {
-    auto *behaviour = new PlayerBehaviour(*this, playerNum);
-    setBehaviour(behaviour);
     applySettings(PlayersSettingsSave::defaultSettings());
-
-
-    if (playerNum == PLAYER_ONE)
-        this->setAnimator(SingleTon<LoadingService>::getInstance().getAnimator("playerAAnimator"));
-    else
-        this->setAnimator(SingleTon<LoadingService>::getInstance().getAnimator("playerBAnimator"));
-
-    this->getAnimator().setCurrentAnimation("walk")
-                       .setCurrentAnimationSpeed(50)
-                       .setAnimationsScale({1.3, 1.3, 1.3})
-                       .setCurrentAnimation("idle")
-                       .playAnimation();
 }
 
 void ind::Player::placeBomb()
@@ -55,12 +42,12 @@ void ind::Player::draw()
     if (force == irr::core::vector2df(0, 0))
         return;
 
-    const irr::core::vector3df actualPosition = this->getAnimator().getCurrentAnimationPosition();
+    const irr::core::vector3df actualPosition = _animator->getCurrentAnimationPosition();
     const irr::core::vector3df futurePosition = correctMovement(actualPosition);
     Position futurePosition2d = to2d(futurePosition);
 
    // object->setPosition(futurePosition);
-    this->getAnimator().setAnimationsPosition(futurePosition);
+    _animator->setAnimationsPosition(futurePosition);
 
     boardPosition = futurePosition2d;
     force.X = 0;
@@ -123,7 +110,7 @@ const bool ind::Player::isWalkable(const irr::core::vector3df &pos, const irr::c
 
 bool ind::Player::checkWalkableTile(const ind::Tile &Tile) const
 {
-    return Tile != BLOCKBREAKABLE && (Tile != BOMB || map.getInfoAtCoord(boardPosition) == BOMB);
+    return Tile != BLOCKBREAKABLE && Tile != WALL && (Tile != BOMB || map.getInfoAtCoord(boardPosition) == BOMB);
 }
 
 short ind::Player::getBombNumber() const
@@ -153,6 +140,11 @@ ind::animations::Animator &ind::Player::getAnimator()
     return *this->_animator;
 }
 
+void ind::Player::setAnimator(ind::animations::Animator *animator)
+{
+    this->_animator = animator;
+}
+
 const ind::Actions ind::Player::getAction()
 {
     return this->_action;
@@ -177,9 +169,4 @@ void ind::Player::checkDeath()
 {
     if (map.isOnExplosion(boardPosition))
         alive = false;
-}
-
-void ind::Player::setAnimator(ind::animations::Animator *animator)
-{
-    this->_animator = animator;
 }

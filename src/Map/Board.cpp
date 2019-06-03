@@ -21,17 +21,19 @@
 #include "Position.hpp"
 #include "Player.hpp"
 #include "Singleton.hpp"
+#include "PlayerFactory.hpp"
 
 ind::Board::Board(Position size) :
     size(size)
 {
     initGround();
     initBlocks();
+    initWall();
     cleanCorners();
 
     // auto cube = initializePlayerCube();
-    std::unique_ptr<Player> player(new Player(Position(0, 0), PLAYER_ONE, *this));
-    std::unique_ptr<Player> player2(new Player(Position(10, 0), PLAYER_TWO, *this));
+    std::unique_ptr<Player> player(PlayerFactory::create(PLAYER_ONE, Position(0, 0), *this));
+    std::unique_ptr<Player> player2(PlayerFactory::create(PLAYER_TWO, Position(0, 0), *this));
 
     players.emplace_back(std::move(player));
     players.emplace_back(std::move(player2));
@@ -56,12 +58,21 @@ void ind::Board::initBlocks()
         map.emplace_back();
         map[i].reserve(size.y);
         for (int j = 0; j < size.y; ++j) {
-            auto first = static_cast<ind::Tile>((rand() % 2) + 1);
-            if (first == ind::BLOCKBREAKABLE)
-                map[i].emplace_back(new ind::BlockBreakable(ind::Position(i, j)));
+            if ((rand() & 1) == 0)
+                map[i].emplace_back(new BlockBreakable(Position(i, j)));
             else
                 map[i].emplace_back(nullptr);
         }
+    }
+}
+
+void ind::Board::initWall()
+{
+    for (int x = 0; x < size.x; ++x) {
+        if (x % 2 == 1)
+            for (int y = 0; y < size.y; ++y)
+                if (y % 2 == 1)
+                    map[x][y].reset(new Wall(Position(x, y)));
     }
 }
 
