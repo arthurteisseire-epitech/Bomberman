@@ -28,6 +28,7 @@ ind::Board::Board(Position size) :
 {
     initGround();
     initBlocks();
+    initWall();
     cleanCorners();
 
     // auto cube = initializePlayerCube();
@@ -56,13 +57,18 @@ void ind::Board::initBlocks()
     for (int i = 0; i < size.x; ++i) {
         map.emplace_back();
         map[i].reserve(size.y);
-        for (int j = 0; j < size.y; ++j) {
-            auto first = static_cast<ind::Tile>((rand() % 2) + 1);
-            if (first == ind::BLOCKBREAKABLE)
-                map[i].emplace_back(new ind::BlockBreakable(ind::Position(i, j)));
-            else
-                map[i].emplace_back(nullptr);
-        }
+        for (int j = 0; j < size.y; ++j)
+            map[i].emplace_back(new ind::BlockBreakable(ind::Position(i, j)));
+    }
+}
+
+void ind::Board::initWall()
+{
+    for (int x = 0; x < size.x; ++x) {
+        if (x % 2 == 0)
+            for (int y = 0; y < size.y; ++y)
+                if (y % 2 == 0)
+                    map[x][y].reset(new Wall(Position(x, y)));
     }
 }
 

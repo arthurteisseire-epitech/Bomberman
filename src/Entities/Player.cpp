@@ -108,7 +108,7 @@ const bool ind::Player::isWalkable(const irr::core::vector3df &pos, const irr::c
 
 bool ind::Player::checkWalkableTile(const ind::Tile &Tile) const
 {
-    return Tile != BLOCKBREAKABLE && (Tile != BOMB || map.getInfoAtCoord(boardPosition) == BOMB);
+    return Tile != BLOCKBREAKABLE && Tile != WALL && (Tile != BOMB || map.getInfoAtCoord(boardPosition) == BOMB);
 }
 
 short ind::Player::getBombNumber() const

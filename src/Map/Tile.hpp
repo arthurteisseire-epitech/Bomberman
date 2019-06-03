@@ -15,6 +15,7 @@ namespace ind
         EMPTY = 1,
         BLOCKBREAKABLE = 2,
         POWERUP = 3,
+        WALL = 4,
         BOMB = 6,
         EXPLOSION = 7,
     };
