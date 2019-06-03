@@ -17,12 +17,14 @@ ind::Player::Player(const Position &position, Board &map, animations::Animator *
         boardPosition(position),
         map(map),
         alive(true),
-        _animator(animator) {
+        _animator(animator)
+{
     applySettings(PlayersSettingsSave::defaultSettings());
     _animator->setAnimationsPosition(to3d(position));
 }
 
-void ind::Player::placeBomb() {
+void ind::Player::placeBomb()
+{
     std::string path = "assets";
 
     if (map.getInfoAtCoord(boardPosition) != EMPTY)
@@ -35,7 +37,8 @@ void ind::Player::placeBomb() {
     }
 }
 
-void ind::Player::draw() {
+void ind::Player::draw()
+{
     if (force == irr::core::vector2df(0, 0))
         return;
 
@@ -57,15 +60,18 @@ void ind::Player::draw() {
     }
 }
 
-void ind::Player::decreaseBombNumber(short number) {
+void ind::Player::decreaseBombNumber(short number)
+{
     actualBombsPlaced -= number;
 }
 
-float ind::Player::getSpeed() const {
+float ind::Player::getSpeed() const
+{
     return movementSpeed;
 }
 
-irr::core::vector3df ind::Player::correctMovement(const irr::core::vector3df &actualPosition) {
+irr::core::vector3df ind::Player::correctMovement(const irr::core::vector3df &actualPosition)
+{
     const irr::core::vector3df horizontalNextPos = irr::core::vector3df(actualPosition.X, actualPosition.Y,
                                                                         actualPosition.Z - force.X);
     const irr::core::vector3df verticalNextPos = irr::core::vector3df(actualPosition.X - force.Y, actualPosition.Y,
@@ -75,11 +81,6 @@ irr::core::vector3df ind::Player::correctMovement(const irr::core::vector3df &ac
     const bool horizontalWalkable = isWalkable(horizontalNextPos, {0, 0, force.X > 0 ? 1.0f : -1.0f});
     const bool verticalWalkable = isWalkable(verticalNextPos, {force.Y > 0 ? 1.0f : -1.0f, 0, 0});
 
-    std::cout << actualPosition.X << ", " << actualPosition.Y << ", " << actualPosition.Z << std::endl;
-    std::cout << horizontalNextPos.X << ", " << horizontalNextPos.Z << std::endl;
-    std::cout << verticalNextPos.X << ", " << verticalNextPos.Z << std::endl;
-    std::cout << "horizontal walkable: " << horizontalWalkable << std::endl;
-    std::cout << "vertical walkable: " << verticalWalkable << std::endl;
     if (horizontalWalkable && verticalWalkable)
         return nextPos;
     if (horizontalWalkable)
@@ -89,7 +90,8 @@ irr::core::vector3df ind::Player::correctMovement(const irr::core::vector3df &ac
     return actualPosition;
 }
 
-const bool ind::Player::isWalkable(const irr::core::vector3df &pos, const irr::core::vector3df &direction) {
+const bool ind::Player::isWalkable(const irr::core::vector3df &pos, const irr::core::vector3df &direction)
+{
     const irr::core::vector3df posBorder = pos - direction * (TILE_SIZE / 2);
     const irr::core::vector3df cornerOffset = (direction.X != 0 ? irr::core::vector3df(0, 0, TILE_SIZE / 3.0f)
                                                                 : irr::core::vector3df(TILE_SIZE / 3.0f, 0, 0));
@@ -98,65 +100,72 @@ const bool ind::Player::isWalkable(const irr::core::vector3df &pos, const irr::c
     const Position mapSize = map.getSize();
 
     if (pos.X + TILE_SIZE / 2 >= mapSize.x * TILE_SIZE - TILE_SIZE / 2 || pos.X < 0 ||
-        pos.Z + TILE_SIZE / 2.0f >= mapSize.y * TILE_SIZE - TILE_SIZE / 2 || pos.Z < 0) {
-        std::cout << "out of bounds" << std::endl;
+        pos.Z + TILE_SIZE / 2.0f >= mapSize.y * TILE_SIZE - TILE_SIZE / 2 || pos.Z < 0)
         return false;
-    }
-    std::cout << pos.X << ", " << pos.Y << ", " << pos.Z << std::endl;
-    std::cout << firstCorner.x << ", " << firstCorner.y << std::endl;
-    std::cout << secondCorner.x << ", " << secondCorner.y << std::endl;
     const Tile firstCornerTile = map.getInfoAtCoord(firstCorner);
     const Tile secondCornerTile = map.getInfoAtCoord(secondCorner);
     return (checkWalkableTile(firstCornerTile) && checkWalkableTile(secondCornerTile));
 }
 
-bool ind::Player::checkWalkableTile(const ind::Tile &Tile) const {
+bool ind::Player::checkWalkableTile(const ind::Tile &Tile) const
+{
     return Tile != BLOCKBREAKABLE && Tile != WALL && (Tile != BOMB || map.getInfoAtCoord(boardPosition) == BOMB);
 }
 
-short ind::Player::getBombNumber() const {
+short ind::Player::getBombNumber() const
+{
     return this->maxBombsPlaced;
 }
 
-void ind::Player::setBombNumber(short bombNumber) {
+void ind::Player::setBombNumber(short bombNumber)
+{
     this->maxBombsPlaced = bombNumber;
 }
 
-bool ind::Player::isAlive() const {
+bool ind::Player::isAlive() const
+{
     return alive;
 }
 
-void ind::Player::applySettings(const ind::PlayerSettings &settings) {
+void ind::Player::applySettings(const ind::PlayerSettings &settings)
+{
     bombPower = settings.bombPower;
     maxBombsPlaced = settings.maxBombsPlaced;
     movementSpeed = settings.speed;
 }
 
-ind::animations::Animator &ind::Player::getAnimator() {
+ind::animations::Animator &ind::Player::getAnimator()
+{
     return *this->_animator;
 }
 
-void ind::Player::setAnimator(ind::animations::Animator *animator) {
+void ind::Player::setAnimator(ind::animations::Animator *animator)
+{
     this->_animator = animator;
 }
 
-const ind::Actions ind::Player::getAction() {
+const ind::Actions ind::Player::getAction()
+{
     return this->_action;
 }
 
-void ind::Player::setAction(ind::Actions action) {
+void ind::Player::setAction(ind::Actions action)
+{
     this->_action = action;
 }
 
-const ind::ORIENTATION ind::Player::getDirection() {
+const ind::ORIENTATION ind::Player::getDirection()
+{
     return this->_direction;
 }
 
-void ind::Player::setDirection(ind::ORIENTATION direction) {
+void ind::Player::setDirection(ind::ORIENTATION direction)
+{
     this->_direction = direction;
 }
 
-void ind::Player::checkDeath() {
+void ind::Player::checkDeath()
+{
     if (map.isOnExplosion(boardPosition))
         alive = false;
 }
