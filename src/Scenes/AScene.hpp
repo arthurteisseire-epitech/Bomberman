@@ -17,6 +17,7 @@ namespace ind {
         MAIN_MENU,
         OPTIONS,
         GAME,
+        LOADING,
         EXIT
     };
 

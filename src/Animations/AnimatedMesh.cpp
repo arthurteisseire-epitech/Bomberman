@@ -2,6 +2,8 @@
 #include <iostream>
 #include <algorithm>
 #include <dirent.h>
+#include <future>
+#include <numeric>
 #include "AnimatedMesh.hpp"
 
 #define EMPTY_FRAME_ERROR "No frame selected"

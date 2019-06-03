@@ -11,6 +11,7 @@
 #include "GameScene.hpp"
 #include "MainMenu.hpp"
 #include "OptionsScene.hpp"
+#include "LoadingScene.hpp"
 
 ind::SceneManager::SceneManager(SceneType sceneType)
 {
@@ -33,6 +34,10 @@ void ind::SceneManager::buildScene(ind::SceneType type)
             break;
         case OPTIONS:
             _currentScene = std::unique_ptr<OptionsScene>(new OptionsScene());
+            break;
+        case LOADING:
+            _currentScene = std::unique_ptr<LoadingScene>(new LoadingScene());
+            break;
         default:
             return;
     }

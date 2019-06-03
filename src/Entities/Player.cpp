@@ -6,6 +6,8 @@
 */
 
 #include <iostream>
+#include <Services/Singleton.hpp>
+#include <Services/LoadingService.hpp>
 #include "crossPlatform.hpp"
 #include "Player.hpp"
 #include "Utilities/to2d.hpp"
@@ -21,24 +23,17 @@ ind::Player::Player(const Position &position, PlayerNumber playerNum, Board &map
     setBehaviour(behaviour);
     applySettings(PlayersSettingsSave::defaultSettings());
 
-    /*
-     * TODO : RAW PATH :'(
-     */
-    if (playerNum == PLAYER_ONE) {
-        this->getAnimator().registerAnimation("walk", "assets/PlayerA/walking", "assets/PlayerA/MAW_diffuse.png", *manager)
-                           .setCurrentAnimation("walk").setCurrentAnimationSpeed(50)
-                           .registerAnimation("idle", "assets/PlayerA/idle", "assets/PlayerA/MAW_diffuse.png", *manager)
-                           .setCurrentAnimation("idle")
-                           .setAnimationsScale({1.3, 1.3, 1.3})
-                           .playAnimation();
-    } else {
-        this->getAnimator().registerAnimation("walk", "assets/PlayerB/walking", "assets/PlayerB/Mutant_diffuse.png", *manager)
-                           .setCurrentAnimation("walk").setCurrentAnimationSpeed(50)
-                           .registerAnimation("idle", "assets/PlayerB/idle", "assets/PlayerB/Mutant_diffuse.png", *manager)
-                           .setCurrentAnimation("idle")
-                           .setAnimationsScale({1.3, 1.3, 1.3})
-                           .playAnimation();
-    }
+
+    if (playerNum == PLAYER_ONE)
+        this->setAnimator(SingleTon<LoadingService>::getInstance().getAnimator("playerAAnimator"));
+    else
+        this->setAnimator(SingleTon<LoadingService>::getInstance().getAnimator("playerBAnimator"));
+
+    this->getAnimator().setCurrentAnimation("walk")
+                       .setCurrentAnimationSpeed(50)
+                       .setAnimationsScale({1.3, 1.3, 1.3})
+                       .setCurrentAnimation("idle")
+                       .playAnimation();
 }
 
 void ind::Player::placeBomb()
@@ -155,7 +150,7 @@ void ind::Player::applySettings(const ind::PlayerSettings &settings)
 
 ind::animations::Animator &ind::Player::getAnimator()
 {
-    return this->_animator;
+    return *this->_animator;
 }
 
 const ind::Actions ind::Player::getAction()
@@ -182,4 +177,9 @@ void ind::Player::checkDeath()
 {
     if (map.isOnExplosion(boardPosition))
         alive = false;
+}
+
+void ind::Player::setAnimator(ind::animations::Animator *animator)
+{
+    this->_animator = animator;
 }

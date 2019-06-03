@@ -10,10 +10,9 @@ namespace ind {
     namespace animations {
         class Animator {
             public:
-                Animator();
                 ~Animator();
                 void update();
-                Animator &registerAnimation(std::string id, std::string path, std::string textures, irr::scene::ISceneManager &manager);
+                void registerAnimation(std::string id, std::string path, std::string textures, irr::scene::ISceneManager &manager);
                 Animator &playAnimation(bool loop = true);
                 Animator &stopAnimation();
                 Animator &setCurrentAnimation(std::string id);

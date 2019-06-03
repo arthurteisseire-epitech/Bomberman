@@ -27,7 +27,7 @@ file(GLOB_RECURSE SOURCE_FILES src/*.cpp src/*.hpp)
 
 add_executable(${NAME} ${SOURCE_FILES})
 
-target_link_libraries(${NAME} ${Irrlicht_LIBRARIES})
+target_link_libraries(${NAME} ${Irrlicht_LIBRARIES} -lpthread)
 
 
 

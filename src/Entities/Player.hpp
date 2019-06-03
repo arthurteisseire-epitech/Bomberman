@@ -43,6 +43,7 @@ namespace ind {
         short getBombNumber() const;
         void setBombNumber(short);
         ind::animations::Animator &getAnimator();
+        void setAnimator(ind::animations::Animator *animator);
         bool isAlive() const;
         const Actions getAction();
         void setAction(Actions action);
@@ -61,7 +62,7 @@ namespace ind {
         bool alive;
         Actions _action = Actions::Idle;
         ind::ORIENTATION _direction = ind::ORIENTATION::NONE;
-        ind::animations::Animator _animator;
+        ind::animations::Animator *_animator;
 
         irr::core::vector3df correctMovement(const irr::core::vector3df &actualPosition);
         const bool isWalkable(const irr::core::vector3df &pos, const irr::core::vector3df &direction);

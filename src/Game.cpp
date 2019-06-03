@@ -26,9 +26,9 @@ ind::Game::Game() :
 void ind::Game::run()
 {
     irr::f32 deltaTime;
-    SceneManager sceneManager(MAIN_MENU);
+    SceneManager sceneManager(LOADING);
     irr::u32 then = device->getTimer()->getTime();
-    SceneType currentScene = MAIN_MENU;
+    SceneType currentScene = LOADING;
     SceneType newScene;
 
     while (device->run() && currentScene != EXIT) {
