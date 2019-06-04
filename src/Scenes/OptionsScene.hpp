@@ -44,6 +44,10 @@ namespace ind {
         irr::gui::IGUIButton *bombsPowerUpButton;
         irr::gui::IGUIButton *bombsPowerDownButton;
         irr::gui::IGUIButton *bombsPowerNumberButton;
+        irr::gui::IGUIButton *playersNumberButton;
+        irr::gui::IGUIButton *playersNumberValue;
+        irr::gui::IGUIButton *playersNumberUp;
+        irr::gui::IGUIButton *playersNumberDown;
         std::map<irr::gui::IGUIButton *, ButtonPosition> buttonsPlace;
         std::map<irr::gui::IGUIButton *, void (ind::OptionsScene::*)(void)> buttonsFunction;
 
@@ -51,6 +55,10 @@ namespace ind {
         irr::gui::IGUIButton *initButton(const irr::core::dimension2df &center, const irr::core::dimension2df &size,
                                          const irr::core::dimension2di &screenDimension, const char *path,
                                          void (ind::OptionsScene::*)());
+        void initMaxBombsButtons(const irr::core::dimension2d<irr::s32> &size, const irr::core::dimension2df &signSize);
+        void initSpeedButtons(const irr::core::dimension2d<irr::s32> &size, const irr::core::dimension2df &signSize);
+        void initBombsPowerButtons(const irr::core::dimension2d<irr::s32> &size,
+                                   const irr::core::dimension2df &signSize);
         void resizeButtons(const irr::core::dimension2d<irr::u32> &currSize) const;
         void draw(const irr::core::dimension2d<irr::u32> &size) const;
         irr::core::rect<irr::s32> findPosition(const irr::u32 &x, const irr::u32 &y, irr::gui::IGUIButton *button) const;
@@ -61,6 +69,9 @@ namespace ind {
         void decrementBombsPower();
         void incrementBombsPower();
         void setTexts() const;
+        void initPlayersNumber(const irr::core::dimension2d<irr::s32> &size, const irr::core::dimension2df &signSize);
+        void incrementPlayersNumber();
+        void decrementPlayersNumber();
     };
 }
 

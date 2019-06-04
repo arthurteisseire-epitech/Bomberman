@@ -11,12 +11,15 @@ std::map<short, ind::PlayerSettings> ind::PlayersSettingsSave::settingsMap = {
         {0, ind::PlayerSettings(5, 1, 30.0f)}
 };
 
-ind::PlayerSettings::PlayerSettings(short bombRange, short maxBombsPlaced, float speed)
+short unsigned ind::PlayersSettingsSave::playersNumber = 1;
+
+ind::PlayerSettings::PlayerSettings(unsigned short bombRange, unsigned short maxBombsPlaced, float speed)
         : bombPower(bombRange), maxBombsPlaced(maxBombsPlaced), speed(speed)
 {
 }
 
-ind::PlayersSettingsSave::PlayersSettingsSave(short playerID, short bombRange, short maxBombsPlaced, float speed)
+ind::PlayersSettingsSave::PlayersSettingsSave(unsigned short playerID, unsigned short bombRange,
+                                              unsigned short maxBombsPlaced, float speed)
 {
     settingsMap.emplace(playerID, PlayerSettings(bombRange, maxBombsPlaced, speed));
 }
@@ -31,4 +34,24 @@ ind::PlayerSettings &ind::PlayersSettingsSave::operator[](short playerID)
 ind::PlayerSettings &ind::PlayersSettingsSave::defaultSettings()
 {
     return settingsMap.at(0);
+}
+
+void ind::PlayersSettingsSave::addPlayer()
+{
+    ++playersNumber;
+}
+
+void ind::PlayersSettingsSave::removePlayer()
+{
+    --playersNumber;
+}
+
+short unsigned ind::PlayersSettingsSave::getPlayersNumber()
+{
+    return playersNumber;
+}
+
+short unsigned ind::PlayersSettingsSave::getMaxPlayers()
+{
+    return maxPlayers;
 }
