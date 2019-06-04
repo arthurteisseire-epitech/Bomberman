@@ -83,14 +83,11 @@ void ind::OptionsScene::initBombsPowerButtons(const irr::core::dimension2d<irr::
 
     bombsPowerButton = initButton({1.0f / 5, bombPowerHeight}, {1.0f / 10, 1.0f / 20}, size,
                                   "./assets/settings/bombs_power.png", nullptr);
-    bombsPowerDownButton = initButton({3.0f / 5, bombPowerHeight}, signSize, size,
-                                      "./assets/settings/minus.png",
+    bombsPowerDownButton = initButton({3.0f / 5, bombPowerHeight}, signSize, size, "./assets/settings/minus.png",
                                       &ind::OptionsScene::decrementBombsPower);
-    bombsPowerUpButton = initButton({4.0f / 5, bombPowerHeight}, signSize, size,
-                                    "./assets/settings/plus.png",
+    bombsPowerUpButton = initButton({4.0f / 5, bombPowerHeight}, signSize, size, "./assets/settings/plus.png",
                                     &ind::OptionsScene::incrementBombsPower);
-    bombsPowerNumberButton = initButton({3.5f / 5, bombPowerHeight}, signSize, size,
-                                        "./assets/settings/empty.png",
+    bombsPowerNumberButton = initButton({3.5f / 5, bombPowerHeight}, signSize, size, "./assets/settings/empty.png",
                                         nullptr);
 }
 
