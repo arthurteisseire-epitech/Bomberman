@@ -19,6 +19,7 @@ ind::animations::AnimatedMesh::AnimatedMesh(irr::scene::ISceneManager &manager,
     // TODO : Check if directory exists
     this->loadFolder(manager);
     this->_sceneNode = manager.addAnimatedMeshSceneNode(this);
+    std::cerr << "loading texture " << texture << std::endl;
     this->loadTexture(manager, texture);
     /*
      * visibility = true when Animator.setCurrentAnimation called
