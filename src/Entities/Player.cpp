@@ -144,11 +144,6 @@ ind::animations::Animator &ind::Player::getAnimator()
     return *this->_animator;
 }
 
-void ind::Player::setAnimator(animations::Animator *animator)
-{
-    this->_animator = animator;
-}
-
 const ind::Actions ind::Player::getAction()
 {
     return this->_action;
