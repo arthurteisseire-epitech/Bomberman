@@ -27,6 +27,7 @@ namespace ind {
         ~Board() = default;
 
         void update(float deltaTime);
+        Tile getInfoAtCoord(int x, int y) const;
         Tile getInfoAtCoord(Position coord) const;
         Position getSize() const;
         void emptyTile(std::shared_ptr<BoardObject> &tile);

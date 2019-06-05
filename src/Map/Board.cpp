@@ -91,7 +91,12 @@ void ind::Board::cleanCorners()
 
 ind::Tile ind::Board::getInfoAtCoord(Position coord) const
 {
-    auto &tile = map[coord.x][coord.y];
+    return getInfoAtCoord(coord.x, coord.y);
+}
+
+ind::Tile ind::Board::getInfoAtCoord(int x, int y) const
+{
+    auto &tile = map[x][y];
 
     if (tile == nullptr)
         return EMPTY;

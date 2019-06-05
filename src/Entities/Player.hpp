@@ -50,8 +50,9 @@ namespace ind {
         void setDirection(ORIENTATION direction);
         void applySettings(const PlayerSettings &settings);
         void checkDeath();
+        const Position &getPosition() const;
 
-    private:
+        private:
         short bombPower;
         short maxBombsPlaced;
         float movementSpeed;

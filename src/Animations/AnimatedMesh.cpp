@@ -10,6 +10,7 @@
 #include <boost/filesystem.hpp>
 #include <future>
 #include <numeric>
+#include <iostream>
 #include "AnimatedMesh.hpp"
 
 #define EMPTY_FRAME_ERROR "No frame selected"
