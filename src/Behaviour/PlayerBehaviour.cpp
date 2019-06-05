@@ -19,20 +19,25 @@ void ind::PlayerBehaviour::update(float deltaTime)
     KeyService &keyService = SingleTon<KeyService>::getInstance();
 
     player.checkDeath();
-    if (wantToWalk()) {
-        if (player.getAction() != Actions::Walking) {
-            player.getAnimator().setCurrentAnimation("walk").playAnimation();
-            player.setAction(Actions::Walking);
-        }
-    } else {
-        if (player.getAction() != Actions::Idle) {
-            player.getAnimator().setCurrentAnimation("idle").playAnimation();
-            player.setAction(Actions::Idle);
-        }
-    }
+    updateAnimation();
     if (keyService.isKeyPressed(playerKeys[PlaceBomb]))
         player.placeBomb();
     move(deltaTime);
+}
+
+void ind::PlayerBehaviour::updateAnimation() const
+{
+    if (wantToWalk()) {
+        if (player.getAction() != ind::Walking) {
+            player.getAnimator().setCurrentAnimation("walk").playAnimation();
+            player.setAction(ind::Walking);
+        }
+    } else {
+        if (player.getAction() != ind::Idle) {
+            player.getAnimator().setCurrentAnimation("idle").playAnimation();
+            player.setAction(ind::Idle);
+        }
+    }
 }
 
 void ind::PlayerBehaviour::move(float deltaTime) const

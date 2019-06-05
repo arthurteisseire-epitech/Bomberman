@@ -49,5 +49,6 @@ namespace ind {
 
         bool wantToWalk() const;
         void move(float deltaTime) const;
+        void updateAnimation() const;
     };
 }
