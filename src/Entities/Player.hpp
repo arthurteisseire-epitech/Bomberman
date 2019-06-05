@@ -19,6 +19,7 @@ namespace ind {
     enum PlayerNumber {
         PLAYER_ONE,
         PLAYER_TWO,
+        AI
     };
 
     enum Actions {

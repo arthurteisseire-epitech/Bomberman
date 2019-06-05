@@ -44,7 +44,8 @@ ind::LoadingScene::LoadingScene() : _loadingService(SingleTon<LoadingService>::g
     };
 
     this->_loadingService.enqueueAnimator("playerAAnimator", playerAAnimations)
-                         .enqueueAnimator("playerBAnimator", playerBAnimations);
+                         .enqueueAnimator("playerBAnimator", playerBAnimations)
+                         .enqueueAnimator("playerCAnimator", playerBAnimations);
 
     std::thread t(&ind::LoadingService::startLoad, this->_loadingService);
     t.detach();
