@@ -12,4 +12,5 @@
 
 namespace ind {
     Position to2d(const irr::core::vector3df& pos3d);
+    irr::core::vector3df to3d(const Position& pos2d);
 }

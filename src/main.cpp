@@ -5,7 +5,6 @@
 ** Created by abel,
 */
 
-#include <iostream>
 #include <irrlicht/irrlicht.h>
 #include <string>
 #include <stdlib.h>

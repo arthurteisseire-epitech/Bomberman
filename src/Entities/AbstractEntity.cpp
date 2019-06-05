@@ -7,7 +7,6 @@
 
 #include <memory>
 #include <algorithm>
-#include <iostream>
 #include "AbstractEntity.hpp"
 #include "Singleton.hpp"
 #include "DeviceService.hpp"

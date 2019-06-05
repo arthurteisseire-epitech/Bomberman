@@ -15,7 +15,7 @@
 
 namespace ind {
     struct ButtonPosition {
-        ButtonPosition(const irr::core::dimension2df center_, const irr::core::dimension2df size_);
+        ButtonPosition(irr::core::dimension2df center_, irr::core::dimension2df size_);
 
         irr::core::dimension2df center;
         irr::core::dimension2df size;
@@ -60,6 +60,7 @@ namespace ind {
         void decrementSpeed();
         void decrementBombsPower();
         void incrementBombsPower();
+        void setTexts() const;
     };
 }
 

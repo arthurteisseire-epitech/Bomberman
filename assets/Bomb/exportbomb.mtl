@@ -40,6 +40,6 @@ Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 map_Kd assets/Bomb/diffusecolorretocado.jpg
-map_Ka shaded.tga
+map_Ka assets/Bomb/shaded.tga
 bump assets/Bomb/normalbomba2.tga -bm 1
 Ni 1.00

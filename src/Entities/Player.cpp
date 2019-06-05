@@ -5,22 +5,27 @@
 ** Created by abel,
 */
 
-#include <iostream>
-#include <Services/Singleton.hpp>
-#include <Services/LoadingService.hpp>
+#include "Singleton.hpp"
+#include "LoadingService.hpp"
 #include "crossPlatform.hpp"
 #include "Player.hpp"
 #include "Utilities/to2d.hpp"
 #include "PlayerBehaviour.hpp"
 
 ind::Player::Player(const Position &position, Board &map, animations::Animator *animator) :
-    AbstractEntity(),
-    boardPosition(0, 0),
-    map(map),
-    alive(true),
-    _animator(animator)
+        AbstractEntity(),
+        boardPosition(position),
+        map(map),
+        alive(true),
+        _animator(animator)
 {
     applySettings(PlayersSettingsSave::defaultSettings());
+    _animator->setAnimationsPosition(to3d(position));
+}
+
+ind::Player::~Player()
+{
+    _animator->stopAnimation();
 }
 
 void ind::Player::placeBomb()
@@ -46,7 +51,7 @@ void ind::Player::draw()
     const irr::core::vector3df futurePosition = correctMovement(actualPosition);
     Position futurePosition2d = to2d(futurePosition);
 
-   // object->setPosition(futurePosition);
+    // object->setPosition(futurePosition);
     _animator->setAnimationsPosition(futurePosition);
 
     boardPosition = futurePosition2d;
@@ -102,7 +107,6 @@ const bool ind::Player::isWalkable(const irr::core::vector3df &pos, const irr::c
     if (pos.X + TILE_SIZE / 2 >= mapSize.x * TILE_SIZE - TILE_SIZE / 2 || pos.X < 0 ||
         pos.Z + TILE_SIZE / 2.0f >= mapSize.y * TILE_SIZE - TILE_SIZE / 2 || pos.Z < 0)
         return false;
-
     const Tile firstCornerTile = map.getInfoAtCoord(firstCorner);
     const Tile secondCornerTile = map.getInfoAtCoord(secondCorner);
     return (checkWalkableTile(firstCornerTile) && checkWalkableTile(secondCornerTile));
@@ -130,19 +134,14 @@ bool ind::Player::isAlive() const
 
 void ind::Player::applySettings(const ind::PlayerSettings &settings)
 {
-	bombPower = settings.bombPower;
-	maxBombsPlaced = settings.maxBombsPlaced;
-	movementSpeed = settings.speed;
+    bombPower = settings.bombPower;
+    maxBombsPlaced = settings.maxBombsPlaced;
+    movementSpeed = settings.speed;
 }
 
 ind::animations::Animator &ind::Player::getAnimator()
 {
     return *this->_animator;
-}
-
-void ind::Player::setAnimator(ind::animations::Animator *animator)
-{
-    this->_animator = animator;
 }
 
 const ind::Actions ind::Player::getAction()
@@ -155,7 +154,7 @@ void ind::Player::setAction(ind::Actions action)
     this->_action = action;
 }
 
-const ind::ORIENTATION  ind::Player::getDirection()
+const ind::ORIENTATION ind::Player::getDirection()
 {
     return this->_direction;
 }

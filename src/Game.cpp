@@ -5,7 +5,6 @@
 ** Created by abel,
 */
 
-#include <iostream>
 #include <Animations/AnimatedMesh.hpp>
 #include "Game.hpp"
 #include "GraphicalBoard.hpp"
