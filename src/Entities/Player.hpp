@@ -61,7 +61,7 @@ namespace ind {
         bool alive;
         Actions _action = Actions::Idle;
         ORIENTATION _direction = ORIENTATION::NONE;
-        std::unique_ptr<animations::Animator> _animator;
+        animations::Animator *_animator;
 
         irr::core::vector3df correctMovement(const irr::core::vector3df &actualPosition);
         const bool isWalkable(const irr::core::vector3df &pos, const irr::core::vector3df &direction);
