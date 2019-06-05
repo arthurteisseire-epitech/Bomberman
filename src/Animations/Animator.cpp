@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2019
+** bomberman
+** File description:
+** Created by Taz
+*/
+
 #include <iostream>
 #include "Animator.hpp"
 

@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2019
+** bomberman
+** File description:
+** Created by Taz
+*/
+
 namespace ind {
     namespace animations {
         namespace optimization {

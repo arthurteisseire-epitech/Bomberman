@@ -29,11 +29,11 @@ namespace ind {
         static PlayerSettings &defaultSettings();
         static void addPlayer();
         static void removePlayer();
-        static short unsigned getPlayersNumber();
+        static short unsigned getPlayerNumber();
         static short unsigned getMaxPlayers();
     private:
         static std::map<short, PlayerSettings> settingsMap;
-        static short unsigned playersNumber;
+        static short unsigned playerNumber;
         static const short unsigned maxPlayers = 4;
     };
 }

@@ -1,6 +1,13 @@
+/*
+** EPITECH PROJECT, 2019
+** bomberman
+** File description:
+** Created by Taz
+*/
+
 #include <sys/types.h>
 #include <algorithm>
-#include <dirent.h>
+#include <boost/filesystem.hpp>
 #include <future>
 #include <numeric>
 #include "AnimatedMesh.hpp"
@@ -27,24 +34,21 @@ ind::animations::AnimatedMesh::AnimatedMesh(irr::scene::ISceneManager &manager,
 
 void ind::animations::AnimatedMesh::loadFolder(irr::scene::ISceneManager &manager)
 {
-    struct dirent *dp;
-    DIR* dir = opendir(this->_folderPath.c_str());
+    boost::filesystem::path p(this->_folderPath.c_str());
     std::vector<std::string> paths;
 
-    while ((dp = readdir(dir)) != nullptr) {
-        if (strcmp(dp->d_name, ".") == 0 || strcmp(dp->d_name, "..") == 0)
+    for (boost::filesystem::directory_iterator itr(p); itr != boost::filesystem::directory_iterator(); ++itr) {
+        const std::string pathName = itr->path().string();
+        if (pathName == "." || pathName == "..")
             continue;
-        std::string name(dp->d_name);
-        if (name.substr(name.find_last_of('.') + 1) != "obj")
+        if (pathName.substr(pathName.find_last_of('.') + 1) != "obj")
             continue;
-        std::string path = this->_folderPath + dp->d_name;
-        paths.emplace_back(path);
+        paths.emplace_back(pathName);
     }
     std::sort(paths.begin(), paths.end());
     for (const auto &path : paths)
         this->_frames.emplace_back(manager.getMesh(path.c_str()));
     this->_frame = this->_frames[0];
-    closedir(dir);
 }
 
 void ind::animations::AnimatedMesh::loadTexture(irr::scene::ISceneManager &manager, std::string &texture)

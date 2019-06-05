@@ -1,9 +1,17 @@
+/*
+** EPITECH PROJECT, 2019
+** bomberman
+** File description:
+** Created by Taz
+*/
+
 #include "LoadingScene.hpp"
 #include "Services/LoadingService.hpp"
 #include "Services/Singleton.hpp"
 #include <thread>
 #include <Services/DeviceService.hpp>
 #include <iostream>
+#include <Services/KeyService.hpp>
 
 extern std::atomic_bool _finish;
 
@@ -45,7 +53,7 @@ ind::LoadingScene::LoadingScene() : _loadingService(SingleTon<LoadingService>::g
 ind::SceneType ind::LoadingScene::execute(irr::f32 deltatime)
 {
     // Override game main loop
-    while (_finish != true){
+    while (_finish != true) {
         SingleTon<DeviceService>::getInstance().getDevice()->getVideoDriver()->beginScene(true, true, irr::video::SColor(0, 0, 0, 0));
         SingleTon<DeviceService>::getInstance().getSceneManager()->drawAll();
         SingleTon<DeviceService>::getInstance().getDevice()->getVideoDriver()->endScene();

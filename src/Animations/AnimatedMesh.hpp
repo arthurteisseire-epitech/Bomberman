@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2019
+** bomberman
+** File description:
+** Created by Taz
+*/
+
 #ifndef BOMBERMAN_ANIMATEDMESH_HPP
 #define BOMBERMAN_ANIMATEDMESH_HPP
 

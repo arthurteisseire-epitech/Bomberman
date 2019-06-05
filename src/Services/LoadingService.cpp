@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2019
+** bomberman
+** File description:
+** Created by Taz
+*/
+
 #include <future>
 #include <condition_variable>
 #include <iostream>
@@ -9,7 +16,7 @@ std::atomic_bool _finish;
 std::map<std::string, ind::animations::Animator *> _loadedAnimators;
 
 ind::LoadingService &ind::LoadingService::enqueueAnimator(std::string name,
-    std::vector<ind::LoadAnimationData> data)
+                                                          std::vector<ind::LoadAnimationData> data)
 {
     if (name.empty())
         throw std::invalid_argument("Loading animator : name empty");
@@ -27,12 +34,14 @@ void ind::LoadingService::startLoad()
 
         for (auto &info : infos.second) {
             std::async(std::launch::async,
-                [&]() { animator->registerAnimation(info.id,
-                    info.folderPath,
-                    info.texture,
-                    *manager); }).get();
+                       [&]() {
+                           animator->registerAnimation(info.id,
+                                                       info.folderPath,
+                                                       info.texture,
+                                                       *manager);
+                       }).get();
         }
-        _loadedAnimators.emplace(infos.first , animator);
+        _loadedAnimators.emplace(infos.first, animator);
     }
     _finish = true;
 }

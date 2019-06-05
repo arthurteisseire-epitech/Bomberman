@@ -44,10 +44,10 @@ namespace ind {
         irr::gui::IGUIButton *bombsPowerUpButton;
         irr::gui::IGUIButton *bombsPowerDownButton;
         irr::gui::IGUIButton *bombsPowerNumberButton;
-        irr::gui::IGUIButton *playersNumberButton;
-        irr::gui::IGUIButton *playersNumberValue;
-        irr::gui::IGUIButton *playersNumberUp;
-        irr::gui::IGUIButton *playersNumberDown;
+        irr::gui::IGUIButton *playerNumberButton;
+        irr::gui::IGUIButton *playerNumberValue;
+        irr::gui::IGUIButton *playerNumberUp;
+        irr::gui::IGUIButton *playerNumberDown;
         std::map<irr::gui::IGUIButton *, ButtonPosition> buttonsPlace;
         std::map<irr::gui::IGUIButton *, void (ind::OptionsScene::*)(void)> buttonsFunction;
 
@@ -69,9 +69,9 @@ namespace ind {
         void decrementBombsPower();
         void incrementBombsPower();
         void setTexts() const;
-        void initPlayersNumber(const irr::core::dimension2d<irr::s32> &size, const irr::core::dimension2df &signSize);
-        void incrementPlayersNumber();
-        void decrementPlayersNumber();
+        void initPlayerNumber(const irr::core::dimension2d<irr::s32> &size, const irr::core::dimension2df &signSize);
+        void incrementPlayerNumber();
+        void decrementPlayerNumber();
     };
 }
 
