@@ -5,13 +5,15 @@
 ** Created by abel,
 */
 
+#include "DirectionMap.hpp"
+#include "Keys.hpp"
 #include "PlayerBehaviour.hpp"
 #include "Singleton.hpp"
 #include "KeyService.hpp"
 
 ind::PlayerBehaviour::PlayerBehaviour(ind::Player &player, ind::PlayerNumber playerNumber) :
     player(player),
-    playerKeys(playerNumber == PLAYER_ONE ? playerOneKeys : playerTwoKeys)
+    playerKeys(playerNumber == PLAYER_ONE ? Keys::playerOne : Keys::playerTwo)
 {}
 
 void ind::PlayerBehaviour::update(float deltaTime)
@@ -20,7 +22,7 @@ void ind::PlayerBehaviour::update(float deltaTime)
 
     player.checkDeath();
     updateAnimation();
-    if (keyService.isKeyPressed(playerKeys[PlaceBomb]))
+    if (keyService.isKeyPressed(playerKeys.at(PlaceBomb)))
         player.placeBomb();
     move(deltaTime);
 }
@@ -45,13 +47,13 @@ void ind::PlayerBehaviour::move(float deltaTime) const
     KeyService &keyService = SingleTon<KeyService>::getInstance();
 
     for (const auto &action : {Up, Down, Left, Right}) {
-        if (keyService.isKeyPressed(playerKeys[action])) {
-            if (player.getDirection() != directionsMapping.at(action)) {
-                player.setDirection(directionsMapping.at(action));
+        if (keyService.isKeyPressed(playerKeys.at(action))) {
+            if (player.getDirection() != DirectionMap::keyDirections.at(action)) {
+                player.setDirection(DirectionMap::keyDirections.at(action));
                 player.getAnimator().setAnimationsRotation(
-                    directionAngles.at(directionsMapping.at(action)));
+                    DirectionMap::directionAngles.at(DirectionMap::keyDirections.at(action)));
             }
-            player.move(directionsMapping.at(action), deltaTime, player.getSpeed());
+            player.move(DirectionMap::keyDirections.at(action), deltaTime, player.getSpeed());
             player.draw();
             return;
         }
