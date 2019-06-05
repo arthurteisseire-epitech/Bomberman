@@ -16,6 +16,8 @@ namespace ind {
     public:
         explicit AIBehaviour(Player &player, Board &board);
         void update(float deltaTime) override;
+
+        std::vector<Position> getAllFutureExplosionsPositions() const;
     private:
         Player &player;
         Board &board;
