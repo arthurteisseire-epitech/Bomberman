@@ -169,3 +169,8 @@ void ind::Player::checkDeath()
     if (map.isOnExplosion(boardPosition))
         alive = false;
 }
+
+const ind::Position &ind::Player::getPosition() const
+{
+    return boardPosition;
+}

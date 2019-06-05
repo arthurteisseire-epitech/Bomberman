@@ -51,6 +51,7 @@ namespace ind {
         void setDirection(ORIENTATION direction);
         void applySettings(const PlayerSettings &settings);
         void checkDeath();
+        const Position &getPosition() const;
 
     private:
         short bombPower;
