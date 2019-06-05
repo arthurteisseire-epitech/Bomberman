@@ -40,6 +40,7 @@ namespace ind {
         PowerUp *getPowerUp(const Position &position);
         irr::scene::IMeshSceneNode *initializePlayerCube() const;
         std::vector<std::unique_ptr<Player>> &getPlayers();
+        std::vector<Bomb *> getAllBombs() const;
 
     private:
         void printMap() const;

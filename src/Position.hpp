@@ -9,20 +9,18 @@
 #define BOMBERMAN_POSITION_HPP
 
 #include <cstddef>
+#include <iostream>
 
 namespace ind {
     struct Position {
-        Position(int x, int y) : x(x), y(y)
-        {}
+        Position(int x, int y);
 
-        bool operator==(const Position &pos) const
-        {
-            return pos.x == x && pos.y == y;
-        }
+        bool operator==(const Position &pos) const;
 
         int x;
         int y;
     };
+    std::ostream &operator<<(std::ostream &o, const Position &pos);
 }
 
 #endif

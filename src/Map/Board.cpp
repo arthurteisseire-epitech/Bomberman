@@ -204,3 +204,14 @@ bool ind::Board::isOnExplosion(const Position &position) const
 {
     return explosionManager.isExplosionAt(position);
 }
+
+std::vector<ind::Bomb *> ind::Board::getAllBombs() const
+{
+    std::vector<Bomb *> bombs;
+
+    for (auto &row : this->map)
+        for (auto &tile : row)
+            if (tile && tile->getTile() == BOMB)
+                bombs.push_back(dynamic_cast<Bomb *>(tile.get()));
+    return bombs;
+}

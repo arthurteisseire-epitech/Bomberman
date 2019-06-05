@@ -74,3 +74,31 @@ ind::Tile ind::Bomb::getTile() const
 ind::Bomb::~Bomb()
 {
 }
+
+int ind::Bomb::getPower() const
+{
+    return power;
+}
+
+std::vector<ind::Position> ind::Bomb::getExplosionsPositions() const
+{
+    std::vector<Position> positions;
+    std::vector<Position> row;
+    const auto &pos = getPosition();
+
+    positions.emplace_back(pos);
+    row = getRowPositions([pos](int i) { return Position(pos.x + i, pos.y); });
+    positions.insert(positions.end(), row.begin(), row.end());
+    row = getRowPositions([pos](int i) { return Position(pos.x - i, pos.y); });
+    positions.insert(positions.end(), row.begin(), row.end());
+    row = getRowPositions([pos](int i) { return Position(pos.x, pos.y + i); });
+    positions.insert(positions.end(), row.begin(), row.end());
+    row = getRowPositions([pos](int i) { return Position(pos.x, pos.y - i); });
+    positions.insert(positions.end(), row.begin(), row.end());
+    return positions;
+}
+
+bool ind::Bomb::isExplosionStop(const ind::Position &pos) const
+{
+    return !inMap(pos) || map.getInfoAtCoord(pos) == BLOCKBREAKABLE || map.getInfoAtCoord(pos) == WALL;
+}
