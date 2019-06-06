@@ -219,3 +219,8 @@ std::vector<ind::Bomb *> ind::Board::getAllBombs() const
                 bombs.push_back(dynamic_cast<Bomb *>(tile.get()));
     return bombs;
 }
+
+bool ind::Board::in(const Position &pos) const
+{
+    return pos.x >= 0 && pos.x < size.x && pos.y >= 0 && pos.y < size.y;
+}

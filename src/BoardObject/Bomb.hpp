@@ -22,7 +22,6 @@ namespace ind {
         ~Bomb() override;
         Tile getTile() const override;
         void explode();
-        bool inMap(const Position &pos) const;
         int getPower() const;
 
         template<typename Func>

@@ -43,7 +43,7 @@ bool ind::Bomb::explodeTile(const Position &pos)
 {
     bool isEnd = false;
 
-    if (inMap(pos)) {
+    if (map.in(pos)) {
         if (map.getInfoAtCoord(pos) == BLOCKBREAKABLE) {
             map.emptyTile(pos);
             isEnd = true;
@@ -59,11 +59,6 @@ bool ind::Bomb::explodeTile(const Position &pos)
             this->toExplode.push_back(pos);
     }
     return isEnd;
-}
-
-bool ind::Bomb::inMap(const Position &pos) const
-{
-    return pos.x >= 0 && pos.x < map.getSize().x && pos.y >= 0 && pos.y < map.getSize().y;
 }
 
 ind::Tile ind::Bomb::getTile() const
@@ -100,5 +95,5 @@ std::vector<ind::Position> ind::Bomb::getExplosionsPositions() const
 
 bool ind::Bomb::isExplosionStop(const ind::Position &pos) const
 {
-    return !inMap(pos) || map.getInfoAtCoord(pos) == BLOCKBREAKABLE || map.getInfoAtCoord(pos) == WALL;
+    return !map.in(pos) || map.getInfoAtCoord(pos) == BLOCKBREAKABLE || map.getInfoAtCoord(pos) == WALL;
 }
