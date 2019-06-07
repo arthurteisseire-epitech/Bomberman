@@ -21,6 +21,8 @@ namespace ind {
         std::vector<Position> getAllFutureExplosionsPositions() const;
         std::vector<Position> getPositionsAround() const;
         void addPosIfInMap(std::vector<ind::Position> &positions, int x, int y) const;
+        void move(float deltaTime, ind::Actions direction) const;
+        Actions posToDir(const Position &pos) const;
 
         Player &player;
         Board &board;

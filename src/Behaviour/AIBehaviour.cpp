@@ -5,7 +5,9 @@
 ** AiBehaviour.cpp
 */
 
-#include <Utilities/DirectionMap.hpp>
+#include "DirectionMap.hpp"
+#include "PathfindingService.hpp"
+#include "Singleton.hpp"
 #include "AIBehaviour.hpp"
 
 ind::AIBehaviour::AIBehaviour(ind::Player &player, Board &board) :
@@ -17,18 +19,30 @@ ind::AIBehaviour::AIBehaviour(ind::Player &player, Board &board) :
 void ind::AIBehaviour::update(float deltaTime)
 {
     player.checkDeath();
+    const Position &targetPos = board.getPlayers()[0]->getPosition();
+    auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(), targetPos);
 
-    if (board.isOnExplosion(player.getPosition())) {
-        if (this->player.getAction() != Actions::Walking) {
+    if (!posToTarget.empty()) {
+        if (player.getAction() != Actions::Walking) {
             player.getAnimator().setCurrentAnimation("walk").playAnimation();
             player.setAction(Actions::Walking);
         }
-        player.setDirection(DirectionMap::keyDirections.at(Up));
-        player.getAnimator().setAnimationsRotation(
-            DirectionMap::directionAngles.at(DirectionMap::keyDirections.at(Up)));
-        player.move(DirectionMap::keyDirections.at(Up), deltaTime, player.getSpeed());
-        player.draw();
+        move(deltaTime, posToDir(posToTarget[1]));
+    } else {
+        if (player.getAction() == Actions::Walking) {
+            player.getAnimator().setCurrentAnimation("idle").playAnimation();
+            player.setAction(Actions::Down);
+        }
     }
+}
+
+void ind::AIBehaviour::move(float deltaTime, ind::Actions direction) const
+{
+    player.setDirection(ind::DirectionMap::keyDirections.at(direction));
+    player.getAnimator().setAnimationsRotation(
+        ind::DirectionMap::directionAngles.at(ind::DirectionMap::keyDirections.at(direction)));
+    player.move(ind::DirectionMap::keyDirections.at(direction), deltaTime, player.getSpeed());
+    player.draw();
 }
 
 std::vector<ind::Position> ind::AIBehaviour::getAllFutureExplosionsPositions() const
@@ -63,4 +77,20 @@ void ind::AIBehaviour::addPosIfInMap(std::vector<ind::Position> &positions, int 
 {
     if (board.in(Position(x, y)))
         positions.emplace_back(x, y);
+}
+
+ind::Actions ind::AIBehaviour::posToDir(const ind::Position &pos) const
+{
+    const auto &playerPos = player.getPosition();
+
+    std::cout << pos << std::endl;
+    if (pos.y > playerPos.y)
+        return Left;
+    else if (pos.y < playerPos.y)
+        return Right;
+    if (pos.x > playerPos.x)
+        return Up;
+    else if (pos.x < playerPos.x)
+        return Down;
+    return Up;
 }
