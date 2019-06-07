@@ -22,7 +22,7 @@ void ind::AIBehaviour::update(float deltaTime)
     const Position &targetPos = board.getPlayers()[0]->getPosition();
     auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(), targetPos);
 
-    if (!posToTarget.empty()) {
+    if (!posToTarget.empty() && !contain(board.getAllExplosionsPositions(), getPositionsAround())) {
         if (player.getAction() != Actions::Walking) {
             player.getAnimator().setCurrentAnimation("walk").playAnimation();
             player.setAction(Actions::Walking);
@@ -83,7 +83,6 @@ ind::Actions ind::AIBehaviour::posToDir(const ind::Position &pos) const
 {
     const auto &playerPos = player.getPosition();
 
-    std::cout << pos << std::endl;
     if (pos.y > playerPos.y)
         return Left;
     else if (pos.y < playerPos.y)
@@ -93,4 +92,23 @@ ind::Actions ind::AIBehaviour::posToDir(const ind::Position &pos) const
     else if (pos.x < playerPos.x)
         return Down;
     return Up;
+}
+
+bool ind::AIBehaviour::contain(const std::vector<ind::Position> &pos1, const std::vector<ind::Position> &pos2) const
+{
+    if (pos1.empty())
+        std::cout << "no explosions" << std::endl;
+    else if (pos2.empty())
+        std::cout << "no pos around" << std::endl;
+    for (auto &i : pos1) {
+        for (auto &j : pos2) {
+            if (i == j) {
+                std::cout << "same pos : " << i << std::endl;
+                return true;
+            } else {
+                std::cout << i << " != " << j << std::endl;
+            }
+        }
+    }
+    return false;
 }

@@ -224,3 +224,8 @@ bool ind::Board::in(const Position &pos) const
 {
     return pos.x >= 0 && pos.x < size.x && pos.y >= 0 && pos.y < size.y;
 }
+
+std::vector<ind::Position> ind::Board::getAllExplosionsPositions() const
+{
+    return explosionManager.getAllExplosionsPositions();
+}

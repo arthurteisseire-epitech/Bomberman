@@ -38,3 +38,13 @@ bool ind::ExplosionManager::isExplosionAt(const ind::Position &position) const
     });
     return it != explosions.end();
 }
+
+std::vector<ind::Position> ind::ExplosionManager::getAllExplosionsPositions() const
+{
+    std::vector<Position> positions;
+
+    positions.reserve(explosions.size());
+    for (auto &explosion : explosions)
+        positions.push_back(explosion->getPosition());
+    return positions;
+}
