@@ -24,7 +24,7 @@ void ind::AIBehaviour::update(float deltaTime)
     auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(), targetPos);
 
     if (!posToTarget.empty() && !contain(board.getAllExplosionsPositions(), getPositionsAround())) {
-        moveAI(deltaTime, posToTarget);
+        moveToPlayerOne(deltaTime, posToTarget);
     } else {
         if (player.getAction() == Actions::Walking) {
             player.getAnimator().setCurrentAnimation("idle").playAnimation();
@@ -33,31 +33,28 @@ void ind::AIBehaviour::update(float deltaTime)
     }
 }
 
-void ind::AIBehaviour::moveAI(float deltaTime, std::vector<ind::Position> &posToTarget)
+void ind::AIBehaviour::moveToPlayerOne(float deltaTime, std::vector<ind::Position> &posToTarget)
 {
-    if (posToTarget.size() > 1) {
-        auto dir = posToDir(posToTarget.at(1));
-        player.updateForce(ind::DirectionMap::keyDirections.at(dir), deltaTime, player.getSpeed());
-        if (player.nextPos() == player.getAnimator().getPosition()) {
-            move(deltaTime, prevDir);
-        } else {
-            move(deltaTime, dir);
-        }
-    }
+    if (posToTarget.size() > 1)
+        move(deltaTime, posToDir(posToTarget.at(1)));
 }
 
 void ind::AIBehaviour::move(float deltaTime, Actions direction)
 {
+    Actions &dir = direction;
+
+    player.updateForce(ind::DirectionMap::keyDirections.at(dir), deltaTime, player.getSpeed());
+    if (player.nextPos() == player.getAnimator().getPosition())
+        dir = prevDir;
     if (player.getAction() != Actions::Walking) {
         player.getAnimator().setCurrentAnimation("walk").playAnimation();
         player.setAction(Actions::Walking);
     }
-    player.setDirection(DirectionMap::keyDirections.at(direction));
-    player.getAnimator().setAnimationsRotation(
-        DirectionMap::directionAngles.at(DirectionMap::keyDirections.at(direction)));
-    player.updateForce(DirectionMap::keyDirections.at(direction), deltaTime, player.getSpeed());
+    player.setDirection(DirectionMap::keyDirections.at(dir));
+    player.getAnimator().setAnimationsRotation(DirectionMap::directionAngles.at(DirectionMap::keyDirections.at(dir)));
+    player.updateForce(DirectionMap::keyDirections.at(dir), deltaTime, player.getSpeed());
     player.draw();
-    prevDir = direction;
+    prevDir = dir;
 }
 
 std::vector<ind::Position> ind::AIBehaviour::getAllFutureExplosionsPositions() const

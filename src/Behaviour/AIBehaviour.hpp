@@ -24,7 +24,7 @@ namespace ind {
         void move(float deltaTime, ind::Actions direction);
         Actions posToDir(const Position &pos) const;
         bool contain(const std::vector<Position> &pos1, const std::vector<Position> &pos2) const;
-        void moveAI(float deltaTime, std::vector<ind::Position> &posToTarget);
+        void moveToPlayerOne(float deltaTime, std::vector<ind::Position> &posToTarget);
 
         Player &player;
         Board &board;
