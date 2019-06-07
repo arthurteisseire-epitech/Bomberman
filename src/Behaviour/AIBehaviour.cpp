@@ -23,11 +23,8 @@ void ind::AIBehaviour::update(float deltaTime)
     auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(), targetPos);
 
     if (!posToTarget.empty() && !contain(board.getAllExplosionsPositions(), getPositionsAround())) {
-        if (player.getAction() != Actions::Walking) {
-            player.getAnimator().setCurrentAnimation("walk").playAnimation();
-            player.setAction(Actions::Walking);
-        }
-        move(deltaTime, posToDir(posToTarget[1]));
+        if (posToTarget.size() > 1)
+            move(deltaTime, posToDir(posToTarget.at(1)));
     } else {
         if (player.getAction() == Actions::Walking) {
             player.getAnimator().setCurrentAnimation("idle").playAnimation();
@@ -38,6 +35,10 @@ void ind::AIBehaviour::update(float deltaTime)
 
 void ind::AIBehaviour::move(float deltaTime, ind::Actions direction) const
 {
+    if (player.getAction() != Actions::Walking) {
+        player.getAnimator().setCurrentAnimation("walk").playAnimation();
+        player.setAction(Actions::Walking);
+    }
     player.setDirection(ind::DirectionMap::keyDirections.at(direction));
     player.getAnimator().setAnimationsRotation(
         ind::DirectionMap::directionAngles.at(ind::DirectionMap::keyDirections.at(direction)));
@@ -96,19 +97,9 @@ ind::Actions ind::AIBehaviour::posToDir(const ind::Position &pos) const
 
 bool ind::AIBehaviour::contain(const std::vector<ind::Position> &pos1, const std::vector<ind::Position> &pos2) const
 {
-    if (pos1.empty())
-        std::cout << "no explosions" << std::endl;
-    else if (pos2.empty())
-        std::cout << "no pos around" << std::endl;
-    for (auto &i : pos1) {
-        for (auto &j : pos2) {
-            if (i == j) {
-                std::cout << "same pos : " << i << std::endl;
+    for (auto &i : pos1)
+        for (auto &j : pos2)
+            if (i == j)
                 return true;
-            } else {
-                std::cout << i << " != " << j << std::endl;
-            }
-        }
-    }
     return false;
 }
