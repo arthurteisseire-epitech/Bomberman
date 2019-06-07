@@ -17,8 +17,11 @@ namespace ind {
         explicit AIBehaviour(Player &player, Board &board);
         void update(float deltaTime) override;
 
-        std::vector<Position> getAllFutureExplosionsPositions() const;
     private:
+        std::vector<Position> getAllFutureExplosionsPositions() const;
+        std::vector<Position> getPositionsAround() const;
+        void addPosIfInMap(std::vector<ind::Position> &positions, int x, int y) const;
+
         Player &player;
         Board &board;
     };

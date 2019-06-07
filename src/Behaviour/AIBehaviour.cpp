@@ -42,3 +42,25 @@ std::vector<ind::Position> ind::AIBehaviour::getAllFutureExplosionsPositions() c
     }
     return positions;
 }
+
+std::vector<ind::Position> ind::AIBehaviour::getPositionsAround() const
+{
+    const auto &pos = player.getPosition();
+    std::vector<Position> positions;
+
+    addPosIfInMap(positions, pos.x + 1, pos.y);
+    addPosIfInMap(positions, pos.x - 1, pos.y);
+    addPosIfInMap(positions, pos.x, pos.y + 1);
+    addPosIfInMap(positions, pos.x, pos.y - 1);
+    addPosIfInMap(positions, pos.x + 1, pos.y + 1);
+    addPosIfInMap(positions, pos.x - 1, pos.y - 1);
+    addPosIfInMap(positions, pos.x + 1, pos.y - 1);
+    addPosIfInMap(positions, pos.x - 1, pos.y + 1);
+    return positions;
+}
+
+void ind::AIBehaviour::addPosIfInMap(std::vector<ind::Position> &positions, int x, int y) const
+{
+    if (board.in(Position(x, y)))
+        positions.emplace_back(x, y);
+}
