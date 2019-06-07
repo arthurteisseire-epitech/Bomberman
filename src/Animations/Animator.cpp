@@ -81,7 +81,7 @@ ind::animations::Animator &ind::animations::Animator::setAnimationsPosition(cons
     return *this;
 }
 
-const irr::core::vector3df &ind::animations::Animator::getCurrentAnimationPosition()
+const irr::core::vector3df &ind::animations::Animator::getPosition()
 {
     if (this->_currentAnimation != nullptr)
         return this->_currentAnimation->get()->getSceneNode()->getPosition();

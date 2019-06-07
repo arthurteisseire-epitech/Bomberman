@@ -21,7 +21,7 @@ namespace ind {
     public:
         explicit AbstractEntity();
         virtual ~AbstractEntity() = default;
-        void move(ORIENTATION direction, float deltaTime, float movementSpeed);
+        void updateForce(ORIENTATION direction, float deltaTime, float movementSpeed);
         virtual void update(float deltaTime);
         void addChild(AbstractEntity *entity);
         void removeChild(AbstractEntity *entity);

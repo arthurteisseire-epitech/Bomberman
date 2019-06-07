@@ -47,11 +47,9 @@ void ind::Player::draw()
     if (force == irr::core::vector2df(0, 0))
         return;
 
-    const irr::core::vector3df actualPosition = _animator->getCurrentAnimationPosition();
-    const irr::core::vector3df futurePosition = correctMovement(actualPosition);
+    const irr::core::vector3df futurePosition = nextPos();
     Position futurePosition2d = to2d(futurePosition);
 
-    // object->setPosition(futurePosition);
     _animator->setAnimationsPosition(futurePosition);
 
     boardPosition = futurePosition2d;
@@ -75,14 +73,12 @@ float ind::Player::getSpeed() const
     return movementSpeed;
 }
 
-irr::core::vector3df ind::Player::correctMovement(const irr::core::vector3df &actualPosition)
+irr::core::vector3df ind::Player::nextPos()
 {
-    const irr::core::vector3df horizontalNextPos = irr::core::vector3df(actualPosition.X, actualPosition.Y,
-                                                                        actualPosition.Z - force.X);
-    const irr::core::vector3df verticalNextPos = irr::core::vector3df(actualPosition.X - force.Y, actualPosition.Y,
-                                                                      actualPosition.Z);
-    const irr::core::vector3df nextPos = irr::core::vector3df(actualPosition.X - force.Y, actualPosition.Y,
-                                                              actualPosition.Z - force.X);
+    const auto &pos = _animator->getPosition();
+    const irr::core::vector3df horizontalNextPos = irr::core::vector3df(pos.X, pos.Y, pos.Z - force.X);
+    const irr::core::vector3df verticalNextPos = irr::core::vector3df(pos.X - force.Y, pos.Y, pos.Z);
+    const irr::core::vector3df nextPos = irr::core::vector3df(pos.X - force.Y, pos.Y, pos.Z - force.X);
     const bool horizontalWalkable = isWalkable(horizontalNextPos, {0, 0, force.X > 0 ? 1.0f : -1.0f});
     const bool verticalWalkable = isWalkable(verticalNextPos, {force.Y > 0 ? 1.0f : -1.0f, 0, 0});
 
@@ -92,7 +88,7 @@ irr::core::vector3df ind::Player::correctMovement(const irr::core::vector3df &ac
         return horizontalNextPos;
     if (verticalWalkable)
         return verticalNextPos;
-    return actualPosition;
+    return pos;
 }
 
 const bool ind::Player::isWalkable(const irr::core::vector3df &pos, const irr::core::vector3df &direction)

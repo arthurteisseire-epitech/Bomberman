@@ -53,7 +53,7 @@ void ind::PlayerBehaviour::move(float deltaTime) const
                 player.getAnimator().setAnimationsRotation(
                     DirectionMap::directionAngles.at(DirectionMap::keyDirections.at(action)));
             }
-            player.move(DirectionMap::keyDirections.at(action), deltaTime, player.getSpeed());
+            player.updateForce(DirectionMap::keyDirections.at(action), deltaTime, player.getSpeed());
             player.draw();
             return;
         }

@@ -21,11 +21,14 @@ namespace ind {
         std::vector<Position> getAllFutureExplosionsPositions() const;
         std::vector<Position> getPositionsAround() const;
         void addPosIfInMap(std::vector<ind::Position> &positions, int x, int y) const;
-        void move(float deltaTime, ind::Actions direction) const;
+        void move(float deltaTime, ind::Actions direction);
         Actions posToDir(const Position &pos) const;
         bool contain(const std::vector<Position> &pos1, const std::vector<Position> &pos2) const;
+        void moveAI(float deltaTime, std::vector<ind::Position> &posToTarget);
+
         Player &player;
         Board &board;
+        Actions prevDir;
     };
 }
 

@@ -52,6 +52,7 @@ namespace ind {
         void applySettings(const PlayerSettings &settings);
         void checkDeath();
         const Position &getPosition() const;
+        irr::core::vector3df nextPos();
 
         private:
         short bombPower;
@@ -65,7 +66,6 @@ namespace ind {
         ORIENTATION _direction = ORIENTATION::NONE;
         animations::Animator *_animator;
 
-        irr::core::vector3df correctMovement(const irr::core::vector3df &actualPosition);
         const bool isWalkable(const irr::core::vector3df &pos, const irr::core::vector3df &direction);
         bool checkWalkableTile(const Tile &Tile) const;
     };
