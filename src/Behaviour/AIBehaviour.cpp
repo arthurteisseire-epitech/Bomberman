@@ -5,6 +5,7 @@
 ** AiBehaviour.cpp
 */
 
+#include "to2d.hpp"
 #include "DirectionMap.hpp"
 #include "PathfindingService.hpp"
 #include "Singleton.hpp"
@@ -44,7 +45,7 @@ void ind::AIBehaviour::move(float deltaTime, Actions direction)
     Actions &dir = direction;
 
     player.updateForce(ind::DirectionMap::keyDirections.at(dir), deltaTime, player.getSpeed());
-    if (player.nextPos() == player.getAnimator().getPosition())
+    if (to2d(player.nextPos()) == to2d(player.getAnimator().getPosition()))
         dir = prevDir;
     if (player.getAction() != Actions::Walking) {
         player.getAnimator().setCurrentAnimation("walk").playAnimation();
