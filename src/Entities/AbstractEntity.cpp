@@ -48,12 +48,12 @@ void ind::AbstractEntity::removeChild(ind::AbstractEntity *entity)
 void ind::AbstractEntity::updateForce(ORIENTATION direction, float deltaTime, float movementSpeed)
 {
     if (direction == NORTH) {
-        force.Y -= deltaTime * movementSpeed;
+        force.Y = -deltaTime * movementSpeed;
     } else if (direction == SOUTH) {
-        force.Y += deltaTime * movementSpeed;
+        force.Y = deltaTime * movementSpeed;
     } else if (direction == WEST) {
-        force.X -= deltaTime * movementSpeed;
+        force.X = -deltaTime * movementSpeed;
     } else if (direction == EAST) {
-        force.X += deltaTime * movementSpeed;
+        force.X = deltaTime * movementSpeed;
     }
 }
