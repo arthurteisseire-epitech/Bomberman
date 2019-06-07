@@ -24,7 +24,7 @@ void ind::AIBehaviour::update(float deltaTime)
     const Position &targetPos = board.getPlayers()[0]->getPosition();
     auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(), targetPos);
 
-    if (!posToTarget.empty() && !contain(board.getAllExplosionsPositions(), getPositionsAround())) {
+    if (!posToTarget.empty() && !contain(board.getAllExplosionsPositions(), getPositionsAroundWalkable())) {
         moveToPlayerOne(deltaTime, posToTarget);
     } else {
         if (player.getAction() == Actions::Walking) {
@@ -36,8 +36,18 @@ void ind::AIBehaviour::update(float deltaTime)
 
 void ind::AIBehaviour::moveToPlayerOne(float deltaTime, std::vector<ind::Position> &posToTarget)
 {
-    if (posToTarget.size() > 1)
+    if (isOnFutureExplosion(player.getPosition()))
+        dodgeExplosions(deltaTime);
+    else if (posToTarget.size() > 2)
         move(deltaTime, posToDir(posToTarget.at(1)));
+}
+
+void ind::AIBehaviour::dodgeExplosions(float deltaTime)
+{
+    std::vector<Position> pos = getPositionsAroundWithoutExplosion();
+
+    if (!pos.empty())
+        move(deltaTime, posToDir(pos.at(0)));
 }
 
 void ind::AIBehaviour::move(float deltaTime, Actions direction)
@@ -70,25 +80,30 @@ std::vector<ind::Position> ind::AIBehaviour::getAllFutureExplosionsPositions() c
     return positions;
 }
 
-std::vector<ind::Position> ind::AIBehaviour::getPositionsAround() const
+std::vector<ind::Position> ind::AIBehaviour::getPositionsAroundWalkable() const
 {
     const auto &pos = player.getPosition();
     std::vector<Position> positions;
 
-    addPosIfInMap(positions, pos.x + 1, pos.y);
-    addPosIfInMap(positions, pos.x - 1, pos.y);
-    addPosIfInMap(positions, pos.x, pos.y + 1);
-    addPosIfInMap(positions, pos.x, pos.y - 1);
-    addPosIfInMap(positions, pos.x + 1, pos.y + 1);
-    addPosIfInMap(positions, pos.x - 1, pos.y - 1);
-    addPosIfInMap(positions, pos.x + 1, pos.y - 1);
-    addPosIfInMap(positions, pos.x - 1, pos.y + 1);
+    addPosIfWalkable(positions, pos.x + 1, pos.y);
+    addPosIfWalkable(positions, pos.x - 1, pos.y);
+    addPosIfWalkable(positions, pos.x, pos.y + 1);
+    addPosIfWalkable(positions, pos.x, pos.y - 1);
+    addPosIfWalkable(positions, pos.x + 1, pos.y + 1);
+    addPosIfWalkable(positions, pos.x - 1, pos.y - 1);
+    addPosIfWalkable(positions, pos.x + 1, pos.y - 1);
+    addPosIfWalkable(positions, pos.x - 1, pos.y + 1);
     return positions;
 }
 
-void ind::AIBehaviour::addPosIfInMap(std::vector<ind::Position> &positions, int x, int y) const
+void ind::AIBehaviour::addPosIfWalkable(std::vector<ind::Position> &positions, int x, int y) const
 {
-    if (board.in(Position(x, y)))
+    if (!board.in(Position(x, y)))
+        return;
+
+    const auto &type = board.getInfoAtCoord(x, y);
+
+    if (type != BLOCKBREAKABLE && type != WALL && type != BOMB)
         positions.emplace_back(x, y);
 }
 
@@ -114,4 +129,24 @@ bool ind::AIBehaviour::contain(const std::vector<ind::Position> &pos1, const std
             if (i == j)
                 return true;
     return false;
+}
+
+std::vector<ind::Position> ind::AIBehaviour::getPositionsAroundWithoutExplosion() const
+{
+    std::vector<Position> positions;
+    auto positionsAround = getPositionsAroundWalkable();
+    auto futureExplosions = getAllFutureExplosionsPositions();
+
+    for (auto &pos : positionsAround)
+        if (std::find(futureExplosions.begin(), futureExplosions.end(), pos) == futureExplosions.end())
+            positions.push_back(pos);
+    return positions;
+}
+
+bool ind::AIBehaviour::isOnFutureExplosion(const ind::Position &pos) const
+{
+    auto futureExplosions = getAllFutureExplosionsPositions();
+    auto it = std::find(futureExplosions.begin(), futureExplosions.end(), pos);
+
+    return it != futureExplosions.end();
 }

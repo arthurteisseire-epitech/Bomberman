@@ -19,12 +19,15 @@ namespace ind {
 
     private:
         std::vector<Position> getAllFutureExplosionsPositions() const;
-        std::vector<Position> getPositionsAround() const;
-        void addPosIfInMap(std::vector<ind::Position> &positions, int x, int y) const;
+        std::vector<Position> getPositionsAroundWalkable() const;
+        void addPosIfWalkable(std::vector<ind::Position> &positions, int x, int y) const;
         void move(float deltaTime, ind::Actions direction);
         Actions posToDir(const Position &pos) const;
         bool contain(const std::vector<Position> &pos1, const std::vector<Position> &pos2) const;
         void moveToPlayerOne(float deltaTime, std::vector<ind::Position> &posToTarget);
+        void dodgeExplosions(float deltaTime);
+        std::vector<Position> getPositionsAroundWithoutExplosion() const;
+        bool isOnFutureExplosion(const Position &pos) const;
 
         Player &player;
         Board &board;
