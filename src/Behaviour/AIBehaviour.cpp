@@ -37,10 +37,7 @@ void ind::AIBehaviour::update(float dt)
     if (!AIUtils::contain(board.getAllExplosionsPositions(), AIUtils::getPositionsAroundWalkable(board, player.getPosition()))) {
         action();
     } else {
-        if (player.getAction() == Actions::Walking) {
-            player.getAnimator().setCurrentAnimation("idle").playAnimation();
-            player.setAction(Actions::Down);
-        }
+        stopWalking();
     }
 }
 
@@ -61,6 +58,11 @@ void ind::AIBehaviour::execFromMap(const std::map<State, std::function<void()>> 
 
 void ind::AIBehaviour::alterDodge()
 {
+    auto positionsWithoutExplosions = AIUtils::getPositionsAroundWithoutExplosion(board, player.getPosition());
+    auto positionsWalkable = AIUtils::getPositionsAroundWalkable(board, player.getPosition());
+
+    if (positionsWalkable.size() == positionsWithoutExplosions.size())
+        state = MOVE_TO_PLAYER;
 }
 
 void ind::AIBehaviour::alterMoveToPlayer()
@@ -71,12 +73,14 @@ void ind::AIBehaviour::alterMoveToPlayer()
 
 void ind::AIBehaviour::actionDodge()
 {
-    std::vector<Position> pos = AIUtils::getPositionsAroundWithoutExplosion(board, player.getPosition());
+    auto positions = AIUtils::getPositionsAroundWithoutExplosion(board, player.getPosition());
 
-    if (!pos.empty()) {
-        auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(), pos.at(0));
-        if (!AIUtils::isOnFutureExplosion(board, player.getPosition()))
+    if (!positions.empty()) {
+        auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(), positions.at(0));
+        if (!AIUtils::isOnFutureExplosion(board, player.getPosition())) {
+            stopWalking();
             return;
+        }
         if (posToTarget.size() > 1)
             move(AIUtils::posToDir(player.getPosition(), posToTarget.at(1)));
     } else {
@@ -108,4 +112,12 @@ void ind::AIBehaviour::move(Orientation dir)
     player.draw();
     std::cout << "player move to " << dir << std::endl;
     prevDir = dir;
+}
+
+void ind::AIBehaviour::stopWalking()
+{
+    if (player.getAction() == ind::Walking) {
+        player.getAnimator().setCurrentAnimation("idle").playAnimation();
+        player.setAction(ind::Down);
+    }
 }

@@ -33,6 +33,7 @@ namespace ind {
         void alterMoveToPlayer();
 
         void move(Orientation dir);
+        void stopWalking();
 
         Player &player;
         Board &board;
