@@ -24,8 +24,8 @@ ind::AIBehaviour::AIBehaviour(ind::Player &player, Board &board) :
     };
 
     actionStateMap = {
-        {DODGE,          [this]() { dodgeExplosions(); }},
-        {MOVE_TO_PLAYER, [this]() { moveToPlayer(); }},
+        {DODGE,          [this]() { actionDodge(); }},
+        {MOVE_TO_PLAYER, [this]() { actionMoveToPlayer(); }},
     };
 }
 
@@ -69,21 +69,21 @@ void ind::AIBehaviour::alterMoveToPlayer()
         state = DODGE;
 }
 
-void ind::AIBehaviour::moveToPlayer()
+void ind::AIBehaviour::actionDodge()
+{
+    std::vector<Position> pos = AIUtils::getPositionsAroundWithoutExplosion(board, player.getPosition());
+
+    if (!pos.empty())
+        move(AIUtils::posToDir(player.getPosition(), pos.at(0)));
+}
+
+void ind::AIBehaviour::actionMoveToPlayer()
 {
     const Position &targetPos = board.getPlayers()[0]->getPosition();
     auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(), targetPos);
 
     if (posToTarget.size() > 2)
         move(AIUtils::posToDir(player.getPosition(), posToTarget.at(1)));
-}
-
-void ind::AIBehaviour::dodgeExplosions()
-{
-    std::vector<Position> pos = AIUtils::getPositionsAroundWithoutExplosion(board, player.getPosition());
-
-    if (!pos.empty())
-        move(AIUtils::posToDir(player.getPosition(), pos.at(0)));
 }
 
 void ind::AIBehaviour::move(ind::Actions direction)

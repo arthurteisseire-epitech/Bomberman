@@ -26,8 +26,8 @@ namespace ind {
         void action();
         void execFromMap(const std::map<State, std::function<void()>> &map);
 
-        void dodgeExplosions();
-        void moveToPlayer();
+        void actionDodge();
+        void actionMoveToPlayer();
 
         void alterDodge();
         void alterMoveToPlayer();
