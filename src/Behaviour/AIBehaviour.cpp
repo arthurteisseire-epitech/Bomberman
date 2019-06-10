@@ -14,7 +14,6 @@
 ind::AIBehaviour::AIBehaviour(ind::Player &player, Board &board) :
     player(player),
     board(board),
-    utils(player, board),
     state(MOVE_TO_PLAYER),
     prevDir(Up),
     deltaTime(0)
@@ -35,7 +34,7 @@ void ind::AIBehaviour::update(float dt)
     deltaTime = dt;
     player.checkDeath();
 
-    if (!utils.contain(board.getAllExplosionsPositions(), utils.getPositionsAroundWalkable())) {
+    if (!AIUtils::contain(board.getAllExplosionsPositions(), AIUtils::getPositionsAroundWalkable(board, player.getPosition()))) {
         action();
     } else {
         if (player.getAction() == Actions::Walking) {
@@ -66,7 +65,7 @@ void ind::AIBehaviour::alterDodge()
 
 void ind::AIBehaviour::alterMoveToPlayer()
 {
-    if (utils.isOnFutureExplosion(player.getPosition()))
+    if (AIUtils::isOnFutureExplosion(board, player.getPosition()))
         state = DODGE;
 }
 
@@ -76,15 +75,15 @@ void ind::AIBehaviour::moveToPlayer()
     auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(), targetPos);
 
     if (posToTarget.size() > 2)
-        move(utils.posToDir(posToTarget.at(1)));
+        move(AIUtils::posToDir(player.getPosition(), posToTarget.at(1)));
 }
 
 void ind::AIBehaviour::dodgeExplosions()
 {
-    std::vector<Position> pos = utils.getPositionsAroundWithoutExplosion();
+    std::vector<Position> pos = AIUtils::getPositionsAroundWithoutExplosion(board, player.getPosition());
 
     if (!pos.empty())
-        move(utils.posToDir(pos.at(0)));
+        move(AIUtils::posToDir(player.getPosition(), pos.at(0)));
 }
 
 void ind::AIBehaviour::move(ind::Actions direction)

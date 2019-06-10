@@ -9,14 +9,7 @@
 #include "DirectionMap.hpp"
 #include "AIUtils.hpp"
 
-ind::AIUtils::AIUtils(ind::Player &player, ind::Board &board) :
-    player(player),
-    board(board)
-{
-}
-
-
-std::vector<ind::Position> ind::AIUtils::getAllFutureExplosionsPositions() const
+std::vector<ind::Position> ind::AIUtils::getAllFutureExplosionsPositions(const Board &board, const Position &pos)
 {
     auto bombs = board.getAllBombs();
     std::vector<Position> positions;
@@ -28,23 +21,22 @@ std::vector<ind::Position> ind::AIUtils::getAllFutureExplosionsPositions() const
     return positions;
 }
 
-std::vector<ind::Position> ind::AIUtils::getPositionsAroundWalkable() const
+std::vector<ind::Position> ind::AIUtils::getPositionsAroundWalkable(const Board &board, const Position &pos)
 {
-    const auto &pos = player.getPosition();
     std::vector<Position> positions;
 
-    addPosIfWalkable(positions, pos.x + 1, pos.y);
-    addPosIfWalkable(positions, pos.x - 1, pos.y);
-    addPosIfWalkable(positions, pos.x, pos.y + 1);
-    addPosIfWalkable(positions, pos.x, pos.y - 1);
-    addPosIfWalkable(positions, pos.x + 1, pos.y + 1);
-    addPosIfWalkable(positions, pos.x - 1, pos.y - 1);
-    addPosIfWalkable(positions, pos.x + 1, pos.y - 1);
-    addPosIfWalkable(positions, pos.x - 1, pos.y + 1);
+    addPosIfWalkable(board, positions, pos.x + 1, pos.y);
+    addPosIfWalkable(board, positions, pos.x - 1, pos.y);
+    addPosIfWalkable(board, positions, pos.x, pos.y + 1);
+    addPosIfWalkable(board, positions, pos.x, pos.y - 1);
+    addPosIfWalkable(board, positions, pos.x + 1, pos.y + 1);
+    addPosIfWalkable(board, positions, pos.x - 1, pos.y - 1);
+    addPosIfWalkable(board, positions, pos.x + 1, pos.y - 1);
+    addPosIfWalkable(board, positions, pos.x - 1, pos.y + 1);
     return positions;
 }
 
-void ind::AIUtils::addPosIfWalkable(std::vector<ind::Position> &positions, int x, int y) const
+void ind::AIUtils::addPosIfWalkable(const Board &board, std::vector<ind::Position> &positions, int x, int y)
 {
     if (!board.in(Position(x, y)))
         return;
@@ -55,10 +47,8 @@ void ind::AIUtils::addPosIfWalkable(std::vector<ind::Position> &positions, int x
         positions.emplace_back(x, y);
 }
 
-ind::Actions ind::AIUtils::posToDir(const ind::Position &pos) const
+ind::Actions ind::AIUtils::posToDir(const Position &playerPos, const ind::Position &pos)
 {
-    const auto &playerPos = player.getPosition();
-
     if (pos.y > playerPos.y)
         return Left;
     else if (pos.y < playerPos.y)
@@ -70,7 +60,7 @@ ind::Actions ind::AIUtils::posToDir(const ind::Position &pos) const
     return Up;
 }
 
-bool ind::AIUtils::contain(const std::vector<ind::Position> &pos1, const std::vector<ind::Position> &pos2) const
+bool ind::AIUtils::contain(const std::vector<ind::Position> &pos1, const std::vector<ind::Position> &pos2)
 {
     for (auto &i : pos1)
         for (auto &j : pos2)
@@ -79,21 +69,21 @@ bool ind::AIUtils::contain(const std::vector<ind::Position> &pos1, const std::ve
     return false;
 }
 
-std::vector<ind::Position> ind::AIUtils::getPositionsAroundWithoutExplosion() const
+std::vector<ind::Position> ind::AIUtils::getPositionsAroundWithoutExplosion(const Board &board, const Position &pos)
 {
     std::vector<Position> positions;
-    auto positionsAround = getPositionsAroundWalkable();
-    auto futureExplosions = getAllFutureExplosionsPositions();
+    auto positionsAround = getPositionsAroundWalkable(board, pos);
+    auto futureExplosions = getAllFutureExplosionsPositions(board, pos);
 
-    for (auto &pos : positionsAround)
-        if (std::find(futureExplosions.begin(), futureExplosions.end(), pos) == futureExplosions.end())
-            positions.push_back(pos);
+    for (auto &p : positionsAround)
+        if (std::find(futureExplosions.begin(), futureExplosions.end(), p) == futureExplosions.end())
+            positions.push_back(p);
     return positions;
 }
 
-bool ind::AIUtils::isOnFutureExplosion(const ind::Position &pos) const
+bool ind::AIUtils::isOnFutureExplosion(const Board &board, const ind::Position &pos)
 {
-    auto futureExplosions = getAllFutureExplosionsPositions();
+    auto futureExplosions = getAllFutureExplosionsPositions(board, pos);
     auto it = std::find(futureExplosions.begin(), futureExplosions.end(), pos);
 
     return it != futureExplosions.end();

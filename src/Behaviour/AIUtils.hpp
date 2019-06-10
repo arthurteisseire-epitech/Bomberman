@@ -13,19 +13,13 @@
 namespace ind {
     class AIUtils {
     public:
-        AIUtils(Player &player, Board &board);
-
-        bool contain(const std::vector<Position> &pos1, const std::vector<Position> &pos2) const;
-        void addPosIfWalkable(std::vector<ind::Position> &positions, int x, int y) const;
-        Actions posToDir(const Position &pos) const;
-        std::vector<Position> getPositionsAroundWithoutExplosion() const;
-        bool isOnFutureExplosion(const Position &pos) const;
-        std::vector<Position> getAllFutureExplosionsPositions() const;
-        std::vector<Position> getPositionsAroundWalkable() const;
-
-    private:
-        Player &player;
-        Board &board;
+        static bool contain(const std::vector<Position> &pos1, const std::vector<Position> &pos2);
+        static ind::Actions posToDir(const Position &playerPos, const ind::Position &pos);
+        static void addPosIfWalkable(const Board &board, std::vector<ind::Position> &positions, int x, int y);
+        static std::vector<ind::Position> getPositionsAroundWithoutExplosion(const Board &board, const Position &pos);
+        static bool isOnFutureExplosion(const Board &board, const ind::Position &pos);
+        static std::vector<ind::Position> getAllFutureExplosionsPositions(const Board &board, const Position &pos);
+        static std::vector<ind::Position> getPositionsAroundWalkable(const Board &board, const Position &pos);
     };
 }
 

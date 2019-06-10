@@ -36,7 +36,6 @@ namespace ind {
 
         Player &player;
         Board &board;
-        AIUtils utils;
         State state;
         Actions prevDir;
         float deltaTime;
