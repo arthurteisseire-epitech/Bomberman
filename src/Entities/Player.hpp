@@ -47,8 +47,8 @@ namespace ind {
         bool isAlive() const;
         const Actions getAction();
         void setAction(Actions action);
-        const ORIENTATION getDirection();
-        void setDirection(ORIENTATION direction);
+        const Orientation getDirection();
+        void setDirection(Orientation direction);
         void applySettings(const PlayerSettings &settings);
         void checkDeath();
         const Position &getPosition() const;
@@ -63,7 +63,7 @@ namespace ind {
         Board &map;
         bool alive;
         Actions _action = Actions::Idle;
-        ORIENTATION _direction = ORIENTATION::NONE;
+        Orientation _direction = Orientation::NONE;
         animations::Animator *_animator;
 
         const bool isWalkable(const irr::core::vector3df &pos, const irr::core::vector3df &direction);

@@ -150,12 +150,12 @@ void ind::Player::setAction(ind::Actions action)
     this->_action = action;
 }
 
-const ind::ORIENTATION ind::Player::getDirection()
+const ind::Orientation ind::Player::getDirection()
 {
     return this->_direction;
 }
 
-void ind::Player::setDirection(ind::ORIENTATION direction)
+void ind::Player::setDirection(ind::Orientation direction)
 {
     this->_direction = direction;
 }

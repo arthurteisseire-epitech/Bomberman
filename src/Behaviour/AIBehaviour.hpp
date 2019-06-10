@@ -32,12 +32,12 @@ namespace ind {
         void alterDodge();
         void alterMoveToPlayer();
 
-        void move(ind::Actions direction);
+        void move(Orientation dir);
 
         Player &player;
         Board &board;
         State state;
-        Actions prevDir;
+        Orientation prevDir;
         float deltaTime;
         std::map<State, std::function<void()>> alterStateMap;
         std::map<State, std::function<void()>> actionStateMap;

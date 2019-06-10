@@ -15,7 +15,7 @@ ind::AIBehaviour::AIBehaviour(ind::Player &player, Board &board) :
     player(player),
     board(board),
     state(MOVE_TO_PLAYER),
-    prevDir(Up),
+    prevDir(NORTH),
     deltaTime(0)
 {
     alterStateMap = {
@@ -86,20 +86,18 @@ void ind::AIBehaviour::actionMoveToPlayer()
         move(AIUtils::posToDir(player.getPosition(), posToTarget.at(1)));
 }
 
-void ind::AIBehaviour::move(ind::Actions direction)
+void ind::AIBehaviour::move(Orientation dir)
 {
-    Actions &dir = direction;
-
-    player.updateForce(ind::DirectionMap::keyDirections.at(dir), deltaTime, player.getSpeed());
+    player.updateForce(dir, deltaTime, player.getSpeed());
     if (to2d(player.nextPos()) == to2d(player.getAnimator().getPosition()))
         dir = prevDir;
     if (player.getAction() != Actions::Walking) {
         player.getAnimator().setCurrentAnimation("walk").playAnimation();
         player.setAction(Actions::Walking);
     }
-    player.setDirection(DirectionMap::keyDirections.at(dir));
-    player.getAnimator().setAnimationsRotation(DirectionMap::directionAngles.at(DirectionMap::keyDirections.at(dir)));
-    player.updateForce(DirectionMap::keyDirections.at(dir), deltaTime, player.getSpeed());
+    player.setDirection(dir);
+    player.getAnimator().setAnimationsRotation(DirectionMap::directionAngles.at(dir));
+    player.updateForce(dir, deltaTime, player.getSpeed());
     player.draw();
     prevDir = dir;
 }

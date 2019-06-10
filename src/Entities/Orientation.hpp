@@ -8,7 +8,7 @@
 #pragma once
 
 namespace ind {
-    enum ORIENTATION {
+    enum Orientation {
         NORTH,
         SOUTH,
         EAST,

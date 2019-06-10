@@ -14,8 +14,8 @@
 namespace ind {
     class DirectionMap {
     public:
-        static const std::map<ind::Actions, ind::ORIENTATION> keyDirections;
-        static const std::map<ind::ORIENTATION, irr::core::vector3df> directionAngles;
+        static const std::map<ind::Actions, ind::Orientation> keyDirections;
+        static const std::map<ind::Orientation, irr::core::vector3df> directionAngles;
     };
 }
 

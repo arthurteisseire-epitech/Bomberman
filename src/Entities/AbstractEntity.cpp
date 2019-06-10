@@ -45,7 +45,7 @@ void ind::AbstractEntity::removeChild(ind::AbstractEntity *entity)
     children.erase(std::find(children.begin(), children.end(), entity));
 }
 
-void ind::AbstractEntity::updateForce(ORIENTATION direction, float deltaTime, float movementSpeed)
+void ind::AbstractEntity::updateForce(Orientation direction, float deltaTime, float movementSpeed)
 {
     if (direction == NORTH) {
         force.Y = -deltaTime * movementSpeed;

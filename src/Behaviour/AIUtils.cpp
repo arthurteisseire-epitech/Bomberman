@@ -47,17 +47,18 @@ void ind::AIUtils::addPosIfWalkable(const Board &board, std::vector<ind::Positio
         positions.emplace_back(x, y);
 }
 
-ind::Actions ind::AIUtils::posToDir(const Position &playerPos, const ind::Position &pos)
+ind::Orientation ind::AIUtils::posToDir(const Position &playerPos, const ind::Position &pos)
 {
     if (pos.y > playerPos.y)
-        return Left;
+        return WEST;
     else if (pos.y < playerPos.y)
-        return Right;
+        return EAST;
     if (pos.x > playerPos.x)
-        return Up;
+        return NORTH;
     else if (pos.x < playerPos.x)
-        return Down;
-    return Up;
+        return SOUTH;
+    std::cout << "none" << std::endl;
+    return NORTH;
 }
 
 bool ind::AIUtils::contain(const std::vector<ind::Position> &pos1, const std::vector<ind::Position> &pos2)
