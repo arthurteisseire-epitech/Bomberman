@@ -12,20 +12,29 @@
 #include "AIBehaviour.hpp"
 
 ind::AIBehaviour::AIBehaviour(ind::Player &player, Board &board) :
+    state(MOVE_TO_PLAYER),
     player(player),
     board(board),
     prevDir(Up)
 {
+    alterStateMap = {
+        {DODGE,          [this]() { alterDodge(); }},
+        {MOVE_TO_PLAYER, [this]() { alterMoveToPlayer(); }},
+    };
+
+    actionStateMap = {
+        {DODGE,          [this]() { dodgeExplosions(); }},
+        {MOVE_TO_PLAYER, [this]() { moveToPlayer(); }},
+    };
 }
 
-void ind::AIBehaviour::update(float deltaTime)
+void ind::AIBehaviour::update(float dt)
 {
+    deltaTime = dt;
     player.checkDeath();
-    const Position &targetPos = board.getPlayers()[0]->getPosition();
-    auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(), targetPos);
 
-    if (!posToTarget.empty() && !contain(board.getAllExplosionsPositions(), getPositionsAroundWalkable())) {
-        moveToPlayerOne(deltaTime, posToTarget);
+    if (!contain(board.getAllExplosionsPositions(), getPositionsAroundWalkable())) {
+        action();
     } else {
         if (player.getAction() == Actions::Walking) {
             player.getAnimator().setCurrentAnimation("idle").playAnimation();
@@ -34,23 +43,49 @@ void ind::AIBehaviour::update(float deltaTime)
     }
 }
 
-void ind::AIBehaviour::moveToPlayerOne(float deltaTime, std::vector<ind::Position> &posToTarget)
+void ind::AIBehaviour::action()
 {
-    if (isOnFutureExplosion(player.getPosition()))
-        dodgeExplosions(deltaTime);
-    else if (posToTarget.size() > 2)
-        move(deltaTime, posToDir(posToTarget.at(1)));
+    execFromMap(alterStateMap);
+    execFromMap(actionStateMap);
 }
 
-void ind::AIBehaviour::dodgeExplosions(float deltaTime)
+void ind::AIBehaviour::execFromMap(const std::map<State, std::function<void()>> &map)
+{
+    for (auto &pair : map)
+        if (pair.first == state) {
+            pair.second();
+            break;
+        }
+}
+
+void ind::AIBehaviour::alterDodge()
+{
+}
+
+void ind::AIBehaviour::alterMoveToPlayer()
+{
+    if (isOnFutureExplosion(player.getPosition()))
+        state = DODGE;
+}
+
+void ind::AIBehaviour::moveToPlayer()
+{
+    const Position &targetPos = board.getPlayers()[0]->getPosition();
+    auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(), targetPos);
+
+    if (posToTarget.size() > 2)
+        move(posToDir(posToTarget.at(1)));
+}
+
+void ind::AIBehaviour::dodgeExplosions()
 {
     std::vector<Position> pos = getPositionsAroundWithoutExplosion();
 
     if (!pos.empty())
-        move(deltaTime, posToDir(pos.at(0)));
+        move(posToDir(pos.at(0)));
 }
 
-void ind::AIBehaviour::move(float deltaTime, Actions direction)
+void ind::AIBehaviour::move(ind::Actions direction)
 {
     Actions &dir = direction;
 
@@ -149,4 +184,5 @@ bool ind::AIBehaviour::isOnFutureExplosion(const ind::Position &pos) const
     auto it = std::find(futureExplosions.begin(), futureExplosions.end(), pos);
 
     return it != futureExplosions.end();
+
 }

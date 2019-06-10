@@ -18,20 +18,37 @@ namespace ind {
         void update(float deltaTime) override;
 
     private:
+        enum State {
+            DODGE,
+            MOVE_TO_PLAYER,
+            PLACE_BOMB,
+            NONE,
+        };
         std::vector<Position> getAllFutureExplosionsPositions() const;
         std::vector<Position> getPositionsAroundWalkable() const;
-        void addPosIfWalkable(std::vector<ind::Position> &positions, int x, int y) const;
-        void move(float deltaTime, ind::Actions direction);
-        Actions posToDir(const Position &pos) const;
+        void action();
+        void execFromMap(const std::map<State, std::function<void()>> &map);
+
+        void dodgeExplosions();
+        void moveToPlayer();
+
+        void alterDodge();
+        void alterMoveToPlayer();
+
+        void move(ind::Actions direction);
         bool contain(const std::vector<Position> &pos1, const std::vector<Position> &pos2) const;
-        void moveToPlayerOne(float deltaTime, std::vector<ind::Position> &posToTarget);
-        void dodgeExplosions(float deltaTime);
+        void addPosIfWalkable(std::vector<ind::Position> &positions, int x, int y) const;
+        Actions posToDir(const Position &pos) const;
         std::vector<Position> getPositionsAroundWithoutExplosion() const;
         bool isOnFutureExplosion(const Position &pos) const;
 
+        State state;
         Player &player;
         Board &board;
         Actions prevDir;
+        float deltaTime;
+        std::map<State, std::function<void()>> alterStateMap;
+        std::map<State, std::function<void()>> actionStateMap;
     };
 }
 
