@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <iostream>
+
 namespace ind {
     enum Orientation {
         NORTH,
@@ -15,4 +17,5 @@ namespace ind {
         WEST,
         NONE,
     };
+    std::ostream &operator<<(std::ostream &os, Orientation orientation);
 }

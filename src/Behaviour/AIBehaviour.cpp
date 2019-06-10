@@ -73,8 +73,15 @@ void ind::AIBehaviour::actionDodge()
 {
     std::vector<Position> pos = AIUtils::getPositionsAroundWithoutExplosion(board, player.getPosition());
 
-    if (!pos.empty())
-        move(AIUtils::posToDir(player.getPosition(), pos.at(0)));
+    if (!pos.empty()) {
+        auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(), pos.at(0));
+        if (!AIUtils::isOnFutureExplosion(board, player.getPosition()))
+            return;
+        if (posToTarget.size() > 1)
+            move(AIUtils::posToDir(player.getPosition(), posToTarget.at(1)));
+    } else {
+        std::cout << "no available pos around: i'm dead" << std::endl;
+    }
 }
 
 void ind::AIBehaviour::actionMoveToPlayer()
@@ -99,5 +106,6 @@ void ind::AIBehaviour::move(Orientation dir)
     player.getAnimator().setAnimationsRotation(DirectionMap::directionAngles.at(dir));
     player.updateForce(dir, deltaTime, player.getSpeed());
     player.draw();
+    std::cout << "player move to " << dir << std::endl;
     prevDir = dir;
 }
