@@ -15,7 +15,8 @@ ind::AIBehaviour::AIBehaviour(ind::Player &player, Board &board) :
     state(MOVE_TO_PLAYER),
     player(player),
     board(board),
-    prevDir(Up)
+    prevDir(Up),
+    deltaTime(0)
 {
     alterStateMap = {
         {DODGE,          [this]() { alterDodge(); }},
