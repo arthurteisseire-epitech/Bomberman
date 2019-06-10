@@ -8,6 +8,7 @@
 #ifndef BOMBERMAN_AIBEHAVIOUR_HPP
 #define BOMBERMAN_AIBEHAVIOUR_HPP
 
+#include "AIUtils.hpp"
 #include "IBehaviour.hpp"
 #include "Player.hpp"
 
@@ -21,11 +22,7 @@ namespace ind {
         enum State {
             DODGE,
             MOVE_TO_PLAYER,
-            PLACE_BOMB,
-            NONE,
         };
-        std::vector<Position> getAllFutureExplosionsPositions() const;
-        std::vector<Position> getPositionsAroundWalkable() const;
         void action();
         void execFromMap(const std::map<State, std::function<void()>> &map);
 
@@ -36,15 +33,11 @@ namespace ind {
         void alterMoveToPlayer();
 
         void move(ind::Actions direction);
-        bool contain(const std::vector<Position> &pos1, const std::vector<Position> &pos2) const;
-        void addPosIfWalkable(std::vector<ind::Position> &positions, int x, int y) const;
-        Actions posToDir(const Position &pos) const;
-        std::vector<Position> getPositionsAroundWithoutExplosion() const;
-        bool isOnFutureExplosion(const Position &pos) const;
 
-        State state;
         Player &player;
         Board &board;
+        AIUtils utils;
+        State state;
         Actions prevDir;
         float deltaTime;
         std::map<State, std::function<void()>> alterStateMap;
