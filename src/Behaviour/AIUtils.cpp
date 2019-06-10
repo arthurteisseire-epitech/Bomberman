@@ -57,7 +57,6 @@ ind::Orientation ind::AIUtils::posToDir(const Position &playerPos, const ind::Po
         return NORTH;
     else if (pos.x < playerPos.x)
         return SOUTH;
-    std::cout << "none" << std::endl;
     return NORTH;
 }
 
