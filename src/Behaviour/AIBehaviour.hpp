@@ -23,6 +23,7 @@ namespace ind {
             DODGE,
             MOVE_TO_PLAYER,
             FIND_BLOCKBREACKABLE,
+            PLACE_BOMB,
         };
         void action();
         void execFromMap(const std::map<State, std::function<void()>> &map);
@@ -30,10 +31,12 @@ namespace ind {
         void alterDodge();
         void alterMoveToPlayer();
         void alterFindBlockBreakable();
+        void alterPlaceBomb();
 
         void actionDodge();
         void actionMoveToPlayer();
-        void actionFindBlockBreackable();
+        void actionFindBlockBreakable();
+        void actionPlaceBomb();
 
         void move(Orientation dir);
         void stopWalking();
@@ -45,6 +48,7 @@ namespace ind {
         float deltaTime;
         std::map<State, std::function<void()>> alterStateMap;
         std::map<State, std::function<void()>> actionStateMap;
+        bool isTurnAround(Orientation orientation);
     };
 }
 

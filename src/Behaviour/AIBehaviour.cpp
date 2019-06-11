@@ -22,12 +22,14 @@ ind::AIBehaviour::AIBehaviour(ind::Player &player, Board &board) :
         {DODGE,                [this]() { alterDodge(); }},
         {MOVE_TO_PLAYER,       [this]() { alterMoveToPlayer(); }},
         {FIND_BLOCKBREACKABLE, [this]() { alterFindBlockBreakable(); }},
+        {PLACE_BOMB,           [this]() { alterPlaceBomb(); }},
     };
 
     actionStateMap = {
         {DODGE,                [this]() { actionDodge(); }},
         {MOVE_TO_PLAYER,       [this]() { actionMoveToPlayer(); }},
-        {FIND_BLOCKBREACKABLE, [this]() { actionFindBlockBreackable(); }},
+        {FIND_BLOCKBREACKABLE, [this]() { actionFindBlockBreakable(); }},
+        {PLACE_BOMB,           [this]() { actionPlaceBomb(); }},
     };
 }
 
@@ -36,7 +38,8 @@ void ind::AIBehaviour::update(float dt)
     deltaTime = dt;
     player.checkDeath();
 
-    if (!AIUtils::contain(board.getAllExplosionsPositions(), AIUtils::getPositionsAroundWalkable(board, player.getPosition()))) {
+    if (!AIUtils::contain(board.getAllExplosionsPositions(),
+                          AIUtils::getPositionsAroundWalkable(board, player.getPosition()))) {
         action();
     } else {
         stopWalking();
@@ -64,7 +67,7 @@ void ind::AIBehaviour::alterDodge()
     auto positionsWalkable = AIUtils::getPositionsAroundWalkable(board, player.getPosition());
 
     if (positionsWalkable.size() == positionsWithoutExplosions.size())
-        state = MOVE_TO_PLAYER;
+        state = FIND_BLOCKBREACKABLE;
 }
 
 void ind::AIBehaviour::alterMoveToPlayer()
@@ -76,7 +79,13 @@ void ind::AIBehaviour::alterMoveToPlayer()
 void ind::AIBehaviour::alterFindBlockBreakable()
 {
     if (AIUtils::isBlockBreakableAround(board, player.getPosition()))
-        state = MOVE_TO_PLAYER;
+        state = PLACE_BOMB;
+}
+
+void ind::AIBehaviour::alterPlaceBomb()
+{
+    if (AIUtils::isOnFutureExplosion(board, player.getPosition()))
+        state = DODGE;
 }
 
 void ind::AIBehaviour::actionDodge()
@@ -106,7 +115,7 @@ void ind::AIBehaviour::actionMoveToPlayer()
         move(AIUtils::posToDir(player.getPosition(), posToTarget.at(1)));
 }
 
-void ind::AIBehaviour::actionFindBlockBreackable()
+void ind::AIBehaviour::actionFindBlockBreakable()
 {
     auto positions = AIUtils::findBlockBreakable(board, player.getPosition());
 
@@ -114,10 +123,15 @@ void ind::AIBehaviour::actionFindBlockBreackable()
         move(AIUtils::posToDir(player.getPosition(), positions.at(0)));
 }
 
+void ind::AIBehaviour::actionPlaceBomb()
+{
+    player.placeBomb();
+}
+
 void ind::AIBehaviour::move(Orientation dir)
 {
     player.updateForce(dir, deltaTime, player.getSpeed());
-    if (to2d(player.nextPos()) == to2d(player.getAnimator().getPosition()))
+    if (to2d(player.nextPos()) == to2d(player.getAnimator().getPosition()) && !isTurnAround(dir))
         dir = prevDir;
     if (player.getAction() != Actions::Walking) {
         player.getAnimator().setCurrentAnimation("walk").playAnimation();
@@ -136,4 +150,17 @@ void ind::AIBehaviour::stopWalking()
         player.getAnimator().setCurrentAnimation("idle").playAnimation();
         player.setAction(ind::Down);
     }
+}
+
+bool ind::AIBehaviour::isTurnAround(ind::Orientation orientation)
+{
+    if (prevDir == NORTH && orientation == SOUTH)
+        return true;
+    else if (prevDir == SOUTH && orientation == NORTH)
+        return true;
+    else if (prevDir == WEST && orientation == EAST)
+        return true;
+    else if (prevDir == EAST && orientation == WEST)
+        return true;
+    return false;
 }

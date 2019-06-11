@@ -36,9 +36,24 @@ std::vector<ind::Position> ind::AIUtils::getPositionsAround(const ind::Board &bo
     auto positions = getPositionsAside(board, pos);
 
     addPosIfInMap(board, positions, pos.x + 1, pos.y + 1);
+    addPosIfInMap(board, positions, pos.x + 2, pos.y + 1);
+    addPosIfInMap(board, positions, pos.x + 1, pos.y + 2);
+    addPosIfInMap(board, positions, pos.x + 2, pos.y + 2);
+
     addPosIfInMap(board, positions, pos.x - 1, pos.y - 1);
+    addPosIfInMap(board, positions, pos.x - 2, pos.y - 1);
+    addPosIfInMap(board, positions, pos.x - 1, pos.y - 2);
+    addPosIfInMap(board, positions, pos.x - 2, pos.y - 2);
+
     addPosIfInMap(board, positions, pos.x + 1, pos.y - 1);
+    addPosIfInMap(board, positions, pos.x + 2, pos.y - 1);
+    addPosIfInMap(board, positions, pos.x + 1, pos.y - 2);
+    addPosIfInMap(board, positions, pos.x + 2, pos.y - 2);
+
     addPosIfInMap(board, positions, pos.x - 1, pos.y + 1);
+    addPosIfInMap(board, positions, pos.x - 2, pos.y + 1);
+    addPosIfInMap(board, positions, pos.x - 1, pos.y + 2);
+    addPosIfInMap(board, positions, pos.x - 2, pos.y + 2);
     return positions;
 }
 
