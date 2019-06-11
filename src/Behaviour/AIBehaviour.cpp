@@ -73,16 +73,25 @@ void ind::AIBehaviour::alterDodge()
 
 void ind::AIBehaviour::alterMoveToPlayer()
 {
+    auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(),
+                                                                               board.getPlayers().at(0)->getPosition());
     if (AIUtils::isOnFutureExplosion(board, player.getPosition()))
         state = DODGE;
+    else if (posToTarget.size() < 3)
+        state = PLACE_BOMB;
 }
 
 void ind::AIBehaviour::alterFindBlockBreakable()
 {
+    auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(),
+                                                                               board.getPlayers().at(0)->getPosition());
+
     if (AIUtils::isOnFutureExplosion(board, player.getPosition()))
         state = DODGE;
     else if (AIUtils::isBlockBreakableAround(board, player.getPosition()))
         state = PLACE_BOMB;
+    else if (!posToTarget.empty())
+        state = MOVE_TO_PLAYER;
 }
 
 void ind::AIBehaviour::alterPlaceBomb()
