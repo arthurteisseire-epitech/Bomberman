@@ -20,8 +20,7 @@ std::vector<ind::Position> ind::PathfindingService::searchPath(
 {
     State state(board);
 
-    if (state.closed[from.x][from.y].distance < 0
-        or state.closed[to.x][to.y].distance < 0)
+    if (state.closed[to.x][to.y].distance < 0)
         return std::vector<ind::Position>();
     state.closed[from.x][from.y].distance = 1;
     state.closed[from.x][from.y].heuristic = heuristicDistance(from, to);
@@ -49,9 +48,9 @@ void ind::PathfindingService::State::backtrack(const Position &begin, int x,
 {
     Position closest = Position(-1, -1);
 
+    path.insert(path.begin(), Position(x, y));
     if (begin == Position(x, y))
         return;
-    path.insert(path.begin(), Position(x, y));
     for (size_t i = 0 ; i < 4 ; ++i) {
         Position p = Position(x + DIRECTIONS[i].x, y + DIRECTIONS[i].y);
         if (p.x > mapSize.x - 1 or p.y > mapSize.y - 1 or
