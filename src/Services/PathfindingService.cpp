@@ -49,9 +49,9 @@ void ind::PathfindingService::State::backtrack(const Position &begin, int x,
 {
     Position closest = Position(-1, -1);
 
-    path.insert(path.begin(), Position(x, y));
     if (begin == Position(x, y))
         return;
+    path.insert(path.begin(), Position(x, y));
     for (size_t i = 0 ; i < 4 ; ++i) {
         Position p = Position(x + DIRECTIONS[i].x, y + DIRECTIONS[i].y);
         if (p.x > mapSize.x - 1 or p.y > mapSize.y - 1 or
