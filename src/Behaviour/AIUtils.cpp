@@ -36,24 +36,27 @@ std::vector<ind::Position> ind::AIUtils::getPositionsAround(const ind::Board &bo
     auto positions = getPositionsAside(board, pos);
 
     addPosIfInMap(board, positions, pos.x + 1, pos.y + 1);
+    addPosIfInMap(board, positions, pos.x - 1, pos.y - 1);
+    addPosIfInMap(board, positions, pos.x + 1, pos.y - 1);
+    addPosIfInMap(board, positions, pos.x - 1, pos.y + 1);
+
     addPosIfInMap(board, positions, pos.x + 2, pos.y + 1);
     addPosIfInMap(board, positions, pos.x + 1, pos.y + 2);
-    addPosIfInMap(board, positions, pos.x + 2, pos.y + 2);
 
-    addPosIfInMap(board, positions, pos.x - 1, pos.y - 1);
     addPosIfInMap(board, positions, pos.x - 2, pos.y - 1);
     addPosIfInMap(board, positions, pos.x - 1, pos.y - 2);
-    addPosIfInMap(board, positions, pos.x - 2, pos.y - 2);
 
-    addPosIfInMap(board, positions, pos.x + 1, pos.y - 1);
     addPosIfInMap(board, positions, pos.x + 2, pos.y - 1);
     addPosIfInMap(board, positions, pos.x + 1, pos.y - 2);
-    addPosIfInMap(board, positions, pos.x + 2, pos.y - 2);
 
-    addPosIfInMap(board, positions, pos.x - 1, pos.y + 1);
     addPosIfInMap(board, positions, pos.x - 2, pos.y + 1);
     addPosIfInMap(board, positions, pos.x - 1, pos.y + 2);
+
+    addPosIfInMap(board, positions, pos.x + 2, pos.y + 2);
+    addPosIfInMap(board, positions, pos.x - 2, pos.y - 2);
+    addPosIfInMap(board, positions, pos.x + 2, pos.y - 2);
     addPosIfInMap(board, positions, pos.x - 2, pos.y + 2);
+
     return positions;
 }
 
@@ -98,13 +101,11 @@ bool ind::AIUtils::contain(const std::vector<ind::Position> &pos1, const std::ve
 
 std::vector<ind::Position> ind::AIUtils::getPositionsAroundWithoutExplosion(const Board &board, const Position &pos)
 {
-    std::vector<Position> positions;
-    auto positionsAround = getPositionsAroundWalkable(board, pos);
-    auto futureExplosions = getAllFutureExplosionsPositions(board, pos);
+    auto positions = getPositionsAroundWalkable(board, pos);
 
-    for (auto &p : positionsAround)
-        if (std::find(futureExplosions.begin(), futureExplosions.end(), p) == futureExplosions.end())
-            positions.push_back(p);
+    positions.erase(std::remove_if(positions.begin(), positions.end(), [&](const Position &position) {
+        return isOnFutureExplosion(board, position);
+    }), positions.end());
     return positions;
 }
 
