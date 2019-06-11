@@ -229,3 +229,12 @@ std::vector<ind::Position> ind::Board::getAllExplosionsPositions() const
 {
     return explosionManager.getAllExplosionsPositions();
 }
+
+bool ind::Board::isWalkable(const ind::Position &pos) const
+{
+    if (!in(pos))
+        return false;
+
+    const auto &type = getInfoAtCoord(pos.x, pos.y);
+    return type != BLOCKBREAKABLE && type != WALL && type != BOMB;
+}

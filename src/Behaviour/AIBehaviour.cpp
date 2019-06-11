@@ -14,18 +14,20 @@
 ind::AIBehaviour::AIBehaviour(ind::Player &player, Board &board) :
     player(player),
     board(board),
-    state(MOVE_TO_PLAYER),
+    state(FIND_BLOCKBREACKABLE),
     prevDir(NORTH),
     deltaTime(0)
 {
     alterStateMap = {
-        {DODGE,          [this]() { alterDodge(); }},
-        {MOVE_TO_PLAYER, [this]() { alterMoveToPlayer(); }},
+        {DODGE,                [this]() { alterDodge(); }},
+        {MOVE_TO_PLAYER,       [this]() { alterMoveToPlayer(); }},
+        {FIND_BLOCKBREACKABLE, [this]() { alterFindBlockBreakable(); }},
     };
 
     actionStateMap = {
-        {DODGE,          [this]() { actionDodge(); }},
-        {MOVE_TO_PLAYER, [this]() { actionMoveToPlayer(); }},
+        {DODGE,                [this]() { actionDodge(); }},
+        {MOVE_TO_PLAYER,       [this]() { actionMoveToPlayer(); }},
+        {FIND_BLOCKBREACKABLE, [this]() { actionFindBlockBreackable(); }},
     };
 }
 
@@ -71,12 +73,19 @@ void ind::AIBehaviour::alterMoveToPlayer()
         state = DODGE;
 }
 
+void ind::AIBehaviour::alterFindBlockBreakable()
+{
+    if (AIUtils::isBlockBreakableAround(board, player.getPosition()))
+        state = MOVE_TO_PLAYER;
+}
+
 void ind::AIBehaviour::actionDodge()
 {
     auto positions = AIUtils::getPositionsAroundWithoutExplosion(board, player.getPosition());
 
     if (!positions.empty()) {
-        auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(), positions.at(0));
+        auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(),
+                                                                                   positions.at(0));
         if (!AIUtils::isOnFutureExplosion(board, player.getPosition())) {
             stopWalking();
             return;
@@ -97,6 +106,14 @@ void ind::AIBehaviour::actionMoveToPlayer()
         move(AIUtils::posToDir(player.getPosition(), posToTarget.at(1)));
 }
 
+void ind::AIBehaviour::actionFindBlockBreackable()
+{
+    auto positions = AIUtils::findBlockBreakable(board, player.getPosition());
+
+    if (!positions.empty())
+        move(AIUtils::posToDir(player.getPosition(), positions.at(0)));
+}
+
 void ind::AIBehaviour::move(Orientation dir)
 {
     player.updateForce(dir, deltaTime, player.getSpeed());
@@ -110,7 +127,6 @@ void ind::AIBehaviour::move(Orientation dir)
     player.getAnimator().setAnimationsRotation(DirectionMap::directionAngles.at(dir));
     player.updateForce(dir, deltaTime, player.getSpeed());
     player.draw();
-    std::cout << "player move to " << dir << std::endl;
     prevDir = dir;
 }
 

@@ -22,15 +22,18 @@ namespace ind {
         enum State {
             DODGE,
             MOVE_TO_PLAYER,
+            FIND_BLOCKBREACKABLE,
         };
         void action();
         void execFromMap(const std::map<State, std::function<void()>> &map);
 
-        void actionDodge();
-        void actionMoveToPlayer();
-
         void alterDodge();
         void alterMoveToPlayer();
+        void alterFindBlockBreakable();
+
+        void actionDodge();
+        void actionMoveToPlayer();
+        void actionFindBlockBreackable();
 
         void move(Orientation dir);
         void stopWalking();

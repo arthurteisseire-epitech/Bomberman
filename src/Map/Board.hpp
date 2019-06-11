@@ -43,6 +43,7 @@ namespace ind {
         std::vector<std::unique_ptr<Player>> &getPlayers();
         std::vector<Bomb *> getAllBombs() const;
         bool in(const Position &pos) const;
+        bool isWalkable(const Position &pos) const;
         std::vector<Position> getAllExplosionsPositions() const;
 
     private:

@@ -14,12 +14,26 @@ namespace ind {
     class AIUtils {
     public:
         static bool contain(const std::vector<Position> &pos1, const std::vector<Position> &pos2);
-        static ind::Orientation posToDir(const Position &playerPos, const ind::Position &pos);
-        static void addPosIfWalkable(const Board &board, std::vector<ind::Position> &positions, int x, int y);
-        static std::vector<ind::Position> getPositionsAroundWithoutExplosion(const Board &board, const Position &pos);
-        static bool isOnFutureExplosion(const Board &board, const ind::Position &pos);
-        static std::vector<ind::Position> getAllFutureExplosionsPositions(const Board &board, const Position &pos);
-        static std::vector<ind::Position> getPositionsAroundWalkable(const Board &board, const Position &pos);
+        static Orientation posToDir(const Position &playerPos, const Position &pos);
+        static void addPosIfInMap(const Board &board, std::vector<Position> &positions, int x, int y);
+        static std::vector<Position> getPositionsAroundWithoutExplosion(const Board &board, const Position &pos);
+        static bool isOnFutureExplosion(const Board &board, const Position &pos);
+        static std::vector<Position> getAllFutureExplosionsPositions(const Board &board, const Position &pos);
+        static std::vector<Position> getPositionsAroundWalkable(const Board &board, const Position &pos);
+        static std::vector<Position> getPositionsAround(const Board &board, const Position &pos);
+        static std::vector<Position> getPositionsAside(const Board &board, const Position &pos);
+        static std::vector<Position> findBlockBreakable(const Board &board, const Position &playerPos);
+        static bool isBlockBreakableAround(const Board &board, const Position &playerPos);
+
+        template<typename Pos>
+        static void applyUntil(const Board &board, std::vector<Position> &positions, Pos getPosAt)
+        {
+            for (int i = 1; ; ++i) {
+                positions.push_back(getPosAt(i));
+                if (!board.isWalkable(getPosAt(i)))
+                    break;
+            }
+        }
     };
 }
 
