@@ -24,6 +24,7 @@ namespace ind {
         static std::vector<Position> getPositionsAside(const Board &board, const Position &pos);
         static std::vector<Position> findBlockBreakable(const Board &board, const Position &playerPos);
         static bool isBlockBreakableAround(const Board &board, const Position &playerPos);
+        static std::vector<Position> findNearestPlayerPositions(Board &board, const Position &pos);
 
         template<typename Pos>
         static void applyUntil(const Board &board, std::vector<Position> &positions, Pos getPosAt)

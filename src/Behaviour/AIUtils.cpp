@@ -5,6 +5,8 @@
 ** AiUtils.cpp
 */
 
+#include "PathfindingService.hpp"
+#include "Singleton.hpp"
 #include "to2d.hpp"
 #include "DirectionMap.hpp"
 #include "AIUtils.hpp"
@@ -136,4 +138,12 @@ std::vector<ind::Position> ind::AIUtils::findBlockBreakable(const ind::Board &bo
     applyUntil(board, positions, [&](int i) { return Position(playerPos.x - i, playerPos.y); });
     applyUntil(board, positions, [&](int i) { return Position(playerPos.x + i, playerPos.y); });
     return positions;
+}
+
+std::vector<ind::Position> ind::AIUtils::findNearestPlayerPositions(ind::Board &board, const ind::Position &pos)
+{
+    auto &pathFinding = SingleTon<PathfindingService>::getInstance();
+    auto &players = board.getPlayers();
+
+    return pathFinding.searchPath(board, pos, players.at(0)->getPosition());
 }

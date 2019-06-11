@@ -73,8 +73,7 @@ void ind::AIBehaviour::alterDodge()
 
 void ind::AIBehaviour::alterMoveToPlayer()
 {
-    auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(),
-                                                                               board.getPlayers().at(0)->getPosition());
+    auto posToTarget = AIUtils::findNearestPlayerPositions(board, player.getPosition());
     if (AIUtils::isOnFutureExplosion(board, player.getPosition()))
         state = DODGE;
     else if (posToTarget.size() < 3)
@@ -83,8 +82,7 @@ void ind::AIBehaviour::alterMoveToPlayer()
 
 void ind::AIBehaviour::alterFindBlockBreakable()
 {
-    auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(),
-                                                                               board.getPlayers().at(0)->getPosition());
+    auto posToTarget = AIUtils::findNearestPlayerPositions(board, player.getPosition());
 
     if (AIUtils::isOnFutureExplosion(board, player.getPosition()))
         state = DODGE;
@@ -121,8 +119,7 @@ void ind::AIBehaviour::actionDodge()
 
 void ind::AIBehaviour::actionMoveToPlayer()
 {
-    const Position &targetPos = board.getPlayers()[0]->getPosition();
-    auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(), targetPos);
+    auto posToTarget = AIUtils::findNearestPlayerPositions(board, player.getPosition());
 
     if (posToTarget.size() > 2)
         move(AIUtils::posToDir(player.getPosition(), posToTarget.at(1)));
