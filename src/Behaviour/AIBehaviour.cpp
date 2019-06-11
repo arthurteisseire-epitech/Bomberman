@@ -154,13 +154,8 @@ void ind::AIBehaviour::stopWalking()
 
 bool ind::AIBehaviour::isTurnAround(ind::Orientation orientation)
 {
-    if (prevDir == NORTH && orientation == SOUTH)
-        return true;
-    else if (prevDir == SOUTH && orientation == NORTH)
-        return true;
-    else if (prevDir == WEST && orientation == EAST)
-        return true;
-    else if (prevDir == EAST && orientation == WEST)
-        return true;
-    return false;
+    return (prevDir == NORTH && orientation == SOUTH) ||
+           (prevDir == SOUTH && orientation == NORTH) ||
+           (prevDir == WEST && orientation == EAST) ||
+           (prevDir == EAST && orientation == WEST);
 }
