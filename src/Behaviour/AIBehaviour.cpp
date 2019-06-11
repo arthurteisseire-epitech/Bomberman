@@ -79,7 +79,9 @@ void ind::AIBehaviour::alterMoveToPlayer()
 
 void ind::AIBehaviour::alterFindBlockBreakable()
 {
-    if (AIUtils::isBlockBreakableAround(board, player.getPosition()))
+    if (AIUtils::isOnFutureExplosion(board, player.getPosition()))
+        state = DODGE;
+    else if (AIUtils::isBlockBreakableAround(board, player.getPosition()))
         state = PLACE_BOMB;
 }
 
@@ -103,6 +105,7 @@ void ind::AIBehaviour::actionDodge()
         if (posToTarget.size() > 1)
             move(AIUtils::posToDir(player.getPosition(), posToTarget.at(1)));
     } else {
+        stopWalking();
         std::cout << "no available pos around: i'm dead" << std::endl;
     }
 }
