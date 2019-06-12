@@ -18,10 +18,10 @@ ind::Player *ind::PlayerFactory::create(ind::PlayerNumber playerNumber, const in
     auto animator = initAnimator(playerNumber);
     auto player = new Player(position, map, animator);
 
-    if (playerNumber == AI)
-        player->setBehaviour(new AIBehaviour(*player, map));
-    else
+    if (playerNumber == PLAYER_ONE || playerNumber == PLAYER_TWO)
         player->setBehaviour(new PlayerBehaviour(*player, playerNumber));
+    else
+        player->setBehaviour(new AIBehaviour(*player, map));
     return player;
 }
 
@@ -33,8 +33,14 @@ ind::animations::Animator *ind::PlayerFactory::initAnimator(const ind::PlayerNum
         animator = SingleTon<LoadingService>::getInstance().getAnimator("playerAAnimator");
     else if (playerNumber == PLAYER_TWO)
         animator = SingleTon<LoadingService>::getInstance().getAnimator("playerBAnimator");
-    else if (playerNumber == AI)
+    else if (playerNumber == AI1)
         animator = SingleTon<LoadingService>::getInstance().getAnimator("playerCAnimator");
+    else if (playerNumber == AI2)
+        animator = SingleTon<LoadingService>::getInstance().getAnimator("playerDAnimator");
+    else if (playerNumber == AI3)
+        animator = SingleTon<LoadingService>::getInstance().getAnimator("playerBAnimator");
+    else if (playerNumber == AI4)
+        animator = SingleTon<LoadingService>::getInstance().getAnimator("playerAAnimator");
 
     if (animator == nullptr)
         return nullptr;

@@ -46,7 +46,9 @@ ind::LoadingScene::LoadingScene() : _loadingService(SingleTon<LoadingService>::g
 
     this->_loadingService.enqueueAnimator("playerAAnimator", playerAAnimations)
                          .enqueueAnimator("playerBAnimator", playerBAnimations)
-                         .enqueueAnimator("playerCAnimator", playerBAnimations);
+                         .enqueueAnimator("playerCAnimator", playerBAnimations)
+                         .enqueueAnimator("playerDAnimator", playerBAnimations)
+                         .enqueueAnimator("playerEAnimator", playerBAnimations);
 
     this->_loadingService.startLoad();
 }

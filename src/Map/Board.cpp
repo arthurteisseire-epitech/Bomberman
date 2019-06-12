@@ -35,7 +35,7 @@ ind::Board::Board(Position size_) :
 
     std::unique_ptr<Player> player(PlayerFactory::create(PLAYER_ONE, Position(0, 0), *this));
     std::unique_ptr<Player> player2(PlayerFactory::create(PLAYER_TWO, Position(size.x - 1, size.y - 1), *this));
-    std::unique_ptr<Player> ai(PlayerFactory::create(AI, Position(0, size.y - 1), *this));
+    std::unique_ptr<Player> ai(PlayerFactory::create(AI1, Position(0, size.y - 1), *this));
 
     players.emplace_back(std::move(player));
     players.emplace_back(std::move(player2));
