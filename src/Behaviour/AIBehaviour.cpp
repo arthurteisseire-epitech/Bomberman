@@ -66,9 +66,12 @@ void ind::AIBehaviour::alterDodge()
     auto positionsWithoutExplosions = AIUtils::getPositionsAroundWithoutFutureExplosion(board, player.getPosition());
     auto positionsWalkable = AIUtils::getPositionsAroundWalkable(board, player.getPosition());
 
-    if (positionsWalkable.size() == positionsWithoutExplosions.size() &&
-        !AIUtils::isOnFutureExplosion(board, player.getPosition()))
-        state = FIND_BLOCKBREACKABLE;
+    if (!AIUtils::isOnFutureExplosion(board, player.getPosition())) {
+        if (positionsWalkable.size() == positionsWithoutExplosions.size())
+            state = FIND_BLOCKBREACKABLE;
+        else if (player.canPlaceBomb())
+            state = PLACE_BOMB;
+    }
 }
 
 void ind::AIBehaviour::alterMoveToPlayer()
