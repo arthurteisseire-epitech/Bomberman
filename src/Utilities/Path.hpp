@@ -5,15 +5,15 @@
 ** Created by Arthamios
 */
 
-#ifndef BOMBERMAN_FULLPATH_HPP
-#define BOMBERMAN_FULLPATH_HPP
+#ifndef BOMBERMAN_PATH_HPP
+#define BOMBERMAN_PATH_HPP
 
 #include <string>
 
 namespace ind {
-    class FullPath {
+    class Path {
     public:
-        static std::string concatenate(std::string &string);
+        static std::string assetPath(std::string &string);
         static void changePath(const std::string &string);
     private:
         static std::string progPath;

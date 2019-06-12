@@ -7,7 +7,6 @@
 
 #include <Animations/AnimatedMesh.hpp>
 #include "Game.hpp"
-#include "GraphicalBoard.hpp"
 #include "Singleton.hpp"
 #include "crossPlatform.hpp"
 #include "KeyService.hpp"
