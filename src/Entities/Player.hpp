@@ -55,12 +55,14 @@ namespace ind {
         irr::core::vector3df nextPos();
         void fireUp();
         void speedUp();
+        void enableWallPass();
 
         private:
         short bombPower;
         short maxBombsPlaced;
         float movementSpeed;
         short actualBombsPlaced = 0;
+        bool wallPass;
         Position boardPosition;
         Board &map;
         bool alive;

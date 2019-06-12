@@ -14,6 +14,7 @@
 
 ind::Player::Player(const Position &position, Board &map, animations::Animator *animator) :
         AbstractEntity(),
+        wallPass(false),
         boardPosition(position),
         map(map),
         alive(true),
@@ -110,6 +111,8 @@ const bool ind::Player::isWalkable(const irr::core::vector3df &pos, const irr::c
 
 bool ind::Player::checkWalkableTile(const ind::Tile &Tile) const
 {
+    if (wallPass)
+        return true;
     return Tile != BLOCKBREAKABLE && Tile != WALL && (Tile != BOMB || map.getInfoAtCoord(boardPosition) == BOMB);
 }
 
@@ -179,4 +182,9 @@ void ind::Player::fireUp()
 void ind::Player::speedUp()
 {
     movementSpeed += 5;
+}
+
+void ind::Player::enableWallPass()
+{
+    wallPass = true;
 }

@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <irrlicht/irrlicht.h>
 #include <cstdlib>
+#include "WallPass.hpp"
 #include "SpeedUp.hpp"
 #include "FireUp.hpp"
 #include "DeviceService.hpp"
@@ -164,12 +165,16 @@ void ind::Board::putPowerUp(const ind::Position &position)
     PowerUp *powerUp = nullptr;
     auto r = rand() % 3;
 
-    if (r == 0)
-        powerUp = new SpeedUp(position, "assets/fast.jpeg");
-    else if (r == 1)
-        powerUp = new BombUp(position, "assets/bombUp.jpeg");
-    else
-        powerUp = new FireUp(position, "assets/red.jpg");
+    if (rand() % 50 == 0) {
+        powerUp = new WallPass(position, "assets/wallpass.png");
+    } else {
+        if (r == 0)
+            powerUp = new SpeedUp(position, "assets/fast.jpeg");
+        else if (r == 1)
+            powerUp = new BombUp(position, "assets/bombUp.jpeg");
+        else
+            powerUp = new FireUp(position, "assets/red.jpg");
+    }
     this->map[position.x][position.y] = std::shared_ptr<PowerUp>(powerUp);
 }
 
