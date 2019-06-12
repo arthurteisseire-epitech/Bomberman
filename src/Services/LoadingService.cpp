@@ -33,13 +33,10 @@ void ind::LoadingService::startLoad()
         auto *manager = SingleTon<DeviceService>::getInstance().getSceneManager();
 
         for (auto &info : infos.second) {
-            std::async(std::launch::async,
-                       [&]() {
-                           animator->registerAnimation(info.id,
-                                                       info.folderPath,
-                                                       info.texture,
-                                                       *manager);
-                       }).get();
+            animator->registerAnimation(info.id,
+                                        info.folderPath,
+                                        info.texture,
+                                        *manager);
         }
         _loadedAnimators.emplace(infos.first, animator);
     }

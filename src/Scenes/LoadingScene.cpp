@@ -48,8 +48,7 @@ ind::LoadingScene::LoadingScene() : _loadingService(SingleTon<LoadingService>::g
                          .enqueueAnimator("playerBAnimator", playerBAnimations)
                          .enqueueAnimator("playerCAnimator", playerBAnimations);
 
-    std::thread t(&ind::LoadingService::startLoad, this->_loadingService);
-    t.detach();
+    this->_loadingService.startLoad();
 }
 
 ind::SceneType ind::LoadingScene::execute(irr::f32 deltatime)
