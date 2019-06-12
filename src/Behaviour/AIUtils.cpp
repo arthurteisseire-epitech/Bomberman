@@ -24,7 +24,8 @@ ind::Position ind::AIUtils::findAvailablePositionAround(const ind::Board &board,
     return playerPos;
 }
 
-std::vector<ind::Position> ind::AIUtils::getPositionsAroundWithoutFutureExplosion(const Board &board, const Position &pos)
+std::vector<ind::Position>
+ind::AIUtils::getPositionsAroundWithoutFutureExplosion(const Board &board, const Position &pos)
 {
     auto positions = getPositionsAroundWalkable(board, pos);
 
@@ -117,13 +118,22 @@ std::vector<ind::Position> ind::AIUtils::getAllFutureExplosionsPositions(const B
 
 std::vector<ind::Position> ind::AIUtils::findBlockBreakable(const ind::Board &board, const ind::Position &playerPos)
 {
-    std::vector<Position> positions;
+    size_t min = std::string::npos;
+    std::vector<std::vector<Position>> positions;
+    std::vector<Position> res;
 
-    applyUntil(board, positions, [&](int i) { return Position(playerPos.x, playerPos.y - i); });
-    applyUntil(board, positions, [&](int i) { return Position(playerPos.x, playerPos.y + i); });
-    applyUntil(board, positions, [&](int i) { return Position(playerPos.x - i, playerPos.y); });
-    applyUntil(board, positions, [&](int i) { return Position(playerPos.x + i, playerPos.y); });
-    return positions;
+    positions.push_back(applyUntil(board, [&](int i) { return Position(playerPos.x, playerPos.y - i); }));
+    positions.push_back(applyUntil(board, [&](int i) { return Position(playerPos.x, playerPos.y + i); }));
+    positions.push_back(applyUntil(board, [&](int i) { return Position(playerPos.x - i, playerPos.y); }));
+    positions.push_back(applyUntil(board, [&](int i) { return Position(playerPos.x + i, playerPos.y); }));
+
+    for (auto &v : positions) {
+        if (!v.empty() && v.size() < min) {
+            min = v.size();
+            res = v;
+        }
+    }
+    return res;
 }
 
 bool ind::AIUtils::isBlockBreakableAround(const ind::Board &board, const ind::Position &playerPos)
@@ -146,8 +156,10 @@ std::vector<ind::Position> ind::AIUtils::findNearestPlayerPositions(ind::Board &
     for (auto &player : players) {
         if (player->getPosition() != AIPos) {
             auto tmp = pathFinding.searchPath(board, AIPos, player->getPosition());
-            if (!tmp.empty() && tmp.size() < min)
+            if (!tmp.empty() && tmp.size() < min) {
                 positions = tmp;
+                min = tmp.size();
+            }
         }
     }
     return positions;

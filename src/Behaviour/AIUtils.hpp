@@ -32,13 +32,18 @@ namespace ind {
         static bool contain(const std::vector<Position> &pos1, const std::vector<Position> &pos2);
 
         template<typename Pos>
-        static void applyUntil(const Board &board, std::vector<Position> &positions, Pos getPosAt)
+        static std::vector<Position> applyUntil(const Board &board, Pos getPosAt)
         {
+            std::vector<Position> positions;
+
             for (int i = 1; ; ++i) {
                 positions.push_back(getPosAt(i));
+                if (!board.in(getPosAt(i + 1)))
+                    return {};
                 if (!board.isWalkable(getPosAt(i)))
                     break;
             }
+            return positions;
         }
     };
 }
