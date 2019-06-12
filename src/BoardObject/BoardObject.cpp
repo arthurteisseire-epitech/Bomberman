@@ -13,7 +13,6 @@ ind::BoardObject::BoardObject(Position position, const std::string &path) :
     position(position),
     node(nullptr)
 {
-    std::cout << Path::realpath(path) << std::endl;
     texture = manager->getVideoDriver()->getTexture(Path::realpath(path).c_str());
 }
 
