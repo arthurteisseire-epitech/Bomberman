@@ -53,6 +53,7 @@ namespace ind {
         void checkDeath();
         const Position &getPosition() const;
         irr::core::vector3df nextPos();
+        void fireUp();
 
         private:
         short bombPower;

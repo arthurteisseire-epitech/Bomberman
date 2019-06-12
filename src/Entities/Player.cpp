@@ -170,3 +170,8 @@ const ind::Position &ind::Player::getPosition() const
 {
     return boardPosition;
 }
+
+void ind::Player::fireUp()
+{
+    ++bombPower;
+}

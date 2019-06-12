@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <irrlicht/irrlicht.h>
 #include <cstdlib>
+#include "FireUp.hpp"
 #include "DeviceService.hpp"
 #include "Bomb.hpp"
 #include "BoardBehaviour.hpp"
@@ -23,7 +24,7 @@
 #include "PlayerFactory.hpp"
 
 ind::Board::Board(Position size_) :
-        size(size_)
+    size(size_)
 {
     initGround();
     initBlocks();
@@ -159,7 +160,12 @@ void ind::Board::removeDeadObjects()
 
 void ind::Board::putPowerUp(const ind::Position &position)
 {
-    auto *powerUp = new BombUp(position, "assets/bombUp.png");
+    PowerUp *powerUp = nullptr;
+
+    if (rand() % 2 == 0)
+        powerUp = new BombUp(position, "assets/bombUp.png");
+    else
+        powerUp = new FireUp(position, "assets/red.jpg");
     this->map[position.x][position.y] = std::shared_ptr<PowerUp>(powerUp);
 }
 
