@@ -31,8 +31,6 @@ ind::Player::~Player()
 
 void ind::Player::placeBomb()
 {
-    std::string path = "assets";
-
     if (map.getInfoAtCoord(boardPosition) != EMPTY)
         return;
     if (actualBombsPlaced < maxBombsPlaced) {

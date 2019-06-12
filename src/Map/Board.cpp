@@ -184,16 +184,6 @@ ind::PowerUp *ind::Board::getPowerUp(const ind::Position &position)
     return ptr;
 }
 
-irr::scene::IMeshSceneNode *ind::Board::initializePlayerCube() const
-{
-    auto manager = SingleTon<DeviceService>::getInstance().getSceneManager();
-    auto cube = manager->addCubeSceneNode(TILE_SIZE, nullptr, -1);
-
-    cube->setPosition(irr::core::vector3df(0, 0, 0));
-    cube->setMaterialTexture(0, manager->getVideoDriver()->getTexture("assets/creeper.jpg"));
-    return cube;
-}
-
 void ind::Board::killDeadPlayers()
 {
     players.erase(std::remove_if(players.begin(), players.end(), [](std::unique_ptr<Player> &player) {

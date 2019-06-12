@@ -5,6 +5,7 @@
 ** Explosion.cpp
 */
 
+#include "Path.hpp"
 #include "TimeoutObjectBehaviour.hpp"
 #include "Explosion.hpp"
 
@@ -42,7 +43,7 @@ ind::Explosion::Explosion(ind::Position position) :
     emitter->drop();
     particleSystem->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     particleSystem->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
-    particleSystem->setMaterialTexture(0, manager->getVideoDriver()->getTexture("assets/explosion.png"));
+    particleSystem->setMaterialTexture(0, manager->getVideoDriver()->getTexture(Path::realpath("assets/explosion.png").c_str()));
     particleSystem->setMaterialType(irr::video::EMT_TRANSPARENT_ALPHA_CHANNEL);
     setBehaviour(new TimeoutObjectBehaviour(*this));
 }

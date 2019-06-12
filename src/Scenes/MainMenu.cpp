@@ -10,6 +10,7 @@
 #include <iostream>
 #include "MainMenu.hpp"
 #include "PlaceRectangle.hpp"
+#include "Path.hpp"
 
 ind::MainMenu::MainMenu() :
         AScene(),
@@ -22,7 +23,7 @@ ind::MainMenu::MainMenu() :
 
     initButtons(x, y);
     fillMapButtonScene();
-    _background = driver->getTexture("./assets/bomb_background.png");
+    _background = driver->getTexture(Path::realpath("assets/bomb_background.png").c_str());
 }
 
 ind::MainMenu::~MainMenu()
@@ -35,11 +36,11 @@ ind::MainMenu::~MainMenu()
 void ind::MainMenu::initButtons(const irr::u32 &x, const irr::u32 &y)
 {
     _startButton = initButton(ind::PlaceRectangle::getRectangle({x / 4, y / 2}, {x / 6, y / 14}),
-                              "./assets/play_game.png");
+                              "assets/play_game.png");
     _optionsButton = initButton(ind::PlaceRectangle::getRectangle({x * 3 / 4, y / 2}, {x / 6, y / 14}),
-                                "./assets/options.png");
+                                "assets/options.png");
     _exitButton = initButton(ind::PlaceRectangle::getRectangle({x / 2, y * 3 / 4}, {x / 6, y / 14}),
-                             "./assets/exit.png");
+                             "assets/exit.png");
 }
 
 void ind::MainMenu::fillMapButtonScene()
@@ -49,10 +50,10 @@ void ind::MainMenu::fillMapButtonScene()
     _buttonScene.emplace(_exitButton, ind::EXIT);
 }
 
-irr::gui::IGUIButton *ind::MainMenu::initButton(const irr::core::rect<irr::s32> &rect, const char *string)
+irr::gui::IGUIButton *ind::MainMenu::initButton(const irr::core::rect<irr::s32> &rect, const char *path)
 {
     irr::gui::IGUIButton *button = _gui->addButton(rect);
-    button->setImage(_gui->getVideoDriver()->getTexture(string));
+    button->setImage(_gui->getVideoDriver()->getTexture(Path::realpath(path).c_str()));
     button->setDrawBorder(false);
     return button;
 }

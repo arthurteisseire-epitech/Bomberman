@@ -39,7 +39,6 @@ namespace ind {
         void putPowerUp(const Position &position);
         bool isOnExplosion(const Position &position) const;
         PowerUp *getPowerUp(const Position &position);
-        irr::scene::IMeshSceneNode *initializePlayerCube() const;
         std::vector<std::unique_ptr<Player>> &getPlayers();
         std::vector<Bomb *> getAllBombs() const;
         bool in(const Position &pos) const;

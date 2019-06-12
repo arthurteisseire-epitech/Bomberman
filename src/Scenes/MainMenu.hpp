@@ -31,7 +31,7 @@ namespace ind {
         std::map<irr::gui::IGUIButton *, SceneType> _buttonScene;
 
         void initButtons(const irr::u32 &x, const irr::u32 &y);
-        irr::gui::IGUIButton *initButton(const irr::core::rect<irr::s32> &rect, const char *string);
+        irr::gui::IGUIButton *initButton(const irr::core::rect<irr::s32> &rect, const char *path);
         void fillMapButtonScene();
         void resizeButtons(const irr::core::dimension2d<irr::u32> &currSize) const;
         void draw(const irr::core::dimension2d<irr::u32> &size) const;

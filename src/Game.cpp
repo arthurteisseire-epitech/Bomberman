@@ -5,7 +5,8 @@
 ** Created by abel,
 */
 
-#include <Animations/AnimatedMesh.hpp>
+#include "AnimatedMesh.hpp"
+#include "Path.hpp"
 #include "Game.hpp"
 #include "Singleton.hpp"
 #include "crossPlatform.hpp"
@@ -18,7 +19,7 @@ ind::Game::Game() :
         driver(device->getVideoDriver()),
         manager(device->getSceneManager())
 {
-    manager->getVideoDriver()->getTexture("assets/powerup/bomb/bombbody_BaseColor.png"); //preLoading
+    manager->getVideoDriver()->getTexture(Path::realpath("assets/powerup/bomb/bombbody_BaseColor.png").c_str()); //preLoading
 }
 
 void ind::Game::run()

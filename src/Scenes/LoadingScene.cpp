@@ -12,6 +12,7 @@
 #include <Services/DeviceService.hpp>
 #include <iostream>
 #include <Services/KeyService.hpp>
+#include "Path.hpp"
 
 extern std::atomic_bool _finish;
 
@@ -20,26 +21,26 @@ ind::LoadingScene::LoadingScene() : _loadingService(SingleTon<LoadingService>::g
     std::vector<ind::LoadAnimationData> playerAAnimations = {
         {
             .id = "walk",
-            .folderPath = "assets/PlayerA/walking",
-            .texture = "assets/PlayerA/MAW_diffuse.png"
+            .folderPath = Path::realpath("assets/PlayerA/walking"),
+            .texture = Path::realpath("assets/PlayerA/MAW_diffuse.png")
         },
         {
             .id = "idle",
-            .folderPath = "assets/PlayerA/idle",
-            .texture = "assets/PlayerA/MAW_diffuse.png"
+            .folderPath = Path::realpath("assets/PlayerA/idle"),
+            .texture = Path::realpath("assets/PlayerA/MAW_diffuse.png")
         }
     };
 
     std::vector<ind::LoadAnimationData> playerBAnimations = {
         {
             .id = "walk",
-            .folderPath = "assets/PlayerB/walking",
-            .texture = "assets/PlayerB/Mutant_diffuse.png"
+            .folderPath = Path::realpath("assets/PlayerB/walking"),
+            .texture = Path::realpath("assets/PlayerB/Mutant_diffuse.png")
         },
         {
             .id = "idle",
-            .folderPath = "assets/PlayerB/idle",
-            .texture = "assets/PlayerB/Mutant_diffuse.png"
+            .folderPath = Path::realpath("assets/PlayerB/idle"),
+            .texture = Path::realpath("assets/PlayerB/Mutant_diffuse.png")
         }
     };
 

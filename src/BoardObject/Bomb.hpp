@@ -19,7 +19,7 @@ namespace ind {
 
     public:
         Bomb(const Position &position, Board &map, int power, std::function<void(Bomb *bomb)> onExplode);
-        ~Bomb() override;
+        ~Bomb() override = default;
         Tile getTile() const override;
         void explode();
         int getPower() const;
