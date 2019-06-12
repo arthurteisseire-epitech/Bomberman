@@ -11,15 +11,26 @@
 #include "DirectionMap.hpp"
 #include "AIUtils.hpp"
 
-std::vector<ind::Position> ind::AIUtils::getAllFutureExplosionsPositions(const Board &board, const Position &pos)
+ind::Position ind::AIUtils::findAvailablePositionAround(const ind::Board &board, const ind::Position &playerPos)
 {
-    auto bombs = board.getAllBombs();
-    std::vector<Position> positions;
+    auto &pathFinding = SingleTon<PathfindingService>::getInstance();
+    const auto positions = getPositionsAroundWithoutFutureExplosion(board, playerPos);
 
-    for (const auto &bomb : bombs) {
-        auto row = bomb->getExplosionsPositions();
-        positions.insert(positions.end(), row.begin(), row.end());
+    for (const auto &pos : positions) {
+        const auto &v = pathFinding.searchPath(board, playerPos, pos);
+        if (v.size() > 1)
+            return v.at(1);
     }
+    return playerPos;
+}
+
+std::vector<ind::Position> ind::AIUtils::getPositionsAroundWithoutFutureExplosion(const Board &board, const Position &pos)
+{
+    auto positions = getPositionsAroundWalkable(board, pos);
+
+    positions.erase(std::remove_if(positions.begin(), positions.end(), [&](const Position &position) {
+        return isOnFutureExplosion(board, position);
+    }), positions.end());
     return positions;
 }
 
@@ -79,6 +90,55 @@ void ind::AIUtils::addPosIfInMap(const Board &board, std::vector<ind::Position> 
         positions.emplace_back(x, y);
 }
 
+bool ind::AIUtils::isOnFutureExplosion(const Board &board, const ind::Position &pos)
+{
+    auto futureExplosions = getAllFutureExplosionsPositions(board, pos);
+    auto it = std::find(futureExplosions.begin(), futureExplosions.end(), pos);
+
+    return it != futureExplosions.end();
+}
+
+std::vector<ind::Position> ind::AIUtils::getAllFutureExplosionsPositions(const Board &board, const Position &pos)
+{
+    auto bombs = board.getAllBombs();
+    std::vector<Position> positions;
+
+    for (const auto &bomb : bombs) {
+        auto row = bomb->getExplosionsPositions();
+        positions.insert(positions.end(), row.begin(), row.end());
+    }
+    return positions;
+}
+
+std::vector<ind::Position> ind::AIUtils::findBlockBreakable(const ind::Board &board, const ind::Position &playerPos)
+{
+    std::vector<Position> positions;
+
+    applyUntil(board, positions, [&](int i) { return Position(playerPos.x, playerPos.y - i); });
+    applyUntil(board, positions, [&](int i) { return Position(playerPos.x, playerPos.y + i); });
+    applyUntil(board, positions, [&](int i) { return Position(playerPos.x - i, playerPos.y); });
+    applyUntil(board, positions, [&](int i) { return Position(playerPos.x + i, playerPos.y); });
+    return positions;
+}
+
+bool ind::AIUtils::isBlockBreakableAround(const ind::Board &board, const ind::Position &playerPos)
+{
+    auto positions = getPositionsAside(board, playerPos);
+
+    for (const auto &pos : positions)
+        if (board.getInfoAtCoord(pos) == BLOCKBREAKABLE)
+            return true;
+    return false;
+}
+
+std::vector<ind::Position> ind::AIUtils::findNearestPlayerPositions(ind::Board &board, const ind::Position &pos)
+{
+    auto &pathFinding = SingleTon<PathfindingService>::getInstance();
+    auto &players = board.getPlayers();
+
+    return pathFinding.searchPath(board, pos, players.at(0)->getPosition());
+}
+
 ind::Orientation ind::AIUtils::posToDir(const Position &playerPos, const ind::Position &pos)
 {
     if (pos.y > playerPos.y)
@@ -99,51 +159,4 @@ bool ind::AIUtils::contain(const std::vector<ind::Position> &pos1, const std::ve
             if (i == j)
                 return true;
     return false;
-}
-
-std::vector<ind::Position> ind::AIUtils::getPositionsAroundWithoutExplosion(const Board &board, const Position &pos)
-{
-    auto positions = getPositionsAroundWalkable(board, pos);
-
-    positions.erase(std::remove_if(positions.begin(), positions.end(), [&](const Position &position) {
-        return isOnFutureExplosion(board, position);
-    }), positions.end());
-    return positions;
-}
-
-bool ind::AIUtils::isBlockBreakableAround(const ind::Board &board, const ind::Position &playerPos)
-{
-    auto positions = getPositionsAside(board, playerPos);
-
-    for (const auto &pos : positions)
-        if (board.getInfoAtCoord(pos) == BLOCKBREAKABLE)
-            return true;
-    return false;
-}
-
-bool ind::AIUtils::isOnFutureExplosion(const Board &board, const ind::Position &pos)
-{
-    auto futureExplosions = getAllFutureExplosionsPositions(board, pos);
-    auto it = std::find(futureExplosions.begin(), futureExplosions.end(), pos);
-
-    return it != futureExplosions.end();
-}
-
-std::vector<ind::Position> ind::AIUtils::findBlockBreakable(const ind::Board &board, const ind::Position &playerPos)
-{
-    std::vector<Position> positions;
-
-    applyUntil(board, positions, [&](int i) { return Position(playerPos.x, playerPos.y - i); });
-    applyUntil(board, positions, [&](int i) { return Position(playerPos.x, playerPos.y + i); });
-    applyUntil(board, positions, [&](int i) { return Position(playerPos.x - i, playerPos.y); });
-    applyUntil(board, positions, [&](int i) { return Position(playerPos.x + i, playerPos.y); });
-    return positions;
-}
-
-std::vector<ind::Position> ind::AIUtils::findNearestPlayerPositions(ind::Board &board, const ind::Position &pos)
-{
-    auto &pathFinding = SingleTon<PathfindingService>::getInstance();
-    auto &players = board.getPlayers();
-
-    return pathFinding.searchPath(board, pos, players.at(0)->getPosition());
 }

@@ -16,6 +16,7 @@ namespace ind {
         Position(int x, int y);
 
         bool operator==(const Position &pos) const;
+        bool operator!=(const Position &pos) const;
 
         int x;
         int y;

@@ -63,7 +63,7 @@ void ind::AIBehaviour::execFromMap(const std::map<State, std::function<void()>> 
 
 void ind::AIBehaviour::alterDodge()
 {
-    auto positionsWithoutExplosions = AIUtils::getPositionsAroundWithoutExplosion(board, player.getPosition());
+    auto positionsWithoutExplosions = AIUtils::getPositionsAroundWithoutFutureExplosion(board, player.getPosition());
     auto positionsWalkable = AIUtils::getPositionsAroundWalkable(board, player.getPosition());
 
     if (positionsWalkable.size() == positionsWithoutExplosions.size() &&
@@ -100,21 +100,15 @@ void ind::AIBehaviour::alterPlaceBomb()
 
 void ind::AIBehaviour::actionDodge()
 {
-    auto positions = AIUtils::getPositionsAroundWithoutExplosion(board, player.getPosition());
-
-    if (!positions.empty()) {
-        auto posToTarget = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(),
-                                                                                   positions.at(0));
-        if (!AIUtils::isOnFutureExplosion(board, player.getPosition())) {
-            stopWalking();
-            return;
-        }
-        if (posToTarget.size() > 1)
-            move(AIUtils::posToDir(player.getPosition(), posToTarget.at(1)));
-    } else {
+    if (!AIUtils::isOnFutureExplosion(board, player.getPosition())) {
         stopWalking();
-        std::cout << "no available pos around: i'm dead" << std::endl;
+        return;
     }
+    const Position &pos = AIUtils::findAvailablePositionAround(board, player.getPosition());
+    if (player.getPosition() != pos)
+        move(AIUtils::posToDir(player.getPosition(), pos));
+    else
+        stopWalking();
 }
 
 void ind::AIBehaviour::actionMoveToPlayer()

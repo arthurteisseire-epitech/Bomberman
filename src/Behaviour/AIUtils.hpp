@@ -13,18 +13,23 @@
 namespace ind {
     class AIUtils {
     public:
-        static bool contain(const std::vector<Position> &pos1, const std::vector<Position> &pos2);
-        static Orientation posToDir(const Position &playerPos, const Position &pos);
-        static void addPosIfInMap(const Board &board, std::vector<Position> &positions, int x, int y);
-        static std::vector<Position> getPositionsAroundWithoutExplosion(const Board &board, const Position &pos);
-        static bool isOnFutureExplosion(const Board &board, const Position &pos);
-        static std::vector<Position> getAllFutureExplosionsPositions(const Board &board, const Position &pos);
+
+        static Position findAvailablePositionAround(const Board &board, const Position &playerPos);
+        static std::vector<Position> getPositionsAroundWithoutFutureExplosion(const Board &board, const Position &pos);
         static std::vector<Position> getPositionsAroundWalkable(const Board &board, const Position &pos);
         static std::vector<Position> getPositionsAround(const Board &board, const Position &pos);
         static std::vector<Position> getPositionsAside(const Board &board, const Position &pos);
+        static void addPosIfInMap(const Board &board, std::vector<Position> &positions, int x, int y);
+        static bool isOnFutureExplosion(const Board &board, const Position &pos);
+        static std::vector<Position> getAllFutureExplosionsPositions(const Board &board, const Position &pos);
+
         static std::vector<Position> findBlockBreakable(const Board &board, const Position &playerPos);
         static bool isBlockBreakableAround(const Board &board, const Position &playerPos);
+
         static std::vector<Position> findNearestPlayerPositions(Board &board, const Position &pos);
+
+        static Orientation posToDir(const Position &playerPos, const Position &pos);
+        static bool contain(const std::vector<Position> &pos1, const std::vector<Position> &pos2);
 
         template<typename Pos>
         static void applyUntil(const Board &board, std::vector<Position> &positions, Pos getPosAt)
