@@ -13,7 +13,7 @@
 namespace ind {
     class SpeedUp : public PowerUp {
     public:
-        SpeedUp(Position position, const irr::io::path &path);
+        explicit SpeedUp(ind::Position position);
         ~SpeedUp() override = default;
         void upgrade(Player &player) override;
     };

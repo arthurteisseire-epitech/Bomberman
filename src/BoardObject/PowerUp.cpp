@@ -8,7 +8,7 @@
 #include "PowerUp.hpp"
 #include "PowerUpBehaviour.hpp"
 
-ind::PowerUp::PowerUp(ind::Position position, const irr::io::path &path)
+ind::PowerUp::PowerUp(ind::Position position, const std::string &path)
     : BoardObject(position, path)
 {
     auto *behaviour = new PowerUpBehaviour(*this);

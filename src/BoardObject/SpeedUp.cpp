@@ -8,7 +8,7 @@
 #include "SpeedUp.hpp"
 #include "Player.hpp"
 
-ind::SpeedUp::SpeedUp(ind::Position position, const irr::io::path &path) : PowerUp(position, path)
+ind::SpeedUp::SpeedUp(ind::Position position) : PowerUp(position, "assets/fast.jpeg")
 {
     createGraphicalCube();
 }

@@ -5,14 +5,16 @@
 ** BoardObject.cpp
 */
 
+#include "Path.hpp"
 #include "BoardObject.hpp"
 
-ind::BoardObject::BoardObject(Position position, const irr::io::path &path) :
+ind::BoardObject::BoardObject(Position position, const std::string &path) :
     AbstractEntity(),
     position(position),
     node(nullptr)
 {
-    texture = manager->getVideoDriver()->getTexture(path);
+    std::cout << Path::realpath(path) << std::endl;
+    texture = manager->getVideoDriver()->getTexture(Path::realpath(path).c_str());
 }
 
 const ind::Position &ind::BoardObject::getPosition() const

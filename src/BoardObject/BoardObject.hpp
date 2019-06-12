@@ -18,7 +18,7 @@
 namespace ind {
     class BoardObject : public AbstractEntity {
     public:
-        BoardObject(Position position, const irr::io::path &path);
+        BoardObject(Position position, const std::string &path);
         ~BoardObject() override;
 
         virtual Tile getTile() const = 0;

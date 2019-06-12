@@ -8,7 +8,7 @@
 #include "WallPass.hpp"
 #include "Player.hpp"
 
-ind::WallPass::WallPass(ind::Position position, const irr::io::path &path) : PowerUp(position, path)
+ind::WallPass::WallPass(ind::Position position) : PowerUp(position, "assets/wallpass.png")
 {
     createGraphicalCube();
 }

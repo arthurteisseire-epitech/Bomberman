@@ -5,19 +5,17 @@
 ** Created by Arthamios
 */
 
+#include <iostream>
 #include "Path.hpp"
 
 std::string ind::Path::progPath = ".";
 
-std::string ind::Path::assetPath(std::string &string)
+std::string ind::Path::realpath(const std::string &string)
 {
-    string = "/assets/" + progPath + string;
-    return string;
+    return progPath + '/' + string;
 }
 
 void ind::Path::changePath(const std::string &string)
 {
-    progPath = string;
-    if (progPath.back() == '/')
-        progPath = progPath.substr(0, progPath.size() - 1);
+    progPath = string.substr(0, string.find_last_of('/'));
 }

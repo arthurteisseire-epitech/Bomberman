@@ -13,7 +13,7 @@
 namespace ind {
     class FireUp : public PowerUp {
     public:
-        FireUp(Position position, const irr::io::path &path);
+        explicit FireUp(Position position);
         ~FireUp() override = default;
         void upgrade(Player &player) override;
     };

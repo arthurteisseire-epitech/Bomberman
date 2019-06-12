@@ -8,7 +8,7 @@
 #include "FireUp.hpp"
 #include "Player.hpp"
 
-ind::FireUp::FireUp(ind::Position position, const irr::io::path &path) : PowerUp(position, path)
+ind::FireUp::FireUp(Position position) : PowerUp(position, "assets/red.jpg")
 {
     createGraphicalCube();
 }

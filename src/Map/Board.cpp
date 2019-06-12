@@ -166,14 +166,14 @@ void ind::Board::putPowerUp(const ind::Position &position)
     auto r = rand() % 3;
 
     if (rand() % 50 == 0) {
-        powerUp = new WallPass(position, "assets/wallpass.png");
+        powerUp = new WallPass(position);
     } else {
         if (r == 0)
-            powerUp = new SpeedUp(position, "assets/fast.jpeg");
+            powerUp = new SpeedUp(position);
         else if (r == 1)
-            powerUp = new BombUp(position, "assets/bombUp.jpeg");
+            powerUp = new BombUp(position);
         else
-            powerUp = new FireUp(position, "assets/red.jpg");
+            powerUp = new FireUp(position);
     }
     this->map[position.x][position.y] = std::shared_ptr<PowerUp>(powerUp);
 }

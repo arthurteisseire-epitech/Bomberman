@@ -14,7 +14,7 @@ namespace ind {
     class Player;
     class PowerUp : public BoardObject {
         public:
-            PowerUp(Position position, const irr::io::path &path);
+            PowerUp(Position position, const std::string &path);
             ~PowerUp() override;
             virtual void upgrade(Player &player) = 0;
             Tile getTile() const override;

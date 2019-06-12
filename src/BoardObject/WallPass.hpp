@@ -13,7 +13,7 @@
 namespace ind {
     class WallPass : public PowerUp {
     public:
-        WallPass(Position position, const irr::io::path &path);
+        explicit WallPass(ind::Position position);
         ~WallPass() override = default;
         void upgrade(Player &player) override;
     };

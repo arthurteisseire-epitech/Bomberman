@@ -12,7 +12,7 @@
 namespace ind {
     class BombUp : public PowerUp {
         public:
-            BombUp(Position position, const irr::io::path &path);
+            explicit BombUp(ind::Position position);
             ~BombUp() override = default;
             void upgrade(Player &player) override;
     };
