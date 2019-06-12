@@ -136,12 +136,21 @@ bool ind::AIUtils::isBlockBreakableAround(const ind::Board &board, const ind::Po
     return false;
 }
 
-std::vector<ind::Position> ind::AIUtils::findNearestPlayerPositions(ind::Board &board, const ind::Position &pos)
+std::vector<ind::Position> ind::AIUtils::findNearestPlayerPositions(ind::Board &board, const ind::Position &AIPos)
 {
+    std::size_t min = std::string::npos;
     auto &pathFinding = SingleTon<PathfindingService>::getInstance();
     auto &players = board.getPlayers();
+    std::vector<Position> positions;
 
-    return pathFinding.searchPath(board, pos, players.at(0)->getPosition());
+    for (auto &player : players) {
+        if (player->getPosition() != AIPos) {
+            auto tmp = pathFinding.searchPath(board, AIPos, player->getPosition());
+            if (!tmp.empty() && tmp.size() < min)
+                positions = tmp;
+        }
+    }
+    return positions;
 }
 
 ind::Orientation ind::AIUtils::posToDir(const Position &playerPos, const ind::Position &pos)

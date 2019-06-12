@@ -26,7 +26,7 @@ namespace ind {
         static std::vector<Position> findBlockBreakable(const Board &board, const Position &playerPos);
         static bool isBlockBreakableAround(const Board &board, const Position &playerPos);
 
-        static std::vector<Position> findNearestPlayerPositions(Board &board, const Position &pos);
+        static std::vector<Position> findNearestPlayerPositions(Board &board, const Position &AIPos);
 
         static Orientation posToDir(const Position &playerPos, const Position &pos);
         static bool contain(const std::vector<Position> &pos1, const std::vector<Position> &pos2);
