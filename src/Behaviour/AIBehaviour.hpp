@@ -24,6 +24,7 @@ namespace ind {
             MOVE_TO_PLAYER,
             FIND_BLOCKBREACKABLE,
             PLACE_BOMB,
+            PICK_POWERUP,
         };
         void action();
         void execFromMap(const std::map<State, std::function<void()>> &map);
@@ -32,11 +33,13 @@ namespace ind {
         void alterMoveToPlayer();
         void alterFindBlockBreakable();
         void alterPlaceBomb();
+        void alterPickPowerUp();
 
         void actionDodge();
         void actionMoveToPlayer();
         void actionFindBlockBreakable();
         void actionPlaceBomb();
+        void actionPickPowerUp();
 
         void move(Orientation dir);
         void stopWalking();

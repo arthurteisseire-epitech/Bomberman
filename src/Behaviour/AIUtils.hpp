@@ -14,6 +14,7 @@ namespace ind {
     class AIUtils {
     public:
 
+        static Position findAvailablePowerUpAround(const Board &board, const Position &playerPos);
         static Position findAvailablePositionAround(const Board &board, const Position &playerPos);
         static std::vector<Position> getPositionsAroundWithoutFutureExplosion(const Board &board, const Position &pos);
         static std::vector<Position> getPositionsAroundWalkable(const Board &board, const Position &pos);

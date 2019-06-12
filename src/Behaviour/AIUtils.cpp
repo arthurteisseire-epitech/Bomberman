@@ -11,6 +11,24 @@
 #include "DirectionMap.hpp"
 #include "AIUtils.hpp"
 
+ind::Position ind::AIUtils::findAvailablePowerUpAround(const ind::Board &board, const ind::Position &playerPos)
+{
+    auto &pathFinding = SingleTon<PathfindingService>::getInstance();
+    auto positionsAroundWalkable = getPositionsAroundWalkable(board, playerPos);
+
+    positionsAroundWalkable.erase(
+        std::remove_if(positionsAroundWalkable.begin(), positionsAroundWalkable.end(), [&](const Position &pos) {
+            return board.getInfoAtCoord(pos) != POWERUP;
+        }), positionsAroundWalkable.end());
+
+    for (const auto &pos : positionsAroundWalkable) {
+        const auto &v = pathFinding.searchPath(board, playerPos, pos);
+        if (v.size() > 1)
+            return v.at(1);
+    }
+    return playerPos;
+}
+
 ind::Position ind::AIUtils::findAvailablePositionAround(const ind::Board &board, const ind::Position &playerPos)
 {
     auto &pathFinding = SingleTon<PathfindingService>::getInstance();

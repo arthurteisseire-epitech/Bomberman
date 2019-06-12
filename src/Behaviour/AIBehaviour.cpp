@@ -23,6 +23,7 @@ ind::AIBehaviour::AIBehaviour(ind::Player &player, Board &board) :
         {MOVE_TO_PLAYER,       [this]() { alterMoveToPlayer(); }},
         {FIND_BLOCKBREACKABLE, [this]() { alterFindBlockBreakable(); }},
         {PLACE_BOMB,           [this]() { alterPlaceBomb(); }},
+        {PICK_POWERUP,         [this]() { alterPickPowerUp(); }},
     };
 
     actionStateMap = {
@@ -30,6 +31,7 @@ ind::AIBehaviour::AIBehaviour(ind::Player &player, Board &board) :
         {MOVE_TO_PLAYER,       [this]() { actionMoveToPlayer(); }},
         {FIND_BLOCKBREACKABLE, [this]() { actionFindBlockBreakable(); }},
         {PLACE_BOMB,           [this]() { actionPlaceBomb(); }},
+        {PICK_POWERUP,         [this]() { actionPickPowerUp(); }},
     };
 }
 
@@ -91,6 +93,8 @@ void ind::AIBehaviour::alterFindBlockBreakable()
         state = DODGE;
     else if (AIUtils::isBlockBreakableAround(board, player.getPosition()))
         state = PLACE_BOMB;
+    else if (AIUtils::findAvailablePowerUpAround(board, player.getPosition()) != player.getPosition())
+        state = PICK_POWERUP;
     else if (!posToTarget.empty())
         state = MOVE_TO_PLAYER;
 }
@@ -99,6 +103,12 @@ void ind::AIBehaviour::alterPlaceBomb()
 {
     if (AIUtils::isOnFutureExplosion(board, player.getPosition()))
         state = DODGE;
+}
+
+void ind::AIBehaviour::alterPickPowerUp()
+{
+    if (AIUtils::findAvailablePowerUpAround(board, player.getPosition()) == player.getPosition())
+        state = FIND_BLOCKBREACKABLE;
 }
 
 void ind::AIBehaviour::actionDodge()
@@ -133,6 +143,17 @@ void ind::AIBehaviour::actionFindBlockBreakable()
 void ind::AIBehaviour::actionPlaceBomb()
 {
     player.placeBomb();
+}
+
+void ind::AIBehaviour::actionPickPowerUp()
+{
+    auto pos = AIUtils::findAvailablePowerUpAround(board, player.getPosition());
+    auto positions = SingleTon<PathfindingService>::getInstance().searchPath(board, player.getPosition(), pos);
+
+    if (positions.size() > 1)
+        move(AIUtils::posToDir(player.getPosition(), positions.at(1)));
+    else
+        stopWalking();
 }
 
 void ind::AIBehaviour::move(Orientation dir)
