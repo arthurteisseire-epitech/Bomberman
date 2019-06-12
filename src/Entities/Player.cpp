@@ -175,3 +175,8 @@ void ind::Player::fireUp()
 {
     ++bombPower;
 }
+
+void ind::Player::speedUp()
+{
+    movementSpeed += 5;
+}

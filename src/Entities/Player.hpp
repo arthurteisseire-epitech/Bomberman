@@ -54,6 +54,7 @@ namespace ind {
         const Position &getPosition() const;
         irr::core::vector3df nextPos();
         void fireUp();
+        void speedUp();
 
         private:
         short bombPower;

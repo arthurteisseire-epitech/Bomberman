@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <irrlicht/irrlicht.h>
 #include <cstdlib>
+#include "SpeedUp.hpp"
 #include "FireUp.hpp"
 #include "DeviceService.hpp"
 #include "Bomb.hpp"
@@ -161,9 +162,12 @@ void ind::Board::removeDeadObjects()
 void ind::Board::putPowerUp(const ind::Position &position)
 {
     PowerUp *powerUp = nullptr;
+    auto r = rand() % 3;
 
-    if (rand() % 2 == 0)
-        powerUp = new BombUp(position, "assets/bombUp.png");
+    if (r == 0)
+        powerUp = new SpeedUp(position, "assets/fast.jpeg");
+    else if (r == 1)
+        powerUp = new BombUp(position, "assets/bombUp.jpeg");
     else
         powerUp = new FireUp(position, "assets/red.jpg");
     this->map[position.x][position.y] = std::shared_ptr<PowerUp>(powerUp);
