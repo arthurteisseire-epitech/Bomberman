@@ -282,7 +282,7 @@ void ind::OptionsScene::incrementPlayerNumber()
 
 void ind::OptionsScene::decrementPlayerNumber()
 {
-    if (PlayersSettingsSave::getPlayerNumber() <= 0)
+    if (PlayersSettingsSave::getPlayerNumber() <= 1)
         return;
 
     PlayersSettingsSave::removePlayer();

@@ -47,7 +47,7 @@ ind::animations::Animator *ind::PlayerFactory::initAnimator(const ind::PlayerNum
 
     animator->setCurrentAnimation("walk")
         .setCurrentAnimationSpeed(50)
-        .setAnimationsScale({1.3, 1.3, 1.3})
+        .setAnimationsScale({1.1, 1.1, 1.1})
         .setCurrentAnimation("idle")
         .playAnimation();
     return animator;

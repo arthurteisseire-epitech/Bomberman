@@ -32,14 +32,12 @@ ind::Board::Board(Position size_) :
     initBlocks();
     initWall();
     cleanCorners();
+    Position cornersPos[4] = {Position(0, 0), Position(size.x - 1, size.y - 1), Position(size.x - 1, 0), Position(0, size.y - 1)};
+    PlayerNumber pNbArr[4] = {PLAYER_ONE, PLAYER_TWO, AI1, AI2};
+    const unsigned short pNb = PlayersSettingsSave::getPlayerNumber();
 
-    std::unique_ptr<Player> player(PlayerFactory::create(PLAYER_ONE, Position(0, 0), *this));
-    std::unique_ptr<Player> player2(PlayerFactory::create(PLAYER_TWO, Position(size.x - 1, size.y - 1), *this));
-    std::unique_ptr<Player> ai(PlayerFactory::create(AI1, Position(0, size.y - 1), *this));
-
-    players.emplace_back(std::move(player));
-    players.emplace_back(std::move(player2));
-    players.emplace_back(std::move(ai));
+    for (unsigned short pIdx = 0; pIdx < pNb; ++pIdx)
+        players.emplace_back(PlayerFactory::create(pNbArr[pIdx], cornersPos[pIdx], *this));
 }
 
 void ind::Board::initGround()
