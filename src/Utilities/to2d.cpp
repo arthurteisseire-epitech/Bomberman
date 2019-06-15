@@ -12,8 +12,8 @@
 
 ind::Position ind::to2d(const irr::core::vector3df &pos3d)
 {
-    int x = (int) ((pos3d.X + TILE_SIZE / 2) / TILE_SIZE);
-    int y = (int) ((pos3d.Z + TILE_SIZE / 2) / TILE_SIZE);
+    int x = static_cast<int>((pos3d.X + TILE_SIZE / 2) / TILE_SIZE);
+    int y = static_cast<int>((pos3d.Z + TILE_SIZE / 2) / TILE_SIZE);
 
     return {x, y};
 }
