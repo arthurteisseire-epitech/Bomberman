@@ -7,6 +7,7 @@
 
 #include "Game.hpp"
 #include "Path.hpp"
+#include <ctime>
 
 int main(int, char **av)
 {

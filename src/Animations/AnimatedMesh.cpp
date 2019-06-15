@@ -21,12 +21,14 @@ ind::animations::AnimatedMesh::AnimatedMesh(irr::scene::ISceneManager &manager,
 {
     if (this->_folderPath.empty())
         throw "Can not create AnimatedMesh. File path empty.";
+
+   // boost::replace_all(this->_folderPath, '/', '\\'); // .replace(this->_folderPath.begin(), this->_folderPath.end(), '/', '\\');
+
     if (this->_folderPath[this->_folderPath.length() - 1] != '/')
         this->_folderPath += "/";
     // TODO : Check if directory exists
     this->loadFolder(manager);
     this->_sceneNode = manager.addAnimatedMeshSceneNode(this);
-    std::cerr << "loading texture " << texture << std::endl;
     this->loadTexture(manager, texture);
     /*
      * visibility = true when Animator.setCurrentAnimation called
@@ -72,7 +74,7 @@ irr::scene::IMesh *ind::animations::AnimatedMesh::getMesh(irr::s32 frame,
 {
     if (frame > this->_frames.size())
         throw BAD_FRAME_INDEX_ERROR;
-    this->_frame = this->_frames[(ulong)frame];
+    this->_frame = this->_frames[frame];
     this->_frameIndex = frame;
     return this->_frame->getMesh(0, detailLevel, startFrameLoop, endFrameLoop);
 }

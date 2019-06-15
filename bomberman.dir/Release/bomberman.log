@@ -1,0 +1,95 @@
+﻿  Building Custom Rule C:/Users/taz/Desktop/OOP_indie_studio_2018/CMakeLists.txt
+cl : Command line warning D9002: ignoring unknown option '-g'
+  AnimatedMesh.cpp
+  Info: Boost.Config is older than your compiler version - probably nothing bad will happen - but you may wish to look for an update Boost version.  Define BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE to suppress this message.
+  Animator.cpp
+C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations\Animator.cpp(46): warning C4244: 'argument': conversion from 'const irr::s32' to 'irr::f32', possible loss of data
+  ObjAnimationOptimizer.cpp
+  AIBehaviour.cpp
+  AIUtils.cpp
+  BoardBehaviour.cpp
+  BombBehaviour.cpp
+  PlayerBehaviour.cpp
+  PowerUpBehaviour.cpp
+  TimeoutObjectBehaviour.cpp
+  BlockBreakable.cpp
+  BoardObject.cpp
+  Bomb.cpp
+  BombUp.cpp
+  Explosion.cpp
+  FireUp.cpp
+  Ground.cpp
+  PowerUp.cpp
+  SpeedUp.cpp
+  TimeoutObject.cpp
+  Generating Code...
+c:\users\taz\desktop\oop_indie_studio_2018\src\animations\animator.cpp(88): warning C4172: returning address of local variable or temporary
+  Compiling...
+  Wall.cpp
+  WallPass.cpp
+  AbstractEntity.cpp
+  Orientation.cpp
+  Player.cpp
+  PlayerFactory.cpp
+C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities\PlayerFactory.cpp(50): warning C4305: 'argument': truncation from 'double' to 'T'
+          with
+          [
+              T=irr::f32
+          ]
+  Game.cpp
+  Board.cpp
+  ExplosionManager.cpp
+  PlayersSettingsSave.cpp
+  Position.cpp
+  AScene.cpp
+  GameScene.cpp
+C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\GameScene.cpp(22): warning C4305: 'argument': truncation from 'double' to 'irr::f32'
+  LoadingScene.cpp
+  MainMenu.cpp
+  OptionsScene.cpp
+C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\OptionsScene.cpp(114): warning C4305: 'initializing': truncation from 'double' to 'float'
+  SceneManager.cpp
+  DeviceService.cpp
+  FileSystemService.cpp
+  KeyService.cpp
+  Generating Code...
+  Compiling...
+  LoadingService.cpp
+  PathfindingService.cpp
+  DirectionMap.cpp
+  Keys.cpp
+  Path.cpp
+  PlaceRectangle.cpp
+  to2d.cpp
+C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\to2d.cpp(23): warning C4244: 'argument': conversion from 'float' to 'const _Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\to2d.cpp(24): warning C4244: 'argument': conversion from 'float' to 'const _Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\to2d.cpp(24): warning C4244: 'argument': conversion from 'const _Ty' to 'T', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+          and
+          [
+              T=irr::f32
+          ]
+C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\to2d.cpp(23): warning C4244: 'argument': conversion from 'const _Ty' to 'T', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+          and
+          [
+              T=irr::f32
+          ]
+  main.cpp
+C:\Users\taz\Desktop\OOP_indie_studio_2018\src\main.cpp(14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
+  bomberman.vcxproj -> C:\Users\taz\Desktop\OOP_indie_studio_2018\Release\bomberman.exe

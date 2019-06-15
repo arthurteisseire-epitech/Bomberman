@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7ACA3356-DF77-36C5-88E7-205DC02814C8}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>bomberman</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\taz\Desktop\OOP_indie_studio_2018\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">bomberman.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">bomberman</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\taz\Desktop\OOP_indie_studio_2018\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">bomberman.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">bomberman</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\taz\Desktop\OOP_indie_studio_2018\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">bomberman.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">bomberman</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\taz\Desktop\OOP_indie_studio_2018\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">bomberman.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">bomberman</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\taz\Desktop\OOP_indie_studio_2018\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\cmake\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\IRRLICHT_INCLUDE_DIRS\..;C:\Users\taz\Desktop\OOP_indie_studio_2018\src;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations;C:\local\boost_1_66_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -g</AdditionalOptions>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;BOOST_NO_CXX11_SCOPED_ENUMS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;BOOST_NO_CXX11_SCOPED_ENUMS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\taz\Desktop\OOP_indie_studio_2018\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\cmake\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\IRRLICHT_INCLUDE_DIRS\..;C:\Users\taz\Desktop\OOP_indie_studio_2018\src;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations;C:\local\boost_1_66_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\taz\Desktop\OOP_indie_studio_2018\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\cmake\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\IRRLICHT_INCLUDE_DIRS\..;C:\Users\taz\Desktop\OOP_indie_studio_2018\src;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations;C:\local\boost_1_66_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_filesystem-vc141-mt-gd-x64-1_66.lib;C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_system-vc141-mt-gd-x64-1_66.lib;cmake\Irrlicht.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/taz/Desktop/OOP_indie_studio_2018/Debug/bomberman.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/taz/Desktop/OOP_indie_studio_2018/Debug/bomberman.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\taz\Desktop\OOP_indie_studio_2018\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\cmake\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\IRRLICHT_INCLUDE_DIRS\..;C:\Users\taz\Desktop\OOP_indie_studio_2018\src;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations;C:\local\boost_1_66_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -g</AdditionalOptions>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;BOOST_NO_CXX11_SCOPED_ENUMS;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;BOOST_NO_CXX11_SCOPED_ENUMS;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\taz\Desktop\OOP_indie_studio_2018\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\cmake\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\IRRLICHT_INCLUDE_DIRS\..;C:\Users\taz\Desktop\OOP_indie_studio_2018\src;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations;C:\local\boost_1_66_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\taz\Desktop\OOP_indie_studio_2018\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\cmake\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\IRRLICHT_INCLUDE_DIRS\..;C:\Users\taz\Desktop\OOP_indie_studio_2018\src;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations;C:\local\boost_1_66_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_filesystem-vc141-mt-x64-1_66.lib;C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_system-vc141-mt-x64-1_66.lib;cmake\Irrlicht.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/taz/Desktop/OOP_indie_studio_2018/Release/bomberman.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/taz/Desktop/OOP_indie_studio_2018/Release/bomberman.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\taz\Desktop\OOP_indie_studio_2018\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\cmake\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\IRRLICHT_INCLUDE_DIRS\..;C:\Users\taz\Desktop\OOP_indie_studio_2018\src;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations;C:\local\boost_1_66_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -g</AdditionalOptions>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;BOOST_NO_CXX11_SCOPED_ENUMS;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;BOOST_NO_CXX11_SCOPED_ENUMS;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\taz\Desktop\OOP_indie_studio_2018\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\cmake\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\IRRLICHT_INCLUDE_DIRS\..;C:\Users\taz\Desktop\OOP_indie_studio_2018\src;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations;C:\local\boost_1_66_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\taz\Desktop\OOP_indie_studio_2018\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\cmake\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\IRRLICHT_INCLUDE_DIRS\..;C:\Users\taz\Desktop\OOP_indie_studio_2018\src;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations;C:\local\boost_1_66_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_filesystem-vc141-mt-x64-1_66.lib;C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_system-vc141-mt-x64-1_66.lib;cmake\Irrlicht.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/taz/Desktop/OOP_indie_studio_2018/MinSizeRel/bomberman.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/taz/Desktop/OOP_indie_studio_2018/MinSizeRel/bomberman.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\taz\Desktop\OOP_indie_studio_2018\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\cmake\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\IRRLICHT_INCLUDE_DIRS\..;C:\Users\taz\Desktop\OOP_indie_studio_2018\src;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations;C:\local\boost_1_66_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -g</AdditionalOptions>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;BOOST_NO_CXX11_SCOPED_ENUMS;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;BOOST_NO_CXX11_SCOPED_ENUMS;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\taz\Desktop\OOP_indie_studio_2018\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\cmake\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\IRRLICHT_INCLUDE_DIRS\..;C:\Users\taz\Desktop\OOP_indie_studio_2018\src;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations;C:\local\boost_1_66_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\taz\Desktop\OOP_indie_studio_2018\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\cmake\include;C:\Users\taz\Desktop\OOP_indie_studio_2018\IRRLICHT_INCLUDE_DIRS\..;C:\Users\taz\Desktop\OOP_indie_studio_2018\src;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities;C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations;C:\local\boost_1_66_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_filesystem-vc141-mt-x64-1_66.lib;C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_system-vc141-mt-x64-1_66.lib;cmake\Irrlicht.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/taz/Desktop/OOP_indie_studio_2018/RelWithDebInfo/bomberman.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/taz/Desktop/OOP_indie_studio_2018/RelWithDebInfo/bomberman.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/taz/Desktop/OOP_indie_studio_2018/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/taz/Desktop/OOP_indie_studio_2018 -BC:/Users/taz/Desktop/OOP_indie_studio_2018 --check-stamp-file C:/Users/taz/Desktop/OOP_indie_studio_2018/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\3.15.0-rc1\CMakeCCompiler.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\3.15.0-rc1\CMakeCXXCompiler.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\3.15.0-rc1\CMakeRCCompiler.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\3.15.0-rc1\CMakeSystem.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\cmake\FindIrrlicht.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/taz/Desktop/OOP_indie_studio_2018/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/taz/Desktop/OOP_indie_studio_2018 -BC:/Users/taz/Desktop/OOP_indie_studio_2018 --check-stamp-file C:/Users/taz/Desktop/OOP_indie_studio_2018/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\3.15.0-rc1\CMakeCCompiler.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\3.15.0-rc1\CMakeCXXCompiler.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\3.15.0-rc1\CMakeRCCompiler.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\3.15.0-rc1\CMakeSystem.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\cmake\FindIrrlicht.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/taz/Desktop/OOP_indie_studio_2018/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/taz/Desktop/OOP_indie_studio_2018 -BC:/Users/taz/Desktop/OOP_indie_studio_2018 --check-stamp-file C:/Users/taz/Desktop/OOP_indie_studio_2018/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\3.15.0-rc1\CMakeCCompiler.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\3.15.0-rc1\CMakeCXXCompiler.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\3.15.0-rc1\CMakeRCCompiler.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\3.15.0-rc1\CMakeSystem.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\cmake\FindIrrlicht.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/taz/Desktop/OOP_indie_studio_2018/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/taz/Desktop/OOP_indie_studio_2018 -BC:/Users/taz/Desktop/OOP_indie_studio_2018 --check-stamp-file C:/Users/taz/Desktop/OOP_indie_studio_2018/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.15\Modules\Platform\WindowsPaths.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\3.15.0-rc1\CMakeCCompiler.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\3.15.0-rc1\CMakeCXXCompiler.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\3.15.0-rc1\CMakeRCCompiler.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\3.15.0-rc1\CMakeSystem.cmake;C:\Users\taz\Desktop\OOP_indie_studio_2018\cmake\FindIrrlicht.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations\AnimatedMesh.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations\AnimatedMesh.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations\Animator.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations\Animator.hpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations\Optimization\IAnimatedMeshOptimizer.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations\Optimization\ObjAnimationOptimizer.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations\Optimization\ObjAnimationOptimizer.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\AIBehaviour.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\AIBehaviour.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\AIUtils.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\AIUtils.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\BoardBehaviour.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\BoardBehaviour.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\BombBehaviour.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\BombBehaviour.hpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\IBehaviour.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\PlayerBehaviour.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\PlayerBehaviour.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\PowerUpBehaviour.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\PowerUpBehaviour.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\TimeoutObjectBehaviour.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\TimeoutObjectBehaviour.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BlockBreakable.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BlockBreakable.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BoardObject.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BoardObject.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Bomb.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Bomb.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BombUp.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BombUp.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Explosion.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Explosion.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\FireUp.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\FireUp.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Ground.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Ground.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\PowerUp.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\PowerUp.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\SpeedUp.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\SpeedUp.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\TimeoutObject.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\TimeoutObject.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Wall.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Wall.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\WallPass.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\WallPass.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities\AbstractEntity.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities\AbstractEntity.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities\Orientation.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities\Orientation.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities\Player.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities\Player.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities\PlayerFactory.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities\PlayerFactory.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Game.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Game.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map\Board.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map\Board.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map\ExplosionManager.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map\ExplosionManager.hpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map\Tile.hpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map\TimeoutObjectManager.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\PlayersSettingsSave.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\PlayersSettingsSave.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Position.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Position.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\AScene.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\AScene.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\GameScene.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\GameScene.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\LoadingScene.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\LoadingScene.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\MainMenu.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\MainMenu.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\OptionsScene.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\OptionsScene.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\SceneManager.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\SceneManager.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\DeviceService.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\DeviceService.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\FileSystemService.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\FileSystemService.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\KeyService.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\KeyService.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\LoadingService.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\LoadingService.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\PathfindingService.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\PathfindingService.hpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\Singleton.hpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Size.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\DirectionMap.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\DirectionMap.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\Keys.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\Keys.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\Path.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\Path.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\PlaceRectangle.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\PlaceRectangle.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\to2d.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\to2d.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\ZERO_CHECK.vcxproj">
+      <Project>{544AB544-8904-301A-8E2F-97B612080E4B}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
