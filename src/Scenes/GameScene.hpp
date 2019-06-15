@@ -23,8 +23,6 @@ namespace ind {
         SceneType type() final;
     private:
         Board _map;
-        void initRootPath();
-        std::string _rootPath;
     };
 }
 

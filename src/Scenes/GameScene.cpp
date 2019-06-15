@@ -16,23 +16,9 @@ ind::GameScene::GameScene() :
         AScene(),
         _map(Position(15, 15))
 {
-    initRootPath();
-
     _manager->addCameraSceneNode(nullptr, irr::core::vector3df(-20, 200, 70), irr::core::vector3df(60, 0, 70));
     _manager->getActiveCamera()->setFOV(0.7);
     _manager->addLightSceneNode(nullptr, irr::core::vector3df(90, 200, 70), irr::video::SColorf(1.0f, 1.0f, 1.0f), 1000.0f);
-}
-
-void ind::GameScene::initRootPath()
-{
-    std::size_t last_slash = this->_progPath.find_last_of(DIRECTORYSEPARATOR);
-    if (last_slash == std::string::npos) {
-        this->_rootPath = ".";
-        this->_rootPath += DIRECTORYSEPARATOR;
-    } else {
-        this->_rootPath = this->_progPath.substr(0, last_slash);
-        this->_rootPath += DIRECTORYSEPARATOR;
-    }
 }
 
 ind::SceneType ind::GameScene::execute(irr::f32 deltaTime)
