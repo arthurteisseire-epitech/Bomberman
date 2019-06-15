@@ -14,7 +14,7 @@
 
 ind::Bomb::Bomb(const ind::Position &position, ind::Board &map, int power, std::function<void(Bomb *bomb)> onExplode) :
     BoardObject(position, "assets/Bomb/diffusecolorretocado.jpg"),
-    TimeoutObject(5),
+    TimeoutObject(3),
     map(map),
     power(power),
     onExplode(std::move(onExplode))
