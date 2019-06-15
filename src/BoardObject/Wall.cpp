@@ -8,7 +8,7 @@
 #include "Wall.hpp"
 
 ind::Wall::Wall(ind::Position position) :
-    BoardObject(position, "assets/wall.jpg")
+    BoardObject(position, "assets/wall.png")
 {
     createGraphicalCube();
 }
