@@ -59,6 +59,7 @@ namespace ind {
         void fireUp();
         void speedUp();
         void enableWallPass();
+        void disableWallPass();
         bool canPlaceBomb() const;
 
         private:

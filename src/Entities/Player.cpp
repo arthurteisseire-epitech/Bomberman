@@ -187,6 +187,11 @@ void ind::Player::enableWallPass()
     wallPass = true;
 }
 
+void ind::Player::disableWallPass()
+{
+    wallPass = false;
+}
+
 bool ind::Player::canPlaceBomb() const
 {
     return actualBombsPlaced < maxBombsPlaced;

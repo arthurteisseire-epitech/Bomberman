@@ -38,6 +38,7 @@ ind::AIBehaviour::AIBehaviour(ind::Player &player, Board &board) :
 void ind::AIBehaviour::update(float dt)
 {
     deltaTime = dt;
+    player.disableWallPass();
     player.checkDeath();
 
     if (!AIUtils::contain(board.getAllExplosionsPositions(),
