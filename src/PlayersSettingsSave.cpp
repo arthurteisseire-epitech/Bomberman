@@ -12,6 +12,7 @@ std::map<short, ind::PlayerSettings> ind::PlayersSettingsSave::settingsMap = {
 };
 
 short unsigned ind::PlayersSettingsSave::playerNumber = 1;
+short unsigned ind::PlayersSettingsSave::aiNumber = 1;
 
 ind::PlayerSettings::PlayerSettings(unsigned short bombRange, unsigned short maxBombsPlaced, float speed)
         : bombPower(bombRange), maxBombsPlaced(maxBombsPlaced), speed(speed)
@@ -54,4 +55,19 @@ short unsigned ind::PlayersSettingsSave::getPlayerNumber()
 short unsigned ind::PlayersSettingsSave::getMaxPlayers()
 {
     return maxPlayers;
+}
+
+unsigned short ind::PlayersSettingsSave::getAINumber()
+{
+    return aiNumber;
+}
+
+void ind::PlayersSettingsSave::removeAI()
+{
+    --aiNumber;
+}
+
+void ind::PlayersSettingsSave::addAI()
+{
+    ++aiNumber;
 }

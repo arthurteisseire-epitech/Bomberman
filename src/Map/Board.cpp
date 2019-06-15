@@ -35,9 +35,12 @@ ind::Board::Board(Position size_) :
     Position cornersPos[4] = {Position(0, 0), Position(size.x - 1, size.y - 1), Position(size.x - 1, 0), Position(0, size.y - 1)};
     PlayerNumber pNbArr[4] = {PLAYER_ONE, PLAYER_TWO, AI1, AI2};
     const unsigned short pNb = PlayersSettingsSave::getPlayerNumber();
+    const unsigned short AINb = PlayersSettingsSave::getAINumber();
 
     for (unsigned short pIdx = 0; pIdx < pNb; ++pIdx)
         players.emplace_back(PlayerFactory::create(pNbArr[pIdx], cornersPos[pIdx], *this));
+    for (unsigned short AIIdx = pNb; AIIdx < pNb + AINb; ++AIIdx)
+        players.emplace_back(PlayerFactory::create(pNbArr[AIIdx], cornersPos[AIIdx], *this));
 }
 
 void ind::Board::initGround()

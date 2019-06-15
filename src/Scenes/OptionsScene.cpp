@@ -39,18 +39,19 @@ void ind::OptionsScene::initButtons(const irr::core::dimension2d<irr::s32> &size
 {
     irr::core::dimension2df signSize = {1.0f / 20, 1.0f / 30};
 
-    returnButton = initButton({1.0f / 2, 9.0f / 10}, {1.0f / 10, 1.0f / 20}, size, "assets/return.png", nullptr);
+    returnButton = initButton({1.0f / 2, 11.0f / 12}, {1.0f / 10, 1.0f / 20}, size, "assets/return.png", nullptr);
     initMaxBombsButtons(size, signSize);
     initBombsPowerButtons(size, signSize);
     initSpeedButtons(size, signSize);
     initPlayerNumber(size, signSize);
+    initAINumber(size, signSize);
     setTexts();
 }
 
 void ind::OptionsScene::initMaxBombsButtons(const irr::core::dimension2d<irr::s32> &size,
                                             const irr::core::dimension2df &signSize)
 {
-    float bombsHeight = 1.0f / 4;
+    float bombsHeight = 0.6f / 4;
 
     maxBombsPlacedButton = initButton({1.0f / 5, bombsHeight}, {1.0f / 10, 1.0f / 15}, size,
                                       "assets/settings/bombs_placed_max.png", nullptr);
@@ -65,7 +66,7 @@ void ind::OptionsScene::initMaxBombsButtons(const irr::core::dimension2d<irr::s3
 void ind::OptionsScene::initSpeedButtons(const irr::core::dimension2d<irr::s32> &size,
                                          const irr::core::dimension2df &signSize)
 {
-    float speedHeight = 2.0f / 5;
+    float speedHeight = 1.6f / 5;
 
     speedButton = initButton({1.0f / 5, speedHeight}, {1.0f / 10, 1.0f / 20}, size,
                              "assets/settings/movement_speed.png", nullptr);
@@ -80,7 +81,7 @@ void ind::OptionsScene::initSpeedButtons(const irr::core::dimension2d<irr::s32> 
 void ind::OptionsScene::initBombsPowerButtons(const irr::core::dimension2d<irr::s32> &size,
                                               const irr::core::dimension2df &signSize)
 {
-    float bombPowerHeight = 2.7f / 5;
+    float bombPowerHeight = 2.3f / 5;
 
     bombsPowerButton = initButton({1.0f / 5, bombPowerHeight}, {1.0f / 10, 1.0f / 20}, size,
                                   "assets/settings/bombs_power.png", nullptr);
@@ -93,18 +94,33 @@ void ind::OptionsScene::initBombsPowerButtons(const irr::core::dimension2d<irr::
 }
 
 void ind::OptionsScene::initPlayerNumber(const irr::core::dimension2d<irr::s32> &size,
-                                          const irr::core::dimension2df &signSize)
+                                         const irr::core::dimension2df &signSize)
 {
-    float playerNumberHeight = 3.5f / 5;
+    float playerNumberHeight = 3.2f / 5;
 
     playerNumberButton = initButton({1.0f / 5, playerNumberHeight}, {1.0f / 10, 1.0f / 15}, size,
-                                     "assets/settings/players_number.png", nullptr);
+                                    "assets/settings/players_number.png", nullptr);
     playerNumberDown = initButton({3.0f / 5, playerNumberHeight}, signSize, size, "assets/settings/minus.png",
-                                   &ind::OptionsScene::decrementPlayerNumber);
+                                  &ind::OptionsScene::decrementPlayerNumber);
     playerNumberUp = initButton({4.0f / 5, playerNumberHeight}, signSize, size, "assets/settings/plus.png",
-                                 &ind::OptionsScene::incrementPlayerNumber);
+                                &ind::OptionsScene::incrementPlayerNumber);
     playerNumberValue = initButton({3.5f / 5, playerNumberHeight}, signSize, size, "assets/settings/empty.png",
-                                    nullptr);
+                                   nullptr);
+}
+
+void ind::OptionsScene::initAINumber(const irr::core::dimension2d<irr::s32> &size,
+                                     const irr::core::dimension2df &signSize)
+{
+    float AINumberHeight = 4.0 / 5;
+
+    AINumberButton = initButton({1.0f / 5, AINumberHeight}, {1.0f / 10, 1.0f / 15}, size,
+                                "assets/settings/ai_number.png", nullptr);
+    AINumberDown = initButton({3.0f / 5, AINumberHeight}, signSize, size, "assets/settings/minus.png",
+                              &ind::OptionsScene::decrementAINumber);
+    AINumberUp = initButton({4.0f / 5, AINumberHeight}, signSize, size, "assets/settings/plus.png",
+                            &ind::OptionsScene::incrementAINumber);
+    AINumberValue = initButton({3.5f / 5, AINumberHeight}, signSize, size, "assets/settings/empty.png",
+                               nullptr);
 }
 
 void ind::OptionsScene::setTexts() const
@@ -127,6 +143,10 @@ void ind::OptionsScene::setTexts() const
     const std::string playersNbStr = std::__cxx11::to_string(ind::PlayersSettingsSave::getPlayerNumber());
     playerNumberValue->setText(std::wstring(playersNbStr.begin(), playersNbStr.end()).c_str());
     playerNumberValue->setOverrideFont(font);
+
+    const std::string AINbStr = std::__cxx11::to_string(ind::PlayersSettingsSave::getAINumber());
+    AINumberValue->setText(std::wstring(AINbStr.begin(), AINbStr.end()).c_str());
+    AINumberValue->setOverrideFont(font);
 }
 
 irr::gui::IGUIButton *ind::OptionsScene::initButton(const irr::core::dimension2df &center,
@@ -227,7 +247,7 @@ void ind::OptionsScene::incrementSpeed()
         return;
 
     ++PlayersSettingsSave::defaultSettings().speed;
-    std::string speedStr = std::to_string((int)PlayersSettingsSave::defaultSettings().speed);
+    std::string speedStr = std::to_string((int) PlayersSettingsSave::defaultSettings().speed);
     speedNumberButton->setText(std::wstring(speedStr.begin(), speedStr.end()).c_str());
     speedUpButton->setPressed(false);
 }
@@ -239,7 +259,7 @@ void ind::OptionsScene::decrementSpeed()
 
     --PlayersSettingsSave::defaultSettings().speed;
 
-    std::string speedStr = std::to_string((int)PlayersSettingsSave::defaultSettings().speed);
+    std::string speedStr = std::to_string((int) PlayersSettingsSave::defaultSettings().speed);
     speedNumberButton->setText(std::wstring(speedStr.begin(), speedStr.end()).c_str());
     speedDownButton->setPressed(false);
 }
@@ -290,4 +310,32 @@ void ind::OptionsScene::decrementPlayerNumber()
     const std::string playerNumberStr = std::to_string(PlayersSettingsSave::getPlayerNumber());
     playerNumberValue->setText(std::wstring(playerNumberStr.begin(), playerNumberStr.end()).c_str());
     playerNumberDown->setPressed(false);
+}
+
+void ind::OptionsScene::decrementAINumber()
+{
+    const unsigned short aiNumber = PlayersSettingsSave::getAINumber();
+
+    if (aiNumber <= 0 || (PlayersSettingsSave::getPlayerNumber() == 1 && aiNumber == 1))
+        return;
+
+    PlayersSettingsSave::removeAI();
+
+    const std::string AINumberStr = std::to_string(aiNumber - 1);
+    AINumberValue->setText(std::wstring(AINumberStr.begin(), AINumberStr.end()).c_str());
+    AINumberDown->setPressed(false);
+}
+
+void ind::OptionsScene::incrementAINumber()
+{
+    const unsigned short aiNumber = PlayersSettingsSave::getAINumber();
+
+    if (aiNumber >= 2)
+        return;
+
+    PlayersSettingsSave::addAI();
+
+    const std::string AINumberStr = std::to_string(aiNumber + 1);
+    AINumberValue->setText(std::wstring(AINumberStr.begin(), AINumberStr.end()).c_str());
+    AINumberUp->setPressed(false);
 }
