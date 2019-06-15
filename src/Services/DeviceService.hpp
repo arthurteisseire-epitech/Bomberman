@@ -14,6 +14,7 @@ namespace ind {
     class DeviceService {
     public:
         DeviceService();
+        ~DeviceService();
         irr::scene::ISceneManager *getSceneManager() const;
         irr::IrrlichtDevice *getDevice() const;
     private:

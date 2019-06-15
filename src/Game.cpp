@@ -30,6 +30,7 @@ void ind::Game::run()
     SceneType currentScene = LOADING;
     SceneType newScene;
 
+    startMusic();
     while (device->run() && currentScene != EXIT) {
         driver->beginScene(true, true, irr::video::SColor(255, 255, 255, 255));
         deltaTime = updateDeltaTime(then);
@@ -39,7 +40,16 @@ void ind::Game::run()
         manager->drawAll();
         driver->endScene();
     }
-//    device->drop();
+}
+
+void ind::Game::startMusic()
+{
+    std::string pathToMusic = "assets/music.ogg";
+
+    if (!music.openFromFile(pathToMusic))
+        throw std::runtime_error("Failed to load music " + pathToMusic);
+    music.setLoop(true);
+    music.play();
 }
 
 irr::f32 ind::Game::updateDeltaTime(irr::u32 &then) const

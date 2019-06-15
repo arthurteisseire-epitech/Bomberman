@@ -27,3 +27,8 @@ irr::IrrlichtDevice *ind::DeviceService::getDevice() const
 {
     return device;
 }
+
+ind::DeviceService::~DeviceService()
+{
+    device->drop();
+}

@@ -38,4 +38,4 @@ if(Boost_FOUND)
     target_link_libraries(${NAME} ${Boost_LIBRARIES})
 endif()
 
-target_link_libraries(${NAME} ${Irrlicht_LIBRARIES})
+target_link_libraries(${NAME} ${Irrlicht_LIBRARIES} sfml-audio)
