@@ -1,8 +1,1 @@
-﻿cl : Command line warning D9002: ignoring unknown option '-g'
-  Player.cpp
-  Game.cpp
-  GameScene.cpp
-C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\GameScene.cpp(22): warning C4305: 'argument': truncation from 'double' to 'irr::f32'
-  Path.cpp
-  Generating Code...
-  bomberman.vcxproj -> C:\Users\taz\Desktop\OOP_indie_studio_2018\Debug\bomberman.exe
+﻿  bomberman.vcxproj -> C:\Users\taz\Desktop\OOP_indie_studio_2018\Debug\bomberman.exe
