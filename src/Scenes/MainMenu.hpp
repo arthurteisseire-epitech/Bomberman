@@ -27,6 +27,7 @@ namespace ind {
         irr::gui::IGUIButton *_startButton;
         irr::gui::IGUIButton *_optionsButton;
         irr::gui::IGUIButton *_exitButton;
+        irr::gui::IGUIButton *_loadButton;
         irr::video::ITexture *_background;
         std::map<irr::gui::IGUIButton *, SceneType> _buttonScene;
 
