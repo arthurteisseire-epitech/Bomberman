@@ -1,9 +1,1 @@
 ﻿  Checking Build System
-  CMake is re-running because C:/Users/taz/Desktop/OOP_indie_studio_2018/CMakeFiles/generate.stamp is out-of-date.
-    the file 'C:/Users/taz/Desktop/OOP_indie_studio_2018/CMakeLists.txt'
-    is newer than 'C:/Users/taz/Desktop/OOP_indie_studio_2018/CMakeFiles/generate.stamp.depend'
-    result='-1'
-  -- Selecting Windows SDK version 10.0.17763.0 to target Windows 10.0.17134.
-  -- Configuring done
-  -- Generating done
-  -- Build files have been written to: C:/Users/taz/Desktop/OOP_indie_studio_2018
