@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations\AnimatedMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations\Animator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations\Optimization\ObjAnimationOptimizer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\AIBehaviour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\AIUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\BoardBehaviour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\BombBehaviour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\PlayerBehaviour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\PowerUpBehaviour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\TimeoutObjectBehaviour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BlockBreakable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BoardObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Bomb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BombUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Explosion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\FireUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Ground.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\PowerUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\SpeedUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\TimeoutObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Wall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\WallPass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities\AbstractEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities\Orientation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities\PlayerFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map\Board.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map\ExplosionManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\PlayersSettingsSave.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Position.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\AScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\GameScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\LoadingScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\MainMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\OptionsScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\SceneManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\DeviceService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\FileSystemService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\KeyService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\LoadingService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\PathfindingService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\DirectionMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\Keys.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\Path.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\PlaceRectangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\to2d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations\AnimatedMesh.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations\Animator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations\Optimization\IAnimatedMeshOptimizer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Animations\Optimization\ObjAnimationOptimizer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\AIBehaviour.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\AIUtils.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\BoardBehaviour.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\BombBehaviour.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\IBehaviour.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\PlayerBehaviour.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\PowerUpBehaviour.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Behaviour\TimeoutObjectBehaviour.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BlockBreakable.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BoardObject.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Bomb.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BombUp.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Explosion.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\FireUp.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Ground.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\PowerUp.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\SpeedUp.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\TimeoutObject.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Wall.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\WallPass.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities\AbstractEntity.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities\Orientation.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities\Player.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Entities\PlayerFactory.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Game.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map\Board.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map\ExplosionManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map\Tile.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Map\TimeoutObjectManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\PlayersSettingsSave.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Position.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\AScene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\GameScene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\LoadingScene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\MainMenu.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\OptionsScene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\SceneManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\DeviceService.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\FileSystemService.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\KeyService.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\LoadingService.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\PathfindingService.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\Singleton.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Size.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\DirectionMap.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\Keys.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\Path.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\PlaceRectangle.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Utilities\to2d.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{96B47B85-7183-3BD5-BD73-D2FCB3F99955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{9D4F01DC-40C9-3F5F-A5F2-E826F320A328}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

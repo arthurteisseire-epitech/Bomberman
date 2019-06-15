@@ -10,7 +10,7 @@
 
 #include <map>
 #include <irrlicht/IGUIEnvironment.h>
-#include <bits/unique_ptr.h>
+#include <memory>
 #include "AScene.hpp"
 
 namespace ind {

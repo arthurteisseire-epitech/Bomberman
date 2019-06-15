@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "Path.hpp"
+#include "include/crossPlatform.hpp"
 
 std::string ind::Path::progPath = ".";
 
@@ -17,5 +18,5 @@ std::string ind::Path::realpath(const std::string &string)
 
 void ind::Path::changePath(const std::string &string)
 {
-    progPath = string.substr(0, string.find_last_of('/'));
+    progPath = string.substr(0, string.find_last_of(DIRECTORYSEPARATOR));
 }

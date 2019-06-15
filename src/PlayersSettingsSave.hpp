@@ -9,7 +9,7 @@
 #define BOMBERMAN_PLAYERSSETTINGSSAVE_HPP
 
 #include <map>
-#include <bits/unique_ptr.h>
+#include <memory>
 
 namespace ind {
     struct PlayerSettings {

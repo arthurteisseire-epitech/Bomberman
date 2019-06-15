@@ -6,6 +6,7 @@
 */
 
 #include <map>
+#include <array>
 #include "PathfindingService.hpp"
 
 static const std::array<ind::Position, 4> DIRECTIONS = {
@@ -25,7 +26,7 @@ std::vector<ind::Position> ind::PathfindingService::searchPath(
     state.closed[from.x][from.y].distance = 1;
     state.closed[from.x][from.y].heuristic = heuristicDistance(from, to);
     state.open.push(state.closed[from.x][from.y]);
-    while (not state.open.empty()) {
+    while (!state.open.empty()) {
         Node node = state.open.top();
         state.open.pop();
         if (node == to) {
@@ -53,17 +54,17 @@ void ind::PathfindingService::State::backtrack(const Position &begin, int x,
         return;
     for (size_t i = 0 ; i < 4 ; ++i) {
         Position p = Position(x + DIRECTIONS[i].x, y + DIRECTIONS[i].y);
-        if (p.x > mapSize.x - 1 or p.y > mapSize.y - 1 or
-            p.x < 0 or p.y < 0 or closed[p.x][p.y].distance < 1)
+        if (p.x > mapSize.x - 1 || p.y > mapSize.y - 1 ||
+            p.x < 0 || p.y < 0 || closed[p.x][p.y].distance < 1)
             continue;
-        if ((closest.x == -1 and
-            std::find(path.begin(), path.end(), p) == path.end()) or
+        if ((closest.x == -1 &&
+            std::find(path.begin(), path.end(), p) == path.end()) ||
             (closed[p.x][p.y].distance < distance)) {
             distance = closed[p.x][p.y].distance;
             closest = Position(p.x, p.y);
         }
     }
-    if (closest.x != -1 and closest.y != -1)
+    if (closest.x != -1 && closest.y != -1)
         backtrack(begin, closest.x, closest.y, distance);
 }
 
@@ -106,19 +107,19 @@ void ind::PathfindingService::State::checkNeighbors(
     for (size_t i = 0 ; i < 4 ; ++i) {
         neighs[i].x = u.x + DIRECTIONS[i].x;
         neighs[i].y = u.y + DIRECTIONS[i].y;
-        if (neighs[i].x > mapSize.x - 1 or (neighs[i].x < 0) or
-            neighs[i].y > mapSize.y - 1 or (neighs[i].y < 0) or
+        if (neighs[i].x > mapSize.x - 1 || (neighs[i].x < 0) ||
+            neighs[i].y > mapSize.y - 1 || (neighs[i].y < 0) ||
             closed[neighs[i].x][neighs[i].y].distance < 0)
             continue;
         neighs[i].distance = u.distance + 1;
         neighs[i].heuristic = neighs[i].distance +
             PathfindingService::heuristicDistance(neighs[i], to);
         Node &node = closed[neighs[i].x][neighs[i].y];
-        if (neighs[i].distance < 1 or node.heuristic != 0)
+        if (neighs[i].distance < 1 || node.heuristic != 0)
             continue;
         open.push(neighs[i]);
         node.heuristic = neighs[i].heuristic;
-        if (node.distance == 0 or node.distance > neighs[i].distance)
+        if (node.distance == 0 || node.distance > neighs[i].distance)
             node.distance = neighs[i].distance;
     }
 }

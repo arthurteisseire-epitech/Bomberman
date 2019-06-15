@@ -20,27 +20,27 @@ ind::LoadingScene::LoadingScene() : _loadingService(SingleTon<LoadingService>::g
 {
     std::vector<ind::LoadAnimationData> playerAAnimations = {
         {
-            .id = "walk",
-            .folderPath = Path::realpath("assets/PlayerA/walking"),
-            .texture = Path::realpath("assets/PlayerA/MAW_diffuse.png")
+            "walk",
+            Path::realpath("assets/PlayerA/walking"),
+            Path::realpath("assets/PlayerA/MAW_diffuse.png")
         },
         {
-            .id = "idle",
-            .folderPath = Path::realpath("assets/PlayerA/idle"),
-            .texture = Path::realpath("assets/PlayerA/MAW_diffuse.png")
+            "idle",
+            Path::realpath("assets/PlayerA/idle"),
+            Path::realpath("assets/PlayerA/MAW_diffuse.png")
         }
     };
 
     std::vector<ind::LoadAnimationData> playerBAnimations = {
         {
-            .id = "walk",
-            .folderPath = Path::realpath("assets/PlayerB/walking"),
-            .texture = Path::realpath("assets/PlayerB/Mutant_diffuse.png")
+            "walk",
+            Path::realpath("assets/PlayerB/walking"),
+            Path::realpath("assets/PlayerB/Mutant_diffuse.png")
         },
         {
-            .id = "idle",
-            .folderPath = Path::realpath("assets/PlayerB/idle"),
-            .texture = Path::realpath("assets/PlayerB/Mutant_diffuse.png")
+            "idle",
+            Path::realpath("assets/PlayerB/idle"),
+            Path::realpath("assets/PlayerB/Mutant_diffuse.png")
         }
     };
 

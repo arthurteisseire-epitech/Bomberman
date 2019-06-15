@@ -24,7 +24,7 @@ ind::OptionsScene::OptionsScene() :
     irr::video::IVideoDriver *driver = gui->getVideoDriver();
     const irr::core::dimension2d<irr::u32> size = gui->getVideoDriver()->getScreenSize();
 
-    initButtons({size.Width, size.Height});
+    initButtons({ (const irr::s32)size.Width,(const irr::s32) size.Height});
     background = driver->getTexture(Path::realpath("assets/bomb_background.png").c_str());
     gui->getSkin()->setColor(irr::gui::EGDC_BUTTON_TEXT, irr::video::SColor(255, 180, 180, 180));
 }
@@ -127,24 +127,24 @@ void ind::OptionsScene::setTexts() const
 {
     irr::gui::IGUIFont *font = gui->getFont(Path::realpath("assets/settings/fonts/32px/myfont.xml").c_str());
 
-    const std::string maxBombsPlacedStr = std::__cxx11::to_string(
+    const std::string maxBombsPlacedStr = std::to_string(
             ind::PlayersSettingsSave::defaultSettings().maxBombsPlaced);
     bombsPlacedNumber->setText(std::wstring(maxBombsPlacedStr.begin(), maxBombsPlacedStr.end()).c_str());
     bombsPlacedNumber->setOverrideFont(font);
 
-    const std::string speedStr = std::__cxx11::to_string((int) ind::PlayersSettingsSave::defaultSettings().speed);
+    const std::string speedStr = std::to_string((int) ind::PlayersSettingsSave::defaultSettings().speed);
     speedNumberButton->setText(std::wstring(speedStr.begin(), speedStr.end()).c_str());
     speedNumberButton->setOverrideFont(font);
 
-    const std::string powerStr = std::__cxx11::to_string(ind::PlayersSettingsSave::defaultSettings().bombPower);
+    const std::string powerStr = std::to_string(ind::PlayersSettingsSave::defaultSettings().bombPower);
     bombsPowerNumberButton->setText(std::wstring(powerStr.begin(), powerStr.end()).c_str());
     bombsPowerNumberButton->setOverrideFont(font);
 
-    const std::string playersNbStr = std::__cxx11::to_string(ind::PlayersSettingsSave::getPlayerNumber());
+    const std::string playersNbStr = std::to_string(ind::PlayersSettingsSave::getPlayerNumber());
     playerNumberValue->setText(std::wstring(playersNbStr.begin(), playersNbStr.end()).c_str());
     playerNumberValue->setOverrideFont(font);
 
-    const std::string AINbStr = std::__cxx11::to_string(ind::PlayersSettingsSave::getAINumber());
+    const std::string AINbStr = std::to_string(ind::PlayersSettingsSave::getAINumber());
     AINumberValue->setText(std::wstring(AINbStr.begin(), AINbStr.end()).c_str());
     AINumberValue->setOverrideFont(font);
 }
@@ -165,7 +165,7 @@ irr::gui::IGUIButton *ind::OptionsScene::initButton(const irr::core::dimension2d
     return button;
 }
 
-ind::SceneType ind::OptionsScene::execute(__attribute__((unused)) irr::f32 deltaTime)
+ind::SceneType ind::OptionsScene::execute(irr::f32 deltaTime)
 {
     static irr::core::dimension2d<irr::u32> size = gui->getVideoDriver()->getScreenSize();
     const irr::core::dimension2d<irr::u32> currSize = gui->getVideoDriver()->getScreenSize();
