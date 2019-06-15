@@ -26,6 +26,7 @@ include_directories(
 		src/Scenes
 		src/Utilities
 		src/Animations
+		.
 )
 
 file(GLOB_RECURSE SOURCE_FILES src/*.cpp src/*.hpp)
