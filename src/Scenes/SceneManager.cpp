@@ -12,6 +12,7 @@
 #include "MainMenu.hpp"
 #include "OptionsScene.hpp"
 #include "LoadingScene.hpp"
+#include "DeadScene.hpp"
 
 ind::SceneManager::SceneManager(SceneType sceneType)
 {
@@ -37,6 +38,9 @@ void ind::SceneManager::buildScene(ind::SceneType type)
             break;
         case LOADING:
             _currentScene = std::unique_ptr<LoadingScene>(new LoadingScene());
+            break;
+        case DEAD:
+            _currentScene = std::unique_ptr<DeadScene>(new DeadScene());
             break;
         default:
             return;
