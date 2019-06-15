@@ -27,11 +27,22 @@ ind::SceneType ind::GameScene::execute(irr::f32 deltaTime)
     if (_map.getPlayers().size() == 1)
         return DEAD;
     if (SingleTon<KeyService>::getInstance().isKeyPressed(irr::KEY_ESCAPE))
-        return MAIN_MENU;
+        return PAUSE;
     return GAME;
 }
 
 ind::SceneType ind::GameScene::type()
 {
     return GAME;
+}
+
+void ind::GameScene::pause()
+{
+    _cameraTargetSave = _manager->getActiveCamera()->getTarget();
+    _manager->getActiveCamera()->setTarget(_cameraTargetSave * -10);
+}
+
+void ind::GameScene::resume()
+{
+    _manager->getActiveCamera()->setTarget(_cameraTargetSave);
 }

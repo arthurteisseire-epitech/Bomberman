@@ -12,15 +12,9 @@
 #include <irrlicht/IGUIEnvironment.h>
 #include <memory>
 #include "AScene.hpp"
+#include "ButtonPosition.hpp"
 
 namespace ind {
-    struct ButtonPosition {
-        ButtonPosition(irr::core::dimension2df center_, irr::core::dimension2df size_);
-
-        irr::core::dimension2df center;
-        irr::core::dimension2df size;
-    };
-
     class OptionsScene : public AScene {
     public:
         OptionsScene();

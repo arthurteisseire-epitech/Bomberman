@@ -10,7 +10,6 @@
 
 ind::PowerUpBehaviour::PowerUpBehaviour(ind::PowerUp &powerUp) : powerUp(powerUp)
 {
-    std::cout << "construit le bhavouil" << std::endl;
 }
 
 void ind::PowerUpBehaviour::update(float deltaTime)

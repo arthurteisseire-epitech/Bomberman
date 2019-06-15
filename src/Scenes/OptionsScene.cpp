@@ -13,10 +13,6 @@
 #include "PlayersSettingsSave.hpp"
 #include "PlaceRectangle.hpp"
 
-ind::ButtonPosition::ButtonPosition(const irr::core::dimension2df center_, const irr::core::dimension2df size_)
-        : center(center_), size(size_)
-{}
-
 ind::OptionsScene::OptionsScene() :
         AScene(),
         gui(_manager->getGUIEnvironment())
@@ -24,7 +20,7 @@ ind::OptionsScene::OptionsScene() :
     irr::video::IVideoDriver *driver = gui->getVideoDriver();
     const irr::core::dimension2d<irr::u32> size = gui->getVideoDriver()->getScreenSize();
 
-    initButtons({ (const irr::s32)size.Width,(const irr::s32) size.Height});
+    initButtons({(const irr::s32)size.Width, (const irr::s32) size.Height});
     background = driver->getTexture(Path::realpath("assets/bomb_background.png").c_str());
     gui->getSkin()->setColor(irr::gui::EGDC_BUTTON_TEXT, irr::video::SColor(255, 180, 180, 180));
 }

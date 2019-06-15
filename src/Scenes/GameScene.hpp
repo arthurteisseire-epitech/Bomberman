@@ -21,8 +21,12 @@ namespace ind {
         explicit GameScene();
         SceneType execute(irr::f32 deltaTime) final;
         SceneType type() final;
+        void pause();
+        void resume();
+
     private:
         Board _map;
+        irr::core::vector3df _cameraTargetSave;
     };
 }
 

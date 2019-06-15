@@ -18,6 +18,7 @@ namespace ind {
         OPTIONS,
         GAME,
         LOADING,
+        PAUSE,
         DEAD,
         EXIT
     };

@@ -19,6 +19,7 @@ namespace ind {
         void buildScene(ind::SceneType type);
     private:
         std::unique_ptr<AScene> _currentScene;
+        std::unique_ptr<AScene> _savedGame;
     };
 }
 
