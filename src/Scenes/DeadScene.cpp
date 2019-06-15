@@ -55,8 +55,8 @@ void ind::DeadScene::initButtons()
     const irr::u32 &x = size.Width;
     const irr::u32 &y = size.Height;
 
-    button = initButton(ind::PlaceRectangle::getRectangle({(const irr::s32)x / 4, (const irr::s32)y / 2},
-                                                          {(const irr::s32)x / 6, (const irr::s32)y / 14}),
+    button = initButton(ind::PlaceRectangle::getRectangle({(const irr::s32)x / 2, (const irr::s32)y / 2},
+                                                          {(const irr::s32)x / 2, (const irr::s32)y / 2}),
                         "./assets/return.png");
 }
 
