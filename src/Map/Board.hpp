@@ -47,7 +47,6 @@ namespace ind {
 
         void save();
     private:
-        void printMap() const;
         void cleanCorners();
         void initGround();
         void initWall();
@@ -59,7 +58,6 @@ namespace ind {
         std::vector<std::unique_ptr<Player>> players;
         std::vector<std::vector<std::unique_ptr<Ground>>> ground;
         std::vector<std::vector<std::shared_ptr<BoardObject>>> map;
-        std::vector<std::vector<std::unique_ptr<Wall>>> walls;
         TimeoutObjectManager<BoardObject> timeoutObjectManager;
         ExplosionManager explosionManager;
         Position size;

@@ -112,19 +112,6 @@ ind::Tile ind::Board::getInfoAtCoord(int x, int y) const
     return tile->getTile();
 }
 
-void ind::Board::printMap() const
-{
-    for (auto &it : map) {
-        for (const auto &it2: it) {
-            if (it2->getTile() != EMPTY)
-                std::cout << "o";
-            else
-                std::cout << "x";
-        }
-        std::cout << std::endl;
-    }
-}
-
 ind::Position ind::Board::getSize() const
 {
     return size;
