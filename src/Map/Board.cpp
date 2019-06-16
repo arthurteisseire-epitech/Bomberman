@@ -249,20 +249,24 @@ bool ind::Board::isWalkable(const ind::Position &pos) const
 
 void ind::Board::save()
 {
+    std::ofstream fs;
+    fs.open("save.txt");
+
+    if (fs.fail())
+        return;
     for (const auto &row : map)
-        saveRow(row);
+        saveRow(row, fs);
+    fs.close();
 }
 
-void ind::Board::saveRow(const std::vector<std::shared_ptr<ind::BoardObject>> &row)
+void ind::Board::saveRow(const std::vector<std::shared_ptr<ind::BoardObject>> &row, std::ofstream &fs)
 {
     for (const auto &tile : row)
-        saveTile(tile);
+        if (tile)
+            saveTile(tile, fs);
 }
 
-void ind::Board::saveTile(const std::shared_ptr<ind::BoardObject> &tile)
+void ind::Board::saveTile(const std::shared_ptr<ind::BoardObject> &tile, std::ofstream &fs)
 {
-    std::fstream fs;
-    fs.open("save.txt", std::fstream::in | std::fstream::out | std::fstream::app);
-
-    fs << tile->toString();
+    fs << tile->toString() << std::endl;
 }

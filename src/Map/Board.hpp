@@ -53,8 +53,8 @@ namespace ind {
         void initWall();
         void initBlocks();
 
-        void saveRow(const std::vector<std::shared_ptr<BoardObject>> &row);
-        void saveTile(const std::shared_ptr<BoardObject> &tile);
+        void saveRow(const std::vector<std::shared_ptr<BoardObject>> &row, std::ofstream &fs);
+        void saveTile(const std::shared_ptr<BoardObject> &tile, std::ofstream &fs);
 
         std::vector<std::unique_ptr<Player>> players;
         std::vector<std::vector<std::unique_ptr<Ground>>> ground;
