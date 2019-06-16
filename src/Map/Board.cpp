@@ -9,6 +9,7 @@
 #include <irrlicht/irrlicht.h>
 #include <cstdlib>
 #include <fstream>
+#include "Path.hpp"
 #include "WallPass.hpp"
 #include "SpeedUp.hpp"
 #include "FireUp.hpp"
@@ -36,7 +37,7 @@ ind::Board::Board(Position size_) :
 
 void ind::Board::initPlayers()
 {
-    std::ifstream fs("players.txt");
+    std::ifstream fs(Path::realpath("players.txt"));
 
     if (fs.good()) {
         loadPlayers(fs);
@@ -58,7 +59,7 @@ void ind::Board::initPlayers()
 
 void ind::Board::initMap()
 {
-    std::ifstream fs("map.txt");
+    std::ifstream fs(Path::realpath("map.txt"));
 
     initGround();
     if (fs.good()) {
@@ -264,8 +265,8 @@ void ind::Board::save()
     std::ofstream fs;
     std::ofstream playerFile;
 
-    fs.open("map.txt");
-    playerFile.open("players.txt");
+    fs.open(Path::realpath("map.txt"));
+    playerFile.open(Path::realpath("players.txt"));
 
     if (fs.good()) {
         for (const auto &row : map)
