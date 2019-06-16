@@ -44,14 +44,15 @@ void ind::Board::initPlayers()
         ind::Position cornersPos[4] = {ind::Position(0, 0), ind::Position(this->size.x - 1, this->size.y - 1),
                                        ind::Position(this->size.x - 1, 0),
                                        ind::Position(0, this->size.y - 1)};
-        ind::PlayerNumber pNbArr[4] = {ind::PLAYER_ONE, ind::PLAYER_TWO, ind::AI1, ind::AI2};
+        ind::PlayerNumber pNbArr[2] = {ind::PLAYER_ONE, ind::PLAYER_TWO};
+	ind::PlayerNumber AINbArr[3] = {ind::AI1, ind::AI2, ind::AI3};
         const unsigned short pNb = ind::PlayersSettingsSave::getPlayerNumber();
         const unsigned short AINb = ind::PlayersSettingsSave::getAINumber();
 
         for (unsigned short pIdx = 0; pIdx < pNb; ++pIdx)
             this->players.emplace_back(ind::PlayerFactory::create(pNbArr[pIdx], cornersPos[pIdx], *this));
         for (unsigned short AIIdx = pNb; AIIdx < pNb + AINb; ++AIIdx)
-            this->players.emplace_back(ind::PlayerFactory::create(pNbArr[AIIdx], cornersPos[AIIdx], *this));
+            this->players.emplace_back(ind::PlayerFactory::create(AINbArr[AIIdx - pNb], cornersPos[AIIdx], *this));
     }
 }
 
