@@ -323,6 +323,8 @@ void ind::Board::initTileFromLine(std::string line)
     int y = std::stoi(line);
     line = line.substr(line.find(' ') + 1);
 
+    if (x >= size.x || y >= size.y || x < 0 || y < 0)
+        return;
     auto tile = BoardObjectFactory::create(line, Position(x, y), *this);
     map[x][y].reset(tile);
 }
@@ -347,5 +349,8 @@ void ind::Board::initPlayerFromLine(std::string line)
     line = line.substr(line.find(' ') + 1);
     auto n = static_cast<PlayerNumber>(std::stoi(line));
 
+    if (x >= size.x || y >= size.y || x < 0 || y < 0)
+        return;
+    emptyTile(map[x][y]);
     players.emplace_back(PlayerFactory::create(n, Position(x, y), *this));
 }
