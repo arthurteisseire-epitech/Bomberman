@@ -194,16 +194,6 @@ void ind::Player::disableWallPass()
     wallPass = false;
 }
 
-bool ind::Player::canPlaceBomb() const
-{
-    return actualBombsPlaced < maxBombsPlaced;
-}
-
-std::string ind::Player::getFileName()
-{
-    return "players.txt";
-}
-
 ind::PlayerNumber ind::Player::getNumber() const
 {
     return playerNumber;
