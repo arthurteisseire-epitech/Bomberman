@@ -14,13 +14,13 @@
 #include "PlayerBehaviour.hpp"
 
 ind::Player::Player(PlayerNumber playerNumber, const Position &position, Board &map, animations::Animator *animator) :
-        AbstractEntity(),
-        playerNumber(playerNumber),
-        wallPass(false),
-        boardPosition(position),
-        map(map),
-        alive(true),
-        _animator(animator)
+    AbstractEntity(),
+    playerNumber(playerNumber),
+    wallPass(false),
+    boardPosition(position),
+    map(map),
+    alive(true),
+    _animator(animator)
 {
     applySettings(PlayersSettingsSave::defaultSettings());
     _animator->setAnimationsPosition(to3d(position));
@@ -194,24 +194,46 @@ void ind::Player::disableWallPass()
     wallPass = false;
 }
 
-bool ind::Player::canPlaceBomb() const
-{
-    return actualBombsPlaced < maxBombsPlaced;
-}
-
-std::string ind::Player::getFileName()
-{
-    return "players.txt";
-}
-
 ind::PlayerNumber ind::Player::getNumber() const
 {
     return playerNumber;
 }
 
+short ind::Player::getBombPower() const
+{
+    return bombPower;
+}
+
+bool ind::Player::hasWallPass() const
+{
+    return wallPass;
+}
+
+void ind::Player::setBombPower(short newPower)
+{
+    bombPower = newPower;
+}
+
+void ind::Player::setMovementSpeed(float newSpeed)
+{
+    movementSpeed = newSpeed;
+}
+
 std::ostream &ind::operator<<(std::ostream &os, const Player &player)
 {
-    os << player.getPosition().y << "," << player.getPosition().x << " " << player.getNumber();
+    os << player.getPosition().y
+       << "," <<
+       player.getPosition().x
+       << " " <<
+       player.getNumber()
+       << " " <<
+       player.getBombNumber()
+       << " " <<
+       player.hasWallPass()
+       << " " <<
+       player.getBombPower()
+       << " " <<
+       player.getSpeed();
 
     return os;
 }

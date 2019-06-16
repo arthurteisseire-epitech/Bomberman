@@ -161,7 +161,7 @@ irr::gui::IGUIButton *ind::OptionsScene::initButton(const irr::core::dimension2d
     return button;
 }
 
-ind::SceneType ind::OptionsScene::execute(irr::f32 deltaTime)
+ind::SceneType ind::OptionsScene::execute(irr::f32)
 {
     static irr::core::dimension2d<irr::u32> size = gui->getVideoDriver()->getScreenSize();
     const irr::core::dimension2d<irr::u32> currSize = gui->getVideoDriver()->getScreenSize();

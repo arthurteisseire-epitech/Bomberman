@@ -8,6 +8,7 @@
 #include <irrlicht/IGUIEnvironment.h>
 #include <irrlicht/IGUIButton.h>
 #include <iostream>
+#include "Path.hpp"
 #include "MainMenu.hpp"
 #include "PlaceRectangle.hpp"
 
@@ -22,7 +23,7 @@ ind::MainMenu::MainMenu() :
 
     initButtons(x, y);
     fillMapButtonScene();
-    _background = driver->getTexture("./assets/bomb_background.png");
+    _background = driver->getTexture(Path::realpath("./assets/bomb_background.png").c_str());
 }
 
 ind::MainMenu::~MainMenu()
@@ -46,7 +47,7 @@ void ind::MainMenu::initButtons(const irr::u32 &x, const irr::u32 &y)
                              "./assets/exit.png");
     _loadButton = initButton(ind::PlaceRectangle::getRectangle({(const irr::s32) x / 2, (const irr::s32) y / 3},
                                                                {(const irr::s32) x / 6, (const irr::s32) y / 14}),
-                             "./assets/load.png");;
+                             "./assets/load.png");
 }
 
 void ind::MainMenu::fillMapButtonScene()
@@ -61,7 +62,7 @@ irr::gui::IGUIButton *ind::MainMenu::initButton(const irr::core::rect<irr::s32> 
 {
     irr::gui::IGUIButton *button = _gui->addButton(rect);
 
-    button->setImage(_gui->getVideoDriver()->getTexture(string));
+    button->setImage(_gui->getVideoDriver()->getTexture(Path::realpath(string).c_str()));
     button->setDrawBorder(false);
     return button;
 }
@@ -76,8 +77,8 @@ ind::SceneType ind::MainMenu::execute(irr::f32 deltaTime)
         size = currSize;
     }
     if (_startButton->isPressed()) {
-        std::remove("map.txt");
-        std::remove("players.txt");
+        std::remove(Path::realpath("map.txt").c_str());
+        std::remove(Path::realpath("players.txt").c_str());
     }
     for (auto &buttonAssocScene : _buttonScene)
         if (buttonAssocScene.first->isPressed())

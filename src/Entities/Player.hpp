@@ -60,9 +60,11 @@ namespace ind {
         void speedUp();
         void enableWallPass();
         void disableWallPass();
-        bool canPlaceBomb() const;
         PlayerNumber getNumber() const;
-        static std::string getFileName();
+        short getBombPower() const;
+        bool hasWallPass() const;
+        void setBombPower(short bombPower);
+        void setMovementSpeed(float movementSpeed);
 
     private:
         PlayerNumber playerNumber;
