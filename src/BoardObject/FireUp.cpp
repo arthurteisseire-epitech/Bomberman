@@ -17,3 +17,8 @@ void ind::FireUp::upgrade(ind::Player &player)
 {
     player.fireUp();
 }
+
+ind::PowerType ind::FireUp::getType() const
+{
+    return FIREUP;
+}

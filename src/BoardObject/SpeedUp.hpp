@@ -15,6 +15,7 @@ namespace ind {
     public:
         explicit SpeedUp(ind::Position position);
         ~SpeedUp() override = default;
+        PowerType getType() const override;
         void upgrade(Player &player) override;
     };
 }

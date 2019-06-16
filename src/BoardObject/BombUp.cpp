@@ -22,3 +22,8 @@ void ind::BombUp::upgrade(Player &player)
 {
     player.setBombNumber(player.getBombNumber() + 1);
 }
+
+ind::PowerType ind::BombUp::getType() const
+{
+    return BOMBUP;
+}

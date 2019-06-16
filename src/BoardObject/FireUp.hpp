@@ -15,6 +15,7 @@ namespace ind {
     public:
         explicit FireUp(Position position);
         ~FireUp() override = default;
+        PowerType getType() const override;
         void upgrade(Player &player) override;
     };
 }

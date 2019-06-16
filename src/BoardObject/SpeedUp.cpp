@@ -17,3 +17,8 @@ void ind::SpeedUp::upgrade(ind::Player &player)
 {
     player.speedUp();
 }
+
+ind::PowerType ind::SpeedUp::getType() const
+{
+    return SPEEDUP;
+}

@@ -17,3 +17,8 @@ void ind::WallPass::upgrade(ind::Player &player)
 {
     player.enableWallPass();
 }
+
+ind::PowerType ind::WallPass::getType() const
+{
+    return WALLPASS;
+}
