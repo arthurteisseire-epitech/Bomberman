@@ -16,6 +16,7 @@ namespace ind {
         explicit Wall(Position position);
 
         Tile getTile() const override;
+        virtual std::string toString() const override;
     };
 }
 

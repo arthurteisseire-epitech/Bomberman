@@ -33,3 +33,8 @@ void ind::BoardObject::createGraphicalCube(int height)
     node->setPosition(irr::core::vector3df(position.x * TILE_SIZE, height * TILE_SIZE, position.y * TILE_SIZE));
     node->setMaterialTexture(0, texture);
 }
+
+std::string ind::BoardObject::toString() const
+{
+    return std::to_string(position.x) + "," + std::to_string(position.y) + " ";
+}

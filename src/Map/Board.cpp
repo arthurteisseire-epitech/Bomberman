@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <irrlicht/irrlicht.h>
 #include <cstdlib>
+#include <fstream>
 #include "WallPass.hpp"
 #include "SpeedUp.hpp"
 #include "FireUp.hpp"
@@ -24,23 +25,48 @@
 #include "Player.hpp"
 #include "Singleton.hpp"
 #include "PlayerFactory.hpp"
+#include "BoardObjectFactory.hpp"
 
 ind::Board::Board(Position size_) :
     size(size_)
 {
-    initGround();
-    initBlocks();
-    initWall();
-    cleanCorners();
-    Position cornersPos[4] = {Position(0, 0), Position(size.x - 1, size.y - 1), Position(size.x - 1, 0), Position(0, size.y - 1)};
-    PlayerNumber pNbArr[4] = {PLAYER_ONE, PLAYER_TWO, AI1, AI2};
-    const unsigned short pNb = PlayersSettingsSave::getPlayerNumber();
-    const unsigned short AINb = PlayersSettingsSave::getAINumber();
+    initMap();
+    initPlayers();
+}
 
-    for (unsigned short pIdx = 0; pIdx < pNb; ++pIdx)
-        players.emplace_back(PlayerFactory::create(pNbArr[pIdx], cornersPos[pIdx], *this));
-    for (unsigned short AIIdx = pNb; AIIdx < pNb + AINb; ++AIIdx)
-        players.emplace_back(PlayerFactory::create(pNbArr[AIIdx], cornersPos[AIIdx], *this));
+void ind::Board::initPlayers()
+{
+    std::ifstream fs("players.txt");
+
+    if (fs.good()) {
+        loadPlayers(fs);
+    } else {
+        ind::Position cornersPos[4] = {ind::Position(0, 0), ind::Position(this->size.x - 1, this->size.y - 1),
+                                       ind::Position(this->size.x - 1, 0),
+                                       ind::Position(0, this->size.y - 1)};
+        ind::PlayerNumber pNbArr[4] = {ind::PLAYER_ONE, ind::PLAYER_TWO, ind::AI1, ind::AI2};
+        const unsigned short pNb = ind::PlayersSettingsSave::getPlayerNumber();
+        const unsigned short AINb = ind::PlayersSettingsSave::getAINumber();
+
+        for (unsigned short pIdx = 0; pIdx < pNb; ++pIdx)
+            this->players.emplace_back(ind::PlayerFactory::create(pNbArr[pIdx], cornersPos[pIdx], *this));
+        for (unsigned short AIIdx = pNb; AIIdx < pNb + AINb; ++AIIdx)
+            this->players.emplace_back(ind::PlayerFactory::create(pNbArr[AIIdx], cornersPos[AIIdx], *this));
+    }
+}
+
+void ind::Board::initMap()
+{
+    std::ifstream fs("map.txt");
+
+    initGround();
+    if (fs.good()) {
+        loadMap(fs);
+    } else {
+        initBlocks();
+        initWall();
+    }
+    cleanCorners();
 }
 
 void ind::Board::initGround()
@@ -108,19 +134,6 @@ ind::Tile ind::Board::getInfoAtCoord(int x, int y) const
     if (tile == nullptr)
         return EMPTY;
     return tile->getTile();
-}
-
-void ind::Board::printMap() const
-{
-    for (auto &it : map) {
-        for (const auto &it2: it) {
-            if (it2->getTile() != EMPTY)
-                std::cout << "o";
-            else
-                std::cout << "x";
-        }
-        std::cout << std::endl;
-    }
 }
 
 ind::Position ind::Board::getSize() const
@@ -243,4 +256,96 @@ bool ind::Board::isWalkable(const ind::Position &pos) const
 
     const auto &type = getInfoAtCoord(pos.x, pos.y);
     return type != BLOCKBREAKABLE && type != WALL && type != BOMB;
+}
+
+void ind::Board::save()
+{
+    std::ofstream fs;
+    std::ofstream playerFile;
+
+    fs.open("map.txt");
+    playerFile.open("players.txt");
+
+    if (fs.good()) {
+        for (const auto &row : map)
+            saveRow(row, fs);
+        fs.close();
+    }
+    if (playerFile.good()) {
+        savePlayers(playerFile);
+        fs.close();
+    }
+}
+
+void ind::Board::saveRow(const std::vector<std::shared_ptr<ind::BoardObject>> &row, std::ofstream &fs)
+{
+    for (const auto &tile : row)
+        if (tile)
+            saveTile(tile, fs);
+}
+
+void ind::Board::saveTile(const std::shared_ptr<ind::BoardObject> &tile, std::ofstream &fs)
+{
+    if (tile->getTile() != BOMB)
+        fs << tile->toString() << std::endl;
+}
+
+void ind::Board::savePlayers(std::ofstream &fs)
+{
+    for (const auto &player : players)
+        fs << *player << std::endl;
+}
+
+void ind::Board::loadMap(std::ifstream &fs)
+{
+    map.reserve(size.x);
+    for (int i = 0; i < size.x; ++i) {
+        map.emplace_back();
+        map[i].reserve(size.y);
+        for (int j = 0; j < size.y; ++j)
+            map[i].emplace_back(nullptr);
+    }
+
+    std::string line;
+    while (std::getline(fs, line)) {
+        try {
+            initTileFromLine(line);
+        } catch (const std::exception &e) {
+            std::cout << e.what() << std::endl;
+        }
+    }
+}
+
+void ind::Board::initTileFromLine(std::string line)
+{
+    int x = std::stoi(line);
+    line = line.substr(line.find(',') + 1);
+    int y = std::stoi(line);
+    line = line.substr(line.find(' ') + 1);
+
+    auto tile = BoardObjectFactory::create(line, Position(x, y), *this);
+    map[x][y].reset(tile);
+}
+
+void ind::Board::loadPlayers(std::ifstream &fs)
+{
+    std::string line;
+    while (std::getline(fs, line)) {
+        try {
+            initPlayerFromLine(line);
+        } catch (const std::exception &e) {
+            std::cout << e.what() << std::endl;
+        }
+    }
+}
+
+void ind::Board::initPlayerFromLine(std::string line)
+{
+    int x = std::stoi(line);
+    line = line.substr(line.find(',') + 1);
+    int y = std::stoi(line);
+    line = line.substr(line.find(' ') + 1);
+    auto n = static_cast<PlayerNumber>(std::stoi(line));
+
+    players.emplace_back(PlayerFactory::create(n, Position(x, y), *this));
 }

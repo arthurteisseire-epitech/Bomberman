@@ -11,9 +11,11 @@
 
 namespace ind {
     class BombUp : public PowerUp {
-        public:
-            explicit BombUp(ind::Position position);
-            ~BombUp() override = default;
-            void upgrade(Player &player) override;
+    public:
+        explicit BombUp(ind::Position position);
+        ~BombUp() override = default;
+        PowerType getType() const override;
+        std::string toString() const override;
+        void upgrade(Player &player) override;
     };
 }
