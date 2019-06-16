@@ -46,7 +46,7 @@ irr::gui::IGUIButton *ind::PauseScene::initButton(const irr::core::dimension2df 
     return button;
 }
 
-ind::SceneType ind::PauseScene::execute(irr::f32 deltaTime)
+ind::SceneType ind::PauseScene::execute(irr::f32)
 {
     static irr::core::dimension2d<irr::u32> size = gui->getVideoDriver()->getScreenSize();
     const irr::core::dimension2d<irr::u32> currSize = gui->getVideoDriver()->getScreenSize();

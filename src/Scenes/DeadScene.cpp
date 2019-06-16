@@ -64,7 +64,7 @@ irr::gui::IGUIButton *ind::DeadScene::initButton(const irr::core::rect<irr::s32>
 {
     irr::gui::IGUIButton *b = gui->addButton(rect);
 
-    b->setImage(gui->getVideoDriver()->getTexture(string));
+    b->setImage(gui->getVideoDriver()->getTexture(Path::realpath(string).c_str()));
     b->setDrawBorder(false);
     return b;
 }

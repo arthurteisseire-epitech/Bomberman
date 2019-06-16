@@ -53,9 +53,8 @@ ind::LoadingScene::LoadingScene() : _loadingService(SingleTon<LoadingService>::g
     this->_loadingService.startLoad();
 }
 
-ind::SceneType ind::LoadingScene::execute(irr::f32 deltatime)
+ind::SceneType ind::LoadingScene::execute(irr::f32)
 {
-    // Override game main loop
     while (_finish != true) {
         SingleTon<DeviceService>::getInstance().getDevice()->getVideoDriver()->beginScene(true, true, irr::video::SColor(0, 0, 0, 0));
         SingleTon<DeviceService>::getInstance().getSceneManager()->drawAll();
