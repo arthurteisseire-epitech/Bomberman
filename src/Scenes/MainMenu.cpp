@@ -23,7 +23,7 @@ ind::MainMenu::MainMenu() :
 
     initButtons(x, y);
     fillMapButtonScene();
-    _background = driver->getTexture(Path::realpath("./assets/bomb_background.png").c_str());
+    _background = driver->getTexture(Path::realpath("assets/bomb_background.png").c_str());
 }
 
 ind::MainMenu::~MainMenu()
@@ -38,16 +38,16 @@ void ind::MainMenu::initButtons(const irr::u32 &x, const irr::u32 &y)
 {
     _startButton = initButton(ind::PlaceRectangle::getRectangle({(const irr::s32) x / 4, (const irr::s32) y / 2},
                                                                 {(const irr::s32) x / 6, (const irr::s32) y / 14}),
-                              "./assets/new_game.png");
+                              "assets/new_game.png");
     _optionsButton = initButton(ind::PlaceRectangle::getRectangle({(const irr::s32) x * 3 / 4, (const irr::s32) y / 2},
                                                                   {(const irr::s32) x / 6, (const irr::s32) y / 14}),
-                                "./assets/options.png");
+                                "assets/options.png");
     _exitButton = initButton(ind::PlaceRectangle::getRectangle({(const irr::s32) x / 2, (const irr::s32) y * 3 / 4},
                                                                {(const irr::s32) x / 6, (const irr::s32) y / 14}),
-                             "./assets/exit.png");
+                             "assets/exit.png");
     _loadButton = initButton(ind::PlaceRectangle::getRectangle({(const irr::s32) x / 2, (const irr::s32) y / 3},
                                                                {(const irr::s32) x / 6, (const irr::s32) y / 14}),
-                             "./assets/load.png");
+                             "assets/load.png");
 }
 
 void ind::MainMenu::fillMapButtonScene()
