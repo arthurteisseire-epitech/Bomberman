@@ -62,7 +62,7 @@ namespace ind {
         void disableWallPass();
         bool canPlaceBomb() const;
 
-        private:
+    private:
         short bombPower;
         short maxBombsPlaced;
         float movementSpeed;

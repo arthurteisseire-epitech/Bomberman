@@ -71,3 +71,8 @@ void ind::PlayersSettingsSave::addAI()
 {
     ++aiNumber;
 }
+
+const unsigned short ind::PlayersSettingsSave::getMaxAI()
+{
+    return maxAi;
+}

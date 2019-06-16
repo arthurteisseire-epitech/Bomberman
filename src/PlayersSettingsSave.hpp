@@ -34,11 +34,13 @@ namespace ind {
         static unsigned short getAINumber();
         static void removeAI();
         static void addAI();
+        static const unsigned short getMaxAI();
     private:
         static std::map<short, PlayerSettings> settingsMap;
         static short unsigned playerNumber;
         static const short unsigned maxPlayers = 2;
         static unsigned short aiNumber;
+        static const unsigned short maxAi = 3;
     };
 }
 

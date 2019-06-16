@@ -20,7 +20,7 @@ ind::OptionsScene::OptionsScene() :
     irr::video::IVideoDriver *driver = gui->getVideoDriver();
     const irr::core::dimension2d<irr::u32> size = gui->getVideoDriver()->getScreenSize();
 
-    initButtons({(const irr::s32)size.Width, (const irr::s32) size.Height});
+    initButtons({(const irr::s32) size.Width, (const irr::s32) size.Height});
     background = driver->getTexture(Path::realpath("assets/bomb_background.png").c_str());
     gui->getSkin()->setColor(irr::gui::EGDC_BUTTON_TEXT, irr::video::SColor(255, 180, 180, 180));
 }
@@ -286,9 +286,11 @@ void ind::OptionsScene::incrementBombsPower()
 
 void ind::OptionsScene::incrementPlayerNumber()
 {
-    if (PlayersSettingsSave::getPlayerNumber() >= PlayersSettingsSave::getMaxPlayers())
+    if (PlayersSettingsSave::getPlayerNumber() == PlayersSettingsSave::getMaxPlayers())
         return;
 
+    if (PlayersSettingsSave::getAINumber() == PlayersSettingsSave::getMaxAI())
+        decrementAINumber();
     PlayersSettingsSave::addPlayer();
 
     const std::string playerNumberStr = std::to_string(PlayersSettingsSave::getPlayerNumber());
@@ -298,9 +300,11 @@ void ind::OptionsScene::incrementPlayerNumber()
 
 void ind::OptionsScene::decrementPlayerNumber()
 {
-    if (PlayersSettingsSave::getPlayerNumber() <= 1)
+    if (PlayersSettingsSave::getPlayerNumber() == 1)
         return;
 
+    if (PlayersSettingsSave::getPlayerNumber() == 2 && PlayersSettingsSave::getAINumber() == 0)
+        incrementAINumber();
     PlayersSettingsSave::removePlayer();
 
     const std::string playerNumberStr = std::to_string(PlayersSettingsSave::getPlayerNumber());
@@ -312,9 +316,11 @@ void ind::OptionsScene::decrementAINumber()
 {
     const unsigned short aiNumber = PlayersSettingsSave::getAINumber();
 
-    if (aiNumber <= 0 || (PlayersSettingsSave::getPlayerNumber() == 1 && aiNumber == 1))
+    if (aiNumber == 0)
         return;
 
+    if (PlayersSettingsSave::getPlayerNumber() == 1 && aiNumber == 1)
+        incrementPlayerNumber();
     PlayersSettingsSave::removeAI();
 
     const std::string AINumberStr = std::to_string(aiNumber - 1);
@@ -324,14 +330,15 @@ void ind::OptionsScene::decrementAINumber()
 
 void ind::OptionsScene::incrementAINumber()
 {
-    const unsigned short aiNumber = PlayersSettingsSave::getAINumber();
-
-    if (aiNumber >= 2)
+    if (PlayersSettingsSave::getAINumber() >= PlayersSettingsSave::getMaxAI())
         return;
 
+    if (PlayersSettingsSave::getPlayerNumber() == PlayersSettingsSave::getMaxPlayers() &&
+        PlayersSettingsSave::getMaxAI() == PlayersSettingsSave::getAINumber() + 1)
+        decrementPlayerNumber();
     PlayersSettingsSave::addAI();
 
-    const std::string AINumberStr = std::to_string(aiNumber + 1);
+    const std::string AINumberStr = std::to_string(PlayersSettingsSave::getAINumber());
     AINumberValue->setText(std::wstring(AINumberStr.begin(), AINumberStr.end()).c_str());
     AINumberUp->setPressed(false);
 }
