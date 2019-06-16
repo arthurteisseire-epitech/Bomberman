@@ -158,7 +158,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_filesystem-vc141-mt-x64-1_66.lib;C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_system-vc141-mt-x64-1_66.lib;cmake\sfml-audio.lib;cmake\Irrlicht.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_filesystem-vc141-mt-x64-1_66.lib;C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_system-vc141-mt-x64-1_66.lib;cmake\sfml-audio-d.lib;cmake\Irrlicht.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -203,7 +203,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_filesystem-vc141-mt-x64-1_66.lib;C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_system-vc141-mt-x64-1_66.lib;cmake\sfml-audio.lib;cmake\Irrlicht.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_filesystem-vc141-mt-x64-1_66.lib;C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_system-vc141-mt-x64-1_66.lib;cmake\sfml-audio-d.lib;cmake\Irrlicht.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -247,7 +247,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_filesystem-vc141-mt-x64-1_66.lib;C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_system-vc141-mt-x64-1_66.lib;cmake\sfml-audio.lib;cmake\Irrlicht.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_filesystem-vc141-mt-x64-1_66.lib;C:\local\boost_1_66_0\lib64-msvc-14.1\libboost_system-vc141-mt-x64-1_66.lib;cmake\sfml-audio-d.lib;cmake\Irrlicht.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -343,6 +343,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BlockBreakable.hpp" />
     <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BoardObject.cpp" />
     <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BoardObject.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BoardObjectFactory.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BoardObjectFactory.hpp" />
     <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Bomb.cpp" />
     <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Bomb.hpp" />
     <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BombUp.cpp" />
@@ -385,6 +387,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Position.hpp" />
     <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\AScene.cpp" />
     <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\AScene.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\ButtonPosition.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\ButtonPosition.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\DeadScene.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\DeadScene.hpp" />
     <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\GameScene.cpp" />
     <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\GameScene.hpp" />
     <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\LoadingScene.cpp" />
@@ -393,6 +399,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\MainMenu.hpp" />
     <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\OptionsScene.cpp" />
     <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\OptionsScene.hpp" />
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\PauseScene.cpp" />
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\PauseScene.hpp" />
     <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\SceneManager.cpp" />
     <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\SceneManager.hpp" />
     <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Services\DeviceService.cpp" />

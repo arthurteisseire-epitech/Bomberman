@@ -37,6 +37,9 @@
     <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BoardObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BoardObjectFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Bomb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -97,6 +100,12 @@
     <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\AScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\ButtonPosition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\DeadScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\GameScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -107,6 +116,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\OptionsScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\PauseScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\SceneManager.cpp">
@@ -189,6 +201,9 @@
     <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BoardObject.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\BoardObjectFactory.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\BoardObject\Bomb.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -255,6 +270,12 @@
     <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\AScene.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\ButtonPosition.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\DeadScene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\GameScene.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -265,6 +286,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\OptionsScene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\PauseScene.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\taz\Desktop\OOP_indie_studio_2018\src\Scenes\SceneManager.hpp">

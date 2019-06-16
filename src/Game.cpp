@@ -45,7 +45,7 @@ void ind::Game::run()
 
 void ind::Game::startMusic()
 {
-    std::string pathToMusic = Path::realpath("assets/music.ogg");
+    std::string pathToMusic = "assets/music.ogg";
 
     if (!music.openFromFile(pathToMusic))
         throw std::runtime_error("Failed to load music " + pathToMusic);

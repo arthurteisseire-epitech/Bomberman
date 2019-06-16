@@ -5,15 +5,20 @@
 ** Created by Arthamios
 */
 
+#include <algorithm>
 #include <iostream>
 #include "Path.hpp"
 #include "include/crossPlatform.hpp"
 
 std::string ind::Path::progPath = ".";
 
-std::string ind::Path::realpath(const std::string &string)
+std::string ind::Path::realpath(const std::string& string)
 {
-    return progPath + '/' + string;
+    std::string s = string;
+#ifdef WIN32
+    std::replace(s.begin(), s.end(), '/', '\\');
+#endif
+    return progPath + '/' + s;
 }
 
 void ind::Path::changePath(const std::string &string)
