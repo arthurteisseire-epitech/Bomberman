@@ -36,17 +36,23 @@ ind::Board::Board(Position size_) :
 
 void ind::Board::initPlayers()
 {
-    ind::Position cornersPos[4] = {ind::Position(0, 0), ind::Position(this->size.x - 1, this->size.y - 1),
-                                   ind::Position(this->size.x - 1, 0),
-                                   ind::Position(0, this->size.y - 1)};
-    ind::PlayerNumber pNbArr[4] = {ind::PLAYER_ONE, ind::PLAYER_TWO, ind::AI1, ind::AI2};
-    const unsigned short pNb = ind::PlayersSettingsSave::getPlayerNumber();
-    const unsigned short AINb = ind::PlayersSettingsSave::getAINumber();
+    std::ifstream fs("players.txt");
 
-    for (unsigned short pIdx = 0; pIdx < pNb; ++pIdx)
-        this->players.emplace_back(ind::PlayerFactory::create(pNbArr[pIdx], cornersPos[pIdx], *this));
-    for (unsigned short AIIdx = pNb; AIIdx < pNb + AINb; ++AIIdx)
-        this->players.emplace_back(ind::PlayerFactory::create(pNbArr[AIIdx], cornersPos[AIIdx], *this));
+    if (fs.good()) {
+        loadPlayers(fs);
+    } else {
+        ind::Position cornersPos[4] = {ind::Position(0, 0), ind::Position(this->size.x - 1, this->size.y - 1),
+                                       ind::Position(this->size.x - 1, 0),
+                                       ind::Position(0, this->size.y - 1)};
+        ind::PlayerNumber pNbArr[4] = {ind::PLAYER_ONE, ind::PLAYER_TWO, ind::AI1, ind::AI2};
+        const unsigned short pNb = ind::PlayersSettingsSave::getPlayerNumber();
+        const unsigned short AINb = ind::PlayersSettingsSave::getAINumber();
+
+        for (unsigned short pIdx = 0; pIdx < pNb; ++pIdx)
+            this->players.emplace_back(ind::PlayerFactory::create(pNbArr[pIdx], cornersPos[pIdx], *this));
+        for (unsigned short AIIdx = pNb; AIIdx < pNb + AINb; ++AIIdx)
+            this->players.emplace_back(ind::PlayerFactory::create(pNbArr[AIIdx], cornersPos[AIIdx], *this));
+    }
 }
 
 void ind::Board::initMap()
@@ -319,4 +325,27 @@ void ind::Board::initTileFromLine(std::string line)
 
     auto tile = BoardObjectFactory::create(line, Position(x, y), *this);
     map[x][y].reset(tile);
+}
+
+void ind::Board::loadPlayers(std::ifstream &fs)
+{
+    std::string line;
+    while (std::getline(fs, line)) {
+        try {
+            initPlayerFromLine(line);
+        } catch (const std::exception &e) {
+            std::cout << e.what() << std::endl;
+        }
+    }
+}
+
+void ind::Board::initPlayerFromLine(std::string line)
+{
+    int x = std::stoi(line);
+    line = line.substr(line.find(',') + 1);
+    int y = std::stoi(line);
+    line = line.substr(line.find(' ') + 1);
+    auto n = static_cast<PlayerNumber>(std::stoi(line));
+
+    players.emplace_back(PlayerFactory::create(n, Position(x, y), *this));
 }

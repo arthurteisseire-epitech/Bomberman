@@ -55,11 +55,12 @@ namespace ind {
         void initGround();
         void initWall();
         void initBlocks();
-
         void saveRow(const std::vector<std::shared_ptr<BoardObject>> &row, std::ofstream &fs);
-        void saveTile(const std::shared_ptr<BoardObject> &tile, std::ofstream &fs);
 
+        void saveTile(const std::shared_ptr<BoardObject> &tile, std::ofstream &fs);
         void initTileFromLine(std::string line);
+
+        void loadPlayers(std::ifstream &fs);
 
         std::vector<std::unique_ptr<Player>> players;
         std::vector<std::vector<std::unique_ptr<Ground>>> ground;
@@ -67,5 +68,6 @@ namespace ind {
         TimeoutObjectManager<BoardObject> timeoutObjectManager;
         ExplosionManager explosionManager;
         Position size;
+        void initPlayerFromLine(std::string line);
     };
 }
