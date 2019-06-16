@@ -26,6 +26,8 @@ ind::SceneType ind::GameScene::execute(irr::f32 deltaTime)
     _map.update(deltaTime);
     if (_map.getPlayers().size() == 1)
         return DEAD;
+    if (SingleTon<KeyService>::getInstance().isKeyPressed(irr::KEY_F1))
+        _map.save();
     if (SingleTon<KeyService>::getInstance().isKeyPressed(irr::KEY_ESCAPE))
         return PAUSE;
     return GAME;

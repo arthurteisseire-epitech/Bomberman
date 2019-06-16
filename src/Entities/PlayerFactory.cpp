@@ -16,7 +16,7 @@
 ind::Player *ind::PlayerFactory::create(ind::PlayerNumber playerNumber, const ind::Position &position, ind::Board &map)
 {
     auto animator = initAnimator(playerNumber);
-    auto player = new Player(position, map, animator);
+    auto player = new Player(playerNumber, position, map, animator);
 
     if (playerNumber == PLAYER_ONE || playerNumber == PLAYER_TWO)
         player->setBehaviour(new PlayerBehaviour(*player, playerNumber));

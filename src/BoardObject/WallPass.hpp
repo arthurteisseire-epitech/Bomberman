@@ -15,6 +15,8 @@ namespace ind {
     public:
         explicit WallPass(ind::Position position);
         ~WallPass() override = default;
+        PowerType getType() const override;
+        std::string toString() const override;
         void upgrade(Player &player) override;
     };
 }

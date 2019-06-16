@@ -5,6 +5,7 @@
 ** Created by abel,
 */
 
+#include <fstream>
 #include "Singleton.hpp"
 #include "LoadingService.hpp"
 #include "crossPlatform.hpp"
@@ -12,8 +13,9 @@
 #include "Utilities/to2d.hpp"
 #include "PlayerBehaviour.hpp"
 
-ind::Player::Player(const Position &position, Board &map, animations::Animator *animator) :
+ind::Player::Player(PlayerNumber playerNumber, const Position &position, Board &map, animations::Animator *animator) :
         AbstractEntity(),
+        playerNumber(playerNumber),
         wallPass(false),
         boardPosition(position),
         map(map),
@@ -195,4 +197,21 @@ void ind::Player::disableWallPass()
 bool ind::Player::canPlaceBomb() const
 {
     return actualBombsPlaced < maxBombsPlaced;
+}
+
+std::string ind::Player::getFileName()
+{
+    return "players.txt";
+}
+
+ind::PlayerNumber ind::Player::getNumber() const
+{
+    return playerNumber;
+}
+
+std::ostream &ind::operator<<(std::ostream &os, const Player &player)
+{
+    os << player.getPosition().y << "," << player.getPosition().x << " " << player.getNumber();
+
+    return os;
 }

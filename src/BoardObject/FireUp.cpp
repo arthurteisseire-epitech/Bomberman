@@ -17,3 +17,13 @@ void ind::FireUp::upgrade(ind::Player &player)
 {
     player.fireUp();
 }
+
+ind::PowerType ind::FireUp::getType() const
+{
+    return FIREUP;
+}
+
+std::string ind::FireUp::toString() const
+{
+    return BoardObject::toString() + FIREUP_NAME;
+}

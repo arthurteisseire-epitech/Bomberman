@@ -15,6 +15,14 @@
 #include "Position.hpp"
 #include "Tile.hpp"
 
+#define BOMB_NAME "bomb"
+#define BLOCKBREAKABLE_NAME "blockbreakable"
+#define WALL_NAME "wall"
+#define BOMBUP_NAME "bombup"
+#define FIREUP_NAME "fireup"
+#define SPEEDUP_NAME "speedup"
+#define WALLPASS_NAME "wallpass"
+
 namespace ind {
     class BoardObject : public AbstractEntity {
     public:
@@ -22,6 +30,8 @@ namespace ind {
         ~BoardObject() override;
 
         virtual Tile getTile() const = 0;
+        virtual std::string toString() const;
+
         const Position &getPosition() const;
 
     protected:

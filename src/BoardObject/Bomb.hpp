@@ -18,10 +18,11 @@ namespace ind {
     class Bomb : public BoardObject, public TimeoutObject {
 
     public:
-        Bomb(const Position &position, Board &map, int power, std::function<void(Bomb *bomb)> onExplode);
+        Bomb(const Position &position, Board &map, int power = 5, std::function<void(Bomb *bomb)> onExplode = nullptr);
         ~Bomb() override = default;
         Tile getTile() const override;
         void explode();
+        std::string toString() const override;
         int getPower() const;
 
         template<typename Func>

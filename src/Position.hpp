@@ -22,6 +22,7 @@ namespace ind {
         int y;
     };
     std::ostream &operator<<(std::ostream &o, const Position &pos);
+    std::ostream &operator>>(std::ostream &o, Position &pos);
 }
 
 #endif

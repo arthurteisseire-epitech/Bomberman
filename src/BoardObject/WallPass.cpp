@@ -17,3 +17,13 @@ void ind::WallPass::upgrade(ind::Player &player)
 {
     player.enableWallPass();
 }
+
+ind::PowerType ind::WallPass::getType() const
+{
+    return WALLPASS;
+}
+
+std::string ind::WallPass::toString() const
+{
+    return BoardObject::toString() + WALLPASS_NAME;
+}

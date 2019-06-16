@@ -17,3 +17,13 @@ void ind::SpeedUp::upgrade(ind::Player &player)
 {
     player.speedUp();
 }
+
+ind::PowerType ind::SpeedUp::getType() const
+{
+    return SPEEDUP;
+}
+
+std::string ind::SpeedUp::toString() const
+{
+    return BoardObject::toString() + SPEEDUP_NAME;
+}
