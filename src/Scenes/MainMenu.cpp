@@ -75,8 +75,10 @@ ind::SceneType ind::MainMenu::execute(irr::f32 deltaTime)
         resizeButtons(currSize);
         size = currSize;
     }
-    if (_startButton->isPressed())
+    if (_startButton->isPressed()) {
         std::remove("map.txt");
+        std::remove("players.txt");
+    }
     for (auto &buttonAssocScene : _buttonScene)
         if (buttonAssocScene.first->isPressed())
             return buttonAssocScene.second;
