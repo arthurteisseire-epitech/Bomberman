@@ -45,12 +45,16 @@ namespace ind {
         bool isWalkable(const Position &pos) const;
         std::vector<Position> getAllExplosionsPositions() const;
 
+        void save();
     private:
         void printMap() const;
         void cleanCorners();
         void initGround();
         void initWall();
         void initBlocks();
+
+        void saveRow(const std::vector<std::shared_ptr<BoardObject>> &row);
+        void saveTile(const std::shared_ptr<BoardObject> &tile);
 
         std::vector<std::unique_ptr<Player>> players;
         std::vector<std::vector<std::unique_ptr<Ground>>> ground;

@@ -35,7 +35,8 @@ void ind::Bomb::explode()
     explodeRow([pos](int i) { return Position(pos.x - i, pos.y); });
     explodeRow([pos](int i) { return Position(pos.x, pos.y + i); });
     explodeRow([pos](int i) { return Position(pos.x, pos.y - i); });
-    onExplode(this);
+    if (onExplode)
+        onExplode(this);
 }
 
 bool ind::Bomb::explodeTile(const Position &pos)
@@ -91,4 +92,9 @@ std::vector<ind::Position> ind::Bomb::getExplosionsPositions() const
 bool ind::Bomb::isExplosionStop(const ind::Position &pos) const
 {
     return !map.in(pos) || map.getInfoAtCoord(pos) == BLOCKBREAKABLE || map.getInfoAtCoord(pos) == WALL;
+}
+
+std::string ind::Bomb::toString() const
+{
+    return BoardObject::toString() + "bomb " + std::to_string(power);
 }

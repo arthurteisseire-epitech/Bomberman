@@ -22,6 +22,8 @@ namespace ind {
         ~BoardObject() override;
 
         virtual Tile getTile() const = 0;
+        virtual std::string toString() const;
+
         const Position &getPosition() const;
 
     protected:

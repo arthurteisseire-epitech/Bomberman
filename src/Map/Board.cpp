@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <irrlicht/irrlicht.h>
 #include <cstdlib>
+#include <fstream>
 #include "WallPass.hpp"
 #include "SpeedUp.hpp"
 #include "FireUp.hpp"
@@ -32,7 +33,8 @@ ind::Board::Board(Position size_) :
     initBlocks();
     initWall();
     cleanCorners();
-    Position cornersPos[4] = {Position(0, 0), Position(size.x - 1, size.y - 1), Position(size.x - 1, 0), Position(0, size.y - 1)};
+    Position cornersPos[4] = {Position(0, 0), Position(size.x - 1, size.y - 1), Position(size.x - 1, 0),
+                              Position(0, size.y - 1)};
     PlayerNumber pNbArr[4] = {PLAYER_ONE, PLAYER_TWO, AI1, AI2};
     const unsigned short pNb = PlayersSettingsSave::getPlayerNumber();
     const unsigned short AINb = PlayersSettingsSave::getAINumber();
@@ -243,4 +245,24 @@ bool ind::Board::isWalkable(const ind::Position &pos) const
 
     const auto &type = getInfoAtCoord(pos.x, pos.y);
     return type != BLOCKBREAKABLE && type != WALL && type != BOMB;
+}
+
+void ind::Board::save()
+{
+    for (const auto &row : map)
+        saveRow(row);
+}
+
+void ind::Board::saveRow(const std::vector<std::shared_ptr<ind::BoardObject>> &row)
+{
+    for (const auto &tile : row)
+        saveTile(tile);
+}
+
+void ind::Board::saveTile(const std::shared_ptr<ind::BoardObject> &tile)
+{
+    std::fstream fs;
+    fs.open("save.txt", std::fstream::in | std::fstream::out | std::fstream::app);
+
+    fs << tile->toString();
 }

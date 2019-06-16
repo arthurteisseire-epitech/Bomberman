@@ -16,6 +16,7 @@ namespace ind {
         explicit BlockBreakable(Position position);
 
         Tile getTile() const override;
+        std::string toString() const override;
     };
 }
 

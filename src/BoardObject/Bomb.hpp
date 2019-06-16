@@ -22,6 +22,7 @@ namespace ind {
         ~Bomb() override = default;
         Tile getTile() const override;
         void explode();
+        std::string toString() const override;
         int getPower() const;
 
         template<typename Func>
