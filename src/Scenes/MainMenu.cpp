@@ -37,7 +37,7 @@ void ind::MainMenu::initButtons(const irr::u32 &x, const irr::u32 &y)
 {
     _startButton = initButton(ind::PlaceRectangle::getRectangle({(const irr::s32) x / 4, (const irr::s32) y / 2},
                                                                 {(const irr::s32) x / 6, (const irr::s32) y / 14}),
-                              "./assets/play_game.png");
+                              "./assets/new_game.png");
     _optionsButton = initButton(ind::PlaceRectangle::getRectangle({(const irr::s32) x * 3 / 4, (const irr::s32) y / 2},
                                                                   {(const irr::s32) x / 6, (const irr::s32) y / 14}),
                                 "./assets/options.png");

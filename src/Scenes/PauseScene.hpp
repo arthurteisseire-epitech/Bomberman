@@ -29,7 +29,6 @@ namespace ind {
         std::map<irr::gui::IGUIButton *, ButtonPosition> buttonsPlace;
         std::map<irr::gui::IGUIButton *, void (ind::PauseScene::*)(void)> buttonsFunction;
         irr::gui::IGUIButton *returnButton;
-        irr::gui::IGUIButton *saveButtion;
         irr::gui::IGUIButton *menuButton;
 
         void initButtons(const irr::core::dimension2d<irr::s32> &size);

@@ -26,7 +26,6 @@ ind::PauseScene::PauseScene() :
 void ind::PauseScene::initButtons(const irr::core::dimension2d<irr::s32> &size)
 {
     returnButton = initButton({1.0f / 2, 1.0f / 4}, {1.0f / 10, 1.0f / 20}, size, "assets/return.png", nullptr);
-    saveButtion = initButton({1.0f / 2, 1.0f / 2}, {1.0f / 10, 1.0f / 20}, size, "assets/settings/save.png", nullptr);
     menuButton = initButton({1.0f / 2, 3.0f / 4}, {1.0f / 10, 1.0f / 20}, size, "assets/settings/menu.png", nullptr);
 }
 
@@ -57,9 +56,10 @@ ind::SceneType ind::PauseScene::execute(irr::f32 deltaTime)
         size = currSize;
     }
     if (returnButton->isPressed())
-        return GAME;
-    if (menuButton->isPressed())
+        return LOADED_SCENE;
+    if (menuButton->isPressed()) {
         return MAIN_MENU;
+    }
     for (const auto &pair : buttonsFunction)
         if (pair.first->isPressed())
             (this->*pair.second)();
@@ -105,5 +105,4 @@ ind::PauseScene::~PauseScene()
 {
     menuButton->remove();
     returnButton->remove();
-    saveButtion->remove();
 }

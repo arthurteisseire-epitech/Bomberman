@@ -29,14 +29,20 @@ void ind::SceneManager::buildScene(ind::SceneType type)
 {
     switch (type) {
         case MAIN_MENU:
+            _savedGame = nullptr;
             _currentScene = std::unique_ptr<MainMenu>(new MainMenu());
             break;
         case GAME:
-            if (_savedGame) {
-                dynamic_cast<GameScene *>(_savedGame.get())->resume();
-                _currentScene = std::move(_savedGame);
-            } else
-                _currentScene = std::unique_ptr<GameScene>(new GameScene());
+            _currentScene = std::unique_ptr<GameScene>(new GameScene());
+            break;
+        case PAUSE:
+            dynamic_cast<GameScene *>(_currentScene.get())->pause();
+            _savedGame = std::move(_currentScene);
+            _currentScene = std::unique_ptr<PauseScene>(new PauseScene());
+            break;
+        case LOADED_SCENE:
+            dynamic_cast<GameScene *>(_savedGame.get())->resume();
+            _currentScene = std::move(_savedGame);
             break;
         case OPTIONS:
             _currentScene = std::unique_ptr<OptionsScene>(new OptionsScene());
@@ -47,10 +53,6 @@ void ind::SceneManager::buildScene(ind::SceneType type)
         case DEAD:
             _currentScene = std::unique_ptr<DeadScene>(new DeadScene());
             break;
-        case PAUSE:
-            dynamic_cast<GameScene *>(_currentScene.get())->pause();
-            _savedGame = std::move(_currentScene);
-            _currentScene = std::unique_ptr<PauseScene>(new PauseScene());
         default:
             return;
     }

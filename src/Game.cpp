@@ -35,8 +35,9 @@ void ind::Game::run()
         driver->beginScene(true, true, irr::video::SColor(255, 255, 255, 255));
         deltaTime = updateDeltaTime(then);
         newScene = sceneManager.executeScene(deltaTime);
-        if (newScene != currentScene)
-            currentScene = changeScene(sceneManager, newScene);
+        if (newScene != currentScene && currentScene != LOADED_SCENE)
+            changeScene(sceneManager, newScene);
+        currentScene = newScene;
         manager->drawAll();
         driver->endScene();
     }
