@@ -211,7 +211,7 @@ ind::PlayerNumber ind::Player::getNumber() const
 
 std::ostream &ind::operator<<(std::ostream &os, const Player &player)
 {
-    os << player.getPosition().x << "," << player.getPosition().y << " " << player.getNumber();
+    os << player.getPosition().y << "," << player.getPosition().x << " " << player.getNumber();
 
     return os;
 }
