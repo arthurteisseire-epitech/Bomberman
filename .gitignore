@@ -30,6 +30,8 @@ lib/qt/Makefile
 # Project
 bomberman
 Makefile
+map.txt
+players.txt
 
 
 #VS specific file
