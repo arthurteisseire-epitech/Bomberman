@@ -348,9 +348,23 @@ void ind::Board::initPlayerFromLine(std::string line)
     int y = std::stoi(line);
     line = line.substr(line.find(' ') + 1);
     auto n = static_cast<PlayerNumber>(std::stoi(line));
+    line = line.substr(line.find(' ') + 1);
+    auto bombNumber = std::stoi(line);
+    line = line.substr(line.find(' ') + 1);
+    auto hasWallPass = std::stoi(line);
+    line = line.substr(line.find(' ') + 1);
+    auto bombPower = std::stoi(line);
+    line = line.substr(line.find(' ') + 1);
+    auto speed = std::stoi(line);
 
     if (x >= size.x || y >= size.y || x < 0 || y < 0)
         return;
     emptyTile(map[x][y]);
-    players.emplace_back(PlayerFactory::create(n, Position(x, y), *this));
+    auto player = PlayerFactory::create(n, Position(x, y), *this);
+    player->setBombNumber(bombNumber);
+    player->setBombPower(bombPower);
+    player->setMovementSpeed(speed);
+    if (hasWallPass)
+        player->enableWallPass();
+    players.emplace_back(player);
 }

@@ -61,6 +61,10 @@ namespace ind {
         void enableWallPass();
         void disableWallPass();
         PlayerNumber getNumber() const;
+        short getBombPower() const;
+        bool hasWallPass() const;
+        void setBombPower(short bombPower);
+        void setMovementSpeed(float movementSpeed);
 
     private:
         PlayerNumber playerNumber;
@@ -78,7 +82,6 @@ namespace ind {
 
         const bool isWalkable(const irr::core::vector3df &pos, const irr::core::vector3df &direction);
         bool checkWalkableTile(const Tile &Tile) const;
-        std::string getFileName();
     };
     std::ostream &operator<<(std::ostream &os, const Player &player);
 }
