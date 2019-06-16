@@ -21,5 +21,5 @@ ind::Tile ind::BlockBreakable::getTile() const
 
 std::string ind::BlockBreakable::toString() const
 {
-    return BoardObject::toString() + "blockbreakable";
+    return BoardObject::toString() + BLOCKBREAKABLE_NAME;
 }

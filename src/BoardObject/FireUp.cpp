@@ -25,5 +25,5 @@ ind::PowerType ind::FireUp::getType() const
 
 std::string ind::FireUp::toString() const
 {
-    return BoardObject::toString() + "fireup";
+    return BoardObject::toString() + FIREUP_NAME;
 }

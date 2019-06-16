@@ -20,5 +20,5 @@ ind::Tile ind::Wall::getTile() const
 
 std::string ind::Wall::toString() const
 {
-    return BoardObject::toString() + "wall";
+    return BoardObject::toString() + WALL_NAME;
 }

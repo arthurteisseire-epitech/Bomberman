@@ -96,5 +96,5 @@ bool ind::Bomb::isExplosionStop(const ind::Position &pos) const
 
 std::string ind::Bomb::toString() const
 {
-    return BoardObject::toString() + "bomb " + std::to_string(power);
+    return BoardObject::toString() + BOMB_NAME;
 }

@@ -25,5 +25,5 @@ ind::PowerType ind::WallPass::getType() const
 
 std::string ind::WallPass::toString() const
 {
-    return BoardObject::toString() + "wallpass";
+    return BoardObject::toString() + WALLPASS_NAME;
 }

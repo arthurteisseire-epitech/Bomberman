@@ -46,7 +46,9 @@ namespace ind {
         std::vector<Position> getAllExplosionsPositions() const;
 
         void save();
+        void loadMap(std::ifstream &fs);
     private:
+        void initMap();
         void cleanCorners();
         void initGround();
         void initWall();
@@ -54,6 +56,8 @@ namespace ind {
 
         void saveRow(const std::vector<std::shared_ptr<BoardObject>> &row, std::ofstream &fs);
         void saveTile(const std::shared_ptr<BoardObject> &tile, std::ofstream &fs);
+
+        void initTileFromLine(std::string line);
 
         std::vector<std::unique_ptr<Player>> players;
         std::vector<std::vector<std::unique_ptr<Ground>>> ground;

@@ -25,14 +25,12 @@
 #include "Player.hpp"
 #include "Singleton.hpp"
 #include "PlayerFactory.hpp"
+#include "BoardObjectFactory.hpp"
 
 ind::Board::Board(Position size_) :
     size(size_)
 {
-    initGround();
-    initBlocks();
-    initWall();
-    cleanCorners();
+    initMap();
     Position cornersPos[4] = {Position(0, 0), Position(size.x - 1, size.y - 1), Position(size.x - 1, 0),
                               Position(0, size.y - 1)};
     PlayerNumber pNbArr[4] = {PLAYER_ONE, PLAYER_TWO, AI1, AI2};
@@ -43,6 +41,20 @@ ind::Board::Board(Position size_) :
         players.emplace_back(PlayerFactory::create(pNbArr[pIdx], cornersPos[pIdx], *this));
     for (unsigned short AIIdx = pNb; AIIdx < pNb + AINb; ++AIIdx)
         players.emplace_back(PlayerFactory::create(pNbArr[AIIdx], cornersPos[AIIdx], *this));
+}
+
+void ind::Board::initMap()
+{
+    std::ifstream fs("save.txt");
+
+    initGround();
+    if (fs.good()) {
+        loadMap(fs);
+    } else {
+        initBlocks();
+        initWall();
+    }
+    cleanCorners();
 }
 
 void ind::Board::initGround()
@@ -255,5 +267,37 @@ void ind::Board::saveRow(const std::vector<std::shared_ptr<ind::BoardObject>> &r
 
 void ind::Board::saveTile(const std::shared_ptr<ind::BoardObject> &tile, std::ofstream &fs)
 {
-    fs << tile->toString() << std::endl;
+    if (tile->getTile() != BOMB)
+        fs << tile->toString() << std::endl;
+}
+
+void ind::Board::loadMap(std::ifstream &fs)
+{
+    map.reserve(size.x);
+    for (int i = 0; i < size.x; ++i) {
+        map.emplace_back();
+        map[i].reserve(size.y);
+        for (int j = 0; j < size.y; ++j)
+            map[i].emplace_back(nullptr);
+    }
+
+    std::string line;
+    while (std::getline(fs, line)) {
+        try {
+            initTileFromLine(line);
+        } catch (const std::exception &e) {
+            std::cout << e.what() << std::endl;
+        }
+    }
+}
+
+void ind::Board::initTileFromLine(std::string line)
+{
+    int x = std::stoi(line);
+    line = line.substr(line.find(',') + 1);
+    int y = std::stoi(line);
+    line = line.substr(line.find(' ') + 1);
+
+    auto tile = BoardObjectFactory::create(line, Position(x, y), *this);
+    map[x][y].reset(tile);
 }

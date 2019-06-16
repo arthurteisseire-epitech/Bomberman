@@ -30,5 +30,5 @@ ind::PowerType ind::BombUp::getType() const
 
 std::string ind::BombUp::toString() const
 {
-    return BoardObject::toString() + "bombup";
+    return BoardObject::toString() + BOMBUP_NAME;
 }

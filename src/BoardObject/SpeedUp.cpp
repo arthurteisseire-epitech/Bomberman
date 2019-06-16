@@ -25,5 +25,5 @@ ind::PowerType ind::SpeedUp::getType() const
 
 std::string ind::SpeedUp::toString() const
 {
-    return BoardObject::toString() + "speedup";
+    return BoardObject::toString() + SPEEDUP_NAME;
 }
