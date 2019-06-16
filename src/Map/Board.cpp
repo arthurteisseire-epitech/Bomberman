@@ -31,21 +31,27 @@ ind::Board::Board(Position size_) :
     size(size_)
 {
     initMap();
-    Position cornersPos[4] = {Position(0, 0), Position(size.x - 1, size.y - 1), Position(size.x - 1, 0),
-                              Position(0, size.y - 1)};
-    PlayerNumber pNbArr[4] = {PLAYER_ONE, PLAYER_TWO, AI1, AI2};
-    const unsigned short pNb = PlayersSettingsSave::getPlayerNumber();
-    const unsigned short AINb = PlayersSettingsSave::getAINumber();
+    initPlayers();
+}
+
+void ind::Board::initPlayers()
+{
+    ind::Position cornersPos[4] = {ind::Position(0, 0), ind::Position(this->size.x - 1, this->size.y - 1),
+                                   ind::Position(this->size.x - 1, 0),
+                                   ind::Position(0, this->size.y - 1)};
+    ind::PlayerNumber pNbArr[4] = {ind::PLAYER_ONE, ind::PLAYER_TWO, ind::AI1, ind::AI2};
+    const unsigned short pNb = ind::PlayersSettingsSave::getPlayerNumber();
+    const unsigned short AINb = ind::PlayersSettingsSave::getAINumber();
 
     for (unsigned short pIdx = 0; pIdx < pNb; ++pIdx)
-        players.emplace_back(PlayerFactory::create(pNbArr[pIdx], cornersPos[pIdx], *this));
+        this->players.emplace_back(ind::PlayerFactory::create(pNbArr[pIdx], cornersPos[pIdx], *this));
     for (unsigned short AIIdx = pNb; AIIdx < pNb + AINb; ++AIIdx)
-        players.emplace_back(PlayerFactory::create(pNbArr[AIIdx], cornersPos[AIIdx], *this));
+        this->players.emplace_back(ind::PlayerFactory::create(pNbArr[AIIdx], cornersPos[AIIdx], *this));
 }
 
 void ind::Board::initMap()
 {
-    std::ifstream fs("save.txt");
+    std::ifstream fs("map.txt");
 
     initGround();
     if (fs.good()) {
@@ -249,13 +255,20 @@ bool ind::Board::isWalkable(const ind::Position &pos) const
 void ind::Board::save()
 {
     std::ofstream fs;
-    fs.open("save.txt");
+    std::ofstream playerFile;
 
-    if (fs.fail())
-        return;
-    for (const auto &row : map)
-        saveRow(row, fs);
-    fs.close();
+    fs.open("map.txt");
+    playerFile.open("players.txt");
+
+    if (fs.good()) {
+        for (const auto &row : map)
+            saveRow(row, fs);
+        fs.close();
+    }
+    if (playerFile.good()) {
+        savePlayers(playerFile);
+        fs.close();
+    }
 }
 
 void ind::Board::saveRow(const std::vector<std::shared_ptr<ind::BoardObject>> &row, std::ofstream &fs)
@@ -269,6 +282,12 @@ void ind::Board::saveTile(const std::shared_ptr<ind::BoardObject> &tile, std::of
 {
     if (tile->getTile() != BOMB)
         fs << tile->toString() << std::endl;
+}
+
+void ind::Board::savePlayers(std::ofstream &fs)
+{
+    for (const auto &player : players)
+        fs << *player << std::endl;
 }
 
 void ind::Board::loadMap(std::ifstream &fs)

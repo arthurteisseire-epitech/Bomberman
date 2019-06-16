@@ -49,6 +49,8 @@ namespace ind {
         void loadMap(std::ifstream &fs);
     private:
         void initMap();
+        void initPlayers();
+        void savePlayers(std::ofstream &fs);
         void cleanCorners();
         void initGround();
         void initWall();

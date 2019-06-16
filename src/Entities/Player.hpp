@@ -38,7 +38,7 @@ namespace ind {
 
     class Player : public AbstractEntity {
     public:
-        Player(const Position &position, Board &map, animations::Animator *animator);
+        Player(PlayerNumber playerNumber, const Position &position, Board &map, animations::Animator *animator);
         ~Player() override;
         void draw();
         void placeBomb();
@@ -61,8 +61,11 @@ namespace ind {
         void enableWallPass();
         void disableWallPass();
         bool canPlaceBomb() const;
+        PlayerNumber getNumber() const;
+        static std::string getFileName();
 
-        private:
+    private:
+        PlayerNumber playerNumber;
         short bombPower;
         short maxBombsPlaced;
         float movementSpeed;
@@ -78,4 +81,5 @@ namespace ind {
         const bool isWalkable(const irr::core::vector3df &pos, const irr::core::vector3df &direction);
         bool checkWalkableTile(const Tile &Tile) const;
     };
+    std::ostream &operator<<(std::ostream &os, const Player &player);
 }

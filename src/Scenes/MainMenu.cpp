@@ -76,7 +76,7 @@ ind::SceneType ind::MainMenu::execute(irr::f32 deltaTime)
         size = currSize;
     }
     if (_startButton->isPressed())
-        std::remove("save.txt");
+        std::remove("map.txt");
     for (auto &buttonAssocScene : _buttonScene)
         if (buttonAssocScene.first->isPressed())
             return buttonAssocScene.second;
