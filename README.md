@@ -10,4 +10,4 @@ make
 ```
 
 ## USAGE
-`./my_rpg`
+`./bomberman`
