@@ -85,7 +85,7 @@ const irr::core::vector3df &ind::animations::Animator::getPosition()
 {
     if (this->_currentAnimation != nullptr)
         return this->_currentAnimation->get()->getSceneNode()->getPosition();
-    return std::move(irr::core::vector3df(0, 0, 0));
+    return defaultPos;
 }
 
 void ind::animations::Animator::update()

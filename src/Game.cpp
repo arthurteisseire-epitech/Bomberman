@@ -41,6 +41,7 @@ void ind::Game::run()
         manager->drawAll();
         driver->endScene();
     }
+    music.stop();
 }
 
 void ind::Game::startMusic()

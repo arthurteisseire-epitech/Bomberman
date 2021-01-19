@@ -30,7 +30,8 @@ namespace ind {
             Animator &setAnimationsPosition(const irr::core::vector3df &position);
             const irr::core::vector3df &getPosition();
         private:
-            std::string _currentAnimationId = "";
+            std::string _currentAnimationId;
+            const irr::core::vector3df defaultPos = irr::core::vector3df(0, 0, 0);
             std::unique_ptr<ind::animations::AnimatedMesh> *_currentAnimation = nullptr;
             std::map<std::string, std::unique_ptr<ind::animations::AnimatedMesh>> _animations;
         };
